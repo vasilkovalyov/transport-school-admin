@@ -33,7 +33,6 @@ export default function BlogCard({ _id, image, heading, text }: BlogCardProps) {
       <CardActions>
         <Box px={1} pb={2}>
           <Button
-            color="success"
             size="small"
             variant="contained"
             onClick={() => navigate(editLink)}

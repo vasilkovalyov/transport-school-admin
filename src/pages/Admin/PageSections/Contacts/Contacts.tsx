@@ -1,3 +1,10 @@
+import { PrivateContentLayout } from '@/src/layouts';
+import { ContactsForm } from './components';
+
 export default function PageSectionContacts() {
-  return <h1>Page Section Contacts</h1>;
+  return (
+    <PrivateContentLayout heading="Section contacts">
+      <ContactsForm />
+    </PrivateContentLayout>
+  );
 }

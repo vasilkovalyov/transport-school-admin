@@ -1,6 +1,7 @@
 export enum Links {
   LOGIN = '/login',
   ADMIN = '/admin',
+  ADMIN_ACCOUNT = '/admin/account',
 
   ADMIN_BLOG = '/admin/blog',
   ADMIN_BLOG_CREATE = '/admin/blog/create',
@@ -30,6 +31,8 @@ export enum Links {
   ADMIN_PAGE_SECTION_ACHIVMENTS = '/admin/page-sections/achivments',
   ADMIN_PAGE_SECTION_CONTACTS = '/admin/page-sections/contacts',
   ADMIN_PAGE_SECTION_REVIEW = '/admin/page-sections/review',
+  ADMIN_PAGE_SECTION_REVIEW_CREATE = '/admin/page-sections/review/create',
+  ADMIN_PAGE_SECTION_REVIEW_EDIT = '/admin/page-sections/review/edit',
   ADMIN_PAGE_SECTION_CTA = '/admin/page-sections/cta',
   ADMIN_PAGE_SECTION_FAQ = '/admin/page-sections/faq',
 }

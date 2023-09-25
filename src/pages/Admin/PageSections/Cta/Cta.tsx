@@ -1,3 +1,10 @@
-export default function PageSectionCta() {
-  return <h1>Page Section Cta</h1>;
+import { PrivateContentLayout } from '@/src/layouts';
+import { CtaForm } from './components';
+
+export default function PageSectioCta() {
+  return (
+    <PrivateContentLayout heading="Section Cta">
+      <CtaForm />
+    </PrivateContentLayout>
+  );
 }

@@ -25,7 +25,7 @@ export default function FormContacts() {
           <TextField id="phone" label="Phone" variant="outlined" fullWidth />
         </Box>
         <Box>
-          <Button variant="contained" size="medium">
+          <Button variant="contained" size="medium" color="success">
             Save
           </Button>
         </Box>

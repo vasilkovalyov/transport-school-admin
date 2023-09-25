@@ -3,7 +3,7 @@ import { createBrowserRouter, Outlet, RouterProvider } from 'react-router-dom';
 import { PublicLayout, PrivateLayout } from 'src/layouts';
 import { Links } from 'src/constants/routes';
 
-import { AdminHomePage, LoginPage, ErrorPage } from 'src/pages';
+import { AdminHomePage, LoginPage, ErrorPage, AdminAccount } from 'src/pages';
 
 import {
   PageHome,
@@ -34,6 +34,8 @@ import {
   PageSectionFaq,
   PageSectionCta,
   PageSectionReview,
+  PageSectionReviewCreate,
+  PageSectionReviewEdit,
 } from '../pages/Admin/PageSections';
 
 import {
@@ -60,6 +62,7 @@ const router = createBrowserRouter([
       },
     ],
   },
+
   {
     element: <PrivateLayout />,
     children: [
@@ -67,6 +70,10 @@ const router = createBrowserRouter([
         index: true,
         path: Links.ADMIN,
         element: <AdminHomePage />,
+      },
+      {
+        path: Links.ADMIN_ACCOUNT,
+        element: <AdminAccount />,
       },
       {
         element: <Outlet />,
@@ -153,6 +160,14 @@ const router = createBrowserRouter([
           {
             path: Links.ADMIN_PAGE_SECTION_REVIEW,
             element: <PageSectionReview />,
+          },
+          {
+            path: `${Links.ADMIN_PAGE_SECTION_REVIEW_EDIT}/:id`,
+            element: <PageSectionReviewEdit />,
+          },
+          {
+            path: Links.ADMIN_PAGE_SECTION_REVIEW_CREATE,
+            element: <PageSectionReviewCreate />,
           },
         ],
       },

@@ -5,104 +5,114 @@ import { Links } from 'src/constants/routes';
 export const menuNavigaton: NavigationLinkItemProps[] = [
   {
     id: '1',
+    name: 'Overview',
+    path: Links.ADMIN,
+  },
+  {
+    id: '2',
+    name: 'Account',
+    path: Links.ADMIN_ACCOUNT,
+  },
+  {
+    id: '3',
     name: 'Concepts',
     children: [
       {
-        id: '1-1',
+        id: '3-1',
         name: 'Blog',
         path: Links.ADMIN_BLOG,
       },
 
       {
-        id: '1-2',
+        id: '3-2',
         name: 'Lesson Schedule',
         path: Links.ADMIN_LESSON_SCHEDULE,
       },
       {
-        id: '1-3',
+        id: '3-3',
         name: 'Services',
         path: Links.ADMIN_SERVICES,
       },
     ],
   },
   {
-    id: '2',
+    id: '4',
     name: 'Pages',
     children: [
       {
-        id: '2-1',
+        id: '4-1',
         path: Links.ADMIN_PAGES,
         name: 'Home',
         icon: IconEnum.HOME,
       },
       {
-        id: '2-2',
+        id: '4-2',
         path: Links.ADMIN_PAGES_ABOUT_COURSE,
         name: 'About Course',
         icon: IconEnum.ABOUT,
       },
       {
-        id: '2-3',
+        id: '4-3',
         path: Links.ADMIN_PAGES_BLOG,
         name: 'Blog',
         icon: IconEnum.BLOG,
       },
       {
-        id: '2-4',
+        id: '4-4',
         path: Links.ADMIN_PAGES_COMPANY,
         name: 'Company',
         icon: IconEnum.COMPANY,
       },
       {
-        id: '2-5',
+        id: '4-5',
         path: Links.ADMIN_PAGES_CONTACT,
         name: 'Contact',
         icon: IconEnum.CONTACT,
       },
       {
-        id: '2-6',
+        id: '4-6',
         path: Links.ADMIN_PAGES_PRICE,
         name: 'Price',
         icon: IconEnum.PRICE,
       },
       {
-        id: '2-7',
+        id: '4-7',
         path: Links.ADMIN_PAGES_SCHEDULE,
         name: 'Schedule',
         icon: IconEnum.SCHEDULE,
       },
       {
-        id: '2-8',
+        id: '4-8',
         path: Links.ADMIN_PAGES_SETTINGS,
         name: 'Settings',
         icon: IconEnum.SETTINGS,
       },
       {
-        id: '2-9',
+        id: '4-9',
         name: 'Sections',
         children: [
           {
-            id: '2-9-1',
+            id: '4-9-1',
             path: Links.ADMIN_PAGE_SECTION_ACHIVMENTS,
             name: 'Achivments',
           },
           {
-            id: '2-9-2',
+            id: '4-9-2',
             path: Links.ADMIN_PAGE_SECTION_CONTACTS,
             name: 'Contacts',
           },
           {
-            id: '2-9-3',
+            id: '4-9-3',
             path: Links.ADMIN_PAGE_SECTION_FAQ,
             name: 'Faq',
           },
           {
-            id: '2-9-4',
+            id: '4-9-4',
             path: Links.ADMIN_PAGE_SECTION_REVIEW,
             name: 'Review',
           },
           {
-            id: '2-9-5',
+            id: '4-9-5',
             path: Links.ADMIN_PAGE_SECTION_CTA,
             name: 'Cta',
           },

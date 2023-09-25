@@ -25,7 +25,6 @@ export default function ServiceRow({
       <TableCell>{price}</TableCell>
       <TableCell>
         <Button
-          color="success"
           size="small"
           variant="contained"
           onClick={() => navigate(editLink)}

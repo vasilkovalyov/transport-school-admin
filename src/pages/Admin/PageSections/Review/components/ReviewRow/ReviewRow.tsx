@@ -1,36 +1,33 @@
 import { useNavigate } from 'react-router-dom';
 
+import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
 import TableCell from '@mui/material/TableCell';
 import TableRow from '@mui/material/TableRow';
 
-import { LessonRowProps } from './LessonRow.type';
+import { ReviewRowProps } from './ReviewRow.type';
 import { Links } from '@/src/constants/routes';
 
-export default function LessonRow({
+export default function ReviewRow({
   _id,
-  heading,
-  typeGroup,
-  typeLesson,
-  daysShedule,
-  timeSchedule,
-  dateStart,
-}: LessonRowProps) {
+  image,
+  text,
+  name,
+  rating,
+}: ReviewRowProps) {
   const navigate = useNavigate();
-  const editLink = `${Links.ADMIN_LESSON_SCHEDULE_EDIT}/${_id}`;
+  const editLink = `${Links.ADMIN_PAGE_SECTION_REVIEW_EDIT}/${_id}`;
 
   return (
     <TableRow key={_id}>
-      <TableCell>{heading}</TableCell>
-      <TableCell>{typeGroup}</TableCell>
-      <TableCell>{typeLesson}</TableCell>
       <TableCell>
-        {daysShedule[0]} - {daysShedule[1]}
+        <img src={image} alt={name} style={{ maxWidth: '100px' }} />
       </TableCell>
+      <TableCell>{name}</TableCell>
       <TableCell>
-        {timeSchedule[0]} - {timeSchedule[1]}
+        <Box maxWidth="400px">{text}</Box>
       </TableCell>
-      <TableCell>{dateStart}</TableCell>
+      <TableCell>{rating}</TableCell>
       <TableCell>
         <Button
           size="small"

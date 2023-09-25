@@ -23,7 +23,6 @@ export default function Blog() {
           </Grid>
           <Grid item>
             <Button
-              color="success"
               variant="contained"
               size="small"
               onClick={() => {

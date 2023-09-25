@@ -1,3 +1,10 @@
+import { PrivateContentLayout } from '@/src/layouts';
+import { FaqForm } from './components';
+
 export default function PageSectionFaq() {
-  return <h1>Page Section Faq</h1>;
+  return (
+    <PrivateContentLayout heading="Section Faq">
+      <FaqForm />
+    </PrivateContentLayout>
+  );
 }

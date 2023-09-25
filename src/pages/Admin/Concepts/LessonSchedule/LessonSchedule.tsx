@@ -22,7 +22,6 @@ export default function LessonSchedule() {
           </Grid>
           <Grid item>
             <Button
-              color="success"
               variant="contained"
               size="small"
               onClick={() => {

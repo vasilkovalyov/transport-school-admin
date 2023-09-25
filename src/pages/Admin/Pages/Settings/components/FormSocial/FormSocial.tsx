@@ -48,7 +48,7 @@ export default function FormSocial() {
           </Box>
         </Box>
         <Box>
-          <Button variant="contained" size="medium">
+          <Button variant="contained" size="medium" color="success">
             Save
           </Button>
         </Box>
