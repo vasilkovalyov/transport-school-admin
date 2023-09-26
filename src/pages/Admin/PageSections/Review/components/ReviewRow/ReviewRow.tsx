@@ -1,6 +1,6 @@
 import { useNavigate } from 'react-router-dom';
 
-import Box from '@mui/material/Box';
+import { Box } from '@mui/material';
 import Button from '@mui/material/Button';
 import TableCell from '@mui/material/TableCell';
 import TableRow from '@mui/material/TableRow';

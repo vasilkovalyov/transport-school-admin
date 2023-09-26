@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom';
-import Box from '@mui/material/Box';
+import { Box } from '@mui/material';
 import Drawer from '@mui/material/Drawer';
 import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';

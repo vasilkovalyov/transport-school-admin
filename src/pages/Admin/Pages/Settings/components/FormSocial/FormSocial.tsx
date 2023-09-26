@@ -1,4 +1,4 @@
-import Box from '@mui/material/Box';
+import { Box } from '@mui/material';
 import Button from '@mui/material/Button';
 import FormControl from '@mui/material/FormControl';
 import InputLabel from '@mui/material/InputLabel';
@@ -20,12 +20,10 @@ export default function FormSocial() {
         <Box mb={2}>
           <Box display="flex" alignItems="center" gap={2} mb={2}>
             <FormControl fullWidth>
-              <InputLabel id="demo-simple-select-label">
-                Social network
-              </InputLabel>
+              <InputLabel id="social-network-label">Social network</InputLabel>
               <Select
-                labelId="demo-simple-select-label"
-                id="demo-simple-select"
+                labelId="social-network-label"
+                id="social-network"
                 label="Social network"
               >
                 <MenuItem value={10}>Instagram</MenuItem>

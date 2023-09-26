@@ -1,7 +1,7 @@
 import { Link, useNavigate } from 'react-router-dom';
 
 import Card from '@mui/material/Card';
-import Box from '@mui/material/Box';
+import { Box } from '@mui/material';
 import Button from '@mui/material/Button';
 import CardActions from '@mui/material/CardActions';
 import CardContent from '@mui/material/CardContent';

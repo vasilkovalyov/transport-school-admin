@@ -1,7 +1,7 @@
 import { Link } from 'react-router-dom';
 import cn from 'classnames';
 
-import Box from '@mui/material/Box';
+import { Box } from '@mui/material';
 import List from '@mui/material/List';
 import ListItem from '@mui/material/ListItem';
 import ListItemButton from '@mui/material/ListItemButton';

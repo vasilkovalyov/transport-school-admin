@@ -1,4 +1,4 @@
-import Box from '@mui/material/Box';
+import { Box } from '@mui/material';
 import Paper from '@mui/material/Paper';
 import Container from '@mui/material/Container';
 import Navigation from '../Navigation/Navigation';
