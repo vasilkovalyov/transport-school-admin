@@ -6,21 +6,21 @@ import Typography from '@mui/material/Typography';
 import Breadcrumbs from '@mui/material/Breadcrumbs';
 
 import { Links } from '@/src/constants/routes';
-import { BlockCreateBlog } from './components';
+import { BlockEditLesson } from './components';
 
-export default function CreateBlog() {
+export default function LessonScheduleEdit() {
   return (
     <Box py={4} component="section">
       <Container className="fullwidth-container">
-        <Typography variant="h1">Create Blog</Typography>
+        <Typography variant="h1">Edit schedule</Typography>
         <Box mb={4}>
           <Breadcrumbs aria-label="breadcrumb">
             <Link to={Links.ADMIN}>Home</Link>
-            <Link to={Links.ADMIN_BLOG}>Blog</Link>
-            <Typography>Create Blog</Typography>
+            <Link to={Links.ADMIN_LESSON_SCHEDULE}>Lesson shedule</Link>
+            <Typography>Edit lesson schedule</Typography>
           </Breadcrumbs>
         </Box>
-        <BlockCreateBlog />
+        <BlockEditLesson />
       </Container>
     </Box>
   );

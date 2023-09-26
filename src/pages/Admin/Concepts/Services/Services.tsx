@@ -11,7 +11,7 @@ import { ServiceList } from './components';
 
 import { Links } from '@/src/constants/routes';
 
-export default function Service() {
+export default function Services() {
   const navigate = useNavigate();
 
   return (

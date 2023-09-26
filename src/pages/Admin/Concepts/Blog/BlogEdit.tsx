@@ -6,9 +6,9 @@ import Typography from '@mui/material/Typography';
 import Breadcrumbs from '@mui/material/Breadcrumbs';
 
 import { Links } from '@/src/constants/routes';
-import { BlockEditBlog } from './components';
+import { BlockBlogEdit } from './components';
 
-export default function EditBlog() {
+export default function BlogEdit() {
   return (
     <Box py={4} component="section">
       <Container className="fullwidth-container">
@@ -20,7 +20,7 @@ export default function EditBlog() {
             <Typography>Edit Blog</Typography>
           </Breadcrumbs>
         </Box>
-        <BlockEditBlog />
+        <BlockBlogEdit />
       </Container>
     </Box>
   );

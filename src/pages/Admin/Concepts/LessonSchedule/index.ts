@@ -1,3 +1,3 @@
 export { default as LessonSchedule } from './LessonSchedule';
-export { default as CreateLessonSchedule } from './CreateLessonSchedule';
-export { default as EditLessonSchedule } from './EditLessonSchedule';
+export { default as LessonScheduleCreate } from './LessonScheduleCreate';
+export { default as LessonScheduleEdit } from './LessonScheduleEdit';

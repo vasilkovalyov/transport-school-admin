@@ -1,3 +1,3 @@
 export { default as Blog } from './Blog';
-export { default as CreateBlog } from './CreateBlog';
-export { default as EditBlog } from './EditBlog';
+export { default as BlogCreate } from './BlogCreate';
+export { default as BlogEdit } from './BlogEdit';

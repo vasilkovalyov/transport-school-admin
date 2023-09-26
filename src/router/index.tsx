@@ -18,13 +18,13 @@ import {
 
 import {
   Blog,
-  CreateBlog,
-  EditBlog,
-  CreateLessonSchedule,
-  EditLessonSchedule,
+  BlogCreate,
+  BlogEdit,
+  LessonScheduleCreate,
+  LessonScheduleEdit,
   LessonSchedule,
-  CreateService,
-  EditService,
+  ServiceCreate,
+  ServiceEdit,
   Services,
 } from 'src/pages/Admin/Concepts';
 
@@ -180,11 +180,11 @@ const router = createBrowserRouter([
           },
           {
             path: Links.ADMIN_BLOG_CREATE,
-            element: <CreateBlog />,
+            element: <BlogCreate />,
           },
           {
             path: `${Links.ADMIN_BLOG_EDIT}/:id`,
-            element: <EditBlog />,
+            element: <BlogEdit />,
           },
           {
             path: Links.ADMIN_LESSON_SCHEDULE,
@@ -192,11 +192,11 @@ const router = createBrowserRouter([
           },
           {
             path: Links.ADMIN_LESSON_SCHEDULE_CREATE,
-            element: <CreateLessonSchedule />,
+            element: <LessonScheduleCreate />,
           },
           {
             path: `${Links.ADMIN_LESSON_SCHEDULE_EDIT}/:id`,
-            element: <EditLessonSchedule />,
+            element: <LessonScheduleEdit />,
           },
           {
             path: Links.ADMIN_SERVICES,
@@ -204,11 +204,11 @@ const router = createBrowserRouter([
           },
           {
             path: Links.ADMIN_SERVICES_CREATE,
-            element: <CreateService />,
+            element: <ServiceCreate />,
           },
           {
             path: `${Links.ADMIN_SERVICES_EDIT}/:id`,
-            element: <EditService />,
+            element: <ServiceEdit />,
           },
         ],
       },
