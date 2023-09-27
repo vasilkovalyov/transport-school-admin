@@ -5,10 +5,8 @@ import { Box } from '@mui/material';
 import Button from '@mui/material/Button';
 import TextField from '@mui/material/TextField';
 import Typography from '@mui/material/Typography';
-import Stack from '@mui/material/Stack';
 
-import AddCircleOutlineOutlinedIcon from '@mui/icons-material/AddCircleOutlineOutlined';
-import RemoveCircleOutlineOutlinedIcon from '@mui/icons-material/RemoveCircleOutlineOutlined';
+import { DynamicFieldTogglers } from '@/src/components';
 
 import { FaqFormProps, IFaq, IFaqFormData } from './FaqForm.type';
 
@@ -92,25 +90,12 @@ export default function FaqForm({ data, onSubmit }: FaqFormProps) {
             />
           </Box>
           <Box mb={2}>
-            <Stack spacing={2} direction="row">
-              {fields.length - 1 <= index ? (
-                <Button
-                  variant="contained"
-                  size="medium"
-                  onClick={onHandleAddAchivmentItem}
-                >
-                  <AddCircleOutlineOutlinedIcon />
-                </Button>
-              ) : (
-                <Button
-                  variant="contained"
-                  size="medium"
-                  onClick={() => onHandleRemoveAchivmentItem(index)}
-                >
-                  <RemoveCircleOutlineOutlinedIcon />
-                </Button>
-              )}
-            </Stack>
+            <DynamicFieldTogglers
+              fieldLength={fields.length}
+              fieldIndex={index}
+              fieldAppend={onHandleAddAchivmentItem}
+              fieldRemove={onHandleRemoveAchivmentItem}
+            />
           </Box>
         </Box>
       ))}

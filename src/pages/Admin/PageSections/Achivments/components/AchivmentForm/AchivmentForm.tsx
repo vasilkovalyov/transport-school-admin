@@ -3,12 +3,10 @@ import { useForm, useFieldArray } from 'react-hook-form';
 
 import { Box } from '@mui/material';
 import Button from '@mui/material/Button';
-import Stack from '@mui/material/Stack';
 import Typography from '@mui/material/Typography';
 import TextField from '@mui/material/TextField';
 
-import AddCircleOutlineOutlinedIcon from '@mui/icons-material/AddCircleOutlineOutlined';
-import RemoveCircleOutlineOutlinedIcon from '@mui/icons-material/RemoveCircleOutlineOutlined';
+import { DynamicFieldTogglers } from '@/src/components';
 
 import {
   IAchivmentFormData,
@@ -110,25 +108,12 @@ export default function AchivmentForm({ data, onSubmit }: AchivmentFormProps) {
             />
           </Box>
           <Box mb={2}>
-            <Stack spacing={2} direction="row">
-              {fields.length - 1 <= index ? (
-                <Button
-                  variant="contained"
-                  size="medium"
-                  onClick={onHandleAddAchivmentItem}
-                >
-                  <AddCircleOutlineOutlinedIcon />
-                </Button>
-              ) : (
-                <Button
-                  variant="contained"
-                  size="medium"
-                  onClick={() => onHandleRemoveAchivmentItem(index)}
-                >
-                  <RemoveCircleOutlineOutlinedIcon />
-                </Button>
-              )}
-            </Stack>
+            <DynamicFieldTogglers
+              fieldLength={fields.length}
+              fieldIndex={index}
+              fieldAppend={onHandleAddAchivmentItem}
+              fieldRemove={onHandleRemoveAchivmentItem}
+            />
           </Box>
         </Box>
       ))}

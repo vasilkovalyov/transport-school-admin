@@ -35,11 +35,13 @@ export function transliterateToLatin(text: string) {
     я: 'ya',
   };
 
-  return text
+  const convertedStr = text
     .toLowerCase()
     .split('')
     .map((char) => {
       return transliterationMap[char] || char;
     })
     .join('');
+
+  return convertedStr.replace(/\s+/g, '_');
 }
