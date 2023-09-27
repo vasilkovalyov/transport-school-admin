@@ -1,1 +1,1 @@
-export { default as AchivmentForm } from './AchivmentForm/AchivmentForm';
+export * from './AchivmentForm';
