@@ -5,4 +5,5 @@ export type FormatLessonsFormProps = {
 
 export interface IFormatLessonsFormData {
   heading: string;
+  subheading: string;
 }

@@ -8,5 +8,5 @@ export interface IBlogFormData {
   heading: string;
   slug: string;
   short_description: string;
-  richText: string;
+  rich_text: string;
 }

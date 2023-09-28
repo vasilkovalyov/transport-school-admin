@@ -16,7 +16,7 @@ import { transliterateToLatin } from '@/src/utils/convertToSlug';
 const defaultValuesForm: IBlogFormData = {
   image: '',
   heading: '',
-  richText: '',
+  rich_text: '',
   slug: '',
   short_description: '',
 };
@@ -28,7 +28,7 @@ export default function BlogForm({ data, onSubmit }: BlogFormProps) {
   useEffect(() => {
     if (!data) return;
     setSlugText(transliterateToLatin(data.heading));
-    setMarkdownText(data.richText);
+    setMarkdownText(data.rich_text);
   }, [data]);
 
   const { handleSubmit, register, setValue } = useForm<IBlogFormData>({
@@ -43,7 +43,7 @@ export default function BlogForm({ data, onSubmit }: BlogFormProps) {
 
   function onChangeRichTextEditor(value: string) {
     setMarkdownText(value);
-    setValue('richText', value);
+    setValue('rich_text', value);
   }
 
   function onChangeHeading(value: string) {

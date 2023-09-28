@@ -4,5 +4,7 @@ export type AboutCourseFormProps = {
 };
 
 export interface IAboutCourseFormData {
+  image?: string;
   heading: string;
+  rich_text: string;
 }

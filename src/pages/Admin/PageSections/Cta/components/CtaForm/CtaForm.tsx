@@ -51,6 +51,7 @@ export default function CtaForm({ data, onSubmit }: CtaFormProps) {
               <Checkbox
                 {...register('use_link_to_contact_page')}
                 defaultChecked={data ? data.use_link_to_contact_page : false}
+                color="success"
               />
             }
             label="Use link to contact page"
@@ -62,6 +63,7 @@ export default function CtaForm({ data, onSubmit }: CtaFormProps) {
               <Checkbox
                 {...register('use_phone_cta')}
                 defaultChecked={data ? data.use_phone_cta : false}
+                color="success"
               />
             }
             label="Use phone cta"

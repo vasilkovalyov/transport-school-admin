@@ -4,5 +4,7 @@ export type AboutUsFormProps = {
 };
 
 export interface IAboutUsFormData {
+  image?: string;
   heading: string;
+  rich_text: string;
 }

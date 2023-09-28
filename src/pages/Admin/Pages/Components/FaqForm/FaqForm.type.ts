@@ -4,5 +4,5 @@ export type FaqFormProps = {
 };
 
 export interface IFaqFormData {
-  isShow: boolean;
+  publish: boolean;
 }

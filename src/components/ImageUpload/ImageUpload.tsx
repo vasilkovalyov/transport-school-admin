@@ -61,7 +61,7 @@ export default function ImageUpload({
         <Button
           onClick={() => refFieldInputFile.current?.click()}
           size="medium"
-          color="primary"
+          color="success"
           variant="contained"
         >
           <FileUploadIcon />

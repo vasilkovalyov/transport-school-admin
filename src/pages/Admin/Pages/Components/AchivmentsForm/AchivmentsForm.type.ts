@@ -4,5 +4,5 @@ export type AchivmentsFormProps = {
 };
 
 export interface IAchivmentsFormData {
-  isShow: boolean;
+  publish: boolean;
 }
