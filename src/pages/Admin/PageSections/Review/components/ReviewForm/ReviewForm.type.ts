@@ -4,6 +4,7 @@ export type ReviewFormProps = {
 };
 
 export interface IReviewFormData {
+  image?: string;
   heading: string;
   text: string;
   rating?: number | null;

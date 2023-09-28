@@ -3,10 +3,11 @@ import { useForm, useFieldArray } from 'react-hook-form';
 
 import { Box } from '@mui/material';
 import Button from '@mui/material/Button';
+import Grid from '@mui/material/Grid';
 import TextField from '@mui/material/TextField';
 import Typography from '@mui/material/Typography';
 
-import { DynamicFieldTogglers } from '@/src/components';
+import { DynamicFieldTogglers, ImageUpload } from '@/src/components';
 
 import { FaqFormProps, IFaq, IFaqFormData } from './FaqForm.type';
 
@@ -16,6 +17,7 @@ const defaultFaqListItem: IFaq = {
 };
 
 const defaultValuesForm: IFaqFormData = {
+  image: '',
   heading: '',
   list_faq: [defaultFaqListItem],
 };
@@ -56,60 +58,75 @@ export default function FaqForm({ data, onSubmit }: FaqFormProps) {
     onSubmit && onSubmit(data);
   }
 
+  function onUploadImage(image: string) {
+    setValue('image', image);
+  }
+
   return (
-    <Box component="form" maxWidth={500} marginBottom={4}>
-      <Box mb={4}>
-        <TextField
-          {...register('heading')}
-          id="heading"
-          label="Heading"
-          variant="outlined"
-          fullWidth
-        />
-      </Box>
-      <Typography variant="h4">Faq list</Typography>
-      {fields.map((item, index) => (
-        <Box key={item.id} mb={4}>
-          <Box mb={2}>
+    <Box component="form" marginBottom={4}>
+      <Grid container columnSpacing={4}>
+        <Grid item xs={12} lg={7} xl={5}>
+          <Box mb={4}>
             <TextField
-              {...register(`list_faq.${index}.heading`)}
-              id={`list_faq.${index}.heading`}
-              label="Heading achivment"
+              {...register('heading')}
+              id="heading"
+              label="Heading"
               variant="outlined"
               fullWidth
             />
           </Box>
-          <Box mb={2}>
-            <TextField
-              {...register(`list_faq.${index}.text`)}
-              id={`list_faq.${index}.text`}
-              label="Text achivment"
-              variant="outlined"
-              multiline
-              fullWidth
-              rows={4}
-            />
+          <Typography variant="h4">Faq list</Typography>
+          {fields.map((item, index) => (
+            <Box key={item.id} mb={4}>
+              <Box mb={2}>
+                <TextField
+                  {...register(`list_faq.${index}.heading`)}
+                  id={`list_faq.${index}.heading`}
+                  label="Heading achivment"
+                  variant="outlined"
+                  fullWidth
+                />
+              </Box>
+              <Box mb={2}>
+                <TextField
+                  {...register(`list_faq.${index}.text`)}
+                  id={`list_faq.${index}.text`}
+                  label="Text achivment"
+                  variant="outlined"
+                  multiline
+                  fullWidth
+                  rows={4}
+                />
+              </Box>
+              <Box mb={2}>
+                <DynamicFieldTogglers
+                  fieldLength={fields.length}
+                  fieldIndex={index}
+                  fieldAppend={onHandleAddAchivmentItem}
+                  fieldRemove={onHandleRemoveAchivmentItem}
+                />
+              </Box>
+            </Box>
+          ))}
+          <Box>
+            <Button
+              variant="contained"
+              size="medium"
+              color="success"
+              onClick={handleSubmit(handleSave)}
+            >
+              Save
+            </Button>
           </Box>
-          <Box mb={2}>
-            <DynamicFieldTogglers
-              fieldLength={fields.length}
-              fieldIndex={index}
-              fieldAppend={onHandleAddAchivmentItem}
-              fieldRemove={onHandleRemoveAchivmentItem}
-            />
-          </Box>
-        </Box>
-      ))}
-      <Box>
-        <Button
-          variant="contained"
-          size="medium"
-          color="success"
-          onClick={handleSubmit(handleSave)}
-        >
-          Save
-        </Button>
-      </Box>
+        </Grid>
+        <Grid item xs={12} lg={5}>
+          <ImageUpload
+            viewType="square"
+            image={data?.image}
+            onChange={onUploadImage}
+          />
+        </Grid>
+      </Grid>
     </Box>
   );
 }

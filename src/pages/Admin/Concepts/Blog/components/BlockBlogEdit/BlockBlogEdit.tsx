@@ -7,6 +7,8 @@ export default function BlockBlogEdit() {
     <Box component="section">
       <BlogForm
         data={{
+          image:
+            'https://images.unsplash.com/photo-1695418624968-d027093abdb9?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80',
           heading: 'Новоприбывшие в США, которые ищут возможности',
           slug: 'novopribyvshie_v_ssha,_kotorye_ischut_vozmozhnosti',
           short_description:

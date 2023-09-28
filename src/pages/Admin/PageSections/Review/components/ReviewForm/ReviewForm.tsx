@@ -11,9 +11,12 @@ import FormControlLabel from '@mui/material/FormControlLabel';
 import FormControl from '@mui/material/FormControl';
 import FormLabel from '@mui/material/FormLabel';
 
+import { ImageUpload } from '@/src/components';
+
 import { IReviewFormData, ReviewFormProps } from './ReviewForm.type';
 
 const defaultValuesForm: IReviewFormData = {
+  image: '',
   heading: '',
   text: '',
 };
@@ -43,9 +46,22 @@ export default function ReviewForm({ data, onSubmit }: ReviewFormProps) {
     setValue('rating', number);
   }
 
+  function onUploadImage(image: string) {
+    setValue('image', image);
+  }
+
   return (
     <Box component="form" maxWidth={800} marginBottom={4}>
       <Grid container spacing={4} mb={4}>
+        <Grid item xs={12} md={4}>
+          <ImageUpload
+            viewType="avatar"
+            width={100}
+            height={100}
+            image={data?.image}
+            onChange={onUploadImage}
+          />
+        </Grid>
         <Grid item xs={12} md={6}>
           <Box mb={4}>
             <TextField

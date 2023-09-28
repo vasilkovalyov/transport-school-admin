@@ -4,6 +4,7 @@ export type BlogFormProps = {
 };
 
 export interface IBlogFormData {
+  image?: string;
   heading: string;
   slug: string;
   short_description: string;

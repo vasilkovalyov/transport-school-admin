@@ -8,10 +8,13 @@ import Grid from '@mui/material/Grid';
 import TextField from '@mui/material/TextField';
 import { Typography } from '@mui/material';
 
+import { ImageUpload } from '@/src/components';
+
 import { BlogFormProps, IBlogFormData } from './BlogForm.type';
 import { transliterateToLatin } from '@/src/utils/convertToSlug';
 
 const defaultValuesForm: IBlogFormData = {
+  image: '',
   heading: '',
   richText: '',
   slug: '',
@@ -34,6 +37,7 @@ export default function BlogForm({ data, onSubmit }: BlogFormProps) {
   });
 
   function handleSave(data: IBlogFormData) {
+    console.log(data);
     onSubmit && onSubmit(data);
   }
 
@@ -48,9 +52,20 @@ export default function BlogForm({ data, onSubmit }: BlogFormProps) {
     setValue('slug', convertedStr);
   }
 
+  function onUploadImage(image: string) {
+    setValue('image', image);
+  }
+
   return (
     <Box component="form" maxWidth={800} marginBottom={4}>
       <Grid container spacing={4} mb={4}>
+        <Grid item xs={12}>
+          <ImageUpload
+            viewType="wide"
+            image={data?.image}
+            onChange={onUploadImage}
+          />
+        </Grid>
         <Grid item xs={12} md={6}>
           <TextField
             {...register('heading')}

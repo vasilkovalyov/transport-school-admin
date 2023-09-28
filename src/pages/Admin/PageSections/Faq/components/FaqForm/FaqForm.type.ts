@@ -4,6 +4,7 @@ export type FaqFormProps = {
 };
 
 export interface IFaqFormData {
+  image?: string;
   heading: string;
   list_faq: IFaq[];
 }
