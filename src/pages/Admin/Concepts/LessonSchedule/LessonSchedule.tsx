@@ -7,7 +7,7 @@ import Container from '@mui/material/Container';
 import Typography from '@mui/material/Typography';
 import Breadcrumbs from '@mui/material/Breadcrumbs';
 
-import { Links } from '@/src/constants/routes';
+import { Links, LinksConcepts } from '@/src/constants/routes';
 import { LessonsList } from './components';
 
 export default function LessonSchedule() {
@@ -25,7 +25,7 @@ export default function LessonSchedule() {
               variant="contained"
               size="small"
               onClick={() => {
-                navigate(Links.ADMIN_LESSON_SCHEDULE_CREATE);
+                navigate(LinksConcepts.LESSON_SCHEDULE_CREATE);
               }}
             >
               Create Lesson

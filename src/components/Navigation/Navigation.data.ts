@@ -1,6 +1,11 @@
 import { IconEnum } from '../Icon/Icon.type';
 import { NavigationLinkItemProps } from './Navigation.type';
-import { Links } from 'src/constants/routes';
+import {
+  Links,
+  LinksPageSections,
+  LinksConcepts,
+  LinksPages,
+} from 'src/constants/routes';
 
 export const menuNavigaton: NavigationLinkItemProps[] = [
   {
@@ -20,18 +25,18 @@ export const menuNavigaton: NavigationLinkItemProps[] = [
       {
         id: '3-1',
         name: 'Blog',
-        path: Links.ADMIN_BLOG,
+        path: LinksConcepts.BLOG,
       },
 
       {
         id: '3-2',
         name: 'Lesson Schedule',
-        path: Links.ADMIN_LESSON_SCHEDULE,
+        path: LinksConcepts.LESSON_SCHEDULE,
       },
       {
         id: '3-3',
         name: 'Services',
-        path: Links.ADMIN_SERVICES,
+        path: LinksConcepts.SERVICES,
       },
     ],
   },
@@ -41,49 +46,49 @@ export const menuNavigaton: NavigationLinkItemProps[] = [
     children: [
       {
         id: '4-1',
-        path: Links.ADMIN_PAGES,
+        path: LinksPages.HOME,
         name: 'Home',
         icon: IconEnum.HOME,
       },
       {
         id: '4-2',
-        path: Links.ADMIN_PAGES_ABOUT_COURSE,
+        path: LinksPages.ABOUT_COURSE,
         name: 'About Course',
         icon: IconEnum.ABOUT,
       },
       {
         id: '4-3',
-        path: Links.ADMIN_PAGES_BLOG,
+        path: LinksPages.BLOG,
         name: 'Blog',
         icon: IconEnum.BLOG,
       },
       {
         id: '4-4',
-        path: Links.ADMIN_PAGES_COMPANY,
+        path: LinksPages.COMPANY,
         name: 'Company',
         icon: IconEnum.COMPANY,
       },
       {
         id: '4-5',
-        path: Links.ADMIN_PAGES_CONTACT,
+        path: LinksPages.CONTACT,
         name: 'Contact',
         icon: IconEnum.CONTACT,
       },
       {
         id: '4-6',
-        path: Links.ADMIN_PAGES_PRICE,
+        path: LinksPages.PRICE,
         name: 'Price',
         icon: IconEnum.PRICE,
       },
       {
         id: '4-7',
-        path: Links.ADMIN_PAGES_SCHEDULE,
+        path: LinksPages.SCHEDULE,
         name: 'Schedule',
         icon: IconEnum.SCHEDULE,
       },
       {
         id: '4-8',
-        path: Links.ADMIN_PAGES_SETTINGS,
+        path: LinksPages.SETTINGS,
         name: 'Settings',
         icon: IconEnum.SETTINGS,
       },
@@ -93,27 +98,27 @@ export const menuNavigaton: NavigationLinkItemProps[] = [
         children: [
           {
             id: '4-9-1',
-            path: Links.ADMIN_PAGE_SECTION_ACHIVMENTS,
+            path: LinksPageSections.ACHIVMENTS,
             name: 'Achivments',
           },
           {
             id: '4-9-2',
-            path: Links.ADMIN_PAGE_SECTION_CONTACTS,
+            path: LinksPageSections.CONTACTS,
             name: 'Contacts',
           },
           {
             id: '4-9-3',
-            path: Links.ADMIN_PAGE_SECTION_FAQ,
+            path: LinksPageSections.FAQ,
             name: 'Faq',
           },
           {
             id: '4-9-4',
-            path: Links.ADMIN_PAGE_SECTION_REVIEW,
+            path: LinksPageSections.REVIEW,
             name: 'Review',
           },
           {
             id: '4-9-5',
-            path: Links.ADMIN_PAGE_SECTION_CTA,
+            path: LinksPageSections.CTA,
             name: 'Cta',
           },
         ],

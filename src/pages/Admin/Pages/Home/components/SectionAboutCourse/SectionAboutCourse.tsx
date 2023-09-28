@@ -1,3 +1,13 @@
+import { Box } from '@mui/material';
+import Typography from '@mui/material/Typography';
+
+import { AboutCourseForm } from '../../../Components';
+
 export default function SectionAboutCourse() {
-  return <div>SectionAboutCourse</div>;
+  return (
+    <Box>
+      <Typography variant="h2">Section about course</Typography>
+      <AboutCourseForm />
+    </Box>
+  );
 }

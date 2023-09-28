@@ -5,7 +5,7 @@ import TableCell from '@mui/material/TableCell';
 import TableRow from '@mui/material/TableRow';
 
 import { ServiceRowProps } from './ServiceRow.type';
-import { Links } from '@/src/constants/routes';
+import { LinksConcepts } from '@/src/constants/routes';
 
 export default function ServiceRow({
   _id,
@@ -14,7 +14,7 @@ export default function ServiceRow({
   price,
 }: ServiceRowProps) {
   const navigate = useNavigate();
-  const editLink = `${Links.ADMIN_SERVICES_EDIT}/${_id}`;
+  const editLink = `${LinksConcepts.SERVICES_EDIT}/${_id}`;
 
   return (
     <TableRow key={_id}>

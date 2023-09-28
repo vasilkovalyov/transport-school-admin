@@ -7,7 +7,7 @@ import Container from '@mui/material/Container';
 import Typography from '@mui/material/Typography';
 import Breadcrumbs from '@mui/material/Breadcrumbs';
 
-import { Links } from '@/src/constants/routes';
+import { Links, LinksPageSections } from '@/src/constants/routes';
 import { ReviewList } from './components';
 
 export default function PageSectionReview() {
@@ -25,7 +25,7 @@ export default function PageSectionReview() {
               variant="contained"
               size="small"
               onClick={() => {
-                navigate(Links.ADMIN_PAGE_SECTION_REVIEW_CREATE);
+                navigate(LinksPageSections.REVIEW_CREATE);
               }}
             >
               Create Lesson

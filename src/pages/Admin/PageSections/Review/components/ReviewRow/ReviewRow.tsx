@@ -6,7 +6,7 @@ import TableCell from '@mui/material/TableCell';
 import TableRow from '@mui/material/TableRow';
 
 import { ReviewRowProps } from './ReviewRow.type';
-import { Links } from '@/src/constants/routes';
+import { LinksPageSections } from '@/src/constants/routes';
 
 export default function ReviewRow({
   _id,
@@ -16,7 +16,7 @@ export default function ReviewRow({
   rating,
 }: ReviewRowProps) {
   const navigate = useNavigate();
-  const editLink = `${Links.ADMIN_PAGE_SECTION_REVIEW_EDIT}/${_id}`;
+  const editLink = `${LinksPageSections.REVIEW_EDIT}/${_id}`;
 
   return (
     <TableRow key={_id}>

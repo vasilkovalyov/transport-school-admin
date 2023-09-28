@@ -9,7 +9,7 @@ import Breadcrumbs from '@mui/material/Breadcrumbs';
 
 import { ServiceList } from './components';
 
-import { Links } from '@/src/constants/routes';
+import { Links, LinksConcepts } from '@/src/constants/routes';
 
 export default function Services() {
   const navigate = useNavigate();
@@ -26,7 +26,7 @@ export default function Services() {
               variant="contained"
               size="small"
               onClick={() => {
-                navigate(Links.ADMIN_SERVICES_CREATE);
+                navigate(LinksConcepts.SERVICES_CREATE);
               }}
             >
               Create Service

@@ -5,7 +5,7 @@ import Container from '@mui/material/Container';
 import Typography from '@mui/material/Typography';
 import Breadcrumbs from '@mui/material/Breadcrumbs';
 
-import { Links } from '@/src/constants/routes';
+import { Links, LinksConcepts } from '@/src/constants/routes';
 import { BlockEditLesson } from './components';
 
 export default function LessonScheduleEdit() {
@@ -16,7 +16,7 @@ export default function LessonScheduleEdit() {
         <Box mb={4}>
           <Breadcrumbs aria-label="breadcrumb">
             <Link to={Links.ADMIN}>Home</Link>
-            <Link to={Links.ADMIN_LESSON_SCHEDULE}>Lesson shedule</Link>
+            <Link to={LinksConcepts.LESSON_SCHEDULE}>Lesson shedule</Link>
             <Typography>Edit lesson schedule</Typography>
           </Breadcrumbs>
         </Box>

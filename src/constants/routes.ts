@@ -2,37 +2,54 @@ export enum Links {
   LOGIN = '/login',
   ADMIN = '/admin',
   ADMIN_ACCOUNT = '/admin/account',
+}
 
-  ADMIN_BLOG = '/admin/blog',
-  ADMIN_BLOG_CREATE = '/admin/blog/create',
-  ADMIN_BLOG_EDIT = '/admin/blog/edit',
-  ADMIN_LESSON_SCHEDULE = '/admin/lesson-schedule',
-  ADMIN_LESSON_SCHEDULE_CREATE = '/admin/lesson-schedule/create',
-  ADMIN_LESSON_SCHEDULE_EDIT = '/admin/lesson-schedule/edit',
-  ADMIN_SERVICES = '/admin/services',
-  ADMIN_SERVICES_CREATE = '/admin/services/create',
-  ADMIN_SERVICES_EDIT = '/admin/services/edit',
+export enum LinksPages {
+  HOME = '/admin/pages',
+  ABOUT_COURSE = '/admin/pages/about-course',
+  BLOG = '/admin/pages/blog',
+  COMPANY = '/admin/pages/company',
+  CONTACT = '/admin/pages/contact',
+  PRICE = '/admin/pages/price',
+  SCHEDULE = '/admin/pages/schedule',
+  SETTINGS = '/admin/pages/settings',
+}
 
-  ADMIN_PAGES = '/admin/pages',
-  ADMIN_PAGES_ABOUT_COURSE = '/admin/pages/about-course',
-  ADMIN_PAGES_BLOG = '/admin/pages/blog',
-  ADMIN_PAGES_COMPANY = '/admin/pages/company',
-  ADMIN_PAGES_CONTACT = '/admin/pages/contact',
-  ADMIN_PAGES_PRICE = '/admin/pages/price',
-  ADMIN_PAGES_SCHEDULE = '/admin/pages/schedule',
-  ADMIN_PAGES_SETTINGS = '/admin/pages/settings',
-  ADMIN_PAGES_HOME_SECTION_HERO = '/admin/pages/home/section-hero',
-  ADMIN_PAGES_HOME_SECTION_ABOUT_US = '/admin/pages/home/section-about-us',
-  ADMIN_PAGES_HOME_SECTION_ABOUT_COURSE = '/admin/pages/home/section-about-course',
-  ADMIN_PAGES_HOME_SECTION_FORMAT_LESSONS = '/admin/pages/home/section-format-lessons',
-  ADMIN_PAGES_HOME_SECTION_FAQ = '/admin/pages/home/section-faq',
-  ADMIN_PAGES_HOME_SECTION_ACHIVMENTS = '/admin/pages/home/section-achivments',
+export enum LinksConcepts {
+  BLOG = '/admin/blog',
+  BLOG_CREATE = '/admin/blog/create',
+  BLOG_EDIT = '/admin/blog/edit',
+  LESSON_SCHEDULE = '/admin/lesson-schedule',
+  LESSON_SCHEDULE_CREATE = '/admin/lesson-schedule/create',
+  LESSON_SCHEDULE_EDIT = '/admin/lesson-schedule/edit',
+  SERVICES = '/admin/services',
+  SERVICES_CREATE = '/admin/services/create',
+  SERVICES_EDIT = '/admin/services/edit',
+}
 
-  ADMIN_PAGE_SECTION_ACHIVMENTS = '/admin/page-sections/achivments',
-  ADMIN_PAGE_SECTION_CONTACTS = '/admin/page-sections/contacts',
-  ADMIN_PAGE_SECTION_REVIEW = '/admin/page-sections/review',
-  ADMIN_PAGE_SECTION_REVIEW_CREATE = '/admin/page-sections/review/create',
-  ADMIN_PAGE_SECTION_REVIEW_EDIT = '/admin/page-sections/review/edit',
-  ADMIN_PAGE_SECTION_CTA = '/admin/page-sections/cta',
-  ADMIN_PAGE_SECTION_FAQ = '/admin/page-sections/faq',
+export enum LinksPageHomeSections {
+  HERO = '/admin/pages/home/section-hero',
+  ABOUT_US = '/admin/pages/home/section-about-us',
+  ABOUT_COURSE = '/admin/pages/home/section-about-course',
+  FORMAT_LESSONS = '/admin/pages/home/section-format-lessons',
+  FAQ = '/admin/pages/home/section-faq',
+  ACHIVMENTS = '/admin/pages/home/section-achivments',
+}
+
+export enum LinksPagePriceSections {
+  HERO = '/admin/pages/price/section-hero',
+  SERVICES = '/admin/pages/price/section-services',
+  EDUCATION = '/admin/pages/price/section-education',
+  REQUIREMENT = '/admin/pages/price/section-requirement',
+  CONTACTS = '/admin/pages/price/section-contacts',
+}
+
+export enum LinksPageSections {
+  ACHIVMENTS = '/admin/page-sections/achivments',
+  CONTACTS = '/admin/page-sections/contacts',
+  REVIEW = '/admin/page-sections/review',
+  REVIEW_CREATE = '/admin/page-sections/review/create',
+  REVIEW_EDIT = '/admin/page-sections/review/edit',
+  CTA = '/admin/page-sections/cta',
+  FAQ = '/admin/page-sections/faq',
 }

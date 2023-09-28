@@ -1,3 +1,12 @@
+import { SectionsContentLayout } from 'src/layouts';
+
+import { navigation } from './Price.data';
+
 export default function PagePrice() {
-  return <h1>Page price</h1>;
+  return (
+    <SectionsContentLayout
+      heading="Page price"
+      navigation={navigation}
+    ></SectionsContentLayout>
+  );
 }

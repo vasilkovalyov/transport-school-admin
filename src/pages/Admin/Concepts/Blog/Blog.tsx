@@ -9,7 +9,7 @@ import Breadcrumbs from '@mui/material/Breadcrumbs';
 
 import { BlogList } from './components';
 
-import { Links } from '@/src/constants/routes';
+import { Links, LinksConcepts } from '@/src/constants/routes';
 
 export default function Blog() {
   const navigate = useNavigate();
@@ -26,7 +26,7 @@ export default function Blog() {
               variant="contained"
               size="small"
               onClick={() => {
-                navigate(Links.ADMIN_BLOG_CREATE);
+                navigate(LinksConcepts.BLOG_CREATE);
               }}
             >
               Create Blog

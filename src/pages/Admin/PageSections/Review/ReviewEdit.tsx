@@ -5,7 +5,7 @@ import Container from '@mui/material/Container';
 import Typography from '@mui/material/Typography';
 import Breadcrumbs from '@mui/material/Breadcrumbs';
 
-import { Links } from '@/src/constants/routes';
+import { Links, LinksPageSections } from '@/src/constants/routes';
 import { ReviewEdit } from './components';
 
 export default function PageSectionReviewEdit() {
@@ -16,7 +16,7 @@ export default function PageSectionReviewEdit() {
         <Box mb={4}>
           <Breadcrumbs aria-label="breadcrumb">
             <Link to={Links.ADMIN}>Home</Link>
-            <Link to={Links.ADMIN_PAGE_SECTION_REVIEW}>Section review</Link>
+            <Link to={LinksPageSections.REVIEW}>Section review</Link>
             <Typography>Edit review</Typography>
           </Breadcrumbs>
         </Box>

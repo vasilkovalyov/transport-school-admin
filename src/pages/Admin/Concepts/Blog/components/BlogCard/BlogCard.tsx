@@ -9,11 +9,11 @@ import CardMedia from '@mui/material/CardMedia';
 import Typography from '@mui/material/Typography';
 
 import { BlogCardProps } from './BlogCard.type';
-import { Links } from '@/src/constants/routes';
+import { LinksConcepts } from '@/src/constants/routes';
 
 export default function BlogCard({ _id, image, heading, text }: BlogCardProps) {
   const navigate = useNavigate();
-  const editLink = `${Links.ADMIN_BLOG_EDIT}/${_id}`;
+  const editLink = `${LinksConcepts.BLOG_EDIT}/${_id}`;
 
   return (
     <Card>

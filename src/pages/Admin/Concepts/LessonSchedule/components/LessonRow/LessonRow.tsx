@@ -7,7 +7,7 @@ import TableRow from '@mui/material/TableRow';
 import dayjs from 'dayjs';
 
 import { LessonRowProps } from './LessonRow.type';
-import { Links } from '@/src/constants/routes';
+import { LinksConcepts } from '@/src/constants/routes';
 
 export default function LessonRow({
   _id,
@@ -19,7 +19,7 @@ export default function LessonRow({
   dateStart,
 }: LessonRowProps) {
   const navigate = useNavigate();
-  const editLink = `${Links.ADMIN_LESSON_SCHEDULE_EDIT}/${_id}`;
+  const editLink = `${LinksConcepts.SERVICES_EDIT}/${_id}`;
 
   return (
     <TableRow key={_id}>

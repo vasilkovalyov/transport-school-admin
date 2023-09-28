@@ -5,7 +5,7 @@ import Container from '@mui/material/Container';
 import Typography from '@mui/material/Typography';
 import Breadcrumbs from '@mui/material/Breadcrumbs';
 
-import { Links } from '@/src/constants/routes';
+import { Links, LinksConcepts } from '@/src/constants/routes';
 import { BlockServiceEdit } from './components';
 
 export default function ServiceEdit() {
@@ -16,7 +16,7 @@ export default function ServiceEdit() {
         <Box mb={4}>
           <Breadcrumbs aria-label="breadcrumb">
             <Link to={Links.ADMIN}>Home</Link>
-            <Link to={Links.ADMIN_SERVICES}>Service</Link>
+            <Link to={LinksConcepts.SERVICES}>Service</Link>
             <Typography>Edit service</Typography>
           </Breadcrumbs>
         </Box>
