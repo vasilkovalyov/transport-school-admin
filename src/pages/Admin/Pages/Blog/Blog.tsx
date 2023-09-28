@@ -1,3 +1,12 @@
+import { SectionsContentLayout } from 'src/layouts';
+
+import { navigation } from './Blog.data';
+
 export default function PageBlog() {
-  return <h1>Page blog</h1>;
+  return (
+    <SectionsContentLayout
+      heading="Page blog"
+      navigation={navigation}
+    ></SectionsContentLayout>
+  );
 }

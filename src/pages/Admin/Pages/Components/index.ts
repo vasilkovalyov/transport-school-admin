@@ -14,3 +14,6 @@ export * from './OurBenefitsForm';
 export * from './StructEducationForm';
 export * from './WhoTeachForm';
 export * from './ScheduleForm';
+export * from './AboutForm';
+export * from './ReviewForm';
+export * from './BlogForm';

@@ -1,3 +1,12 @@
+import { SectionsContentLayout } from 'src/layouts';
+
+import { navigation } from './Company.data';
+
 export default function PageCompany() {
-  return <h1>Page company</h1>;
+  return (
+    <SectionsContentLayout
+      heading="Page company"
+      navigation={navigation}
+    ></SectionsContentLayout>
+  );
 }

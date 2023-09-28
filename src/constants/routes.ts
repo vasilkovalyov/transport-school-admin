@@ -51,6 +51,22 @@ export enum LinksPageScheduleSections {
   CONTACTS = '/admin/pages/schedule/section-contacts',
 }
 
+export enum LinksPageCompanySections {
+  HERO = '/admin/pages/company/section-hero',
+  ABOUT = '/admin/pages/company/section-about',
+  ACHIVMENTS = '/admin/pages/company/section-achivments',
+  BLOG = '/admin/pages/company/section-blog',
+  FAQ = '/admin/pages/company/section-faq',
+  REVIEWS = '/admin/pages/company/section-review',
+  CONTACTS = '/admin/pages/company/section-contacts',
+}
+
+export enum LinksPageBlogSections {
+  HERO = '/admin/pages/blog/section-hero',
+  BLOG = '/admin/pages/blog/section-blog',
+  CTA = '/admin/pages/blog/section-achivments',
+}
+
 export enum LinksPagePriceSections {
   HERO = '/admin/pages/price/section-hero',
   SERVICES = '/admin/pages/price/section-services',

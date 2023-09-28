@@ -23,6 +23,8 @@ import { pages as homeSectionRoutes } from '../pages/Admin/Pages/Home/components
 import { pages as aboutCourseSectionRoutes } from '../pages/Admin/Pages/AboutCourse/components';
 import { pages as aboutScheduleSectionRoutes } from '../pages/Admin/Pages/Schedule/components';
 import { pages as priceSectionsRoutes } from '../pages/Admin/Pages/Price/components';
+import { pages as companySectionsRoutes } from '../pages/Admin/Pages/Company/components';
+import { pages as blogSectionsRoutes } from '../pages/Admin/Pages/Blog/components';
 
 const router = createBrowserRouter([
   {
@@ -67,10 +69,12 @@ const router = createBrowserRouter([
           {
             path: LinksPages.BLOG,
             element: <PageBlog />,
+            children: blogSectionsRoutes,
           },
           {
             path: LinksPages.COMPANY,
             element: <PageCompany />,
+            children: companySectionsRoutes,
           },
           {
             path: LinksPages.CONTACT,
