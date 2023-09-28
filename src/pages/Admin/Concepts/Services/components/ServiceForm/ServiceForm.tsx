@@ -93,8 +93,8 @@ export default function ServiceForm({ data, onSubmit }: ServiceFormProps) {
         </Grid>
         <Grid item xs={12}>
           <Typography variant="h4">Top list info</Typography>
-          {topFields.map((_, index) => (
-            <Box key={index} mb={4}>
+          {topFields.map((item, index) => (
+            <Box key={item.id} mb={4}>
               <Box mb={2}>
                 <TextField
                   {...register(`top_list_info.${index}.text`)}
@@ -117,8 +117,8 @@ export default function ServiceForm({ data, onSubmit }: ServiceFormProps) {
         </Grid>
         <Grid item xs={12}>
           <Typography variant="h4">Bottom list info</Typography>
-          {bottomFields.map((_, index) => (
-            <Box key={index} mb={4}>
+          {bottomFields.map((item, index) => (
+            <Box key={item.id} mb={4}>
               <Box mb={2}>
                 <TextField
                   {...register(`bottom_list_info.${index}.text`)}

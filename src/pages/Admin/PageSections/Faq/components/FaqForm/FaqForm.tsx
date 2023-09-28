@@ -29,6 +29,7 @@ export default function FaqForm({ data, onSubmit }: FaqFormProps) {
   const { fields, remove, append } = useFieldArray({
     control,
     name: 'list_faq',
+    keyName: 'id',
   });
 
   useEffect(() => {
@@ -67,8 +68,8 @@ export default function FaqForm({ data, onSubmit }: FaqFormProps) {
         />
       </Box>
       <Typography variant="h4">Faq list</Typography>
-      {fields.map((_, index) => (
-        <Box key={index} mb={4}>
+      {fields.map((item, index) => (
+        <Box key={item.id} mb={4}>
           <Box mb={2}>
             <TextField
               {...register(`list_faq.${index}.heading`)}

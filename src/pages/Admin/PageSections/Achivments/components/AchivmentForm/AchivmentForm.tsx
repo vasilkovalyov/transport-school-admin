@@ -35,6 +35,7 @@ export default function AchivmentForm({ data, onSubmit }: AchivmentFormProps) {
   const { fields, remove, append } = useFieldArray({
     control,
     name: 'list_achivments',
+    keyName: 'id',
   });
 
   useEffect(() => {
@@ -85,8 +86,8 @@ export default function AchivmentForm({ data, onSubmit }: AchivmentFormProps) {
         </Box>
       </Box>
       <Typography variant="h4">Achivment list</Typography>
-      {fields.map((_, index) => (
-        <Box key={index} mb={4}>
+      {fields.map((item, index) => (
+        <Box key={item.id} mb={4}>
           <Box mb={2}>
             <TextField
               {...register(`list_achivments.${index}.heading`)}

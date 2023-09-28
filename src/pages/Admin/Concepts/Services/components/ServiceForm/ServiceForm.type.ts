@@ -11,5 +11,6 @@ export interface IServiceFormData {
 }
 
 export interface IServiceInfoItemData {
+  id?: string;
   text: string;
 }
