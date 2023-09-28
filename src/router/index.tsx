@@ -18,7 +18,9 @@ import {
 
 import { pages as conceptsRoutes } from 'src/pages/Admin/Concepts';
 import { pages as pageSectionRoutes } from '../pages/Admin/PageSections';
+
 import { pages as homeSectionRoutes } from '../pages/Admin/Pages/Home/components';
+import { pages as aboutCourseSectionRoutes } from '../pages/Admin/Pages/AboutCourse/components';
 import { pages as priceSectionsRoutes } from '../pages/Admin/Pages/Price/components';
 
 const router = createBrowserRouter([
@@ -59,6 +61,7 @@ const router = createBrowserRouter([
           {
             path: LinksPages.ABOUT_COURSE,
             element: <PageAboutCourse />,
+            children: aboutCourseSectionRoutes,
           },
           {
             path: LinksPages.BLOG,

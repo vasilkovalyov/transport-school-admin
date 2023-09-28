@@ -36,6 +36,15 @@ export enum LinksPageHomeSections {
   ACHIVMENTS = '/admin/pages/home/section-achivments',
 }
 
+export enum LinksPageAboutCourseSections {
+  HERO = '/admin/pages/about-course/section-hero',
+  COURSE_FOR_PEOPLE = '/admin/pages/about-course/section-course-for-people',
+  STRUCT_EDUCATION = '/admin/pages/about-course/section-struct-education',
+  OUR_BENEFITS = '/admin/pages/about-course/section-our-benefits',
+  WHO_TEACH = '/admin/pages/about-course/section-who-teach',
+  CTA = '/admin/pages/about-course/section-cta',
+}
+
 export enum LinksPagePriceSections {
   HERO = '/admin/pages/price/section-hero',
   SERVICES = '/admin/pages/price/section-services',

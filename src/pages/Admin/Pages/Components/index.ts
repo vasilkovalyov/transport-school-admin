@@ -8,3 +8,8 @@ export * from './ServicesForm';
 export * from './TeamEducationForm';
 export * from './RequirementForm';
 export * from './ContactsForm';
+export * from './CourseForPeopleForm';
+export * from './CtaForm';
+export * from './OurBenefitsForm';
+export * from './StructEducationForm';
+export * from './WhoTeachForm';
