@@ -4,42 +4,50 @@ import { Box } from '@mui/material';
 import Typography from '@mui/material/Typography';
 import Grid from '@mui/material/Grid';
 import Container from '@mui/material/Container';
-import List from '@mui/material/List';
-import ListItem from '@mui/material/ListItem';
-import ListItemButton from '@mui/material/ListItemButton';
-import ListItemText from '@mui/material/ListItemText';
+import Stack from '@mui/material/Stack';
+import Paper from '@mui/material/Paper';
 
 import { SectionsContentLayoutProps } from './SectionsContentLayout.type';
+
+import './SectionsContentLayout.scss';
 
 export default function SectionsContentLayout({
   heading,
   navigation,
+  children,
 }: SectionsContentLayoutProps) {
   return (
     <Box py={4} component="section">
       <Container className="fullwidth-container">
         <Typography variant="h1">{heading}</Typography>
-        <Grid container spacing={4}>
-          <Grid item>
-            <List className="navigation__list">
+        <Box mb={4}>{children}</Box>
+        <Grid container columnSpacing={4}>
+          <Grid item xs={12} md={3}>
+            <Stack className="content-navigation">
               {navigation.map((navItem) => (
-                <ListItem
+                <Box
                   key={navItem.id}
-                  disablePadding
-                  className="navigation__item"
-                  style={{ marginBottom: 0 }}
+                  mb={2}
+                  className="content-navigation__item"
                 >
-                  <ListItemButton>
-                    <Link to={navItem.path} className="navigation__link">
-                      <ListItemText primary={navItem.name} />
+                  <Paper elevation={3}>
+                    <Link
+                      to={navItem.path}
+                      className="content-navigation__link"
+                    >
+                      {navItem.name}
                     </Link>
-                  </ListItemButton>
-                </ListItem>
+                  </Paper>
+                </Box>
               ))}
-            </List>
+            </Stack>
           </Grid>
-          <Grid item>
-            <Outlet />
+          <Grid item xs={12} md={9} display="flex">
+            <Paper style={{ width: '100%' }} elevation={3}>
+              <Box p={2}>
+                <Outlet />
+              </Box>
+            </Paper>
           </Grid>
         </Grid>
       </Container>

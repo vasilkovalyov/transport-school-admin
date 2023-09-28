@@ -1,6 +1,7 @@
 export type SectionsContentLayoutProps = {
   heading: string;
   navigation: SectionContentLink[];
+  children?: React.ReactNode;
 };
 
 export type SectionContentLink = {

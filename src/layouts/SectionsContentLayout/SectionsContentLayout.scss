@@ -1,0 +1,11 @@
+.content-navigation {
+  &__item {
+  }
+
+  &__link {
+    display: block;
+    padding: 8px 10px;
+    text-decoration: none;
+    color: inherit;
+  }
+}

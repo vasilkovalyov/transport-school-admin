@@ -38,7 +38,7 @@ const headCells: string[] = ['Image', 'Heading', 'Price'];
 export default function ServiceList() {
   return (
     <Box>
-      <TableContainer component={Paper}>
+      <TableContainer component={Paper} elevation={3}>
         <Table sx={{ minWidth: 650 }} aria-label="simple table">
           <TableHead>
             <TableRow>

@@ -51,7 +51,7 @@ const headCells: string[] = [
 export default function BlogList() {
   return (
     <Box>
-      <TableContainer component={Paper}>
+      <TableContainer component={Paper} elevation={3}>
         <Table sx={{ minWidth: 650 }} aria-label="simple table">
           <TableHead>
             <TableRow>
