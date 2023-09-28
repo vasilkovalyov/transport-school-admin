@@ -67,6 +67,12 @@ export enum LinksPageBlogSections {
   CTA = '/admin/pages/blog/section-achivments',
 }
 
+export enum LinksPageContactSections {
+  CONTACT_FORM = '/admin/pages/contact/section-contact-form',
+  CONTACTS = '/admin/pages/contact/section-contacts',
+  CTA = '/admin/pages/contact/section-cta',
+}
+
 export enum LinksPagePriceSections {
   HERO = '/admin/pages/price/section-hero',
   SERVICES = '/admin/pages/price/section-services',

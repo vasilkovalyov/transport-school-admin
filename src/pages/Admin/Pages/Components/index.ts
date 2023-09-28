@@ -17,3 +17,4 @@ export * from './ScheduleForm';
 export * from './AboutForm';
 export * from './ReviewForm';
 export * from './BlogForm';
+export * from './ContactForm';

@@ -1,3 +1,12 @@
+import { SectionsContentLayout } from 'src/layouts';
+
+import { navigation } from './Contact.data';
+
 export default function PageContact() {
-  return <h1>Page contact</h1>;
+  return (
+    <SectionsContentLayout
+      heading="Page contact"
+      navigation={navigation}
+    ></SectionsContentLayout>
+  );
 }
