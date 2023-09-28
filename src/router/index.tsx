@@ -21,6 +21,7 @@ import { pages as pageSectionRoutes } from '../pages/Admin/PageSections';
 
 import { pages as homeSectionRoutes } from '../pages/Admin/Pages/Home/components';
 import { pages as aboutCourseSectionRoutes } from '../pages/Admin/Pages/AboutCourse/components';
+import { pages as aboutScheduleSectionRoutes } from '../pages/Admin/Pages/Schedule/components';
 import { pages as priceSectionsRoutes } from '../pages/Admin/Pages/Price/components';
 
 const router = createBrowserRouter([
@@ -83,6 +84,7 @@ const router = createBrowserRouter([
           {
             path: LinksPages.SCHEDULE,
             element: <PageSchedule />,
+            children: aboutScheduleSectionRoutes,
           },
           {
             path: LinksPages.SETTINGS,

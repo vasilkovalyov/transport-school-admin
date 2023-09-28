@@ -45,6 +45,12 @@ export enum LinksPageAboutCourseSections {
   CTA = '/admin/pages/about-course/section-cta',
 }
 
+export enum LinksPageScheduleSections {
+  HERO = '/admin/pages/schedule/section-hero',
+  SCHEDULE = '/admin/pages/schedule/section-schedule',
+  CONTACTS = '/admin/pages/schedule/section-contacts',
+}
+
 export enum LinksPagePriceSections {
   HERO = '/admin/pages/price/section-hero',
   SERVICES = '/admin/pages/price/section-services',

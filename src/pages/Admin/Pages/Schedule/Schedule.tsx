@@ -1,3 +1,12 @@
+import { SectionsContentLayout } from 'src/layouts';
+
+import { navigation } from './Schedule.data';
+
 export default function PageSchedule() {
-  return <h1>Page schedule</h1>;
+  return (
+    <SectionsContentLayout
+      heading="Page schedule"
+      navigation={navigation}
+    ></SectionsContentLayout>
+  );
 }
