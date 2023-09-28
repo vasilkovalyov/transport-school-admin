@@ -4,6 +4,8 @@ import Button from '@mui/material/Button';
 import TableCell from '@mui/material/TableCell';
 import TableRow from '@mui/material/TableRow';
 
+import dayjs from 'dayjs';
+
 import { LessonRowProps } from './LessonRow.type';
 import { Links } from '@/src/constants/routes';
 
@@ -30,7 +32,7 @@ export default function LessonRow({
       <TableCell>
         {timeSchedule[0]} - {timeSchedule[1]}
       </TableCell>
-      <TableCell>{dateStart}</TableCell>
+      <TableCell>{dayjs(dateStart).format('DD MMM YYYY')}</TableCell>
       <TableCell>
         <Button
           size="small"
