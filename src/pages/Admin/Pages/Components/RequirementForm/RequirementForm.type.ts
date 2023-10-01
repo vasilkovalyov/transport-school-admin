@@ -5,4 +5,12 @@ export type RequirementFormProps = {
 
 export interface IRequirementFormData {
   heading: string;
+  requirement_list: IRequirementItem[];
+}
+
+export interface IRequirementItem {
+  id?: string;
+  image?: string;
+  heading: string;
+  text: string;
 }

@@ -4,5 +4,5 @@ export type CtaFormProps = {
 };
 
 export interface ICtaFormData {
-  heading: string;
+  publish: boolean;
 }

@@ -5,4 +5,5 @@ export type ReviewFormProps = {
 
 export interface IReviewFormData {
   heading: string;
+  publish: boolean;
 }

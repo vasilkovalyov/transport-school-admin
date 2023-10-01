@@ -4,5 +4,9 @@ export type ContactFormProps = {
 };
 
 export interface IContactFormData {
-  isShow: boolean;
+  image?: string;
+  heading: string;
+  rich_text: string;
+  form_heading: string;
+  require_message: string;
 }

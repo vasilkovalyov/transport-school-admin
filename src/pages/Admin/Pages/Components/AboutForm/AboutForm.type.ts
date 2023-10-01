@@ -5,4 +5,5 @@ export type AboutFormProps = {
 
 export interface IAboutFormData {
   heading: string;
+  rich_text: string;
 }

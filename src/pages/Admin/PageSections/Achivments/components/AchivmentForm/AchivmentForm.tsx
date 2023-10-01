@@ -64,7 +64,7 @@ export default function AchivmentForm({ data, onSubmit }: AchivmentFormProps) {
   }
 
   return (
-    <Box component="form" maxWidth={500} marginBottom={4}>
+    <Box component="form" maxWidth={800} marginBottom={4}>
       <Box mb={4}>
         <Box mb={2}>
           <TextField

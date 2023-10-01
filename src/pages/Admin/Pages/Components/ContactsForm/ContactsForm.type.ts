@@ -4,5 +4,5 @@ export type ContactsFormProps = {
 };
 
 export interface IContactsFormData {
-  isShow: boolean;
+  publish: boolean;
 }

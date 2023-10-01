@@ -13,22 +13,27 @@ export const navigation = [
   },
   {
     id: '3',
-    path: LinksPageCompanySections.BLOG,
-    name: 'Section blog',
+    path: LinksPageCompanySections.REVIEWS,
+    name: 'Section reviews',
   },
   {
     id: '4',
+    path: LinksPageCompanySections.ACHIVMENTS,
+    name: 'Section achivments',
+  },
+  {
+    id: '5',
     path: LinksPageCompanySections.CONTACTS,
     name: 'Section contacts',
   },
   {
-    id: '5',
+    id: '6',
     path: LinksPageCompanySections.FAQ,
     name: 'Section faq',
   },
   {
-    id: '6',
-    path: LinksPageCompanySections.REVIEWS,
-    name: 'Section reviews',
+    id: '7',
+    path: LinksPageCompanySections.BLOG,
+    name: 'Section blog',
   },
 ];

@@ -5,4 +5,11 @@ export type StructEducationFormProps = {
 
 export interface IStructEducationFormData {
   heading: string;
+  struct_education_list: IStructEducationData[];
+}
+
+export interface IStructEducationData {
+  id?: string;
+  heading: string;
+  rich_text: string;
 }

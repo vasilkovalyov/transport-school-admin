@@ -5,4 +5,6 @@ export type ScheduleFormProps = {
 
 export interface IScheduleFormData {
   heading: string;
+  schedule_number: number | null;
+  publish: boolean;
 }

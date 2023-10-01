@@ -5,4 +5,14 @@ export type TeamEducationFormProps = {
 
 export interface ITeamEducationFormData {
   heading: string;
+  subheading: string;
+  use_cta_link?: boolean;
+  education_list: ITeamEducationData[];
+}
+
+export interface ITeamEducationData {
+  id?: string;
+  heading: string;
+  type: string;
+  discount: string;
 }

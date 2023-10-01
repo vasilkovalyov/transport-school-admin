@@ -5,4 +5,6 @@ export type BlogFormProps = {
 
 export interface IBlogFormData {
   heading: string;
+  post_number: number | null;
+  publish: boolean;
 }

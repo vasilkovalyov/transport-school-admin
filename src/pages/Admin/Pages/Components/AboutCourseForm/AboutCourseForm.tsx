@@ -51,7 +51,7 @@ export default function AboutCourseForm({
 
   return (
     <Grid container columnSpacing={4}>
-      <Grid item xs={12} lg={7} xl={5}>
+      <Grid item xs={12} lg={7} xl={7}>
         <Box mb={4}>
           <TextField
             {...register('heading')}

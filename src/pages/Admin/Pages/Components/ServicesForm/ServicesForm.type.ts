@@ -5,4 +5,5 @@ export type ServicesFormProps = {
 
 export interface IServicesFormData {
   heading: string;
+  subheading: string;
 }

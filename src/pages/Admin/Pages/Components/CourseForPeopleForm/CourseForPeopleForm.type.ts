@@ -4,5 +4,6 @@ export type CourseForPeopleFormProps = {
 };
 
 export interface ICourseForPeopleFormData {
-  isShow: boolean;
+  heading: string;
+  rich_text: string;
 }

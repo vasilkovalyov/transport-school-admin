@@ -4,5 +4,7 @@ export type WhoTeachFormProps = {
 };
 
 export interface IWhoTeachFormData {
+  image?: string;
   heading: string;
+  rich_text: string;
 }

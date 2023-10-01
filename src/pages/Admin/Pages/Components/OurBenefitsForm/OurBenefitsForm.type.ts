@@ -4,5 +4,7 @@ export type OurBenefitsFormProps = {
 };
 
 export interface IOurBenefitsFormData {
+  image?: string;
   heading: string;
+  rich_text: string;
 }
