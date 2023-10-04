@@ -1,5 +1,5 @@
 export type BaseBlockFormProps<T> = {
-  data: T;
+  data?: T;
   onSubmit?: (data: T) => void;
   onPublish?: (value: boolean) => void;
 };
