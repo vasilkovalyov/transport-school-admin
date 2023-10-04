@@ -1,6 +1,7 @@
 import { useForm } from 'react-hook-form';
 
 import { Box } from '@mui/material';
+import Stack from '@mui/material/Stack';
 import Button from '@mui/material/Button';
 import TextField from '@mui/material/TextField';
 
@@ -18,11 +19,13 @@ const defaultStructEducationItem: IStructEducationData = {
 const defaultValuesForm: IStructEducationFormData = {
   heading: '',
   struct_education_list: [defaultStructEducationItem],
+  publish: false,
 };
 
 export default function StructEducationForm({
   data,
   onSubmit,
+  onPublish,
 }: StructEducationFormProps) {
   const { handleSubmit, register } = useForm<IStructEducationFormData>({
     mode: 'onSubmit',
@@ -46,7 +49,7 @@ export default function StructEducationForm({
           rows={2}
         />
       </Box>
-      <Box>
+      <Stack spacing={2} direction="row">
         <Button
           variant="contained"
           size="medium"
@@ -55,7 +58,15 @@ export default function StructEducationForm({
         >
           Save
         </Button>
-      </Box>
+        <Button
+          variant="contained"
+          size="medium"
+          color={data?.publish ? 'info' : 'warning'}
+          onClick={() => onPublish && onPublish(!data?.publish)}
+        >
+          {data?.publish ? 'Unpublish' : 'Publish'}
+        </Button>
+      </Stack>
     </Box>
   );
 }

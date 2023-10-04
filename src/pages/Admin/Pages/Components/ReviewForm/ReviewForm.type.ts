@@ -1,9 +1,7 @@
-export type ReviewFormProps = {
-  data?: IReviewFormData;
-  onSubmit?: (data: IReviewFormData) => void;
-};
+import { BaseBlockFormProps, IBaseBlock } from '../types';
 
-export interface IReviewFormData {
+export type ReviewFormProps = BaseBlockFormProps<IReviewFormData>;
+
+export interface IReviewFormData extends IBaseBlock {
   heading: string;
-  publish: boolean;
 }

@@ -1,10 +1,9 @@
 import { useForm } from 'react-hook-form';
 
 import { Box } from '@mui/material';
+import Stack from '@mui/material/Stack';
 import Button from '@mui/material/Button';
 import TextField from '@mui/material/TextField';
-import Checkbox from '@mui/material/Checkbox';
-import FormControlLabel from '@mui/material/FormControlLabel';
 
 import { BlogFormProps, IBlogFormData } from './BlogForm.type';
 
@@ -14,7 +13,7 @@ const defaultValuesForm: IBlogFormData = {
   publish: false,
 };
 
-export default function BlogForm({ data, onSubmit }: BlogFormProps) {
+export default function BlogForm({ data, onSubmit, onPublish }: BlogFormProps) {
   const { handleSubmit, register } = useForm<IBlogFormData>({
     mode: 'onSubmit',
     defaultValues: data ?? defaultValuesForm,
@@ -46,19 +45,7 @@ export default function BlogForm({ data, onSubmit }: BlogFormProps) {
           fullWidth
         />
       </Box>
-      <Box mb={4}>
-        <FormControlLabel
-          control={
-            <Checkbox
-              {...register('publish')}
-              defaultChecked={data ? data.publish : false}
-              color="success"
-            />
-          }
-          label="Publish section"
-        />
-      </Box>
-      <Box>
+      <Stack spacing={2} direction="row">
         <Button
           variant="contained"
           size="medium"
@@ -67,7 +54,15 @@ export default function BlogForm({ data, onSubmit }: BlogFormProps) {
         >
           Save
         </Button>
-      </Box>
+        <Button
+          variant="contained"
+          size="medium"
+          color={data?.publish ? 'info' : 'warning'}
+          onClick={() => onPublish && onPublish(!data?.publish)}
+        >
+          {data?.publish ? 'Unpublish' : 'Publish'}
+        </Button>
+      </Stack>
     </Box>
   );
 }

@@ -1,6 +1,7 @@
 import { useForm } from 'react-hook-form';
 
 import { Box } from '@mui/material';
+import Stack from '@mui/material/Stack';
 import Button from '@mui/material/Button';
 import TextField from '@mui/material/TextField';
 import Checkbox from '@mui/material/Checkbox';
@@ -13,7 +14,11 @@ const defaultValuesForm: IReviewFormData = {
   publish: false,
 };
 
-export default function ReviewForm({ data, onSubmit }: ReviewFormProps) {
+export default function ReviewForm({
+  data,
+  onSubmit,
+  onPublish,
+}: ReviewFormProps) {
   const { handleSubmit, register } = useForm<IReviewFormData>({
     mode: 'onSubmit',
     defaultValues: data ?? defaultValuesForm,
@@ -36,19 +41,7 @@ export default function ReviewForm({ data, onSubmit }: ReviewFormProps) {
           rows={2}
         />
       </Box>
-      <Box mb={4}>
-        <FormControlLabel
-          control={
-            <Checkbox
-              {...register('publish')}
-              defaultChecked={data ? data.publish : false}
-              color="success"
-            />
-          }
-          label="Publish section"
-        />
-      </Box>
-      <Box>
+      <Stack spacing={2} direction="row">
         <Button
           variant="contained"
           size="medium"
@@ -57,7 +50,15 @@ export default function ReviewForm({ data, onSubmit }: ReviewFormProps) {
         >
           Save
         </Button>
-      </Box>
+        <Button
+          variant="contained"
+          size="medium"
+          color={data?.publish ? 'info' : 'warning'}
+          onClick={() => onPublish && onPublish(!data?.publish)}
+        >
+          {data?.publish ? 'Unpublish' : 'Publish'}
+        </Button>
+      </Stack>
     </Box>
   );
 }

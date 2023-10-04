@@ -3,6 +3,7 @@ import { useForm } from 'react-hook-form';
 import MDEditor from '@uiw/react-md-editor';
 
 import { Box } from '@mui/material';
+import Stack from '@mui/material/Stack';
 import Button from '@mui/material/Button';
 import Grid from '@mui/material/Grid';
 import TextField from '@mui/material/TextField';
@@ -17,9 +18,14 @@ const defaultValuesForm: IContactFormData = {
   form_heading: '',
   require_message: '',
   image: '',
+  publish: false,
 };
 
-export default function ContactForm({ data, onSubmit }: ContactFormProps) {
+export default function ContactForm({
+  data,
+  onSubmit,
+  onPublish,
+}: ContactFormProps) {
   const [markdownText, setMarkdownText] = useState<string | null>(null);
 
   const { handleSubmit, register, setValue } = useForm<IContactFormData>({
@@ -88,7 +94,7 @@ export default function ContactForm({ data, onSubmit }: ContactFormProps) {
               rows={2}
             />
           </Box>
-          <Box>
+          <Stack spacing={2} direction="row">
             <Button
               variant="contained"
               size="medium"
@@ -97,7 +103,15 @@ export default function ContactForm({ data, onSubmit }: ContactFormProps) {
             >
               Save
             </Button>
-          </Box>
+            <Button
+              variant="contained"
+              size="medium"
+              color={data?.publish ? 'info' : 'warning'}
+              onClick={() => onPublish && onPublish(!data?.publish)}
+            >
+              {data?.publish ? 'Unpublish' : 'Publish'}
+            </Button>
+          </Stack>
         </Grid>
         <Grid item xs={12} lg={5}>
           <Box mb={4}>

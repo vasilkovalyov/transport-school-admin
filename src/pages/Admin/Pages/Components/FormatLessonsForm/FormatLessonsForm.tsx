@@ -1,6 +1,7 @@
 import { useForm } from 'react-hook-form';
 
 import { Box } from '@mui/material';
+import Stack from '@mui/material/Stack';
 import Button from '@mui/material/Button';
 import TextField from '@mui/material/TextField';
 
@@ -12,11 +13,13 @@ import {
 const defaultValuesForm: IFormatLessonsFormData = {
   heading: '',
   subheading: '',
+  publish: false,
 };
 
 export default function FormatLessonsForm({
   data,
   onSubmit,
+  onPublish,
 }: FormatLessonsFormProps) {
   const { handleSubmit, register } = useForm<IFormatLessonsFormData>({
     mode: 'onSubmit',
@@ -51,7 +54,7 @@ export default function FormatLessonsForm({
           rows={4}
         />
       </Box>
-      <Box>
+      <Stack spacing={2} direction="row">
         <Button
           variant="contained"
           size="medium"
@@ -60,7 +63,15 @@ export default function FormatLessonsForm({
         >
           Save
         </Button>
-      </Box>
+        <Button
+          variant="contained"
+          size="medium"
+          color={data?.publish ? 'info' : 'warning'}
+          onClick={() => onPublish && onPublish(!data?.publish)}
+        >
+          {data?.publish ? 'Unpublish' : 'Publish'}
+        </Button>
+      </Stack>
     </Box>
   );
 }

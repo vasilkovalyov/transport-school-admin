@@ -1,9 +1,8 @@
-export type OurBenefitsFormProps = {
-  data?: IOurBenefitsFormData;
-  onSubmit?: (data: IOurBenefitsFormData) => void;
-};
+import { BaseBlockFormProps, IBaseBlock } from '../types';
 
-export interface IOurBenefitsFormData {
+export type OurBenefitsFormProps = BaseBlockFormProps<IOurBenefitsFormData>;
+
+export interface IOurBenefitsFormData extends IBaseBlock {
   image?: string;
   heading: string;
   rich_text: string;

@@ -1,6 +1,7 @@
 import { useForm } from 'react-hook-form';
 
 import { Box } from '@mui/material';
+import Stack from '@mui/material/Stack';
 import Button from '@mui/material/Button';
 import TextField from '@mui/material/TextField';
 
@@ -9,9 +10,14 @@ import { ServicesFormProps, IServicesFormData } from './ServicesForm.type';
 const defaultValuesForm: IServicesFormData = {
   heading: '',
   subheading: '',
+  publish: false,
 };
 
-export default function ServicesForm({ data, onSubmit }: ServicesFormProps) {
+export default function ServicesForm({
+  data,
+  onSubmit,
+  onPublish,
+}: ServicesFormProps) {
   const { handleSubmit, register } = useForm<IServicesFormData>({
     mode: 'onSubmit',
     defaultValues: data ?? defaultValuesForm,
@@ -45,7 +51,7 @@ export default function ServicesForm({ data, onSubmit }: ServicesFormProps) {
           rows={4}
         />
       </Box>
-      <Box>
+      <Stack spacing={2} direction="row">
         <Button
           variant="contained"
           size="medium"
@@ -54,7 +60,15 @@ export default function ServicesForm({ data, onSubmit }: ServicesFormProps) {
         >
           Save
         </Button>
-      </Box>
+        <Button
+          variant="contained"
+          size="medium"
+          color={data?.publish ? 'info' : 'warning'}
+          onClick={() => onPublish && onPublish(!data?.publish)}
+        >
+          {data?.publish ? 'Unpublish' : 'Publish'}
+        </Button>
+      </Stack>
     </Box>
   );
 }

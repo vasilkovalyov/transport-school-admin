@@ -1,8 +1,5 @@
-export type FaqFormProps = {
-  data?: IFaqFormData;
-  onSubmit?: (data: IFaqFormData) => void;
-};
+import { BaseBlockFormProps, IBaseBlock } from '../types';
 
-export interface IFaqFormData {
-  publish: boolean;
-}
+export type FaqFormProps = BaseBlockFormProps<IFaqFormData>;
+
+export interface IFaqFormData extends IBaseBlock {}

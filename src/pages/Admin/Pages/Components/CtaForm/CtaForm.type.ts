@@ -1,8 +1,5 @@
-export type CtaFormProps = {
-  data?: ICtaFormData;
-  onSubmit?: (data: ICtaFormData) => void;
-};
+import { BaseBlockFormProps, IBaseBlock } from '../types';
 
-export interface ICtaFormData {
-  publish: boolean;
-}
+export type CtaFormProps = BaseBlockFormProps<ICtaFormData>;
+
+export interface ICtaFormData extends IBaseBlock {}

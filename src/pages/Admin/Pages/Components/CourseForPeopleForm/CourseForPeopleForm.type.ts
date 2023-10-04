@@ -1,9 +1,9 @@
-export type CourseForPeopleFormProps = {
-  data?: ICourseForPeopleFormData;
-  onSubmit?: (data: ICourseForPeopleFormData) => void;
-};
+import { BaseBlockFormProps, IBaseBlock } from '../types';
 
-export interface ICourseForPeopleFormData {
+export type CourseForPeopleFormProps =
+  BaseBlockFormProps<ICourseForPeopleFormData>;
+
+export interface ICourseForPeopleFormData extends IBaseBlock {
   heading: string;
   rich_text: string;
 }

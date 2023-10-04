@@ -1,9 +1,8 @@
-export type HeroFormProps = {
-  data?: IHeroFormData;
-  onSubmit?: (data: IHeroFormData) => void;
-};
+import { BaseBlockFormProps, IBaseBlock } from '../types';
 
-export interface IHeroFormData {
+export type HeroFormProps = BaseBlockFormProps<IHeroFormData>;
+
+export interface IHeroFormData extends IBaseBlock {
   image?: string;
   heading: string;
   subheading: string;

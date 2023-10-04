@@ -1,6 +1,7 @@
 import { useForm, useFieldArray } from 'react-hook-form';
 
 import { Box } from '@mui/material';
+import Stack from '@mui/material/Stack';
 import Button from '@mui/material/Button';
 import TextField from '@mui/material/TextField';
 import Checkbox from '@mui/material/Checkbox';
@@ -26,11 +27,13 @@ const defaultValuesForm: ITeamEducationFormData = {
   subheading: '',
   use_cta_link: false,
   education_list: [defaultEducationItem],
+  publish: false,
 };
 
 export default function TeamEducationForm({
   data,
   onSubmit,
+  onPublish,
 }: TeamEducationFormProps) {
   const { handleSubmit, register, control } = useForm<ITeamEducationFormData>({
     mode: 'onSubmit',
@@ -131,7 +134,7 @@ export default function TeamEducationForm({
           label="Use cta link"
         />
       </Box>
-      <Box>
+      <Stack spacing={2} direction="row">
         <Button
           variant="contained"
           size="medium"
@@ -140,7 +143,15 @@ export default function TeamEducationForm({
         >
           Save
         </Button>
-      </Box>
+        <Button
+          variant="contained"
+          size="medium"
+          color={data?.publish ? 'info' : 'warning'}
+          onClick={() => onPublish && onPublish(!data?.publish)}
+        >
+          {data?.publish ? 'Unpublish' : 'Publish'}
+        </Button>
+      </Stack>
     </Box>
   );
 }

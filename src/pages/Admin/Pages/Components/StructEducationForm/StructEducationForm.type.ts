@@ -1,9 +1,9 @@
-export type StructEducationFormProps = {
-  data?: IStructEducationFormData;
-  onSubmit?: (data: IStructEducationFormData) => void;
-};
+import { BaseBlockFormProps, IBaseBlock } from '../types';
 
-export interface IStructEducationFormData {
+export type StructEducationFormProps =
+  BaseBlockFormProps<IStructEducationFormData>;
+
+export interface IStructEducationFormData extends IBaseBlock {
   heading: string;
   struct_education_list: IStructEducationData[];
 }

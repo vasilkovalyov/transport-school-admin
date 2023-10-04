@@ -1,8 +1,5 @@
-export type ContactsFormProps = {
-  data?: IContactsFormData;
-  onSubmit?: (data: IContactsFormData) => void;
-};
+import { BaseBlockFormProps, IBaseBlock } from '../types';
 
-export interface IContactsFormData {
-  publish: boolean;
-}
+export type ContactsFormProps = BaseBlockFormProps<IContactsFormData>;
+
+export interface IContactsFormData extends IBaseBlock {}

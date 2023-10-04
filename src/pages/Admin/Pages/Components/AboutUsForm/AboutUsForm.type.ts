@@ -1,9 +1,7 @@
-export type AboutUsFormProps = {
-  data?: IAboutUsFormData;
-  onSubmit?: (data: IAboutUsFormData) => void;
-};
+import { BaseBlockFormProps, IBaseBlock } from '../types';
+export type AboutUsFormProps = BaseBlockFormProps<IAboutUsFormData>;
 
-export interface IAboutUsFormData {
+export interface IAboutUsFormData extends IBaseBlock {
   image?: string;
   heading: string;
   rich_text: string;

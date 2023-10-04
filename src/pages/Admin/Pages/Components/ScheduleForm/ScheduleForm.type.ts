@@ -1,10 +1,8 @@
-export type ScheduleFormProps = {
-  data?: IScheduleFormData;
-  onSubmit?: (data: IScheduleFormData) => void;
-};
+import { BaseBlockFormProps, IBaseBlock } from '../types';
 
-export interface IScheduleFormData {
+export type ScheduleFormProps = BaseBlockFormProps<IScheduleFormData>;
+
+export interface IScheduleFormData extends IBaseBlock {
   heading: string;
   schedule_number: number | null;
-  publish: boolean;
 }

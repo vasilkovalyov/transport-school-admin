@@ -1,9 +1,8 @@
-export type RequirementFormProps = {
-  data?: IRequirementFormData;
-  onSubmit?: (data: IRequirementFormData) => void;
-};
+import { BaseBlockFormProps, IBaseBlock } from '../types';
 
-export interface IRequirementFormData {
+export type RequirementFormProps = BaseBlockFormProps<IRequirementFormData>;
+
+export interface IRequirementFormData extends IBaseBlock {
   heading: string;
   requirement_list: IRequirementItem[];
 }

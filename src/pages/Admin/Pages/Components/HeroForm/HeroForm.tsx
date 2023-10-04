@@ -1,6 +1,7 @@
 import { useForm } from 'react-hook-form';
 
 import { Box } from '@mui/material';
+import Stack from '@mui/material/Stack';
 import Button from '@mui/material/Button';
 import TextField from '@mui/material/TextField';
 import Checkbox from '@mui/material/Checkbox';
@@ -16,9 +17,10 @@ const defaultValuesForm: IHeroFormData = {
   subheading: '',
   use_link_to_contact_page: false,
   use_phone_cta: false,
+  publish: false,
 };
 
-export default function HeroForm({ data, onSubmit }: HeroFormProps) {
+export default function HeroForm({ data, onSubmit, onPublish }: HeroFormProps) {
   const { handleSubmit, register, setValue } = useForm<IHeroFormData>({
     mode: 'onSubmit',
     defaultValues: data ?? defaultValuesForm,
@@ -89,7 +91,7 @@ export default function HeroForm({ data, onSubmit }: HeroFormProps) {
           />
         </Box>
       </Box>
-      <Box>
+      <Stack spacing={2} direction="row">
         <Button
           variant="contained"
           size="medium"
@@ -98,7 +100,15 @@ export default function HeroForm({ data, onSubmit }: HeroFormProps) {
         >
           Save
         </Button>
-      </Box>
+        <Button
+          variant="contained"
+          size="medium"
+          color={data?.publish ? 'info' : 'warning'}
+          onClick={() => onPublish && onPublish(!data?.publish)}
+        >
+          {data?.publish ? 'Unpublish' : 'Publish'}
+        </Button>
+      </Stack>
     </Box>
   );
 }

@@ -1,9 +1,8 @@
-export type ServicesFormProps = {
-  data?: IServicesFormData;
-  onSubmit?: (data: IServicesFormData) => void;
-};
+import { BaseBlockFormProps, IBaseBlock } from '../types';
 
-export interface IServicesFormData {
+export type ServicesFormProps = BaseBlockFormProps<IServicesFormData>;
+
+export interface IServicesFormData extends IBaseBlock {
   heading: string;
   subheading: string;
 }

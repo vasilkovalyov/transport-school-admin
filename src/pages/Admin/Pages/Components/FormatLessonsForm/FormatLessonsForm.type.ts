@@ -1,9 +1,8 @@
-export type FormatLessonsFormProps = {
-  data?: IFormatLessonsFormData;
-  onSubmit?: (data: IFormatLessonsFormData) => void;
-};
+import { BaseBlockFormProps, IBaseBlock } from '../types';
 
-export interface IFormatLessonsFormData {
+export type FormatLessonsFormProps = BaseBlockFormProps<IFormatLessonsFormData>;
+
+export interface IFormatLessonsFormData extends IBaseBlock {
   heading: string;
   subheading: string;
 }

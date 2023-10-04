@@ -1,10 +1,8 @@
-export type BlogFormProps = {
-  data?: IBlogFormData;
-  onSubmit?: (data: IBlogFormData) => void;
-};
+import { BaseBlockFormProps, IBaseBlock } from '../types';
 
-export interface IBlogFormData {
+export type BlogFormProps = BaseBlockFormProps<IBlogFormData>;
+
+export interface IBlogFormData extends IBaseBlock {
   heading: string;
   post_number: number | null;
-  publish: boolean;
 }

@@ -1,8 +1,5 @@
-export type AchivmentsFormProps = {
-  data?: IAchivmentsFormData;
-  onSubmit?: (data: IAchivmentsFormData) => void;
-};
+import { BaseBlockFormProps, IBaseBlock } from '../types';
 
-export interface IAchivmentsFormData {
-  publish: boolean;
-}
+export type AchivmentsFormProps = BaseBlockFormProps<IAchivmentsFormData>;
+
+export interface IAchivmentsFormData extends IBaseBlock {}

@@ -3,6 +3,7 @@ import { useForm } from 'react-hook-form';
 import MDEditor from '@uiw/react-md-editor';
 
 import { Box } from '@mui/material';
+import Stack from '@mui/material/Stack';
 import Button from '@mui/material/Button';
 import Grid from '@mui/material/Grid';
 import TextField from '@mui/material/TextField';
@@ -15,9 +16,14 @@ const defaultValuesForm: IAboutUsFormData = {
   image: '',
   heading: '',
   rich_text: '',
+  publish: false,
 };
 
-export default function AboutUsForm({ data, onSubmit }: AboutUsFormProps) {
+export default function AboutUsForm({
+  data,
+  onSubmit,
+  onPublish,
+}: AboutUsFormProps) {
   const [markdownText, setMarkdownText] = useState<string | null>(null);
 
   const { handleSubmit, register, setValue } = useForm<IAboutUsFormData>({
@@ -64,7 +70,7 @@ export default function AboutUsForm({ data, onSubmit }: AboutUsFormProps) {
               value={markdownText || ''}
             />
           </Box>
-          <Box>
+          <Stack spacing={2} direction="row">
             <Button
               variant="contained"
               size="medium"
@@ -73,7 +79,15 @@ export default function AboutUsForm({ data, onSubmit }: AboutUsFormProps) {
             >
               Save
             </Button>
-          </Box>
+            <Button
+              variant="contained"
+              size="medium"
+              color={data?.publish ? 'info' : 'warning'}
+              onClick={() => onPublish && onPublish(!data?.publish)}
+            >
+              {data?.publish ? 'Unpublish' : 'Publish'}
+            </Button>
+          </Stack>
         </Grid>
         <Grid item xs={12} lg={5}>
           <Box mb={4}>

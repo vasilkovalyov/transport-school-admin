@@ -3,6 +3,7 @@ import { useForm } from 'react-hook-form';
 import MDEditor from '@uiw/react-md-editor';
 
 import { Box } from '@mui/material';
+import Stack from '@mui/material/Stack';
 import Button from '@mui/material/Button';
 import Grid from '@mui/material/Grid';
 import TextField from '@mui/material/TextField';
@@ -18,11 +19,13 @@ const defaultValuesForm: IAboutCourseFormData = {
   image: '',
   heading: '',
   rich_text: '',
+  publish: false,
 };
 
 export default function AboutCourseForm({
   data,
   onSubmit,
+  onPublish,
 }: AboutCourseFormProps) {
   const [markdownText, setMarkdownText] = useState<string | null>(null);
 
@@ -69,7 +72,7 @@ export default function AboutCourseForm({
             value={markdownText || ''}
           />
         </Box>
-        <Box>
+        <Stack spacing={2} direction="row">
           <Button
             variant="contained"
             size="medium"
@@ -78,7 +81,15 @@ export default function AboutCourseForm({
           >
             Save
           </Button>
-        </Box>
+          <Button
+            variant="contained"
+            size="medium"
+            color={data?.publish ? 'info' : 'warning'}
+            onClick={() => onPublish && onPublish(!data?.publish)}
+          >
+            {data?.publish ? 'Unpublish' : 'Publish'}
+          </Button>
+        </Stack>
       </Grid>
       <Grid item xs={12} lg={5}>
         <Box mb={4}>

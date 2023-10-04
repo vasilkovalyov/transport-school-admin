@@ -1,6 +1,7 @@
 import { useForm, useFieldArray } from 'react-hook-form';
 
 import { Box } from '@mui/material';
+import Stack from '@mui/material/Stack';
 import Button from '@mui/material/Button';
 import Grid from '@mui/material/Grid';
 import TextField from '@mui/material/TextField';
@@ -23,11 +24,13 @@ const defaultRequirementItem: IRequirementItem = {
 const defaultValuesForm: IRequirementFormData = {
   heading: '',
   requirement_list: [defaultRequirementItem],
+  publish: false,
 };
 
 export default function RequirementForm({
   data,
   onSubmit,
+  onPublish,
 }: RequirementFormProps) {
   const { handleSubmit, register, setValue, control } =
     useForm<IRequirementFormData>({
@@ -114,7 +117,7 @@ export default function RequirementForm({
           </Grid>
         </Grid>
       ))}
-      <Box>
+      <Stack spacing={2} direction="row">
         <Button
           variant="contained"
           size="medium"
@@ -123,7 +126,15 @@ export default function RequirementForm({
         >
           Save
         </Button>
-      </Box>
+        <Button
+          variant="contained"
+          size="medium"
+          color={data?.publish ? 'info' : 'warning'}
+          onClick={() => onPublish && onPublish(!data?.publish)}
+        >
+          {data?.publish ? 'Unpublish' : 'Publish'}
+        </Button>
+      </Stack>
     </Box>
   );
 }

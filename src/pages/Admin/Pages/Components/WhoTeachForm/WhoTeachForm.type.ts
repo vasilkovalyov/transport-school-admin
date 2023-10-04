@@ -1,9 +1,8 @@
-export type WhoTeachFormProps = {
-  data?: IWhoTeachFormData;
-  onSubmit?: (data: IWhoTeachFormData) => void;
-};
+import { BaseBlockFormProps, IBaseBlock } from '../types';
 
-export interface IWhoTeachFormData {
+export type WhoTeachFormProps = BaseBlockFormProps<IWhoTeachFormData>;
+
+export interface IWhoTeachFormData extends IBaseBlock {
   image?: string;
   heading: string;
   rich_text: string;

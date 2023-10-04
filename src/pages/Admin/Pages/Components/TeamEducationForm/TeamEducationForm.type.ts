@@ -1,9 +1,8 @@
-export type TeamEducationFormProps = {
-  data?: ITeamEducationFormData;
-  onSubmit?: (data: ITeamEducationFormData) => void;
-};
+import { BaseBlockFormProps, IBaseBlock } from '../types';
 
-export interface ITeamEducationFormData {
+export type TeamEducationFormProps = BaseBlockFormProps<ITeamEducationFormData>;
+
+export interface ITeamEducationFormData extends IBaseBlock {
   heading: string;
   subheading: string;
   use_cta_link?: boolean;
