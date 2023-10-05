@@ -1,10 +1,56 @@
+import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { useForm } from 'react-hook-form';
+import { yupResolver } from '@hookform/resolvers/yup';
+
+import { useAppDispatch } from '@/src/redux/hooks';
+import { saveAdmin } from '@/src/redux/slices';
+
 import { Box } from '@mui/material';
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
 
+import { ILogin } from './Login.type';
+import { loginValidationSchema } from './Login.validation';
+import { AxiosError } from 'axios';
+import AuthService from '@/src/services/auth';
+import { Links } from '@/src/constants/routes';
+
+const authService = new AuthService();
+
 export default function LoginPage() {
+  const [loading, setLoading] = useState<boolean>(false);
+  const [errorMessage, setErrorMessage] = useState<string | null>(null);
+  const dispatch = useAppDispatch();
+  const navigate = useNavigate();
+
+  const {
+    handleSubmit,
+    register,
+    formState: { errors },
+  } = useForm<ILogin>({
+    mode: 'onSubmit',
+    resolver: yupResolver(loginValidationSchema),
+  });
+
+  async function handleLogin(params: ILogin) {
+    try {
+      setLoading(true);
+      const response = await authService.login(params);
+      dispatch(saveAdmin(response.data));
+      localStorage.setItem('token', response.data.token);
+      navigate(Links.ADMIN);
+    } catch (e) {
+      if (e instanceof AxiosError) {
+        setErrorMessage(e.response?.data.error);
+      }
+    } finally {
+      setLoading(false);
+    }
+  }
+
   return (
     <Box
       component="section"
@@ -20,21 +66,37 @@ export default function LoginPage() {
         </Typography>
         <Box component="form" maxWidth={500} mx="auto" marginBottom={8}>
           <Box mb={2}>
-            <TextField id="login" label="Login" variant="outlined" fullWidth />
+            <TextField
+              {...register('login')}
+              id="login"
+              label="Login"
+              variant="outlined"
+              fullWidth
+              error={!!errors.login?.message}
+              helperText={errors.login?.message}
+            />
           </Box>
           <Box mb={2}>
             <TextField
+              {...register('password')}
               id="password"
               label="Password"
               variant="outlined"
               fullWidth
+              error={!!errors.password?.message}
+              helperText={errors.password?.message}
             />
           </Box>
           <Box textAlign="center">
-            <Button variant="contained" size="medium">
-              Sign in
+            <Button
+              variant="contained"
+              size="medium"
+              onClick={handleSubmit(handleLogin)}
+            >
+              {loading ? 'Loading...' : 'Sign in'}
             </Button>
           </Box>
+          {errorMessage}
         </Box>
       </Container>
     </Box>

@@ -1,10 +1,10 @@
 import { combineReducers } from 'redux';
 import { configureStore, ThunkAction, Action } from '@reduxjs/toolkit';
 
-import { userAuthSlice } from '../slices';
+import { adminAuthSlice } from '../slices';
 
 const rootReducer = combineReducers({
-  [userAuthSlice.name]: userAuthSlice.reducer,
+  [adminAuthSlice.name]: adminAuthSlice.reducer,
 });
 
 export const makeStore = () =>
