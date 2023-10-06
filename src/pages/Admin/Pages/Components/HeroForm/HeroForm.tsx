@@ -1,4 +1,6 @@
+import { useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
+import { yupResolver } from '@hookform/resolvers/yup';
 
 import { Box } from '@mui/material';
 import Stack from '@mui/material/Stack';
@@ -9,7 +11,14 @@ import FormControlLabel from '@mui/material/FormControlLabel';
 
 import { ImageUpload } from '@/src/components';
 
-import { HeroFormProps, IHeroFormData } from './HeroForm.type';
+import {
+  HeroFormProps,
+  IHeroFormData,
+  FormFieldsNecessary,
+  CheckboxTypes,
+} from './HeroForm.type';
+
+import schemaValidation from './HeroForm.validation';
 
 const defaultValuesForm: IHeroFormData = {
   image: '',
@@ -20,18 +29,67 @@ const defaultValuesForm: IHeroFormData = {
   publish: false,
 };
 
-export default function HeroForm({ data, onSubmit, onPublish }: HeroFormProps) {
-  const { handleSubmit, register, setValue } = useForm<IHeroFormData>({
+export default function HeroForm({
+  data,
+  onCreate,
+  onUpdate,
+  onPublish,
+}: HeroFormProps) {
+  const [checkboxValues, setCheckboxValues] = useState<CheckboxTypes>({
+    use_link_to_contact_page: false,
+    use_phone_cta: false,
+  });
+
+  const {
+    handleSubmit,
+    register,
+    setValue,
+    formState: { errors },
+  } = useForm<IHeroFormData>({
     mode: 'onSubmit',
+    resolver: yupResolver(schemaValidation),
     defaultValues: data ?? defaultValuesForm,
   });
+
+  useEffect(() => {
+    if (!data) return;
+    setValue('heading', data?.heading);
+    setValue('subheading', data?.subheading);
+    setCheckboxValues({
+      use_link_to_contact_page: data.use_link_to_contact_page,
+      use_phone_cta: data.use_phone_cta,
+    });
+  }, [data]);
 
   function onUploadImage(image: string) {
     setValue('image', image);
   }
 
-  function handleSave(data: IHeroFormData) {
-    onSubmit && onSubmit(data);
+  function handleSave(params: FormFieldsNecessary) {
+    if (data) {
+      onUpdate &&
+        onUpdate({
+          ...params,
+          use_link_to_contact_page: checkboxValues.use_link_to_contact_page,
+          use_phone_cta: checkboxValues.use_phone_cta,
+        });
+      return;
+    }
+    onCreate &&
+      onCreate({
+        ...params,
+        use_link_to_contact_page: checkboxValues.use_link_to_contact_page,
+        use_phone_cta: checkboxValues.use_phone_cta,
+      });
+  }
+
+  function onChangeCheckbox(field: keyof CheckboxTypes, checked: boolean) {
+    setCheckboxValues((prev) => {
+      return {
+        ...prev,
+        [field]: checked,
+      };
+    });
   }
 
   return (
@@ -52,6 +110,9 @@ export default function HeroForm({ data, onSubmit, onPublish }: HeroFormProps) {
           fullWidth
           multiline
           rows={2}
+          defaultValue={data?.heading}
+          error={!!errors['heading']?.message}
+          helperText={errors['heading']?.message}
         />
       </Box>
       <Box mb={4}>
@@ -63,6 +124,7 @@ export default function HeroForm({ data, onSubmit, onPublish }: HeroFormProps) {
           fullWidth
           multiline
           rows={4}
+          defaultValue={data?.subheading}
         />
       </Box>
       <Box>
@@ -70,8 +132,10 @@ export default function HeroForm({ data, onSubmit, onPublish }: HeroFormProps) {
           <FormControlLabel
             control={
               <Checkbox
-                {...register('use_link_to_contact_page')}
-                defaultChecked={data ? data.use_link_to_contact_page : false}
+                checked={checkboxValues.use_link_to_contact_page}
+                onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
+                  onChangeCheckbox('use_link_to_contact_page', e.target.checked)
+                }
                 color="success"
               />
             }
@@ -82,8 +146,10 @@ export default function HeroForm({ data, onSubmit, onPublish }: HeroFormProps) {
           <FormControlLabel
             control={
               <Checkbox
-                {...register('use_phone_cta')}
-                defaultChecked={data ? data.use_phone_cta : false}
+                checked={checkboxValues.use_phone_cta}
+                onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
+                  onChangeCheckbox('use_phone_cta', e.target.checked)
+                }
                 color="success"
               />
             }
@@ -98,16 +164,18 @@ export default function HeroForm({ data, onSubmit, onPublish }: HeroFormProps) {
           color="success"
           onClick={handleSubmit(handleSave)}
         >
-          Save
+          {data ? 'Update' : 'Create'}
         </Button>
-        <Button
-          variant="contained"
-          size="medium"
-          color={data?.publish ? 'info' : 'warning'}
-          onClick={() => onPublish && onPublish(!data?.publish)}
-        >
-          {data?.publish ? 'Unpublish' : 'Publish'}
-        </Button>
+        {data ? (
+          <Button
+            variant="contained"
+            size="medium"
+            color={data?.publish ? 'info' : 'warning'}
+            onClick={() => onPublish && onPublish(!data?.publish)}
+          >
+            {data?.publish ? 'Unpublish' : 'Publish'}
+          </Button>
+        ) : null}
       </Stack>
     </Box>
   );

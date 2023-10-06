@@ -1,9 +1,25 @@
+import { AxiosPromise } from 'axios';
+
 export type BaseBlockFormProps<T> = {
-  data?: T;
-  onSubmit?: (data: T) => void;
+  data?: T | null;
+  onUpdate?: (data: T) => void;
+  onCreate?: (data: T) => void;
   onPublish?: (value: boolean) => void;
 };
 
 export interface IBaseBlock {
-  publish: boolean;
+  publish?: boolean;
+}
+
+export interface IBlockInfoPage {
+  block_order: number;
+  block_page: string;
+}
+
+export interface IBlockService<T> {
+  publish: (page: string) => AxiosPromise<boolean>;
+  unpublish: (page: string) => AxiosPromise<boolean>;
+  getBlock: (page: string) => AxiosPromise<T>;
+  create: (params: T) => AxiosPromise<{ message: string }>;
+  update: (params: T) => AxiosPromise<{ message: string }>;
 }
