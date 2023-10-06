@@ -1,4 +1,5 @@
 import { AxiosPromise } from 'axios';
+import { BlocsEnum } from '../blocks-enum';
 
 export type BaseBlockFormProps<T> = {
   data?: T | null;
@@ -13,6 +14,7 @@ export interface IBaseBlock {
 
 export interface IBlockInfoPage {
   block_order: number;
+  block_name: BlocsEnum;
   block_page: string;
 }
 

@@ -10,6 +10,7 @@ import {
 import { PageEnum } from '../../../pages-enum';
 import { IBlockInfoPage } from '../../../Components/types';
 import { useApisBlock } from '../../../hooks/useApisBlock';
+import { BlocsEnum } from '../../../blocks-enum';
 
 const service = new HeroFormService();
 const currentPage = PageEnum.PRICE;
@@ -17,6 +18,7 @@ const currentPage = PageEnum.PRICE;
 const blockInfoPage: IBlockInfoPage = {
   block_order: 0,
   block_page: currentPage,
+  block_name: BlocsEnum.BlockHero,
 };
 
 const getAdapterSectionParams = (
