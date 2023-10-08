@@ -1,10 +1,10 @@
 import { Box } from '@mui/material';
 
 import {
-  ServicesForm,
-  ServicesFormService,
-  IServicesBlockFullData,
-  IServicesFormData,
+  FormatLessonsForm,
+  IFormatLessonsBlockFullData,
+  IFormatLessonsFormData,
+  FormatLessonsFormService,
   BlockHeading,
 } from '@/src/pages/Admin/Pages/Components';
 import { PageEnum } from '@/src/pages/Admin/Pages/pages-enum';
@@ -12,45 +12,45 @@ import { IBlockInfoPage } from '@/src/pages/Admin/Pages/Components/types';
 import { useApisBlock } from '@/src/pages/Admin/Pages/hooks/useApisBlock';
 import { BlocsEnum } from '@/src/pages/Admin/Pages/blocks-enum';
 
-const service = new ServicesFormService();
+const service = new FormatLessonsFormService();
 const currentPage = PageEnum.PRICE;
 
 const blockInfoPage: IBlockInfoPage = {
   block_order: 0,
   block_page: currentPage,
-  block_name: BlocsEnum.BlockServices,
+  block_name: BlocsEnum.BlockFormatLessons,
 };
 
 const getAdapterSectionParams = (
-  params: IServicesFormData,
+  params: IFormatLessonsFormData,
   additionalParams: IBlockInfoPage
-): IServicesBlockFullData => {
+): IFormatLessonsBlockFullData => {
   return {
     ...params,
     ...additionalParams,
   };
 };
 
-export default function SectionServices() {
+export default function SectionFormatLessons() {
   const { data, updateSection, createSection, publishToggleSection } =
-    useApisBlock<IServicesBlockFullData>({
+    useApisBlock<IFormatLessonsBlockFullData>({
       page: currentPage,
       service: service,
       blockInfoPage: blockInfoPage,
     });
 
-  function onHandleCreateSection(params: IServicesFormData) {
+  function onHandleCreateSection(params: IFormatLessonsFormData) {
     createSection(getAdapterSectionParams(params, blockInfoPage));
   }
 
-  function onHandleUpdateSection(params: IServicesFormData) {
+  function onHandleUpdateSection(params: IFormatLessonsFormData) {
     updateSection(getAdapterSectionParams(params, blockInfoPage));
   }
 
   return (
     <Box>
-      <BlockHeading heading="Section services" publish={data?.publish} />
-      <ServicesForm
+      <BlockHeading heading="Section format lessons" publish={data?.publish} />
+      <FormatLessonsForm
         data={data}
         onCreate={onHandleCreateSection}
         onUpdate={onHandleUpdateSection}

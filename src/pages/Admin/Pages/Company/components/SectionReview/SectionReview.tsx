@@ -3,8 +3,8 @@ import { Box } from '@mui/material';
 import {
   ReviewForm,
   ReviewFormService,
-  IServicesBlockFullData,
-  IServicesFormData,
+  IReviewBlockFullData,
+  IReviewFormData,
   BlockHeading,
 } from '@/src/pages/Admin/Pages/Components';
 import { PageEnum } from '@/src/pages/Admin/Pages/pages-enum';
@@ -22,9 +22,9 @@ const blockInfoPage: IBlockInfoPage = {
 };
 
 const getAdapterSectionParams = (
-  params: IServicesFormData,
+  params: IReviewFormData,
   additionalParams: IBlockInfoPage
-): IServicesBlockFullData => {
+): IReviewBlockFullData => {
   return {
     ...params,
     ...additionalParams,
@@ -33,17 +33,17 @@ const getAdapterSectionParams = (
 
 export default function SectionReview() {
   const { data, updateSection, createSection, publishToggleSection } =
-    useApisBlock<IServicesBlockFullData>({
+    useApisBlock<IReviewBlockFullData>({
       page: currentPage,
       service: service,
       blockInfoPage: blockInfoPage,
     });
 
-  function onHandleCreateSection(params: IServicesFormData) {
+  function onHandleCreateSection(params: IReviewFormData) {
     createSection(getAdapterSectionParams(params, blockInfoPage));
   }
 
-  function onHandleUpdateSection(params: IServicesFormData) {
+  function onHandleUpdateSection(params: IReviewFormData) {
     updateSection(getAdapterSectionParams(params, blockInfoPage));
   }
 

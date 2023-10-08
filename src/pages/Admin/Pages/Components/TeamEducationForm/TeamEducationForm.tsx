@@ -16,7 +16,7 @@ import {
   TeamEducationFormProps,
   ITeamEducationFormData,
   ITeamEducationData,
-  CheckboxTypes,
+  TeamEducationFormCheckboxTypes,
 } from './TeamEducationForm.type';
 import schemaValidation from './TeamEducationForm.validation';
 
@@ -40,9 +40,10 @@ export default function TeamEducationForm({
   onUpdate,
   onPublish,
 }: TeamEducationFormProps) {
-  const [checkboxValues, setCheckboxValues] = useState<CheckboxTypes>({
-    use_cta_link: false,
-  });
+  const [checkboxValues, setCheckboxValues] =
+    useState<TeamEducationFormCheckboxTypes>({
+      use_cta_link: false,
+    });
 
   const { handleSubmit, register, setValue, control } =
     useForm<ITeamEducationFormData>({
@@ -95,7 +96,10 @@ export default function TeamEducationForm({
       });
   }
 
-  function onChangeCheckbox(field: keyof CheckboxTypes, checked: boolean) {
+  function onChangeCheckbox(
+    field: keyof TeamEducationFormCheckboxTypes,
+    checked: boolean
+  ) {
     setCheckboxValues((prev) => {
       return {
         ...prev,

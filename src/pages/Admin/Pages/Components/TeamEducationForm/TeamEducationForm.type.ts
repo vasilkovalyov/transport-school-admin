@@ -16,9 +16,15 @@ export interface ITeamEducationData {
   discount: string;
 }
 
-export type CheckboxFields = 'use_cta_link';
-export type CheckboxTypes = Pick<ITeamEducationFormData, CheckboxFields>;
-export type FormFieldsNecessary = Omit<ITeamEducationFormData, CheckboxFields>;
+export type TeamEducationFormCheckboxFields = 'use_cta_link';
+export type TeamEducationFormCheckboxTypes = Pick<
+  ITeamEducationFormData,
+  TeamEducationFormCheckboxFields
+>;
+export type TeamEducationFormFieldsNecessary = Omit<
+  ITeamEducationFormData,
+  TeamEducationFormCheckboxFields
+>;
 
 export interface ITeamEducationBlockFullData
   extends ITeamEducationFormData,

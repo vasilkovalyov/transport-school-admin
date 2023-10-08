@@ -75,7 +75,7 @@ export enum LinksPageContactSections {
 
 export enum LinksPagePriceSections {
   HERO = '/admin/pages/price/section-hero',
-  SERVICES = '/admin/pages/price/section-services',
+  FORMAT_LESSONS = '/admin/pages/price/section-format-lessons',
   EDUCATION = '/admin/pages/price/section-education',
   REQUIREMENT = '/admin/pages/price/section-requirement',
   CONTACTS = '/admin/pages/price/section-contacts',

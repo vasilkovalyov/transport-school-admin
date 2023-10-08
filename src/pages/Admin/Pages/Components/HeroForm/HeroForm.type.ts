@@ -10,8 +10,13 @@ export interface IHeroFormData extends IBaseBlock {
   use_phone_cta?: boolean;
 }
 
-export type CheckboxFields = 'use_link_to_contact_page' | 'use_phone_cta';
-export type CheckboxTypes = Pick<IHeroFormData, CheckboxFields>;
-export type FormFieldsNecessary = Omit<IHeroFormData, CheckboxFields>;
+export type HeroFormCheckboxFields =
+  | 'use_link_to_contact_page'
+  | 'use_phone_cta';
+export type HeroFormCheckboxTypes = Pick<IHeroFormData, HeroFormCheckboxFields>;
+export type HeroFormFieldsNecessary = Omit<
+  IHeroFormData,
+  HeroFormCheckboxFields
+>;
 
 export interface IHeroBlockFullData extends IHeroFormData, IBlockInfoPage {}

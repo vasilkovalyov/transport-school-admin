@@ -14,8 +14,8 @@ import { ImageUpload } from '@/src/components';
 import {
   HeroFormProps,
   IHeroFormData,
-  FormFieldsNecessary,
-  CheckboxTypes,
+  HeroFormFieldsNecessary,
+  HeroFormCheckboxTypes,
 } from './HeroForm.type';
 
 import schemaValidation from './HeroForm.validation';
@@ -35,7 +35,7 @@ export default function HeroForm({
   onUpdate,
   onPublish,
 }: HeroFormProps) {
-  const [checkboxValues, setCheckboxValues] = useState<CheckboxTypes>({
+  const [checkboxValues, setCheckboxValues] = useState<HeroFormCheckboxTypes>({
     use_link_to_contact_page: false,
     use_phone_cta: false,
   });
@@ -65,7 +65,7 @@ export default function HeroForm({
     setValue('image', image);
   }
 
-  function handleSave(params: FormFieldsNecessary) {
+  function handleSave(params: HeroFormFieldsNecessary) {
     if (data) {
       onUpdate &&
         onUpdate({
@@ -83,7 +83,10 @@ export default function HeroForm({
       });
   }
 
-  function onChangeCheckbox(field: keyof CheckboxTypes, checked: boolean) {
+  function onChangeCheckbox(
+    field: keyof HeroFormCheckboxTypes,
+    checked: boolean
+  ) {
     setCheckboxValues((prev) => {
       return {
         ...prev,

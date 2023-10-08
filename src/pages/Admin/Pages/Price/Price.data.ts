@@ -8,8 +8,8 @@ export const navigation = [
   },
   {
     id: '2',
-    path: LinksPagePriceSections.SERVICES,
-    name: 'Section services',
+    path: LinksPagePriceSections.FORMAT_LESSONS,
+    name: 'Section format lessons',
   },
   {
     id: '3',
