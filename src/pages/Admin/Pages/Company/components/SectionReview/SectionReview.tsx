@@ -18,7 +18,7 @@ const currentPage = PageEnum.COMPANY;
 const blockInfoPage: IBlockInfoPage = {
   block_order: 0,
   block_page: currentPage,
-  block_name: BlocsEnum.BlockAbout,
+  block_name: BlocsEnum.BlockReview,
 };
 
 const getAdapterSectionParams = (

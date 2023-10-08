@@ -66,8 +66,7 @@ export default function RequirementForm({
     remove(number);
   }
 
-  function handleSave(params: IRequirementFormData) {
-    console.log(params);
+  function handleSave({ publish, ...params }: IRequirementFormData) {
     if (data) {
       onUpdate &&
         onUpdate({

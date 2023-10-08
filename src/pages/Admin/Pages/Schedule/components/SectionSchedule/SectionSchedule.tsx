@@ -13,7 +13,7 @@ import { useApisBlock } from '@/src/pages/Admin/Pages/hooks/useApisBlock';
 import { BlocsEnum } from '@/src/pages/Admin/Pages/blocks-enum';
 
 const service = new ScheduleFormService();
-const currentPage = PageEnum.COMPANY;
+const currentPage = PageEnum.SCHEDULE;
 
 const blockInfoPage: IBlockInfoPage = {
   block_order: 0,
