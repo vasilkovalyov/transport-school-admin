@@ -1,4 +1,5 @@
 import { useForm } from 'react-hook-form';
+import { yupResolver } from '@hookform/resolvers/yup';
 
 import { Box } from '@mui/material';
 import Stack from '@mui/material/Stack';
@@ -10,6 +11,8 @@ import {
   IStructEducationFormData,
   IStructEducationData,
 } from './StructEducationForm.type';
+import schemaValidation from './StructEducationForm.validation';
+import { useEffect } from 'react';
 
 const defaultStructEducationItem: IStructEducationData = {
   heading: '',
@@ -24,16 +27,34 @@ const defaultValuesForm: IStructEducationFormData = {
 
 export default function StructEducationForm({
   data,
-  onSubmit,
+  onCreate,
+  onUpdate,
   onPublish,
 }: StructEducationFormProps) {
-  const { handleSubmit, register } = useForm<IStructEducationFormData>({
-    mode: 'onSubmit',
-    defaultValues: data ?? defaultValuesForm,
-  });
+  const { handleSubmit, register, setValue } =
+    useForm<IStructEducationFormData>({
+      mode: 'onSubmit',
+      defaultValues: data ?? defaultValuesForm,
+      resolver: yupResolver(schemaValidation),
+    });
 
-  function handleSave(data: IStructEducationFormData) {
-    onSubmit && onSubmit(data);
+  useEffect(() => {
+    if (!data) return;
+    setValue('heading', data?.heading);
+  }, [data]);
+
+  function handleSave(params: IStructEducationFormData) {
+    if (data) {
+      onUpdate &&
+        onUpdate({
+          ...params,
+        });
+      return;
+    }
+    onCreate &&
+      onCreate({
+        ...params,
+      });
   }
 
   return (
@@ -56,16 +77,18 @@ export default function StructEducationForm({
           color="success"
           onClick={handleSubmit(handleSave)}
         >
-          Save
+          {data ? 'Update' : 'Create'}
         </Button>
-        <Button
-          variant="contained"
-          size="medium"
-          color={data?.publish ? 'info' : 'warning'}
-          onClick={() => onPublish && onPublish(!data?.publish)}
-        >
-          {data?.publish ? 'Unpublish' : 'Publish'}
-        </Button>
+        {data ? (
+          <Button
+            variant="contained"
+            size="medium"
+            color={data?.publish ? 'info' : 'warning'}
+            onClick={() => onPublish && onPublish(!data?.publish)}
+          >
+            {data?.publish ? 'Unpublish' : 'Publish'}
+          </Button>
+        ) : null}
       </Stack>
     </Box>
   );

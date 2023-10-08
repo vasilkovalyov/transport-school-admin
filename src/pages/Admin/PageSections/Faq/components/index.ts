@@ -1,1 +1,1 @@
-export { default as FaqForm } from './FaqForm/FaqForm';
+export * from './FaqForm';

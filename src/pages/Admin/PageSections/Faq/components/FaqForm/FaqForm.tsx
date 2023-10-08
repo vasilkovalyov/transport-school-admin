@@ -6,6 +6,7 @@ import Button from '@mui/material/Button';
 import Grid from '@mui/material/Grid';
 import TextField from '@mui/material/TextField';
 import Typography from '@mui/material/Typography';
+import Stack from '@mui/material/Stack';
 
 import { DynamicFieldTogglers, ImageUpload } from '@/src/components';
 
@@ -22,7 +23,7 @@ const defaultValuesForm: IFaqFormData = {
   list_faq: [defaultFaqListItem],
 };
 
-export default function FaqForm({ data, onSubmit }: FaqFormProps) {
+export default function FaqForm({ data, onCreate, onUpdate }: FaqFormProps) {
   const { handleSubmit, register, control, setValue } = useForm<IFaqFormData>({
     mode: 'onSubmit',
     defaultValues: data ?? defaultValuesForm,
@@ -54,8 +55,18 @@ export default function FaqForm({ data, onSubmit }: FaqFormProps) {
     remove(numberAchivment);
   }
 
-  function handleSave(data: IFaqFormData) {
-    onSubmit && onSubmit(data);
+  function handleSave(params: IFaqFormData) {
+    if (data) {
+      onUpdate &&
+        onUpdate({
+          ...params,
+        });
+      return;
+    }
+    onCreate &&
+      onCreate({
+        ...params,
+      });
   }
 
   function onUploadImage(image: string) {
@@ -108,16 +119,16 @@ export default function FaqForm({ data, onSubmit }: FaqFormProps) {
               </Box>
             </Box>
           ))}
-          <Box>
+          <Stack spacing={2} direction="row">
             <Button
               variant="contained"
               size="medium"
               color="success"
               onClick={handleSubmit(handleSave)}
             >
-              Save
+              {data ? 'Update' : 'Create'}
             </Button>
-          </Box>
+          </Stack>
         </Grid>
         <Grid item xs={12} lg={5}>
           <ImageUpload

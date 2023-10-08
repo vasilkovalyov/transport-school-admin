@@ -5,4 +5,5 @@ export enum PageEnum {
   COMPANY = 'company',
   PRICE = 'price',
   SCHEDULE = 'schedule',
+  CONTACT = 'contact',
 }

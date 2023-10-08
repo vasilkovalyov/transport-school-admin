@@ -47,8 +47,8 @@ export default function HeroForm({
     formState: { errors },
   } = useForm<IHeroFormData>({
     mode: 'onSubmit',
-    resolver: yupResolver(schemaValidation),
     defaultValues: data ?? defaultValuesForm,
+    resolver: yupResolver(schemaValidation),
   });
 
   useEffect(() => {

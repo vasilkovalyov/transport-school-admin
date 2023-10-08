@@ -1,4 +1,6 @@
+import { useEffect } from 'react';
 import { useForm } from 'react-hook-form';
+import { yupResolver } from '@hookform/resolvers/yup';
 
 import { Box } from '@mui/material';
 import Stack from '@mui/material/Stack';
@@ -6,6 +8,7 @@ import Button from '@mui/material/Button';
 import TextField from '@mui/material/TextField';
 
 import { ServicesFormProps, IServicesFormData } from './ServicesForm.type';
+import schemaValidation from './ServicesForm.validation';
 
 const defaultValuesForm: IServicesFormData = {
   heading: '',
@@ -15,16 +18,34 @@ const defaultValuesForm: IServicesFormData = {
 
 export default function ServicesForm({
   data,
-  onSubmit,
+  onCreate,
+  onUpdate,
   onPublish,
 }: ServicesFormProps) {
-  const { handleSubmit, register } = useForm<IServicesFormData>({
+  const { handleSubmit, register, setValue } = useForm<IServicesFormData>({
     mode: 'onSubmit',
     defaultValues: data ?? defaultValuesForm,
+    resolver: yupResolver(schemaValidation),
   });
 
-  function handleSave(data: IServicesFormData) {
-    onSubmit && onSubmit(data);
+  useEffect(() => {
+    if (!data) return;
+    setValue('heading', data?.heading);
+    setValue('subheading', data?.subheading);
+  }, [data]);
+
+  function handleSave(params: IServicesFormData) {
+    if (data) {
+      onUpdate &&
+        onUpdate({
+          ...params,
+        });
+      return;
+    }
+    onCreate &&
+      onCreate({
+        ...params,
+      });
   }
 
   return (
@@ -58,16 +79,18 @@ export default function ServicesForm({
           color="success"
           onClick={handleSubmit(handleSave)}
         >
-          Save
+          {data ? 'Update' : 'Create'}
         </Button>
-        <Button
-          variant="contained"
-          size="medium"
-          color={data?.publish ? 'info' : 'warning'}
-          onClick={() => onPublish && onPublish(!data?.publish)}
-        >
-          {data?.publish ? 'Unpublish' : 'Publish'}
-        </Button>
+        {data ? (
+          <Button
+            variant="contained"
+            size="medium"
+            color={data?.publish ? 'info' : 'warning'}
+            onClick={() => onPublish && onPublish(!data?.publish)}
+          >
+            {data?.publish ? 'Unpublish' : 'Publish'}
+          </Button>
+        ) : null}
       </Stack>
     </Box>
   );

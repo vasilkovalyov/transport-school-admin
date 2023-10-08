@@ -1,3 +1,4 @@
+import { useEffect } from 'react';
 import { useForm } from 'react-hook-form';
 
 import { Box } from '@mui/material';
@@ -14,16 +15,32 @@ const defaultValuesForm: IReviewFormData = {
 
 export default function ReviewForm({
   data,
-  onSubmit,
+  onCreate,
+  onUpdate,
   onPublish,
 }: ReviewFormProps) {
-  const { handleSubmit, register } = useForm<IReviewFormData>({
+  const { handleSubmit, register, setValue } = useForm<IReviewFormData>({
     mode: 'onSubmit',
     defaultValues: data ?? defaultValuesForm,
   });
 
-  function handleSave(data: IReviewFormData) {
-    onSubmit && onSubmit(data);
+  useEffect(() => {
+    if (!data) return;
+    setValue('heading', data?.heading);
+  }, [data]);
+
+  function handleSave(params: IReviewFormData) {
+    if (data) {
+      onUpdate &&
+        onUpdate({
+          ...params,
+        });
+      return;
+    }
+    onCreate &&
+      onCreate({
+        ...params,
+      });
   }
 
   return (
@@ -46,16 +63,18 @@ export default function ReviewForm({
           color="success"
           onClick={handleSubmit(handleSave)}
         >
-          Save
+          {data ? 'Update' : 'Create'}
         </Button>
-        <Button
-          variant="contained"
-          size="medium"
-          color={data?.publish ? 'info' : 'warning'}
-          onClick={() => onPublish && onPublish(!data?.publish)}
-        >
-          {data?.publish ? 'Unpublish' : 'Publish'}
-        </Button>
+        {data ? (
+          <Button
+            variant="contained"
+            size="medium"
+            color={data?.publish ? 'info' : 'warning'}
+            onClick={() => onPublish && onPublish(!data?.publish)}
+          >
+            {data?.publish ? 'Unpublish' : 'Publish'}
+          </Button>
+        ) : null}
       </Stack>
     </Box>
   );

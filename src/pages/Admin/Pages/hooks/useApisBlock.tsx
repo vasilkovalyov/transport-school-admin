@@ -27,6 +27,7 @@ export function useApisBlock<T>({
   }
 
   async function createSection(params: T) {
+    if (!service.create) return;
     try {
       const data = {
         ...params,
@@ -41,6 +42,8 @@ export function useApisBlock<T>({
   }
 
   async function updateSection(params: T) {
+    if (!service.update) return;
+
     try {
       const data = {
         ...params,

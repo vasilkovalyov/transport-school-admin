@@ -1,13 +1,19 @@
 import { Box } from '@mui/material';
-import Typography from '@mui/material/Typography';
 
-import { FaqForm } from '../../../Components';
+import { BlockHeading } from '@/src/pages/Admin/Pages/Components';
 
 export default function SectionFaq() {
   return (
     <Box>
-      <Typography variant="h2">Section faq</Typography>
-      <FaqForm />
+      <BlockHeading heading="Section faq" />
+      {/* {data === null ? (
+        <Typography variant="h4">
+          First of all you have to create{' '}
+          <Link to={LinksPageSections.FAQ}>section faq</Link>
+        </Typography>
+      ) : (
+        <FaqForm />
+      )} */}
     </Box>
   );
 }

@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import MDEditor from '@uiw/react-md-editor';
+import { yupResolver } from '@hookform/resolvers/yup';
 
 import { Box } from '@mui/material';
 import Stack from '@mui/material/Stack';
@@ -11,6 +12,7 @@ import TextField from '@mui/material/TextField';
 import { ImageUpload } from '@/src/components';
 
 import { WhoTeachFormProps, IWhoTeachFormData } from './WhoTeachForm.type';
+import schemaValidation from './WhoTeachForm.validation';
 
 const defaultValuesForm: IWhoTeachFormData = {
   image: '',
@@ -21,7 +23,8 @@ const defaultValuesForm: IWhoTeachFormData = {
 
 export default function WhoTeachForm({
   data,
-  onSubmit,
+  onCreate,
+  onUpdate,
   onPublish,
 }: WhoTeachFormProps) {
   const [markdownText, setMarkdownText] = useState<string | null>(null);
@@ -29,11 +32,16 @@ export default function WhoTeachForm({
   const { handleSubmit, register, setValue } = useForm<IWhoTeachFormData>({
     mode: 'onSubmit',
     defaultValues: data ?? defaultValuesForm,
+    resolver: yupResolver(schemaValidation),
   });
 
   useEffect(() => {
     if (!data) return;
-    setMarkdownText(data.rich_text);
+    setValue('heading', data.heading);
+
+    if (data.rich_text) {
+      setMarkdownText(data.rich_text);
+    }
   }, [data]);
 
   function onUploadImage(image: string) {
@@ -45,8 +53,18 @@ export default function WhoTeachForm({
     setValue('rich_text', value);
   }
 
-  function handleSave(data: IWhoTeachFormData) {
-    onSubmit && onSubmit(data);
+  function handleSave(params: IWhoTeachFormData) {
+    if (data) {
+      onUpdate &&
+        onUpdate({
+          ...params,
+        });
+      return;
+    }
+    onCreate &&
+      onCreate({
+        ...params,
+      });
   }
 
   return (
@@ -77,16 +95,18 @@ export default function WhoTeachForm({
               color="success"
               onClick={handleSubmit(handleSave)}
             >
-              Save
+              {data ? 'Update' : 'Create'}
             </Button>
-            <Button
-              variant="contained"
-              size="medium"
-              color={data?.publish ? 'info' : 'warning'}
-              onClick={() => onPublish && onPublish(!data?.publish)}
-            >
-              {data?.publish ? 'Unpublish' : 'Publish'}
-            </Button>
+            {data ? (
+              <Button
+                variant="contained"
+                size="medium"
+                color={data?.publish ? 'info' : 'warning'}
+                onClick={() => onPublish && onPublish(!data?.publish)}
+              >
+                {data?.publish ? 'Unpublish' : 'Publish'}
+              </Button>
+            ) : null}
           </Stack>
         </Grid>
         <Grid item xs={12} lg={5}>

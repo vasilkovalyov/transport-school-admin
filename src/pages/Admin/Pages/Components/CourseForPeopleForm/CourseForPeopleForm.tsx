@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import MDEditor from '@uiw/react-md-editor';
+import { yupResolver } from '@hookform/resolvers/yup';
 
 import { Box } from '@mui/material';
 import Stack from '@mui/material/Stack';
@@ -12,6 +13,7 @@ import {
   CourseForPeopleFormProps,
   ICourseForPeopleFormData,
 } from './CourseForPeopleForm.type';
+import schemaValidation from './CourseForPeopleForm.validation';
 
 const defaultValuesForm: ICourseForPeopleFormData = {
   heading: '',
@@ -21,7 +23,8 @@ const defaultValuesForm: ICourseForPeopleFormData = {
 
 export default function CourseForPeopleForm({
   data,
-  onSubmit,
+  onCreate,
+  onUpdate,
   onPublish,
 }: CourseForPeopleFormProps) {
   const [markdownText, setMarkdownText] = useState<string | null>(null);
@@ -30,11 +33,16 @@ export default function CourseForPeopleForm({
     useForm<ICourseForPeopleFormData>({
       mode: 'onSubmit',
       defaultValues: data ?? defaultValuesForm,
+      resolver: yupResolver(schemaValidation),
     });
 
   useEffect(() => {
     if (!data) return;
-    setMarkdownText(data.rich_text);
+    setValue('heading', data?.heading);
+
+    if (data.rich_text) {
+      setMarkdownText(data.rich_text);
+    }
   }, [data]);
 
   function onChangeRichTextEditor(value: string) {
@@ -42,8 +50,18 @@ export default function CourseForPeopleForm({
     setValue('rich_text', value);
   }
 
-  function handleSave(data: ICourseForPeopleFormData) {
-    onSubmit && onSubmit(data);
+  function handleSave(params: ICourseForPeopleFormData) {
+    if (data) {
+      onUpdate &&
+        onUpdate({
+          ...params,
+        });
+      return;
+    }
+    onCreate &&
+      onCreate({
+        ...params,
+      });
   }
 
   return (
@@ -74,16 +92,18 @@ export default function CourseForPeopleForm({
               color="success"
               onClick={handleSubmit(handleSave)}
             >
-              Save
+              {data ? 'Update' : 'Create'}
             </Button>
-            <Button
-              variant="contained"
-              size="medium"
-              color={data?.publish ? 'info' : 'warning'}
-              onClick={() => onPublish && onPublish(!data?.publish)}
-            >
-              {data?.publish ? 'Unpublish' : 'Publish'}
-            </Button>
+            {data ? (
+              <Button
+                variant="contained"
+                size="medium"
+                color={data?.publish ? 'info' : 'warning'}
+                onClick={() => onPublish && onPublish(!data?.publish)}
+              >
+                {data?.publish ? 'Unpublish' : 'Publish'}
+              </Button>
+            ) : null}
           </Stack>
         </Grid>
       </Grid>

@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
+import { yupResolver } from '@hookform/resolvers/yup';
 import MDEditor from '@uiw/react-md-editor';
 
 import { Box } from '@mui/material';
@@ -11,6 +12,7 @@ import TextField from '@mui/material/TextField';
 import { ImageUpload } from '@/src/components';
 
 import { AboutUsFormProps, IAboutUsFormData } from './AboutUsForm.type';
+import schemaValidation from './AboutUsForm.validation';
 
 const defaultValuesForm: IAboutUsFormData = {
   image: '',
@@ -21,19 +23,30 @@ const defaultValuesForm: IAboutUsFormData = {
 
 export default function AboutUsForm({
   data,
-  onSubmit,
+  onCreate,
+  onUpdate,
   onPublish,
 }: AboutUsFormProps) {
   const [markdownText, setMarkdownText] = useState<string | null>(null);
 
-  const { handleSubmit, register, setValue } = useForm<IAboutUsFormData>({
+  const {
+    handleSubmit,
+    register,
+    setValue,
+    formState: { errors },
+  } = useForm<IAboutUsFormData>({
     mode: 'onSubmit',
     defaultValues: data ?? defaultValuesForm,
+    resolver: yupResolver(schemaValidation),
   });
 
   useEffect(() => {
     if (!data) return;
-    setMarkdownText(data.rich_text);
+    setValue('heading', data?.heading);
+
+    if (data.rich_text) {
+      setMarkdownText(data.rich_text);
+    }
   }, [data]);
 
   function onUploadImage(image: string) {
@@ -45,8 +58,18 @@ export default function AboutUsForm({
     setValue('rich_text', value);
   }
 
-  function handleSave(data: IAboutUsFormData) {
-    onSubmit && onSubmit(data);
+  function handleSave(params: IAboutUsFormData) {
+    if (data) {
+      onUpdate &&
+        onUpdate({
+          ...params,
+        });
+      return;
+    }
+    onCreate &&
+      onCreate({
+        ...params,
+      });
   }
 
   return (
@@ -62,6 +85,9 @@ export default function AboutUsForm({
               fullWidth
               multiline
               rows={2}
+              defaultValue={data?.heading}
+              error={!!errors['heading']?.message}
+              helperText={errors['heading']?.message}
             />
           </Box>
           <Box mb={4}>
@@ -77,16 +103,18 @@ export default function AboutUsForm({
               color="success"
               onClick={handleSubmit(handleSave)}
             >
-              Save
+              {data ? 'Update' : 'Create'}
             </Button>
-            <Button
-              variant="contained"
-              size="medium"
-              color={data?.publish ? 'info' : 'warning'}
-              onClick={() => onPublish && onPublish(!data?.publish)}
-            >
-              {data?.publish ? 'Unpublish' : 'Publish'}
-            </Button>
+            {data ? (
+              <Button
+                variant="contained"
+                size="medium"
+                color={data?.publish ? 'info' : 'warning'}
+                onClick={() => onPublish && onPublish(!data?.publish)}
+              >
+                {data?.publish ? 'Unpublish' : 'Publish'}
+              </Button>
+            ) : null}
           </Stack>
         </Grid>
         <Grid item xs={12} lg={5}>

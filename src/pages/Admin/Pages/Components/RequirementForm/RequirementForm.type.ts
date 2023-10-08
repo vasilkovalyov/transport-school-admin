@@ -1,10 +1,10 @@
-import { BaseBlockFormProps, IBaseBlock } from '../types';
+import { BaseBlockFormProps, IBaseBlock, IBlockInfoPage } from '../types';
 
 export type RequirementFormProps = BaseBlockFormProps<IRequirementFormData>;
 
 export interface IRequirementFormData extends IBaseBlock {
   heading: string;
-  requirement_list: IRequirementItem[];
+  requirements_list?: IRequirementItem[];
 }
 
 export interface IRequirementItem {
@@ -13,3 +13,7 @@ export interface IRequirementItem {
   heading: string;
   text: string;
 }
+
+export interface IRequirementBlockFullData
+  extends IRequirementFormData,
+    IBlockInfoPage {}

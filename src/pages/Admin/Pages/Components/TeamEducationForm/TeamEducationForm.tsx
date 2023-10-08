@@ -1,4 +1,6 @@
+import { useEffect, useState } from 'react';
 import { useForm, useFieldArray } from 'react-hook-form';
+import { yupResolver } from '@hookform/resolvers/yup';
 
 import { Box } from '@mui/material';
 import Stack from '@mui/material/Stack';
@@ -14,7 +16,9 @@ import {
   TeamEducationFormProps,
   ITeamEducationFormData,
   ITeamEducationData,
+  CheckboxTypes,
 } from './TeamEducationForm.type';
+import schemaValidation from './TeamEducationForm.validation';
 
 const defaultEducationItem: ITeamEducationData = {
   type: '',
@@ -32,19 +36,40 @@ const defaultValuesForm: ITeamEducationFormData = {
 
 export default function TeamEducationForm({
   data,
-  onSubmit,
+  onCreate,
+  onUpdate,
   onPublish,
 }: TeamEducationFormProps) {
-  const { handleSubmit, register, control } = useForm<ITeamEducationFormData>({
-    mode: 'onSubmit',
-    defaultValues: data ?? defaultValuesForm,
+  const [checkboxValues, setCheckboxValues] = useState<CheckboxTypes>({
+    use_cta_link: false,
   });
+
+  const { handleSubmit, register, setValue, control } =
+    useForm<ITeamEducationFormData>({
+      mode: 'onSubmit',
+      defaultValues: data ?? defaultValuesForm,
+      resolver: yupResolver(schemaValidation),
+    });
 
   const { fields, append, remove } = useFieldArray({
     control,
     name: 'education_list',
     keyName: 'id',
   });
+
+  useEffect(() => {
+    if (!data) return;
+    setValue('heading', data?.heading);
+    setValue('subheading', data?.subheading);
+
+    setCheckboxValues({
+      use_cta_link: data.use_cta_link,
+    });
+
+    if (data.education_list) {
+      setValue(`education_list`, data.education_list);
+    }
+  }, [data]);
 
   function onHandleAddItem() {
     append(defaultEducationItem);
@@ -54,8 +79,29 @@ export default function TeamEducationForm({
     remove(number);
   }
 
-  function handleSave(data: ITeamEducationFormData) {
-    onSubmit && onSubmit(data);
+  function handleSave(params: ITeamEducationFormData) {
+    if (data) {
+      onUpdate &&
+        onUpdate({
+          ...params,
+          use_cta_link: checkboxValues.use_cta_link,
+        });
+      return;
+    }
+    onCreate &&
+      onCreate({
+        ...params,
+        use_cta_link: checkboxValues.use_cta_link,
+      });
+  }
+
+  function onChangeCheckbox(field: keyof CheckboxTypes, checked: boolean) {
+    setCheckboxValues((prev) => {
+      return {
+        ...prev,
+        [field]: checked,
+      };
+    });
   }
 
   return (
@@ -126,9 +172,11 @@ export default function TeamEducationForm({
         <FormControlLabel
           control={
             <Checkbox
-              {...register('use_cta_link')}
-              defaultChecked={data ? data.use_cta_link : false}
+              checked={checkboxValues.use_cta_link}
               color="success"
+              onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
+                onChangeCheckbox('use_cta_link', e.target.checked)
+              }
             />
           }
           label="Use cta link"
@@ -141,16 +189,18 @@ export default function TeamEducationForm({
           color="success"
           onClick={handleSubmit(handleSave)}
         >
-          Save
+          {data ? 'Update' : 'Create'}
         </Button>
-        <Button
-          variant="contained"
-          size="medium"
-          color={data?.publish ? 'info' : 'warning'}
-          onClick={() => onPublish && onPublish(!data?.publish)}
-        >
-          {data?.publish ? 'Unpublish' : 'Publish'}
-        </Button>
+        {data ? (
+          <Button
+            variant="contained"
+            size="medium"
+            color={data?.publish ? 'info' : 'warning'}
+            onClick={() => onPublish && onPublish(!data?.publish)}
+          >
+            {data?.publish ? 'Unpublish' : 'Publish'}
+          </Button>
+        ) : null}
       </Stack>
     </Box>
   );

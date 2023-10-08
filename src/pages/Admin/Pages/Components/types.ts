@@ -22,6 +22,6 @@ export interface IBlockService<T> {
   publish: (page: string) => AxiosPromise<boolean>;
   unpublish: (page: string) => AxiosPromise<boolean>;
   getBlock: (page: string) => AxiosPromise<T>;
-  create: (params: T) => AxiosPromise<{ message: string }>;
-  update: (params: T) => AxiosPromise<{ message: string }>;
+  create?: (params: T) => AxiosPromise<{ message: string }>;
+  update?: (params: T) => AxiosPromise<{ message: string }>;
 }

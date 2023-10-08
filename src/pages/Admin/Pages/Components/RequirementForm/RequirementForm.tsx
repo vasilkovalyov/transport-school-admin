@@ -1,4 +1,5 @@
 import { useForm, useFieldArray } from 'react-hook-form';
+import { yupResolver } from '@hookform/resolvers/yup';
 
 import { Box } from '@mui/material';
 import Stack from '@mui/material/Stack';
@@ -14,6 +15,8 @@ import {
   IRequirementFormData,
   IRequirementItem,
 } from './RequirementForm.type';
+import schemaValidation from './RequirementForm.validation';
+import { useEffect } from 'react';
 
 const defaultRequirementItem: IRequirementItem = {
   heading: '',
@@ -23,26 +26,37 @@ const defaultRequirementItem: IRequirementItem = {
 
 const defaultValuesForm: IRequirementFormData = {
   heading: '',
-  requirement_list: [defaultRequirementItem],
+  requirements_list: [defaultRequirementItem],
   publish: false,
 };
 
 export default function RequirementForm({
   data,
-  onSubmit,
+  onCreate,
+  onUpdate,
   onPublish,
 }: RequirementFormProps) {
   const { handleSubmit, register, setValue, control } =
     useForm<IRequirementFormData>({
       mode: 'onSubmit',
       defaultValues: data ?? defaultValuesForm,
+      resolver: yupResolver(schemaValidation),
     });
 
   const { fields, append, remove } = useFieldArray({
     control,
-    name: 'requirement_list',
+    name: 'requirements_list',
     keyName: 'id',
   });
+
+  useEffect(() => {
+    if (!data) return;
+    setValue('heading', data?.heading);
+
+    if (data.requirements_list?.length) {
+      setValue(`requirements_list`, data.requirements_list);
+    }
+  }, [data]);
 
   function onHandleAddItem() {
     append(defaultRequirementItem);
@@ -52,12 +66,23 @@ export default function RequirementForm({
     remove(number);
   }
 
-  function handleSave(data: IRequirementFormData) {
-    onSubmit && onSubmit(data);
+  function handleSave(params: IRequirementFormData) {
+    console.log(params);
+    if (data) {
+      onUpdate &&
+        onUpdate({
+          ...params,
+        });
+      return;
+    }
+    onCreate &&
+      onCreate({
+        ...params,
+      });
   }
 
   function onUploadImage(image: string, index: number) {
-    setValue(`requirement_list.${index}.image`, image);
+    setValue(`requirements_list.${index}.image`, image);
   }
 
   return (
@@ -78,17 +103,21 @@ export default function RequirementForm({
         <Grid container key={item.id} mb={4} columnSpacing={4}>
           <Grid item xs={12} lg={4}>
             <Box mb={2}>
-              <ImageUpload
+              {/* <ImageUpload
                 viewType="square"
-                image={data?.requirement_list[index].image}
+                image={
+                  data?.requirements_list?.length
+                    ? data?.requirements_list[index].image
+                    : '/'
+                }
                 onChange={(image) => onUploadImage(image, index)}
-              />
+              /> */}
             </Box>
           </Grid>
           <Grid item xs={12} lg={8}>
             <Box mb={2}>
               <TextField
-                {...register(`requirement_list.${index}.heading`)}
+                {...register(`requirements_list.${index}.heading`)}
                 id={`fields.${index}.heading`}
                 label="Heading"
                 variant="outlined"
@@ -97,7 +126,7 @@ export default function RequirementForm({
             </Box>
             <Box mb={2}>
               <TextField
-                {...register(`requirement_list.${index}.text`)}
+                {...register(`requirements_list.${index}.text`)}
                 id={`fields.${index}.text`}
                 label="Text"
                 variant="outlined"
@@ -124,16 +153,18 @@ export default function RequirementForm({
           color="success"
           onClick={handleSubmit(handleSave)}
         >
-          Save
+          {data ? 'Update' : 'Create'}
         </Button>
-        <Button
-          variant="contained"
-          size="medium"
-          color={data?.publish ? 'info' : 'warning'}
-          onClick={() => onPublish && onPublish(!data?.publish)}
-        >
-          {data?.publish ? 'Unpublish' : 'Publish'}
-        </Button>
+        {data ? (
+          <Button
+            variant="contained"
+            size="medium"
+            color={data?.publish ? 'info' : 'warning'}
+            onClick={() => onPublish && onPublish(!data?.publish)}
+          >
+            {data?.publish ? 'Unpublish' : 'Publish'}
+          </Button>
+        ) : null}
       </Stack>
     </Box>
   );

@@ -6,11 +6,11 @@ import {
   IHeroBlockFullData,
   IHeroFormData,
   BlockHeading,
-} from '../../../Components';
-import { PageEnum } from '../../../pages-enum';
-import { IBlockInfoPage } from '../../../Components/types';
-import { useApisBlock } from '../../../hooks/useApisBlock';
-import { BlocsEnum } from '../../../blocks-enum';
+} from '@/src/pages/Admin/Pages/Components';
+import { PageEnum } from '@/src/pages/Admin/Pages/pages-enum';
+import { IBlockInfoPage } from '@/src/pages/Admin/Pages/Components/types';
+import { useApisBlock } from '@/src/pages/Admin/Pages/hooks/useApisBlock';
+import { BlocsEnum } from '@/src/pages/Admin/Pages/blocks-enum';
 
 const service = new HeroFormService();
 const currentPage = PageEnum.BLOG;
@@ -46,6 +46,7 @@ export default function SectionHero() {
   function onHandleUpdateSection(params: IHeroFormData) {
     updateSection(getAdapterSectionParams(params, blockInfoPage));
   }
+
   return (
     <Box>
       <BlockHeading heading="Section hero" publish={data?.publish} />

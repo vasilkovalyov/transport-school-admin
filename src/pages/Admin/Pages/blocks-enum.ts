@@ -4,6 +4,7 @@ export enum BlocsEnum {
   BlockAboutUs = 'BlockAboutUs',
   BlockFormatLessons = 'BlockFormatLessons',
   BlockFaq = 'BlockFaq',
+  BaseBlockFaq = 'BaseBlockFaq',
   BlockAchivments = 'BlockAchivments',
   BlockServices = 'BlockServices',
   BlockTeamEducation = 'BlockTeamEducation',
@@ -18,5 +19,5 @@ export enum BlocsEnum {
   BlockAbout = 'BlockAbout',
   BlockReview = 'BlockReview',
   BlockBlog = 'BlockBlog',
-  BlockContact = 'BlockContact',
+  BlockContactForm = 'BlockContactForm',
 }

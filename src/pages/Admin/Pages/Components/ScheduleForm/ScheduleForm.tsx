@@ -1,4 +1,6 @@
+import { useEffect } from 'react';
 import { useForm } from 'react-hook-form';
+import { yupResolver } from '@hookform/resolvers/yup';
 
 import { Box } from '@mui/material';
 import Stack from '@mui/material/Stack';
@@ -6,6 +8,7 @@ import Button from '@mui/material/Button';
 import TextField from '@mui/material/TextField';
 
 import { ScheduleFormProps, IScheduleFormData } from './ScheduleForm.type';
+import schemaValidation from './ScheduleForm.validation';
 
 const defaultValuesForm: IScheduleFormData = {
   heading: '',
@@ -15,16 +18,33 @@ const defaultValuesForm: IScheduleFormData = {
 
 export default function ScheduleForm({
   data,
-  onSubmit,
+  onCreate,
+  onUpdate,
   onPublish,
 }: ScheduleFormProps) {
-  const { handleSubmit, register } = useForm<IScheduleFormData>({
+  const { handleSubmit, register, setValue } = useForm<IScheduleFormData>({
     mode: 'onSubmit',
     defaultValues: data ?? defaultValuesForm,
+    resolver: yupResolver(schemaValidation),
   });
 
-  function handleSave(data: IScheduleFormData) {
-    onSubmit && onSubmit(data);
+  useEffect(() => {
+    if (!data) return;
+    setValue('heading', data?.heading);
+  }, [data]);
+
+  function handleSave(params: IScheduleFormData) {
+    if (data) {
+      onUpdate &&
+        onUpdate({
+          ...params,
+        });
+      return;
+    }
+    onCreate &&
+      onCreate({
+        ...params,
+      });
   }
 
   return (
@@ -47,6 +67,7 @@ export default function ScheduleForm({
           label="Schedule number"
           variant="outlined"
           fullWidth
+          type="number"
         />
       </Box>
       <Stack spacing={2} direction="row">
@@ -56,16 +77,18 @@ export default function ScheduleForm({
           color="success"
           onClick={handleSubmit(handleSave)}
         >
-          Save
+          {data ? 'Update' : 'Create'}
         </Button>
-        <Button
-          variant="contained"
-          size="medium"
-          color={data?.publish ? 'info' : 'warning'}
-          onClick={() => onPublish && onPublish(!data?.publish)}
-        >
-          {data?.publish ? 'Unpublish' : 'Publish'}
-        </Button>
+        {data ? (
+          <Button
+            variant="contained"
+            size="medium"
+            color={data?.publish ? 'info' : 'warning'}
+            onClick={() => onPublish && onPublish(!data?.publish)}
+          >
+            {data?.publish ? 'Unpublish' : 'Publish'}
+          </Button>
+        ) : null}
       </Stack>
     </Box>
   );

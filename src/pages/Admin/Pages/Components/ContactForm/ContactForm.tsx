@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
+import { yupResolver } from '@hookform/resolvers/yup';
 import MDEditor from '@uiw/react-md-editor';
 
 import { Box } from '@mui/material';
@@ -11,6 +12,7 @@ import TextField from '@mui/material/TextField';
 import { ImageUpload } from '@/src/components';
 
 import { ContactFormProps, IContactFormData } from './ContactForm.type';
+import schemaValidation from './ContactForm.validation';
 
 const defaultValuesForm: IContactFormData = {
   heading: '',
@@ -23,7 +25,8 @@ const defaultValuesForm: IContactFormData = {
 
 export default function ContactForm({
   data,
-  onSubmit,
+  onCreate,
+  onUpdate,
   onPublish,
 }: ContactFormProps) {
   const [markdownText, setMarkdownText] = useState<string | null>(null);
@@ -31,11 +34,18 @@ export default function ContactForm({
   const { handleSubmit, register, setValue } = useForm<IContactFormData>({
     mode: 'onSubmit',
     defaultValues: data ?? defaultValuesForm,
+    resolver: yupResolver(schemaValidation),
   });
 
   useEffect(() => {
     if (!data) return;
-    setMarkdownText(data.rich_text);
+    setValue('heading', data?.heading);
+    setValue('form_heading', data?.form_heading);
+    setValue('require_message', data?.require_message);
+
+    if (data.rich_text) {
+      setMarkdownText(data.rich_text);
+    }
   }, [data]);
 
   function onUploadImage(image: string) {
@@ -47,8 +57,18 @@ export default function ContactForm({
     setValue('rich_text', value);
   }
 
-  function handleSave(data: IContactFormData) {
-    onSubmit && onSubmit(data);
+  function handleSave(params: IContactFormData) {
+    if (data) {
+      onUpdate &&
+        onUpdate({
+          ...params,
+        });
+      return;
+    }
+    onCreate &&
+      onCreate({
+        ...params,
+      });
   }
 
   return (
@@ -101,16 +121,18 @@ export default function ContactForm({
               color="success"
               onClick={handleSubmit(handleSave)}
             >
-              Save
+              {data ? 'Update' : 'Create'}
             </Button>
-            <Button
-              variant="contained"
-              size="medium"
-              color={data?.publish ? 'info' : 'warning'}
-              onClick={() => onPublish && onPublish(!data?.publish)}
-            >
-              {data?.publish ? 'Unpublish' : 'Publish'}
-            </Button>
+            {data ? (
+              <Button
+                variant="contained"
+                size="medium"
+                color={data?.publish ? 'info' : 'warning'}
+                onClick={() => onPublish && onPublish(!data?.publish)}
+              >
+                {data?.publish ? 'Unpublish' : 'Publish'}
+              </Button>
+            ) : null}
           </Stack>
         </Grid>
         <Grid item xs={12} lg={5}>

@@ -1,13 +1,61 @@
 import { Box } from '@mui/material';
-import Typography from '@mui/material/Typography';
 
-import { RequirementForm } from '../../../Components';
+import {
+  RequirementForm,
+  RequirementFormService,
+  IRequirementBlockFullData,
+  IRequirementFormData,
+  BlockHeading,
+} from '@/src/pages/Admin/Pages/Components';
+import { PageEnum } from '@/src/pages/Admin/Pages/pages-enum';
+import { IBlockInfoPage } from '@/src/pages/Admin/Pages/Components/types';
+import { useApisBlock } from '@/src/pages/Admin/Pages/hooks/useApisBlock';
+import { BlocsEnum } from '@/src/pages/Admin/Pages/blocks-enum';
+
+const service = new RequirementFormService();
+const currentPage = PageEnum.PRICE;
+
+const blockInfoPage: IBlockInfoPage = {
+  block_order: 0,
+  block_page: currentPage,
+  block_name: BlocsEnum.BlockRequirement,
+};
+
+const getAdapterSectionParams = (
+  params: IRequirementFormData,
+  additionalParams: IBlockInfoPage
+): IRequirementBlockFullData => {
+  return {
+    ...params,
+    ...additionalParams,
+  };
+};
 
 export default function SectionRequirement() {
+  const { data, updateSection, createSection, publishToggleSection } =
+    useApisBlock<IRequirementBlockFullData>({
+      page: currentPage,
+      service: service,
+      blockInfoPage: blockInfoPage,
+    });
+
+  function onHandleCreateSection(params: IRequirementFormData) {
+    createSection(getAdapterSectionParams(params, blockInfoPage));
+  }
+
+  function onHandleUpdateSection(params: IRequirementFormData) {
+    updateSection(getAdapterSectionParams(params, blockInfoPage));
+  }
+
   return (
     <Box>
-      <Typography variant="h2">Section requirement</Typography>
-      <RequirementForm />
+      <BlockHeading heading="Section  requirement" publish={data?.publish} />
+      <RequirementForm
+        data={data}
+        onCreate={onHandleCreateSection}
+        onUpdate={onHandleUpdateSection}
+        onPublish={publishToggleSection}
+      />
     </Box>
   );
 }

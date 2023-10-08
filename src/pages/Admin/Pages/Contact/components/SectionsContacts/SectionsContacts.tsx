@@ -1,7 +1,7 @@
 import { Box } from '@mui/material';
 import Typography from '@mui/material/Typography';
 
-import { ContactsForm } from '../../../Components';
+import { ContactsForm } from '@/src/pages/Admin/Pages/Components';
 
 export default function SectionContacts() {
   return (
