@@ -1,3 +1,4 @@
+import { useEffect } from 'react';
 import { useForm, useFieldArray } from 'react-hook-form';
 
 import { Box } from '@mui/material';
@@ -11,22 +12,26 @@ import Typography from '@mui/material/Typography';
 
 import { DynamicFieldTogglers } from '@/src/components';
 
-import { IFormSocialData, IFormSocialItem } from './FormSocial.type';
+import { ISocialFormData, ISocialFormItem } from './SocialForm.type';
+import SocialFormService from './SocialForm.service';
 
-const defaultSocialItem: IFormSocialItem = {
+const defaultSocialItem: ISocialFormItem = {
   social_icon: '',
   social_url: '',
 };
 
-const defaultValuesForm: IFormSocialData = {
+const defaultValuesForm: ISocialFormData = {
   social_list: [defaultSocialItem],
 };
 
+const service = new SocialFormService();
+
 export default function FormSocial() {
-  const { control, handleSubmit, register } = useForm<IFormSocialData>({
-    mode: 'onSubmit',
-    defaultValues: defaultValuesForm,
-  });
+  const { control, handleSubmit, register, setValue } =
+    useForm<ISocialFormData>({
+      mode: 'onSubmit',
+      defaultValues: defaultValuesForm,
+    });
 
   const { fields, append, remove } = useFieldArray({
     control,
@@ -34,8 +39,8 @@ export default function FormSocial() {
     keyName: 'id',
   });
 
-  function handleSave(data: IFormSocialData) {
-    console.log(data);
+  function handleSave(data: ISocialFormData) {
+    service.update(data);
   }
 
   function onHandleAddItem() {
@@ -45,6 +50,15 @@ export default function FormSocial() {
   function onHandleRemoveItem(number: number) {
     remove(number);
   }
+
+  async function loadData() {
+    const response = await service.getInfo();
+    setValue('social_list', response.data.social_list);
+  }
+
+  useEffect(() => {
+    loadData();
+  }, []);
 
   return (
     <Box>
@@ -70,7 +84,13 @@ export default function FormSocial() {
                   labelId={`social_icon-${index}`}
                   id={`social_icon-${index}`}
                   label="Social network"
-                  defaultValue={''}
+                  defaultValue={item.social_icon}
+                  // onChange={(e) => {
+                  //   onHandleChangeField(
+                  //     e.target.name,
+                  //     e.target.value as string
+                  //   );
+                  // }}
                 >
                   <MenuItem value="instagram">Instagram</MenuItem>
                   <MenuItem value="whatsapp">Whatsapp</MenuItem>
@@ -83,6 +103,7 @@ export default function FormSocial() {
                 label="Social url"
                 variant="outlined"
                 fullWidth
+                defaultValue={item.social_url}
               />
               <DynamicFieldTogglers
                 fieldLength={fields.length}

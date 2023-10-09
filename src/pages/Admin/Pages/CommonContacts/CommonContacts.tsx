@@ -6,7 +6,7 @@ import Breadcrumbs from '@mui/material/Breadcrumbs';
 import Container from '@mui/material/Container';
 import Divider from '@mui/material/Divider';
 
-import { FormContacts, FormSocial } from './components';
+import { FormContacts, SocialForm } from './components';
 
 import { Links, LinksPages } from '@/src/constants/routes';
 
@@ -31,7 +31,7 @@ export default function PageCommonContacts() {
         <Box marginBottom={4}>
           <Divider />
         </Box>
-        <FormSocial />
+        <SocialForm />
       </Container>
     </Box>
   );

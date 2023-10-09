@@ -1,3 +1,4 @@
+import { useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
 
 import { Box } from '@mui/material';
@@ -6,6 +7,7 @@ import TextField from '@mui/material/TextField';
 import Typography from '@mui/material/Typography';
 
 import { IFormContactsData } from './FormContacts.type';
+import ContactFormService from './FormContacts.service';
 
 const defaultValuesForm: IFormContactsData = {
   address: '',
@@ -13,15 +15,29 @@ const defaultValuesForm: IFormContactsData = {
   phone: '',
 };
 
+const service = new ContactFormService();
+
 export default function FormContacts() {
-  const { handleSubmit, register } = useForm<IFormContactsData>({
+  const { handleSubmit, register, setValue } = useForm<IFormContactsData>({
     mode: 'onSubmit',
     defaultValues: defaultValuesForm,
   });
 
   function handleSave(data: IFormContactsData) {
-    console.log(data);
+    service.update(data);
   }
+
+  async function loadData() {
+    const response = await service.getInfo();
+    const { address, email, phone } = response.data;
+    setValue('address', address);
+    setValue('email', email);
+    setValue('phone', phone);
+  }
+
+  useEffect(() => {
+    loadData();
+  }, []);
 
   return (
     <Box>

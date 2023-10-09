@@ -51,12 +51,14 @@ export default function SectionHero() {
   return (
     <Box>
       <BlockHeading heading="Section hero" publish={data?.publish} />
-      <HeroForm
-        data={data}
-        onCreate={onHandleCreateSection}
-        onUpdate={onHandleUpdateSection}
-        onPublish={publishToggleSection}
-      />
+      {data ? (
+        <HeroForm
+          data={data}
+          onCreate={onHandleCreateSection}
+          onUpdate={onHandleUpdateSection}
+          onPublish={publishToggleSection}
+        />
+      ) : null}
     </Box>
   );
 }
