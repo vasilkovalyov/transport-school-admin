@@ -2,6 +2,11 @@ import { LinksPagePriceSections } from '@/src/constants/routes';
 
 export const navigation = [
   {
+    id: '0',
+    path: LinksPagePriceSections.SEO,
+    name: 'Seo',
+  },
+  {
     id: '1',
     path: LinksPagePriceSections.HERO,
     name: 'Section hero',

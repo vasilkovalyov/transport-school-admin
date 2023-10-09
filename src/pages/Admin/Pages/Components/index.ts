@@ -18,3 +18,4 @@ export * from './ReviewForm';
 export * from './BlogForm';
 export * from './ContactForm';
 export * from './BlockHeading';
+export * from './SeoForm';

@@ -1,5 +1,6 @@
 import { LinksPageAboutCourseSections } from 'src/constants/routes';
 
+import Seo from './Seo/Seo';
 import SectionHero from './SectionHero/SectionHero';
 import SectionCourseForPeople from './SectionCourseForPeople/SectionCourseForPeople';
 import SectionStructEducation from './SectionStructEducation/SectionStructEducation';
@@ -8,6 +9,10 @@ import SectionWhoTeach from './SectionWhoTeach/SectionWhoTeach';
 import SectionCta from './SectionCta/SectionCta';
 
 export const pages = [
+  {
+    path: LinksPageAboutCourseSections.SEO,
+    element: <Seo />,
+  },
   {
     path: LinksPageAboutCourseSections.HERO,
     element: <SectionHero />,

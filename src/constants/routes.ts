@@ -28,6 +28,7 @@ export enum LinksConcepts {
 }
 
 export enum LinksPageHomeSections {
+  SEO = '/admin/pages/home/seo',
   HERO = '/admin/pages/home/section-hero',
   ABOUT_US = '/admin/pages/home/section-about-us',
   ABOUT_COURSE = '/admin/pages/home/section-about-course',
@@ -37,6 +38,7 @@ export enum LinksPageHomeSections {
 }
 
 export enum LinksPageAboutCourseSections {
+  SEO = '/admin/pages/about-course/seo',
   HERO = '/admin/pages/about-course/section-hero',
   COURSE_FOR_PEOPLE = '/admin/pages/about-course/section-course-for-people',
   STRUCT_EDUCATION = '/admin/pages/about-course/section-struct-education',
@@ -46,12 +48,14 @@ export enum LinksPageAboutCourseSections {
 }
 
 export enum LinksPageScheduleSections {
+  SEO = '/admin/pages/schedule/seo',
   HERO = '/admin/pages/schedule/section-hero',
   SCHEDULE = '/admin/pages/schedule/section-schedule',
   CONTACTS = '/admin/pages/schedule/section-contacts',
 }
 
 export enum LinksPageCompanySections {
+  SEO = '/admin/pages/company/seo',
   HERO = '/admin/pages/company/section-hero',
   ABOUT = '/admin/pages/company/section-about',
   ACHIVMENTS = '/admin/pages/company/section-achivments',
@@ -62,18 +66,21 @@ export enum LinksPageCompanySections {
 }
 
 export enum LinksPageBlogSections {
+  SEO = '/admin/pages/blog/seo',
   HERO = '/admin/pages/blog/section-hero',
   BLOG = '/admin/pages/blog/section-blog',
   CTA = '/admin/pages/blog/section-achivments',
 }
 
 export enum LinksPageContactSections {
+  SEO = '/admin/pages/contact/seo',
   CONTACT_FORM = '/admin/pages/contact/section-contact-form',
   CONTACTS = '/admin/pages/contact/section-contacts',
   CTA = '/admin/pages/contact/section-cta',
 }
 
 export enum LinksPagePriceSections {
+  SEO = '/admin/pages/price/seo',
   HERO = '/admin/pages/price/section-hero',
   FORMAT_LESSONS = '/admin/pages/price/section-format-lessons',
   EDUCATION = '/admin/pages/price/section-education',

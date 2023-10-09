@@ -2,6 +2,11 @@ import { LinksPageContactSections } from '@/src/constants/routes';
 
 export const navigation = [
   {
+    id: '0',
+    path: LinksPageContactSections.SEO,
+    name: 'Seo',
+  },
+  {
     id: '1',
     path: LinksPageContactSections.CONTACT_FORM,
     name: 'Section contact form',

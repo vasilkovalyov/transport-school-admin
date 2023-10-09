@@ -1,5 +1,6 @@
 import { LinksPageCompanySections } from 'src/constants/routes';
 
+import Seo from './Seo/Seo';
 import SectionHero from './SectionHero/SectionHero';
 import SectionAbout from './SectionAbout/SectionAbout';
 import SectionAchivments from './SectionAchivments/SectionAchivments';
@@ -9,6 +10,10 @@ import SectionReview from './SectionReview/SectionReview';
 import SectionsContacts from './SectionsContacts/SectionsContacts';
 
 export const pages = [
+  {
+    path: LinksPageCompanySections.SEO,
+    element: <Seo />,
+  },
   {
     path: LinksPageCompanySections.HERO,
     element: <SectionHero />,
