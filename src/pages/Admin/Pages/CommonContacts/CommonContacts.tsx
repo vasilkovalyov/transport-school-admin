@@ -10,12 +10,12 @@ import { FormContacts, FormSocial } from './components';
 
 import { Links, LinksPages } from '@/src/constants/routes';
 
-export default function PageSettings() {
+export default function PageCommonContacts() {
   return (
     <Box py={4} component="section">
       <Container className="fullwidth-container">
         <Typography variant="h1" marginBottom={2}>
-          Page settings
+          Page common contacts
         </Typography>
         <Box marginBottom={4}>
           <Breadcrumbs aria-label="breadcrumb">

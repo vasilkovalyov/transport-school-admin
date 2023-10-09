@@ -13,7 +13,7 @@ import {
   PageContact,
   PagePrice,
   PageSchedule,
-  PageSettings,
+  PageCommonContacts,
 } from 'src/pages/Admin/Pages';
 
 import { pages as conceptsRoutes } from 'src/pages/Admin/Concepts';
@@ -93,8 +93,8 @@ const router = createBrowserRouter([
             children: aboutScheduleSectionRoutes,
           },
           {
-            path: LinksPages.SETTINGS,
-            element: <PageSettings />,
+            path: LinksPages.COMMON_CONTACTS,
+            element: <PageCommonContacts />,
           },
         ],
       },

@@ -5,4 +5,4 @@ export { default as PageContact } from './Contact/Contact';
 export { default as PageHome } from './Home/Home';
 export { default as PagePrice } from './Price/Price';
 export { default as PageSchedule } from './Schedule/Schedule';
-export { default as PageSettings } from './Settings/Settings';
+export { default as PageCommonContacts } from './CommonContacts/CommonContacts';

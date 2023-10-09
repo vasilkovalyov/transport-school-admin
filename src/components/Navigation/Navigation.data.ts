@@ -88,8 +88,8 @@ export const menuNavigaton: NavigationLinkItemProps[] = [
       },
       {
         id: '4-8',
-        path: LinksPages.SETTINGS,
-        name: 'Settings',
+        path: LinksPages.COMMON_CONTACTS,
+        name: 'Common contacts',
         icon: IconEnum.SETTINGS,
       },
       {

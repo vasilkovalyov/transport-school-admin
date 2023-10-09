@@ -12,7 +12,7 @@ export enum LinksPages {
   CONTACT = '/admin/pages/contact',
   PRICE = '/admin/pages/price',
   SCHEDULE = '/admin/pages/schedule',
-  SETTINGS = '/admin/pages/settings',
+  COMMON_CONTACTS = '/admin/pages/common-contacts',
 }
 
 export enum LinksConcepts {
