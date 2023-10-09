@@ -31,6 +31,7 @@ export default function ScheduleForm({
   useEffect(() => {
     if (!data) return;
     setValue('heading', data?.heading);
+    setValue('schedule_number', data?.schedule_number);
   }, [data]);
 
   function handleSave(params: IScheduleFormData) {

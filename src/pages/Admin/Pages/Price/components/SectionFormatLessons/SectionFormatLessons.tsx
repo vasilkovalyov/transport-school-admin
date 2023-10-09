@@ -16,7 +16,7 @@ const service = new FormatLessonsFormService();
 const currentPage = PageEnum.PRICE;
 
 const blockInfoPage: IBlockInfoPage = {
-  block_order: 0,
+  block_order: 1,
   block_page: currentPage,
   block_name: BlocsEnum.BlockFormatLessons,
 };
@@ -25,8 +25,9 @@ const getAdapterSectionParams = (
   params: IFormatLessonsFormData,
   additionalParams: IBlockInfoPage
 ): IFormatLessonsBlockFullData => {
+  const { publish, ...props } = params;
   return {
-    ...params,
+    ...props,
     ...additionalParams,
   };
 };

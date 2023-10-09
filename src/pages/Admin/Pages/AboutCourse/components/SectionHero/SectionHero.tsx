@@ -25,8 +25,9 @@ const getAdapterSectionParams = (
   params: IHeroFormData,
   additionalParams: IBlockInfoPage
 ): IHeroBlockFullData => {
+  const { publish, ...props } = params;
   return {
-    ...params,
+    ...props,
     ...additionalParams,
   };
 };

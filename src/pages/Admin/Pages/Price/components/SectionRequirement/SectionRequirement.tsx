@@ -16,7 +16,7 @@ const service = new RequirementFormService();
 const currentPage = PageEnum.PRICE;
 
 const blockInfoPage: IBlockInfoPage = {
-  block_order: 0,
+  block_order: 3,
   block_page: currentPage,
   block_name: BlocsEnum.BlockRequirement,
 };
@@ -25,8 +25,9 @@ const getAdapterSectionParams = (
   params: IRequirementFormData,
   additionalParams: IBlockInfoPage
 ): IRequirementBlockFullData => {
+  const { publish, ...props } = params;
   return {
-    ...params,
+    ...props,
     ...additionalParams,
   };
 };

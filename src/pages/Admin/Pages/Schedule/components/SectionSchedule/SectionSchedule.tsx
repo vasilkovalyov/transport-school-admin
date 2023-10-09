@@ -16,7 +16,7 @@ const service = new ScheduleFormService();
 const currentPage = PageEnum.SCHEDULE;
 
 const blockInfoPage: IBlockInfoPage = {
-  block_order: 0,
+  block_order: 1,
   block_page: currentPage,
   block_name: BlocsEnum.BlockSchedule,
 };
@@ -25,8 +25,9 @@ const getAdapterSectionParams = (
   params: IScheduleFormData,
   additionalParams: IBlockInfoPage
 ): IScheduleBlockFullData => {
+  const { publish, ...props } = params;
   return {
-    ...params,
+    ...props,
     ...additionalParams,
   };
 };

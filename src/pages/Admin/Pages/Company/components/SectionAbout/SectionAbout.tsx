@@ -16,7 +16,7 @@ const service = new AboutFormService();
 const currentPage = PageEnum.COMPANY;
 
 const blockInfoPage: IBlockInfoPage = {
-  block_order: 0,
+  block_order: 1,
   block_page: currentPage,
   block_name: BlocsEnum.BlockAbout,
 };
@@ -25,8 +25,9 @@ const getAdapterSectionParams = (
   params: IAboutFormData,
   additionalParams: IBlockInfoPage
 ): IAboutBlockFullData => {
+  const { publish, ...props } = params;
   return {
-    ...params,
+    ...props,
     ...additionalParams,
   };
 };

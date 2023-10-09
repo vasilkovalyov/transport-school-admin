@@ -16,7 +16,7 @@ const service = new TeamEducationFormService();
 const currentPage = PageEnum.PRICE;
 
 const blockInfoPage: IBlockInfoPage = {
-  block_order: 0,
+  block_order: 2,
   block_page: currentPage,
   block_name: BlocsEnum.BlockTeamEducation,
 };
@@ -25,8 +25,9 @@ const getAdapterSectionParams = (
   params: ITeamEducationFormData,
   additionalParams: IBlockInfoPage
 ): ITeamEducationBlockFullData => {
+  const { publish, ...props } = params;
   return {
-    ...params,
+    ...props,
     ...additionalParams,
   };
 };

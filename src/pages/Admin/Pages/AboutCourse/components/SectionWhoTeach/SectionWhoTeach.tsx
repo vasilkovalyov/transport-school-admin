@@ -16,7 +16,7 @@ const service = new WhoTeachFormService();
 const currentPage = PageEnum.ABOUT_COURSE;
 
 const blockInfoPage: IBlockInfoPage = {
-  block_order: 0,
+  block_order: 4,
   block_page: currentPage,
   block_name: BlocsEnum.BlockWhoTeach,
 };
@@ -25,8 +25,9 @@ const getAdapterSectionParams = (
   params: IWhoTeachFormData,
   additionalParams: IBlockInfoPage
 ): IWhoTeachBlockFullData => {
+  const { publish, ...props } = params;
   return {
-    ...params,
+    ...props,
     ...additionalParams,
   };
 };

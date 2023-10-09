@@ -16,7 +16,7 @@ const service = new BlogFormService();
 const currentPage = PageEnum.BLOG;
 
 const blockInfoPage: IBlockInfoPage = {
-  block_order: 0,
+  block_order: 1,
   block_page: currentPage,
   block_name: BlocsEnum.BlockBlog,
 };
@@ -25,8 +25,9 @@ const getAdapterSectionParams = (
   params: IBlogFormData,
   additionalParams: IBlockInfoPage
 ): IBlogBlockFullData => {
+  const { publish, ...props } = params;
   return {
-    ...params,
+    ...props,
     ...additionalParams,
   };
 };

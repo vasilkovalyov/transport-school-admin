@@ -35,6 +35,7 @@ export default function BlogForm({
   }, [data]);
 
   function handleSave(params: IBlogFormData) {
+    console.log(params);
     if (data) {
       onUpdate &&
         onUpdate({

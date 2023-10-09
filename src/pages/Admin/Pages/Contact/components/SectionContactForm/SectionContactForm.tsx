@@ -25,8 +25,9 @@ const getAdapterSectionParams = (
   params: IContactFormData,
   additionalParams: IBlockInfoPage
 ): IContactBlockFullData => {
+  const { publish, ...props } = params;
   return {
-    ...params,
+    ...props,
     ...additionalParams,
   };
 };

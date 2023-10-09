@@ -17,7 +17,7 @@ const service = new CourseForPeopleFormService();
 const currentPage = PageEnum.ABOUT_COURSE;
 
 const blockInfoPage: IBlockInfoPage = {
-  block_order: 0,
+  block_order: 1,
   block_page: currentPage,
   block_name: BlocsEnum.BlockCourseForPeople,
 };
@@ -26,8 +26,9 @@ const getAdapterSectionParams = (
   params: ICourseForPeopleFormData,
   additionalParams: IBlockInfoPage
 ): ICourseForPeopleFullData => {
+  const { publish, ...props } = params;
   return {
-    ...params,
+    ...props,
     ...additionalParams,
   };
 };
