@@ -8,7 +8,7 @@ import Grid from '@mui/material/Grid';
 import TextField from '@mui/material/TextField';
 import Typography from '@mui/material/Typography';
 
-import { DynamicFieldTogglers, ImageUpload } from '@/src/components';
+import { DynamicFieldTogglers } from '@/src/components';
 
 import {
   RequirementFormProps,
@@ -80,9 +80,9 @@ export default function RequirementForm({
       });
   }
 
-  function onUploadImage(image: string, index: number) {
-    setValue(`requirements_list.${index}.image`, image);
-  }
+  // function onUploadImage(image: string, index: number) {
+  // setValue(`requirements_list.${index}.image`, image);
+  // }
 
   return (
     <Box component="form" maxWidth={800} marginBottom={4}>
