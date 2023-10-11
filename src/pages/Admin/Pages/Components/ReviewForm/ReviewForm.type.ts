@@ -1,9 +1,13 @@
-import { BaseBlockFormProps, IBaseBlock, IBlockInfoPage } from '../types';
+import {
+  BaseBlockCutDownFormProps,
+  IBaseBlock,
+  IBlockInfoPage,
+} from '../types';
 
-export type ReviewFormProps = BaseBlockFormProps<IReviewFormData>;
+export type ReviewFormProps = BaseBlockCutDownFormProps<IReviewSectionFormData>;
 
-export interface IReviewFormData extends IBaseBlock {
-  heading: string;
-}
+export interface IReviewSectionFormData extends IBaseBlock {}
 
-export interface IReviewBlockFullData extends IReviewFormData, IBlockInfoPage {}
+export interface IReviewFormBlockFullData
+  extends IReviewSectionFormData,
+    IBlockInfoPage {}

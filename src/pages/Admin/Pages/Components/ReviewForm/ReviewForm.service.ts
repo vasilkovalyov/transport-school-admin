@@ -1,17 +1,17 @@
 import { AxiosPromise } from 'axios';
 import api from '@/src/api/axios';
-import { IReviewBlockFullData } from './ReviewForm.type';
+import { IReviewFormBlockFullData } from './ReviewForm.type';
 import { IBlockService } from '../types';
 
 enum EndpointBlockReviewEnum {
-  CREATE = 'block/reviews-create',
-  UPDATE = 'block/reviews-update',
-  PUBLISH = 'block/reviews/publish',
-  UNPUBLISH = 'block/reviews/unpublish',
-  GET_BLOCK = 'block/reviews/',
+  CREATE = 'block/review-create',
+  UPDATE = 'block/review-update',
+  PUBLISH = 'block/review/publish',
+  UNPUBLISH = 'block/review/unpublish',
+  GET_BLOCK = 'block/review/',
 }
 
-class ReviewFormService implements IBlockService<IReviewBlockFullData> {
+class ReviewFormService implements IBlockService<IReviewFormBlockFullData> {
   async publish(page: string): AxiosPromise<boolean> {
     const response = await api.patch(EndpointBlockReviewEnum.PUBLISH, {
       page: page,
@@ -27,7 +27,7 @@ class ReviewFormService implements IBlockService<IReviewBlockFullData> {
   }
 
   async create(
-    params: IReviewBlockFullData
+    params: IReviewFormBlockFullData
   ): AxiosPromise<{ message: string }> {
     const response = await api.post(EndpointBlockReviewEnum.CREATE, {
       ...params,
@@ -36,7 +36,7 @@ class ReviewFormService implements IBlockService<IReviewBlockFullData> {
   }
 
   async update(
-    params: IReviewBlockFullData
+    params: IReviewFormBlockFullData
   ): AxiosPromise<{ message: string }> {
     const response = await api.patch(EndpointBlockReviewEnum.UPDATE, {
       ...params,
@@ -44,7 +44,7 @@ class ReviewFormService implements IBlockService<IReviewBlockFullData> {
     return response;
   }
 
-  async getBlock(page: string): AxiosPromise<IReviewBlockFullData> {
+  async getBlock(page: string): AxiosPromise<IReviewFormBlockFullData> {
     const response = await api.get(
       `${EndpointBlockReviewEnum.GET_BLOCK}${page}`
     );

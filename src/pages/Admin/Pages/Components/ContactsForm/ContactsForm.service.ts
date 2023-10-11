@@ -8,7 +8,7 @@ enum EndpointBlockContactsEnum {
   UPDATE = 'block/contacts-update',
   PUBLISH = 'block/contacts/publish',
   UNPUBLISH = 'block/contacts/unpublish',
-  GET_BLOCK = 'blocks/contacts/',
+  GET_BLOCK = 'block/contacts/',
 }
 
 class ContactsFormService implements IBlockService<IContactsBlockFullData> {

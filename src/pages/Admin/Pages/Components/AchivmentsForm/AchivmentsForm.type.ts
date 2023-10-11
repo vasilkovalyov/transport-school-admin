@@ -1,5 +1,14 @@
-import { BaseBlockFormProps, IBaseBlock } from '../types';
+import {
+  BaseBlockCutDownFormProps,
+  IBaseBlock,
+  IBlockInfoPage,
+} from '../types';
 
-export type AchivmentsFormProps = BaseBlockFormProps<IAchivmentsFormData>;
+export type AchivmentsFormProps =
+  BaseBlockCutDownFormProps<IAchivmentsSectionFormData>;
 
-export interface IAchivmentsFormData extends IBaseBlock {}
+export interface IAchivmentsSectionFormData extends IBaseBlock {}
+
+export interface IAchivmentsFormBlockFullData
+  extends IAchivmentsSectionFormData,
+    IBlockInfoPage {}

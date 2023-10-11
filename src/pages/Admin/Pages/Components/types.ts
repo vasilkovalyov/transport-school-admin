@@ -8,6 +8,12 @@ export type BaseBlockFormProps<T> = {
   onPublish?: (value: boolean) => void;
 };
 
+export type BaseBlockCutDownFormProps<T> = {
+  data?: T | null;
+  onCreate?: () => void;
+  onPublish?: (value: boolean) => void;
+};
+
 export interface IBaseBlock {
   publish?: boolean;
 }
@@ -19,6 +25,14 @@ export interface IBlockInfoPage {
 }
 
 export interface IBlockService<T> {
+  publish: (page: string) => AxiosPromise<boolean>;
+  unpublish: (page: string) => AxiosPromise<boolean>;
+  getBlock: (page: string) => AxiosPromise<T>;
+  create?: (params: T) => AxiosPromise<{ message: string }>;
+  update?: (params: T) => AxiosPromise<{ message: string }>;
+}
+
+export interface IBlockShortService<T> {
   publish: (page: string) => AxiosPromise<boolean>;
   unpublish: (page: string) => AxiosPromise<boolean>;
   getBlock: (page: string) => AxiosPromise<T>;
