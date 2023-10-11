@@ -46,9 +46,9 @@ export default function ReviewForm({ data, onSubmit }: ReviewFormProps) {
     setRatingValue(number);
   }
 
-  function onUploadImage(image: string) {
-    // setValue('image', image);
-  }
+  // function onUploadImage(image: string) {
+  // setValue('image', image);
+  // }
 
   return (
     <Box component="form" maxWidth={800} marginBottom={4}>

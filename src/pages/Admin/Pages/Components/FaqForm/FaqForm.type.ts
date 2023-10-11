@@ -1,7 +1,9 @@
 import { BaseBlockFormProps, IBaseBlock, IBlockInfoPage } from '../types';
 
-export type FaqFormProps = BaseBlockFormProps<IFaqFormData>;
+export type FaqFormProps = BaseBlockFormProps<IFaqSectionFormData>;
 
-export interface IFaqFormData extends IBaseBlock {}
+export interface IFaqSectionFormData extends IBaseBlock {}
 
-export interface IFaqFormBlockFullData extends IFaqFormData, IBlockInfoPage {}
+export interface IFaqFormBlockFullData
+  extends IFaqSectionFormData,
+    IBlockInfoPage {}

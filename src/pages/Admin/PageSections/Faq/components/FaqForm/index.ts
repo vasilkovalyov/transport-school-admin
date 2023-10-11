@@ -1,2 +1,2 @@
 export { default as FaqForm } from './FaqForm';
-export { type IFaqFormData } from './FaqForm.type';
+export { type IFaqSectionFormData } from './FaqForm.type';
