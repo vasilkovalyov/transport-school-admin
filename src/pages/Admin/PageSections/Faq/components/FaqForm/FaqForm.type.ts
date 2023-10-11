@@ -1,8 +1,4 @@
-import { BaseBlockReusableFormProps } from '../../../types';
-
-export type FaqFormProps = BaseBlockReusableFormProps<IFaqFormData>;
-
-export interface IFaqFormData {
+export interface IFaqSectionFormData {
   image?: string;
   heading: string;
   list_faq: IFaq[];

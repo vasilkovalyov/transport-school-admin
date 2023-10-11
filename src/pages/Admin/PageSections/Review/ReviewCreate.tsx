@@ -1,4 +1,4 @@
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
 import { Box } from '@mui/material';
 import Container from '@mui/material/Container';
@@ -6,9 +6,23 @@ import Typography from '@mui/material/Typography';
 import Breadcrumbs from '@mui/material/Breadcrumbs';
 
 import { Links, LinksPageSections } from '@/src/constants/routes';
-import { ReviewCreate } from './components';
+import { IReviewFormData, ReviewForm } from './components';
+import ServiceReview from './Review.service';
+
+const service = new ServiceReview();
 
 export default function PageSectionReviewCreate() {
+  const navigate = useNavigate();
+
+  async function onCreate(data: IReviewFormData) {
+    try {
+      await service.create(data);
+      navigate(LinksPageSections.REVIEW);
+    } catch (e) {
+      console.log(e);
+    }
+  }
+
   return (
     <Box py={4} component="section">
       <Container className="fullwidth-container">
@@ -20,7 +34,7 @@ export default function PageSectionReviewCreate() {
             <Typography>Create review</Typography>
           </Breadcrumbs>
         </Box>
-        <ReviewCreate />
+        <ReviewForm onSubmit={onCreate} />
       </Container>
     </Box>
   );

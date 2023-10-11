@@ -8,7 +8,7 @@ import Typography from '@mui/material/Typography';
 import Breadcrumbs from '@mui/material/Breadcrumbs';
 
 import { Links, LinksPageSections } from '@/src/constants/routes';
-import { ReviewList } from './components';
+import { ReviewList, ReviewContentForm } from './components';
 
 export default function PageSectionReview() {
   const navigate = useNavigate();
@@ -38,6 +38,7 @@ export default function PageSectionReview() {
             <Typography>Section Review</Typography>
           </Breadcrumbs>
         </Box>
+        <ReviewContentForm />
         <ReviewList />
       </Container>
     </Box>

@@ -9,27 +9,29 @@ import TextField from '@mui/material/TextField';
 import { DynamicFieldTogglers } from '@/src/components';
 
 import {
-  IAchivmentFormData,
-  AchivmentFormProps,
-  IAchivmentListItemData,
+  IAchivmentSectionFormData,
+  IAchivmentSectionListItemData,
 } from './AchivmentForm.type';
+import AchivmentSectionFormService from './AchivmentForm.service';
 
-const defaultAchivmentListItem: IAchivmentListItemData = {
+const defaultAchivmentListItem: IAchivmentSectionListItemData = {
   heading: '',
   text: '',
 };
 
-const defaultValuesForm: IAchivmentFormData = {
+const defaultValuesForm: IAchivmentSectionFormData = {
   heading: '',
   subheading: '',
   list_achivments: [defaultAchivmentListItem],
 };
 
-export default function AchivmentForm({ data, onSubmit }: AchivmentFormProps) {
+const serviceSectionAchivment = new AchivmentSectionFormService();
+
+export default function AchivmentForm() {
   const { handleSubmit, register, control, setValue } =
-    useForm<IAchivmentFormData>({
+    useForm<IAchivmentSectionFormData>({
       mode: 'onSubmit',
-      defaultValues: data ?? defaultValuesForm,
+      defaultValues: defaultValuesForm,
     });
 
   const { fields, remove, append } = useFieldArray({
@@ -38,18 +40,21 @@ export default function AchivmentForm({ data, onSubmit }: AchivmentFormProps) {
     keyName: 'id',
   });
 
-  useEffect(() => {
-    if (!data) return;
-    if (!data.list_achivments.length) {
+  async function loadData() {
+    const response = await serviceSectionAchivment.getInfo();
+    const { heading, subheading, list_achivments } = response.data;
+    if (!list_achivments.length) {
       setValue('list_achivments', [defaultAchivmentListItem]);
     } else {
-      setValue('list_achivments', data.list_achivments);
+      setValue('list_achivments', list_achivments);
     }
-    setValue('heading', data.heading);
-    setValue('subheading', data.subheading);
+    setValue('heading', heading);
+    setValue('subheading', subheading);
+  }
 
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [data?.heading, data?.subheading, data?.list_achivments]);
+  useEffect(() => {
+    loadData();
+  }, []);
 
   function onHandleAddAchivmentItem() {
     append(defaultAchivmentListItem);
@@ -59,8 +64,8 @@ export default function AchivmentForm({ data, onSubmit }: AchivmentFormProps) {
     remove(numberAchivment);
   }
 
-  function handleSave(data: IAchivmentFormData) {
-    onSubmit && onSubmit(data);
+  function handleSave(data: IAchivmentSectionFormData) {
+    serviceSectionAchivment.update(data);
   }
 
   return (

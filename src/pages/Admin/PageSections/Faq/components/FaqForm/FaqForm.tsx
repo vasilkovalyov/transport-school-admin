@@ -8,26 +8,30 @@ import TextField from '@mui/material/TextField';
 import Typography from '@mui/material/Typography';
 import Stack from '@mui/material/Stack';
 
-import { DynamicFieldTogglers, ImageUpload } from '@/src/components';
+import { DynamicFieldTogglers } from '@/src/components';
 
-import { FaqFormProps, IFaq, IFaqFormData } from './FaqForm.type';
+import { IFaq, IFaqSectionFormData } from './FaqForm.type';
+import FaqSectionFormService from './FaqForm.service';
 
 const defaultFaqListItem: IFaq = {
   heading: '',
   text: '',
 };
 
-const defaultValuesForm: IFaqFormData = {
+const defaultValuesForm: IFaqSectionFormData = {
   image: '',
   heading: '',
   list_faq: [defaultFaqListItem],
 };
 
-export default function FaqForm({ data, onCreate, onUpdate }: FaqFormProps) {
-  const { handleSubmit, register, control, setValue } = useForm<IFaqFormData>({
-    mode: 'onSubmit',
-    defaultValues: data ?? defaultValuesForm,
-  });
+const serviceSectionFaq = new FaqSectionFormService();
+
+export default function FaqForm() {
+  const { handleSubmit, register, control, setValue } =
+    useForm<IFaqSectionFormData>({
+      mode: 'onSubmit',
+      defaultValues: defaultValuesForm,
+    });
 
   const { fields, remove, append } = useFieldArray({
     control,
@@ -35,17 +39,16 @@ export default function FaqForm({ data, onCreate, onUpdate }: FaqFormProps) {
     keyName: 'id',
   });
 
-  useEffect(() => {
-    if (!data) return;
-    if (!data.list_faq.length) {
-      setValue('list_faq', [defaultFaqListItem]);
-    } else {
-      setValue('list_faq', data.list_faq);
-    }
-    setValue('heading', data.heading);
+  async function loadData() {
+    const response = await serviceSectionFaq.getInfo();
+    const { heading, list_faq } = response.data;
+    setValue('heading', heading);
+    setValue('list_faq', list_faq);
+  }
 
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [data?.heading, data?.list_faq]);
+  useEffect(() => {
+    loadData();
+  }, []);
 
   function onHandleAddAchivmentItem() {
     append(defaultFaqListItem);
@@ -55,22 +58,8 @@ export default function FaqForm({ data, onCreate, onUpdate }: FaqFormProps) {
     remove(numberAchivment);
   }
 
-  function handleSave(params: IFaqFormData) {
-    if (data) {
-      onUpdate &&
-        onUpdate({
-          ...params,
-        });
-      return;
-    }
-    onCreate &&
-      onCreate({
-        ...params,
-      });
-  }
-
-  function onUploadImage(image: string) {
-    setValue('image', image);
+  function handleSave(data: IFaqSectionFormData) {
+    serviceSectionFaq.update(data);
   }
 
   return (
@@ -126,17 +115,17 @@ export default function FaqForm({ data, onCreate, onUpdate }: FaqFormProps) {
               color="success"
               onClick={handleSubmit(handleSave)}
             >
-              {data ? 'Update' : 'Create'}
+              Save
             </Button>
           </Stack>
         </Grid>
-        <Grid item xs={12} lg={5}>
+        {/* <Grid item xs={12} lg={5}>
           <ImageUpload
             viewType="square"
-            image={data?.image}
+            image={image}
             onChange={onUploadImage}
           />
-        </Grid>
+        </Grid> */}
       </Grid>
     </Box>
   );

@@ -1,7 +1,11 @@
 export type ReviewRowProps = {
-  _id: string;
-  image: string;
-  text: string;
-  name: string;
-  rating: number;
+  data: IReview;
+  onDelete: (id: string) => void;
 };
+
+export interface IReview {
+  _id: string;
+  name: string;
+  text?: string;
+  rating: number | null;
+}

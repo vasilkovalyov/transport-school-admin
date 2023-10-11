@@ -16,3 +16,11 @@ export interface IBlockReusableService<T> {
   create: (params: T) => AxiosPromise<{ message: string }>;
   update: (params: T) => AxiosPromise<{ message: string }>;
 }
+
+export enum SectionEnum {
+  SectionAchivment = 'ReuseBlockAchivments',
+  SectionContacts = 'ReuseBlockContacts',
+  SectionCta = 'ReuseBlockCta',
+  SectionFaq = 'ReuseBlockFaq',
+  SectionReview = 'ReuseBlockReview',
+}

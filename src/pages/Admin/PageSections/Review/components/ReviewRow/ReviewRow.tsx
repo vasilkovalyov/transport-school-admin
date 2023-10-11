@@ -8,20 +8,15 @@ import TableRow from '@mui/material/TableRow';
 import { ReviewRowProps } from './ReviewRow.type';
 import { LinksPageSections } from '@/src/constants/routes';
 
-export default function ReviewRow({
-  _id,
-  image,
-  text,
-  name,
-  rating,
-}: ReviewRowProps) {
+export default function ReviewRow({ data, onDelete }: ReviewRowProps) {
+  const { _id, name, rating, text } = data;
   const navigate = useNavigate();
   const editLink = `${LinksPageSections.REVIEW_EDIT}/${_id}`;
 
   return (
     <TableRow key={_id}>
       <TableCell>
-        <img src={image} alt={name} style={{ maxWidth: '100px' }} />
+        {/* <img src={image} alt={name} style={{ maxWidth: '100px' }} /> */}
       </TableCell>
       <TableCell>{name}</TableCell>
       <TableCell>
@@ -35,6 +30,16 @@ export default function ReviewRow({
           onClick={() => navigate(editLink)}
         >
           Edit
+        </Button>
+      </TableCell>
+      <TableCell>
+        <Button
+          size="small"
+          variant="contained"
+          color="error"
+          onClick={() => onDelete(_id)}
+        >
+          Delete
         </Button>
       </TableCell>
     </TableRow>

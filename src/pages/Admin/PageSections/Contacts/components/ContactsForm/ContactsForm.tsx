@@ -6,13 +6,10 @@ import Button from '@mui/material/Button';
 import Grid from '@mui/material/Grid';
 import TextField from '@mui/material/TextField';
 
-import {
-  ContactsFormProps,
-  IContactsFormData,
-  FormValuesKey,
-} from './ContactsForm.type';
+import { IContactsSectionFormData, FormValuesKey } from './ContactsForm.type';
+import ContactsSectionFormService from './ContactsForm.service';
 
-const defaultValuesForm: IContactsFormData = {
+const defaultValuesForm: IContactsSectionFormData = {
   heading: '',
   address: '',
   phone: '',
@@ -28,27 +25,35 @@ const valuesKeys: FormValuesKey[] = [
   'map_url',
 ];
 
-export default function ContactsForm({ data }: ContactsFormProps) {
+const serviceSectionContacts = new ContactsSectionFormService();
+
+export default function ContactsForm() {
   const [mapUrl, setMapUrl] = useState<string | null>(null);
-  const { handleSubmit, register, setValue } = useForm<IContactsFormData>({
-    mode: 'onSubmit',
-    defaultValues: data ?? defaultValuesForm,
-  });
+  const { handleSubmit, register, setValue } =
+    useForm<IContactsSectionFormData>({
+      mode: 'onSubmit',
+      defaultValues: defaultValuesForm,
+    });
 
-  useEffect(() => {
-    if (!data) return;
-    fillValues(valuesKeys);
-    setMapUrl(data.map_url);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [data]);
-
-  function fillValues(values: FormValuesKey[]) {
-    if (!data) return;
-    values.map((item) => setValue(item, data[item]));
+  async function loadData() {
+    const response = await serviceSectionContacts.getInfo();
+    fillValues(valuesKeys, response.data);
+    setMapUrl(response.data.map_url);
   }
 
-  function handleSave(data: IContactsFormData) {
-    console.log(data);
+  useEffect(() => {
+    loadData();
+  }, []);
+
+  function fillValues(keys: FormValuesKey[], values: IContactsSectionFormData) {
+    if (!values) return;
+    keys.forEach((key) => {
+      setValue(key, values[key]);
+    });
+  }
+
+  function handleSave(data: IContactsSectionFormData) {
+    serviceSectionContacts.update(data);
   }
 
   return (

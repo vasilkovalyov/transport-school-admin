@@ -1,4 +1,4 @@
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
 
 import { Box } from '@mui/material';
@@ -11,30 +11,30 @@ import FormControlLabel from '@mui/material/FormControlLabel';
 import FormControl from '@mui/material/FormControl';
 import FormLabel from '@mui/material/FormLabel';
 
-import { ImageUpload } from '@/src/components';
+// import { ImageUpload } from '@/src/components';
 
-import { IReviewFormData, ReviewFormProps } from './ReviewForm.type';
+import { ReviewFormProps, IReviewFormData } from './ReviewForm.type';
 
 const defaultValuesForm: IReviewFormData = {
-  image: '',
-  heading: '',
+  name: '',
   text: '',
+  rating: null,
 };
 
 export default function ReviewForm({ data, onSubmit }: ReviewFormProps) {
   const ratingCount = 5;
-  const { handleSubmit, register, setValue, getValues } =
-    useForm<IReviewFormData>({
-      mode: 'onSubmit',
-      defaultValues: data ?? defaultValuesForm,
-    });
+  const [ratingValue, setRatingValue] = useState<number | null>(null);
+
+  const { handleSubmit, register, setValue } = useForm<IReviewFormData>({
+    mode: 'onSubmit',
+    defaultValues: data ?? defaultValuesForm,
+  });
 
   useEffect(() => {
     if (!data) return;
-    setValue('heading', data.heading);
+    setValue('name', data.name);
     setValue('text', data.text);
-    setValue('rating', data.rating);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
+    setRatingValue(data.rating);
   }, [data]);
 
   function handleSave(data: IReviewFormData) {
@@ -43,29 +43,29 @@ export default function ReviewForm({ data, onSubmit }: ReviewFormProps) {
   }
 
   function onChangeRating(number: number) {
-    setValue('rating', number);
+    setRatingValue(number);
   }
 
   function onUploadImage(image: string) {
-    setValue('image', image);
+    // setValue('image', image);
   }
 
   return (
     <Box component="form" maxWidth={800} marginBottom={4}>
       <Grid container spacing={4} mb={4}>
         <Grid item xs={12} md={4}>
-          <ImageUpload
+          {/* <ImageUpload
             viewType="avatar"
             width={100}
             height={100}
             image={data?.image}
             onChange={onUploadImage}
-          />
+          /> */}
         </Grid>
         <Grid item xs={12} md={6}>
           <Box mb={4}>
             <TextField
-              {...register('heading')}
+              {...register('name')}
               id="name"
               label="Name"
               variant="outlined"
@@ -80,7 +80,7 @@ export default function ReviewForm({ data, onSubmit }: ReviewFormProps) {
               variant="outlined"
               fullWidth
               multiline
-              rows="6"
+              rows="8"
             />
           </Box>
           <Box>
@@ -94,7 +94,7 @@ export default function ReviewForm({ data, onSubmit }: ReviewFormProps) {
                     control={
                       <Radio
                         {...register('rating')}
-                        checked={item === getValues('rating')}
+                        checked={item + 1 === ratingValue}
                         onChange={(e) => onChangeRating(+e.currentTarget.value)}
                       />
                     }

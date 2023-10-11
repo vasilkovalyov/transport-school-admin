@@ -1,9 +1,4 @@
-export type ContactsFormProps = {
-  data?: IContactsFormData | null;
-  onSubmit?: (data: IContactsFormData) => void;
-};
-
-export interface IContactsFormData {
+export interface IContactsSectionFormData {
   heading: string;
   address: string;
   phone: string;
@@ -11,4 +6,4 @@ export interface IContactsFormData {
   map_url: string;
 }
 
-export type FormValuesKey = keyof IContactsFormData;
+export type FormValuesKey = keyof IContactsSectionFormData;
