@@ -40,6 +40,10 @@ export function usePostPaginate<T>({
     loadData();
   }, []);
 
+  useEffect(() => {
+    loadData();
+  }, [currentPage]);
+
   function handleChangePage(e: React.ChangeEvent<unknown>, numberPage: number) {
     setCurrentPage(numberPage);
     loadData();
