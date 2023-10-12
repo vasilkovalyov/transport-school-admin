@@ -1,26 +1,74 @@
+import { useEffect, useState } from 'react';
+import { useNavigate, useParams } from 'react-router-dom';
 import { Box } from '@mui/material';
+import Button from '@mui/material/Button';
 
 import BlogForm from '../BlogForm/BlogForm';
+import { BlockCardCreateProps, BlogCardProps } from '../BlogCard';
+import PostService from '../../Blog.service';
+import { LinksConcepts } from '@/src/constants/routes';
+
+const service = new PostService();
+const initialData: BlogCardProps = {
+  _id: '',
+  heading: '',
+  rich_text: '',
+  slug: '',
+  short_description: '',
+};
 
 export default function BlockBlogEdit() {
+  let { id } = useParams();
+  const navigate = useNavigate();
+  const [data, setData] = useState<BlogCardProps>(initialData);
+
+  async function loadData() {
+    try {
+      const response = await service.getPost(id || '');
+      setData(response.data);
+    } catch (e) {
+      console.log(e);
+    }
+  }
+
+  useEffect(() => {
+    loadData();
+  }, []);
+
+  async function onUpdate(params: BlockCardCreateProps) {
+    try {
+      await service.update({
+        ...params,
+        _id: id || '',
+      });
+      navigate(LinksConcepts.BLOG);
+    } catch (e) {
+      console.log(e);
+    }
+  }
+
+  async function handleDelete() {
+    try {
+      await service.delete(id || '');
+      navigate(LinksConcepts.BLOG);
+    } catch (e) {
+      console.log(e);
+    }
+  }
+
   return (
     <Box component="section">
-      <BlogForm
-        data={{
-          image:
-            'https://images.unsplash.com/photo-1695418624968-d027093abdb9?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80',
-          heading: 'Новоприбывшие в США, которые ищут возможности',
-          slug: 'novopribyvshie_v_ssha,_kotorye_ischut_vozmozhnosti',
-          short_description:
-            'Начинающим нужно время, чтобы приобрести уверенность за рулем. Поэтому на дорогах могут случаться разные ситуации. Водителю-новичку крайне важно разобраться в видах страхования автомобиля, таких как',
-          rich_text: `### Шаг 1: Изучение Требований
-          Первым шагом к получению CDL является изучение требований вашего штата. В каждом штате могут быть различные возрастные ограничения, правила и условия для получения CDL в зависимости от типа транспортного средства. Вам также могут потребоваться дополнительные документы, такие как медицинская аттестация, резидентское удостоверение и другие.
-          ### Шаг 2: Подготовка к Теоретическому Экзамену
-          
-          Прежде чем получить CDL, вы должны успешно сдать теоретический экзамен. Вам потребуется изучить учебный материал, касающийся правил дорожного движения, безопасности и других аспектов, связанных с вождением коммерческих транспортных средств. Многие штаты предоставляют официальные руководства и онлайн-ресурсы для подготовки.`,
-        }}
-        onSubmit={(data) => console.log(data)}
-      />
+      <BlogForm data={data} onSubmit={onUpdate} />
+      <Box>
+        <Button
+          variant="contained"
+          size="medium"
+          color="error"
+          onClick={handleDelete}
+        >
+          Delete
+        </Button>
+      </Box>
     </Box>
   );
 }

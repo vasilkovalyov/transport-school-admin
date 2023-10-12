@@ -1,12 +1,6 @@
-export type BlogFormProps = {
-  data?: IBlogFormData;
-  onSubmit?: (data: IBlogFormData) => void;
-};
+import { BlockCardCreateProps } from '../BlogCard';
 
-export interface IBlogFormData {
-  image?: string;
-  heading: string;
-  slug: string;
-  short_description: string;
-  rich_text: string;
-}
+export type BlogFormProps = {
+  data?: BlockCardCreateProps;
+  onSubmit?: (data: BlockCardCreateProps) => void;
+};

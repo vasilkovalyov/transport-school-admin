@@ -2,5 +2,9 @@ export type BlogCardProps = {
   _id: string;
   image?: string;
   heading: string;
-  text: string;
+  slug: string;
+  short_description?: string;
+  rich_text: string;
 };
+
+export type BlockCardCreateProps = Omit<BlogCardProps, '_id'>;

@@ -11,7 +11,12 @@ import Typography from '@mui/material/Typography';
 import { BlogCardProps } from './BlogCard.type';
 import { LinksConcepts } from '@/src/constants/routes';
 
-export default function BlogCard({ _id, image, heading, text }: BlogCardProps) {
+export default function BlogCard({
+  _id,
+  image,
+  heading,
+  short_description,
+}: BlogCardProps) {
   const navigate = useNavigate();
   const editLink = `${LinksConcepts.BLOG_EDIT}/${_id}`;
 
@@ -24,9 +29,9 @@ export default function BlogCard({ _id, image, heading, text }: BlogCardProps) {
         <Typography gutterBottom variant="h5">
           <Link to={editLink}>{heading}</Link>
         </Typography>
-        {text ? (
+        {short_description ? (
           <Typography variant="body2" color="text.secondary">
-            {text}
+            {short_description}
           </Typography>
         ) : null}
       </CardContent>

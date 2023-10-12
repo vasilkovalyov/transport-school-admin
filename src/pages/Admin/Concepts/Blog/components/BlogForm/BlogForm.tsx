@@ -10,15 +10,16 @@ import { Typography } from '@mui/material';
 
 import { ImageUpload } from '@/src/components';
 
-import { BlogFormProps, IBlogFormData } from './BlogForm.type';
+import { BlogFormProps } from './BlogForm.type';
 import { transliterateToLatin } from '@/src/utils/convertToSlug';
+import { BlockCardCreateProps } from '../BlogCard';
 
-const defaultValuesForm: IBlogFormData = {
+const defaultValuesForm: BlockCardCreateProps = {
   image: '',
   heading: '',
-  rich_text: '',
   slug: '',
   short_description: '',
+  rich_text: '',
 };
 
 export default function BlogForm({ data, onSubmit }: BlogFormProps) {
@@ -27,16 +28,18 @@ export default function BlogForm({ data, onSubmit }: BlogFormProps) {
 
   useEffect(() => {
     if (!data) return;
+    setValue('heading', data.heading);
+    setValue('short_description', data.short_description);
     setSlugText(transliterateToLatin(data.heading));
     setMarkdownText(data.rich_text);
   }, [data]);
 
-  const { handleSubmit, register, setValue } = useForm<IBlogFormData>({
+  const { handleSubmit, register, setValue } = useForm<BlockCardCreateProps>({
     mode: 'onSubmit',
     defaultValues: data ?? defaultValuesForm,
   });
 
-  function handleSave(data: IBlogFormData) {
+  function handleSave(data: BlockCardCreateProps) {
     console.log(data);
     onSubmit && onSubmit(data);
   }
