@@ -18,7 +18,8 @@ export default function DynamicFieldTogglers({
         <Button variant="contained" size="medium" onClick={fieldAppend}>
           <AddCircleOutlineOutlinedIcon />
         </Button>
-      ) : (
+      ) : null}
+      {fieldLength !== 1 ? (
         <Button
           variant="contained"
           size="medium"
@@ -26,7 +27,7 @@ export default function DynamicFieldTogglers({
         >
           <RemoveCircleOutlineOutlinedIcon />
         </Button>
-      )}
+      ) : null}
     </Stack>
   );
 }
