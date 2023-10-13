@@ -20,7 +20,7 @@ export function usePostPaginate<T>({
   const [totalPageCount, setTotalPageCount] = useState<number | null>(null);
   const [currentPage, setCurrentPage] = useState<number>(1);
 
-  async function loadData() {
+  async function loadData(currentPage: number = 1) {
     try {
       const response = await api.get(apiUrl, {
         params: {
@@ -37,16 +37,13 @@ export function usePostPaginate<T>({
   }
 
   useEffect(() => {
+    console.log(1);
     loadData();
   }, []);
 
-  useEffect(() => {
-    loadData();
-  }, [currentPage]);
-
   function handleChangePage(e: React.ChangeEvent<unknown>, numberPage: number) {
     setCurrentPage(numberPage);
-    loadData();
+    loadData(numberPage);
   }
 
   return { posts, totalPageCount, handleChangePage };
