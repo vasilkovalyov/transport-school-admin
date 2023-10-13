@@ -20,6 +20,7 @@ const defaultValuesForm: BlockCardCreateProps = {
   slug: '',
   short_description: '',
   rich_text: '',
+  date: '',
 };
 
 export default function BlogForm({ data, onSubmit }: BlogFormProps) {
@@ -50,7 +51,7 @@ export default function BlogForm({ data, onSubmit }: BlogFormProps) {
   }
 
   function onChangeHeading(value: string) {
-    const convertedStr = transliterateToLatin(value);
+    const convertedStr = transliterateToLatin(value).trim();
     setSlugText(convertedStr);
     setValue('slug', convertedStr);
   }

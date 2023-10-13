@@ -2,11 +2,13 @@ import { useEffect, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import { Box } from '@mui/material';
 import Button from '@mui/material/Button';
+import Typography from '@mui/material/Typography';
 
 import BlogForm from '../BlogForm/BlogForm';
 import { BlockCardCreateProps, BlogCardProps } from '../BlogCard';
 import PostService from '../../Blog.service';
 import { LinksConcepts } from '@/src/constants/routes';
+import dayjs from 'dayjs';
 
 const service = new PostService();
 const initialData: BlogCardProps = {
@@ -15,6 +17,7 @@ const initialData: BlogCardProps = {
   rich_text: '',
   slug: '',
   short_description: '',
+  date: '',
 };
 
 export default function BlockBlogEdit() {
@@ -58,6 +61,9 @@ export default function BlockBlogEdit() {
 
   return (
     <Box component="section">
+      <Typography variant="body2">
+        Date post - {dayjs(data.date).format('HH:MM | DD MMM YYYY')}
+      </Typography>
       <BlogForm data={data} onSubmit={onUpdate} />
       <Box>
         <Button

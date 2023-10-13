@@ -5,6 +5,7 @@ export type BlogCardProps = {
   slug: string;
   short_description?: string;
   rich_text: string;
+  date: string;
 };
 
 export type BlockCardCreateProps = Omit<BlogCardProps, '_id'>;

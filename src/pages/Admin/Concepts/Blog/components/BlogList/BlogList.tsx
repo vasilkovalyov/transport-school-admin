@@ -24,7 +24,7 @@ export default function BlogList() {
       ) : (
         <Typography>No posts</Typography>
       )}
-      {totalPageCount ? (
+      {totalPageCount && totalPageCount > 1 ? (
         <Box py={4} display="flex" justifyContent="center">
           <Pagination
             count={totalPageCount}
