@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
-import MDEditor from '@uiw/react-md-editor';
+import { yupResolver } from '@hookform/resolvers/yup';
+import ReactQuill from 'react-quill';
 
 import { Box } from '@mui/material';
 import Button from '@mui/material/Button';
@@ -13,6 +14,8 @@ import { ImageUpload } from '@/src/components';
 import { BlogFormProps } from './BlogForm.type';
 import { transliterateToLatin } from '@/src/utils/convertToSlug';
 import { BlockCardEditableProps } from '../BlogCard';
+import schemaValidation from './BlogForm.validation';
+import 'react-quill/dist/quill.snow.css';
 
 const defaultValuesForm: BlockCardEditableProps = {
   image: '',
@@ -29,18 +32,24 @@ export default function BlogForm({ data, onSubmit }: BlogFormProps) {
   useEffect(() => {
     if (!data) return;
     setValue('heading', data.heading);
+    setValue('slug', data.slug);
     setValue('short_description', data.short_description);
     setSlugText(transliterateToLatin(data.heading));
-    setMarkdownText(data.rich_text);
+    setMarkdownText(data.rich_text || '');
   }, [data]);
 
-  const { handleSubmit, register, setValue } = useForm<BlockCardEditableProps>({
+  const {
+    handleSubmit,
+    register,
+    setValue,
+    formState: { errors },
+  } = useForm<BlockCardEditableProps>({
     mode: 'onSubmit',
     defaultValues: data ?? defaultValuesForm,
+    resolver: yupResolver(schemaValidation),
   });
 
   function handleSave(data: BlockCardEditableProps) {
-    console.log(data);
     onSubmit && onSubmit(data);
   }
 
@@ -78,6 +87,8 @@ export default function BlogForm({ data, onSubmit }: BlogFormProps) {
             fullWidth
             multiline
             rows={6}
+            error={!!errors['heading']?.message}
+            helperText={errors['heading']?.message}
             InputLabelProps={{
               shrink: true,
             }}
@@ -93,7 +104,8 @@ export default function BlogForm({ data, onSubmit }: BlogFormProps) {
             fullWidth
             multiline
             rows={6}
-            value={slugText}
+            error={!!errors['slug']?.message}
+            helperText={errors['slug']?.message}
             InputLabelProps={{
               shrink: true,
             }}
@@ -116,9 +128,10 @@ export default function BlogForm({ data, onSubmit }: BlogFormProps) {
       </Grid>
       <Typography variant="h4">Default post content</Typography>
       <Box mb={4}>
-        <MDEditor
-          onChange={(value) => onChangeRichTextEditor(value as string)}
-          value={markdownText || ''}
+        <ReactQuill
+          theme="snow"
+          value={markdownText as string}
+          onChange={(value) => onChangeRichTextEditor(value)}
         />
       </Box>
       <Box>

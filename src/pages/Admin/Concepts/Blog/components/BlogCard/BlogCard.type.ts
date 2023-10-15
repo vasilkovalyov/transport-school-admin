@@ -4,7 +4,7 @@ export type BlogCardProps = {
   heading: string;
   slug: string;
   short_description?: string;
-  rich_text: string;
+  rich_text?: string;
   createdAt?: string;
 };
 

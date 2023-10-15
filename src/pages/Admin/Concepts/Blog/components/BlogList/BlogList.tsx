@@ -1,15 +1,27 @@
-import { Box, Typography } from '@mui/material';
+import { Box } from '@mui/material';
 import Grid from '@mui/material/Grid';
-import { BlogCard, BlogCardProps } from '../BlogCard';
+import Typography from '@mui/material/Typography';
 import Pagination from '@mui/material/Pagination';
+import CircularProgress from '@mui/material/CircularProgress';
+
+import { BlogCard, BlogCardProps } from '../BlogCard';
+
 import { usePostPaginate } from '@/src/hooks/usePostPaginate';
 
 export default function BlogList() {
-  const { posts, totalPageCount, handleChangePage } =
+  const { loading, posts, totalPageCount, handleChangePage } =
     usePostPaginate<BlogCardProps>({
       apiUrl: 'posts',
       postSizePage: 4,
     });
+
+  if (loading) {
+    return (
+      <Box py={4} sx={{ display: 'flex', justifyContent: 'center' }}>
+        <CircularProgress />
+      </Box>
+    );
+  }
 
   return (
     <Box>

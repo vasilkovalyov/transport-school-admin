@@ -1,8 +1,10 @@
 import { useEffect, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
+
 import { Box } from '@mui/material';
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
+import CircularProgress from '@mui/material/CircularProgress';
 
 import BlogForm from '../BlogForm/BlogForm';
 import { BlockCardEditableProps, BlogCardProps } from '../BlogCard';
@@ -22,10 +24,12 @@ const initialData: BlogCardProps = {
 export default function BlockBlogEdit() {
   let { id } = useParams();
   const navigate = useNavigate();
+  const [loading, setLoading] = useState<boolean>(false);
   const [data, setData] = useState<BlogCardProps>(initialData);
 
   async function loadData() {
     try {
+      setLoading(true);
       const response = await service.getPost(id || '');
       if (response.data === null) {
         navigate(LinksConcepts.BLOG);
@@ -33,6 +37,8 @@ export default function BlockBlogEdit() {
       setData(response.data);
     } catch (e) {
       navigate(LinksConcepts.BLOG);
+    } finally {
+      setLoading(false);
     }
   }
 
@@ -59,6 +65,14 @@ export default function BlockBlogEdit() {
     } catch (e) {
       console.log(e);
     }
+  }
+
+  if (loading) {
+    return (
+      <Box py={4} sx={{ display: 'flex', justifyContent: 'center' }}>
+        <CircularProgress />
+      </Box>
+    );
   }
 
   return (

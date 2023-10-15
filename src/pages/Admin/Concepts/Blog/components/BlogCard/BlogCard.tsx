@@ -20,32 +20,38 @@ export default function BlogCard({
   const navigate = useNavigate();
   const editLink = `${LinksConcepts.BLOG_EDIT}/${_id}`;
 
+  const cutOfString = (str: string, wordCount: number): string => {
+    return str.split(' ').splice(0, wordCount).join(' ') + '...';
+  };
+
   return (
-    <Card>
+    <Card style={{ display: 'flex', flexDirection: 'column' }}>
       {image ? (
         <CardMedia sx={{ height: 140 }} image={image} title={heading} />
       ) : null}
       <CardContent>
         <Typography gutterBottom variant="h5">
-          <Link to={editLink}>{heading}</Link>
+          <Link to={editLink}>{cutOfString(heading, 6)}</Link>
         </Typography>
         {short_description ? (
           <Typography variant="body2" color="text.secondary">
-            {short_description}
+            {cutOfString(short_description, 10)}
           </Typography>
         ) : null}
       </CardContent>
-      <CardActions>
-        <Box px={1} pb={2}>
-          <Button
-            size="small"
-            variant="contained"
-            onClick={() => navigate(editLink)}
-          >
-            Edit
-          </Button>
-        </Box>
-      </CardActions>
+      <Box marginTop="auto">
+        <CardActions>
+          <Box px={1} pb={2}>
+            <Button
+              size="small"
+              variant="contained"
+              onClick={() => navigate(editLink)}
+            >
+              Edit
+            </Button>
+          </Box>
+        </CardActions>
+      </Box>
     </Card>
   );
 }

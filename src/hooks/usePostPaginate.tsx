@@ -9,6 +9,7 @@ type UsePostPaginateType = {
 type UsePostPaginateReturnType<T> = {
   posts: T[];
   totalPageCount: number | null;
+  loading: boolean;
   handleChangePage: (e: React.ChangeEvent<unknown>, numberPage: number) => void;
 };
 
@@ -16,11 +17,13 @@ export function usePostPaginate<T>({
   postSizePage,
   apiUrl,
 }: UsePostPaginateType): UsePostPaginateReturnType<T> {
+  const [loading, setLoading] = useState<boolean>(false);
   const [posts, setPosts] = useState<T[]>([]);
   const [totalPageCount, setTotalPageCount] = useState<number | null>(null);
 
   async function loadData(currentPage: number = 1) {
     try {
+      setLoading(true);
       const response = await api.get(apiUrl, {
         params: {
           size: postSizePage,
@@ -32,6 +35,8 @@ export function usePostPaginate<T>({
       setTotalPageCount(total_pages || null);
     } catch (e) {
       console.log(e);
+    } finally {
+      setLoading(false);
     }
   }
 
@@ -47,5 +52,5 @@ export function usePostPaginate<T>({
     loadData(numberPage);
   }
 
-  return { posts, totalPageCount, handleChangePage };
+  return { loading, posts, totalPageCount, handleChangePage };
 }

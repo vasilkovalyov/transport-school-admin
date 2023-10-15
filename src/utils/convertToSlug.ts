@@ -41,7 +41,8 @@ export function transliterateToLatin(text: string) {
     .map((char) => {
       return transliterationMap[char] || char;
     })
-    .join('');
+    .join('')
+    .replace(/[\(\):,]/g, '');
 
   return convertedStr.replace(/\s+/g, '_');
 }
