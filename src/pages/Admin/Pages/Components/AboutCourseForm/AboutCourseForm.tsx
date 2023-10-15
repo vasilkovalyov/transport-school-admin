@@ -1,13 +1,14 @@
 import { useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
-import MDEditor from '@uiw/react-md-editor';
 
 import { Box } from '@mui/material';
 import Stack from '@mui/material/Stack';
 import Button from '@mui/material/Button';
 import Grid from '@mui/material/Grid';
 import TextField from '@mui/material/TextField';
+
+import ReactQuill from 'react-quill';
 
 import { ImageUpload } from '@/src/components';
 
@@ -88,9 +89,10 @@ export default function AboutCourseForm({
           />
         </Box>
         <Box mb={4}>
-          <MDEditor
-            onChange={(value) => onChangeRichTextEditor(value as string)}
-            value={markdownText || ''}
+          <ReactQuill
+            theme="snow"
+            value={markdownText as string}
+            onChange={(value) => onChangeRichTextEditor(value)}
           />
         </Box>
         <Stack spacing={2} direction="row">

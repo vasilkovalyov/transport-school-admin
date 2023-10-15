@@ -1,7 +1,6 @@
 import { useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
-import MDEditor from '@uiw/react-md-editor';
 
 import { Box } from '@mui/material';
 import Stack from '@mui/material/Stack';
@@ -10,6 +9,8 @@ import TextField from '@mui/material/TextField';
 import Typography from '@mui/material/Typography';
 import Checkbox from '@mui/material/Checkbox';
 import FormControlLabel from '@mui/material/FormControlLabel';
+
+import ReactQuill from 'react-quill';
 
 import {
   FormatLessonsFormProps,
@@ -122,9 +123,10 @@ export default function FormatLessonsForm({
           />
         </Box>
         <Box mb={4}>
-          <MDEditor
-            onChange={(value) => onChangeRichTextEditor(value as string)}
-            value={markdownText || ''}
+          <ReactQuill
+            theme="snow"
+            value={markdownText as string}
+            onChange={(value) => onChangeRichTextEditor(value)}
           />
         </Box>
         <Stack spacing={2} direction="row">
