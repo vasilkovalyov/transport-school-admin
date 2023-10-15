@@ -1,5 +1,5 @@
 import { AxiosPromise } from 'axios';
-import { BlogCardProps, BlockCardCreateProps } from './components';
+import { BlogCardProps, BlockCardEditableProps } from './components';
 import api from '@/src/api/axios';
 import { PaginationPostsType } from '@/src/types/pagination.type';
 
@@ -12,7 +12,7 @@ enum EndpointPostEnum {
 
 class PostService {
   async create(
-    params: BlockCardCreateProps
+    params: BlockCardEditableProps
   ): AxiosPromise<{ message: string }> {
     const response = await api.post(EndpointPostEnum.CREATE, {
       ...params,

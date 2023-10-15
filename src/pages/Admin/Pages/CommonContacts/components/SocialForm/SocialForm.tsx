@@ -85,12 +85,6 @@ export default function FormSocial() {
                   id={`social_icon-${index}`}
                   label="Social network"
                   defaultValue={item.social_icon}
-                  // onChange={(e) => {
-                  //   onHandleChangeField(
-                  //     e.target.name,
-                  //     e.target.value as string
-                  //   );
-                  // }}
                 >
                   <MenuItem value="instagram">Instagram</MenuItem>
                   <MenuItem value="whatsapp">Whatsapp</MenuItem>

@@ -1,6 +1,6 @@
-import { BlockCardCreateProps } from '../BlogCard';
+import { BlockCardEditableProps } from '../BlogCard';
 
 export type BlogFormProps = {
-  data?: BlockCardCreateProps;
-  onSubmit?: (data: BlockCardCreateProps) => void;
+  data?: BlockCardEditableProps;
+  onSubmit?: (data: BlockCardEditableProps) => void;
 };

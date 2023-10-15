@@ -4,7 +4,7 @@ export type ScheduleFormProps = BaseBlockFormProps<IScheduleFormData>;
 
 export interface IScheduleFormData extends IBaseBlock {
   heading: string;
-  schedule_number?: number | null;
+  post_number?: number | null;
 }
 
 export interface IScheduleBlockFullData

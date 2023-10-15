@@ -1,5 +1,6 @@
-import { Box } from '@mui/material';
+import { Box, Pagination } from '@mui/material';
 import Table from '@mui/material/Table';
+import Typography from '@mui/material/Typography';
 import TableBody from '@mui/material/TableBody';
 import TableCell from '@mui/material/TableCell';
 import TableContainer from '@mui/material/TableContainer';
@@ -7,37 +8,8 @@ import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
 
-import { LessonRow, LessonRowProps } from '../LessonRow';
-
-const lessons: LessonRowProps[] = [
-  {
-    _id: '1',
-    heading: 'Plus',
-    typeGroup: 'Вечерняя группа',
-    typeLesson: 'offline',
-    daysShedule: ['Пн', 'Пт'],
-    timeSchedule: ['7:00', '8:00'],
-    dateStart: '2024-04-23',
-  },
-  {
-    _id: '2',
-    heading: 'STANDART',
-    typeGroup: 'Вечерняя группа',
-    typeLesson: 'offline',
-    daysShedule: ['Пн', 'Пт'],
-    timeSchedule: ['7:00', '8:00'],
-    dateStart: '2024-05-23',
-  },
-  {
-    _id: '3',
-    heading: 'PRACTIC',
-    typeGroup: 'Вечерняя группа',
-    typeLesson: 'offline',
-    daysShedule: ['Пн', 'Пт'],
-    timeSchedule: ['7:00', '8:00'],
-    dateStart: '2024-11-23',
-  },
-];
+import { LessonRow, LessonScheduleProps } from '../LessonRow';
+import { usePostPaginate } from '@/src/hooks/usePostPaginate';
 
 const headCells: string[] = [
   'Heading',
@@ -46,28 +18,52 @@ const headCells: string[] = [
   'Days Shedule',
   'Time Schedule',
   'Date Start',
+  'Date Create',
+  'Status',
 ];
 
-export default function BlogList() {
+export default function LessonsList() {
+  const { posts, totalPageCount, handleChangePage } =
+    usePostPaginate<LessonScheduleProps>({
+      apiUrl: 'lesson-schedules',
+      postSizePage: 4,
+    });
+
   return (
     <Box>
-      <TableContainer component={Paper} elevation={3}>
-        <Table sx={{ minWidth: 650 }} aria-label="simple table">
-          <TableHead>
-            <TableRow>
-              {headCells.map((cell) => (
-                <TableCell key={cell}>{cell}</TableCell>
-              ))}
-              <TableCell></TableCell>
-            </TableRow>
-          </TableHead>
-          <TableBody>
-            {lessons.map((rowLesson) => (
-              <LessonRow key={rowLesson._id} {...rowLesson} />
-            ))}
-          </TableBody>
-        </Table>
-      </TableContainer>
+      {posts && posts.length ? (
+        <Box>
+          <TableContainer component={Paper} elevation={3}>
+            <Table sx={{ minWidth: 650 }} aria-label="simple table">
+              <TableHead>
+                <TableRow>
+                  {headCells.map((cell) => (
+                    <TableCell key={cell}>{cell}</TableCell>
+                  ))}
+                  <TableCell></TableCell>
+                </TableRow>
+              </TableHead>
+
+              <TableBody>
+                {posts.map((post) => (
+                  <LessonRow key={post._id} {...post} />
+                ))}
+              </TableBody>
+            </Table>
+          </TableContainer>
+          {totalPageCount && totalPageCount > 1 ? (
+            <Box py={4} display="flex" justifyContent="center">
+              <Pagination
+                count={totalPageCount}
+                shape="rounded"
+                onChange={handleChangePage}
+              />
+            </Box>
+          ) : null}
+        </Box>
+      ) : (
+        <Typography variant="h4">No lessons</Typography>
+      )}
     </Box>
   );
 }

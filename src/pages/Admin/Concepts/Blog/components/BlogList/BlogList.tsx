@@ -22,7 +22,7 @@ export default function BlogList() {
           ))}
         </Grid>
       ) : (
-        <Typography>No posts</Typography>
+        <Typography variant="h4">No posts</Typography>
       )}
       {totalPageCount && totalPageCount > 1 ? (
         <Box py={4} display="flex" justifyContent="center">

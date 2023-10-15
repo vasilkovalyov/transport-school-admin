@@ -5,7 +5,7 @@ import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 
 import BlogForm from '../BlogForm/BlogForm';
-import { BlockCardCreateProps, BlogCardProps } from '../BlogCard';
+import { BlockCardEditableProps, BlogCardProps } from '../BlogCard';
 import PostService from '../../Blog.service';
 import { LinksConcepts } from '@/src/constants/routes';
 import dayjs from 'dayjs';
@@ -17,7 +17,6 @@ const initialData: BlogCardProps = {
   rich_text: '',
   slug: '',
   short_description: '',
-  date: '',
 };
 
 export default function BlockBlogEdit() {
@@ -38,7 +37,7 @@ export default function BlockBlogEdit() {
     loadData();
   }, []);
 
-  async function onUpdate(params: BlockCardCreateProps) {
+  async function onUpdate(params: BlockCardEditableProps) {
     try {
       await service.update({
         ...params,
@@ -62,7 +61,7 @@ export default function BlockBlogEdit() {
   return (
     <Box component="section">
       <Typography variant="body2">
-        Date post - {dayjs(data.date).format('HH:MM | DD MMM YYYY')}
+        Date post - {dayjs(data.createdAt).format('HH:MM | DD MMM YYYY')}
       </Typography>
       <BlogForm data={data} onSubmit={onUpdate} />
       <Box>

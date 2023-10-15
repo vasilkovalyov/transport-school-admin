@@ -1,4 +1,4 @@
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
 
 import { Box } from '@mui/material';
@@ -12,54 +12,87 @@ import FormControl from '@mui/material/FormControl';
 
 import { shortNames } from '@/src/utils/dayNames';
 
-import {
-  LessonFormProps,
-  ILessonFormData,
-  FormValuesKey,
-} from './LessonForm.type';
+import { LessonFormProps } from './LessonForm.type';
+import { FormValuesKey, LessonScheduleEditableProps } from '../LessonRow';
 
-const defaultValuesForm: ILessonFormData = {
+const defaultValuesForm: LessonScheduleEditableProps = {
   heading: '',
-  time_end: '',
-  time_start: '',
   type_group: '',
   type_lesson: '',
-  date_end: '',
-  day_end: null,
-  day_start: null,
+  time_start: '',
+  time_end: '',
+  day_start: '',
+  day_end: '',
+  date_start_event: '',
+};
+
+const defaultSelectValues = {
+  time_start: '',
+  time_end: '',
+  day_start: '',
+  day_end: '',
+  type_group: '',
+  type_lesson: '',
 };
 
 const valuesKeys: FormValuesKey[] = [
   'heading',
-  'time_end',
-  'time_start',
   'type_group',
   'type_lesson',
-  'date_end',
-  'day_end',
+  'time_start',
+  'time_end',
   'day_start',
+  'day_end',
+  'date_start_event',
 ];
 
+type SelectTypeKeys = Pick<
+  LessonScheduleEditableProps,
+  | 'time_start'
+  | 'time_end'
+  | 'day_start'
+  | 'day_end'
+  | 'type_group'
+  | 'type_lesson'
+>;
+
 export default function LessonForm({ data, onSubmit }: LessonFormProps) {
-  const { handleSubmit, register, setValue } = useForm<ILessonFormData>({
-    mode: 'onSubmit',
-    defaultValues: data ?? defaultValuesForm,
-  });
+  const [selectValues, setSelectValues] =
+    useState<SelectTypeKeys>(defaultSelectValues);
+  const { handleSubmit, register, setValue } =
+    useForm<LessonScheduleEditableProps>({
+      mode: 'onSubmit',
+      defaultValues: data ?? defaultValuesForm,
+    });
 
   useEffect(() => {
     if (!data) return;
     fillValues(valuesKeys);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [data]);
 
-  function handleSave(data: ILessonFormData) {
-    console.log(data);
+  function handleSave(data: LessonScheduleEditableProps) {
     onSubmit && onSubmit(data);
+  }
+
+  function setSelect(key: string, value: string) {
+    setSelectValues((prevState) => ({
+      ...prevState,
+      [key]: value,
+    }));
   }
 
   function fillValues(values: FormValuesKey[]) {
     if (!data) return;
     values.map((item) => setValue(item, data[item]));
+    setSelectValues((prevState) => ({
+      ...prevState,
+      day_end: data.day_end,
+      day_start: data.day_start,
+      time_end: data.time_end,
+      time_start: data.time_start,
+      type_group: data.type_group,
+      type_lesson: data.type_lesson,
+    }));
   }
 
   return (
@@ -82,7 +115,8 @@ export default function LessonForm({ data, onSubmit }: LessonFormProps) {
               labelId="type_group"
               id="type_group"
               label="Type Group"
-              defaultValue={data?.type_group}
+              value={selectValues.type_group}
+              onChange={(e) => setSelect('type_group', e.target.value)}
             >
               <MenuItem value="morning">Утренняя группа</MenuItem>
               <MenuItem value="midday">Дневная группа</MenuItem>
@@ -98,7 +132,8 @@ export default function LessonForm({ data, onSubmit }: LessonFormProps) {
               labelId="type_lesson"
               id="type_lesson"
               label="Type Lesson"
-              defaultValue={data?.type_lesson}
+              value={selectValues?.type_lesson}
+              onChange={(e) => setSelect('type_lesson', e.target.value)}
             >
               <MenuItem value="online">онлайн</MenuItem>
               <MenuItem value="offline">оффлайн</MenuItem>
@@ -107,8 +142,8 @@ export default function LessonForm({ data, onSubmit }: LessonFormProps) {
         </Grid>
         <Grid item xs={12} md={6}>
           <TextField
-            {...register('date_end')}
-            id="date_end"
+            {...register('date_start_event')}
+            id="date_start_event"
             type="date"
             label="Date event end"
             variant="outlined"
@@ -123,7 +158,8 @@ export default function LessonForm({ data, onSubmit }: LessonFormProps) {
               labelId="day_start"
               id="day_start"
               label="Days shedule start"
-              defaultValue={data?.day_start}
+              value={selectValues?.day_start}
+              onChange={(e) => setSelect('day_start', e.target.value)}
             >
               {shortNames.map(({ name, number }) => (
                 <MenuItem value={number} key={number}>
@@ -141,7 +177,8 @@ export default function LessonForm({ data, onSubmit }: LessonFormProps) {
               labelId="day_end"
               id="day_end"
               label="Days shedule end"
-              defaultValue={data?.day_end}
+              value={selectValues?.day_end}
+              onChange={(e) => setSelect('day_end', e.target.value)}
             >
               {shortNames.map(({ name, number }) => (
                 <MenuItem value={number} key={number}>

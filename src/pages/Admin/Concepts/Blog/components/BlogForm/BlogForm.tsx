@@ -12,15 +12,14 @@ import { ImageUpload } from '@/src/components';
 
 import { BlogFormProps } from './BlogForm.type';
 import { transliterateToLatin } from '@/src/utils/convertToSlug';
-import { BlockCardCreateProps } from '../BlogCard';
+import { BlockCardEditableProps } from '../BlogCard';
 
-const defaultValuesForm: BlockCardCreateProps = {
+const defaultValuesForm: BlockCardEditableProps = {
   image: '',
   heading: '',
   slug: '',
   short_description: '',
   rich_text: '',
-  date: '',
 };
 
 export default function BlogForm({ data, onSubmit }: BlogFormProps) {
@@ -35,12 +34,12 @@ export default function BlogForm({ data, onSubmit }: BlogFormProps) {
     setMarkdownText(data.rich_text);
   }, [data]);
 
-  const { handleSubmit, register, setValue } = useForm<BlockCardCreateProps>({
+  const { handleSubmit, register, setValue } = useForm<BlockCardEditableProps>({
     mode: 'onSubmit',
     defaultValues: data ?? defaultValuesForm,
   });
 
-  function handleSave(data: BlockCardCreateProps) {
+  function handleSave(data: BlockCardEditableProps) {
     console.log(data);
     onSubmit && onSubmit(data);
   }

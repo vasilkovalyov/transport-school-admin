@@ -12,7 +12,7 @@ import schemaValidation from './ScheduleForm.validation';
 
 const defaultValuesForm: IScheduleFormData = {
   heading: '',
-  schedule_number: null,
+  post_number: null,
   publish: false,
 };
 
@@ -31,7 +31,7 @@ export default function ScheduleForm({
   useEffect(() => {
     if (!data) return;
     setValue('heading', data?.heading);
-    setValue('schedule_number', data?.schedule_number);
+    setValue('post_number', data?.post_number);
   }, [data]);
 
   function handleSave(params: IScheduleFormData) {
@@ -63,8 +63,8 @@ export default function ScheduleForm({
       </Box>
       <Box mb={4}>
         <TextField
-          {...register('schedule_number')}
-          id="schedule_number"
+          {...register('post_number')}
+          id="post_number"
           label="Schedule number"
           variant="outlined"
           fullWidth

@@ -1,38 +1,55 @@
 import { useNavigate } from 'react-router-dom';
 
+import Chip from '@mui/material/Chip';
 import Button from '@mui/material/Button';
 import TableCell from '@mui/material/TableCell';
 import TableRow from '@mui/material/TableRow';
 
 import dayjs from 'dayjs';
 
-import { LessonRowProps } from './LessonRow.type';
+import { LessonScheduleProps } from './LessonRow.type';
 import { LinksConcepts } from '@/src/constants/routes';
+import { shortNames } from '@/src/utils/dayNames';
 
 export default function LessonRow({
   _id,
   heading,
-  typeGroup,
-  typeLesson,
-  daysShedule,
-  timeSchedule,
-  dateStart,
-}: LessonRowProps) {
+  date_start_event,
+  day_end,
+  day_start,
+  time_end,
+  time_start,
+  type_group,
+  type_lesson,
+  createdAt,
+}: LessonScheduleProps) {
   const navigate = useNavigate();
-  const editLink = `${LinksConcepts.SERVICES_EDIT}/${_id}`;
+  const editLink = `${LinksConcepts.LESSON_SCHEDULE_EDIT}/${_id}`;
+
+  const isElapsedDate = () =>
+    new Date(date_start_event).getTime() < new Date().getTime();
 
   return (
     <TableRow key={_id}>
       <TableCell>{heading}</TableCell>
-      <TableCell>{typeGroup}</TableCell>
-      <TableCell>{typeLesson}</TableCell>
+      <TableCell>{type_group}</TableCell>
+      <TableCell>{type_lesson}</TableCell>
+      {}
       <TableCell>
-        {daysShedule[0]} - {daysShedule[1]}
+        {shortNames[parseInt(day_start)].name} -{' '}
+        {shortNames[parseInt(day_end)].name}
       </TableCell>
       <TableCell>
-        {timeSchedule[0]} - {timeSchedule[1]}
+        {time_start} - {time_end}
       </TableCell>
-      <TableCell>{dayjs(dateStart).format('DD MMM YYYY')}</TableCell>
+      <TableCell>{dayjs(date_start_event).format('DD MMM YYYY')}</TableCell>
+      <TableCell>{dayjs(createdAt).format('DD MMM YYYY | HH:MM')}</TableCell>
+      <TableCell>
+        <Chip
+          label={isElapsedDate() ? 'Done' : 'Waiting'}
+          color={isElapsedDate() ? 'error' : 'success'}
+        />
+      </TableCell>
       <TableCell>
         <Button
           size="small"
