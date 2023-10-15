@@ -27,9 +27,12 @@ export default function BlockEditLesson() {
   async function loadData() {
     try {
       const response = await service.getPost(id || '');
+      if (response.data === null) {
+        navigate(LinksConcepts.LESSON_SCHEDULE);
+      }
       setData(response.data);
     } catch (e) {
-      console.log(e);
+      navigate(LinksConcepts.LESSON_SCHEDULE);
     }
   }
 

@@ -38,17 +38,12 @@ export default function ReviewForm({ data, onSubmit }: ReviewFormProps) {
   }, [data]);
 
   function handleSave(data: IReviewFormData) {
-    console.log('data', data);
     onSubmit && onSubmit(data);
   }
 
   function onChangeRating(number: number) {
     setRatingValue(number);
   }
-
-  // function onUploadImage(image: string) {
-  // setValue('image', image);
-  // }
 
   return (
     <Box component="form" maxWidth={800} marginBottom={4}>

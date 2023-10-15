@@ -27,9 +27,12 @@ export default function BlockBlogEdit() {
   async function loadData() {
     try {
       const response = await service.getPost(id || '');
+      if (response.data === null) {
+        navigate(LinksConcepts.BLOG);
+      }
       setData(response.data);
     } catch (e) {
-      console.log(e);
+      navigate(LinksConcepts.BLOG);
     }
   }
 

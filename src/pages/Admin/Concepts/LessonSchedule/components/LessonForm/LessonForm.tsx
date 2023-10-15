@@ -67,7 +67,7 @@ export default function LessonForm({ data, onSubmit }: LessonFormProps) {
 
   useEffect(() => {
     if (!data) return;
-    fillValues(valuesKeys);
+    fillValues(valuesKeys, data);
   }, [data]);
 
   function handleSave(data: LessonScheduleEditableProps) {
@@ -81,9 +81,15 @@ export default function LessonForm({ data, onSubmit }: LessonFormProps) {
     }));
   }
 
-  function fillValues(values: FormValuesKey[]) {
+  function fillValues(
+    keys: FormValuesKey[],
+    values: LessonScheduleEditableProps
+  ) {
     if (!data) return;
-    values.map((item) => setValue(item, data[item]));
+    keys.forEach((key) => {
+      setValue(key, values[key]);
+    });
+
     setSelectValues((prevState) => ({
       ...prevState,
       day_end: data.day_end,

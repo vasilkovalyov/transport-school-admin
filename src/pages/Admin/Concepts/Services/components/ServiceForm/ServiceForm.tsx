@@ -1,3 +1,4 @@
+import { useEffect } from 'react';
 import { useForm, useFieldArray } from 'react-hook-form';
 
 import { Box } from '@mui/material';
@@ -12,13 +13,22 @@ import {
   ServiceFormProps,
   IServiceFormData,
   IServiceInfoItemData,
+  ServiceEditableFormData,
+  FormValuesKey,
 } from './ServiceForm.type';
+
+const valuesKeys: FormValuesKey[] = [
+  'heading',
+  'price',
+  'top_list_info',
+  'bottom_list_info',
+];
 
 const defaultInfoItem: IServiceInfoItemData = {
   text: '',
 };
 
-const defaultValuesForm: IServiceFormData = {
+const defaultValuesForm: ServiceEditableFormData = {
   heading: '',
   price: null,
   top_list_info: [defaultInfoItem],
@@ -26,10 +36,11 @@ const defaultValuesForm: IServiceFormData = {
 };
 
 export default function ServiceForm({ data, onSubmit }: ServiceFormProps) {
-  const { handleSubmit, register, control } = useForm<IServiceFormData>({
-    mode: 'onSubmit',
-    defaultValues: data ?? defaultValuesForm,
-  });
+  const { handleSubmit, register, control, setValue } =
+    useForm<IServiceFormData>({
+      mode: 'onSubmit',
+      defaultValues: data ?? defaultValuesForm,
+    });
 
   const {
     fields: topFields,
@@ -48,6 +59,19 @@ export default function ServiceForm({ data, onSubmit }: ServiceFormProps) {
     control,
     name: 'bottom_list_info',
   });
+
+  useEffect(() => {
+    if (!data) return;
+    fillValues(valuesKeys, data);
+  }, [data]);
+
+  function fillValues(keys: FormValuesKey[], values: ServiceEditableFormData) {
+    if (!data) return;
+
+    keys.forEach((key) => {
+      setValue(key, values[key]);
+    });
+  }
 
   function onHandleAddTopListItem() {
     topFieldsAppend(defaultInfoItem);
@@ -97,7 +121,7 @@ export default function ServiceForm({ data, onSubmit }: ServiceFormProps) {
             }}
           />
         </Grid>
-        <Grid item xs={12}>
+        <Grid item xs={12} md={6}>
           <Typography variant="h4">Top list info</Typography>
           {topFields.map((item, index) => (
             <Box key={item.id} mb={4}>
@@ -108,6 +132,8 @@ export default function ServiceForm({ data, onSubmit }: ServiceFormProps) {
                   label="Heading top list item"
                   variant="outlined"
                   fullWidth
+                  multiline
+                  rows={3}
                   InputLabelProps={{
                     shrink: true,
                   }}
@@ -124,7 +150,7 @@ export default function ServiceForm({ data, onSubmit }: ServiceFormProps) {
             </Box>
           ))}
         </Grid>
-        <Grid item xs={12}>
+        <Grid item xs={12} md={6}>
           <Typography variant="h4">Bottom list info</Typography>
           {bottomFields.map((item, index) => (
             <Box key={item.id} mb={4}>
@@ -135,6 +161,8 @@ export default function ServiceForm({ data, onSubmit }: ServiceFormProps) {
                   label="Heading bottom list item"
                   variant="outlined"
                   fullWidth
+                  multiline
+                  rows={3}
                   InputLabelProps={{
                     shrink: true,
                   }}

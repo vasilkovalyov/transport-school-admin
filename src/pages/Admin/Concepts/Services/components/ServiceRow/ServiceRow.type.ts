@@ -1,6 +1,7 @@
-export type ServiceRowProps = {
+import { IServiceFormData } from '../ServiceForm';
+
+export type ServiceRowProps = Pick<IServiceFormData, 'heading' | 'price'> & {
   _id: string;
-  image: string;
-  heading: string;
-  price: string;
 };
+
+export type FormValuesKey = keyof Omit<ServiceRowProps, '_id'>;

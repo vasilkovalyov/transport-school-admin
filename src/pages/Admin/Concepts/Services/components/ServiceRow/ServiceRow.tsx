@@ -19,7 +19,9 @@ export default function ServiceRow({
   return (
     <TableRow key={_id}>
       <TableCell>
-        <img src={image} alt={heading} style={{ maxWidth: '100px' }} />
+        {image ? (
+          <img src={image} alt={heading} style={{ maxWidth: '100px' }} />
+        ) : null}
       </TableCell>
       <TableCell>{heading}</TableCell>
       <TableCell>{price}</TableCell>
