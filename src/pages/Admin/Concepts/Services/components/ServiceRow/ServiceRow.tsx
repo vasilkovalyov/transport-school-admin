@@ -10,8 +10,8 @@ import { LinksConcepts } from '@/src/constants/routes';
 export default function ServiceRow({
   _id,
   heading,
-  image,
   price,
+  image,
 }: ServiceRowProps) {
   const navigate = useNavigate();
   const editLink = `${LinksConcepts.SERVICES_EDIT}/${_id}`;

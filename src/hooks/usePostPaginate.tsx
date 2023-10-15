@@ -17,7 +17,7 @@ export function usePostPaginate<T>({
   postSizePage,
   apiUrl,
 }: UsePostPaginateType): UsePostPaginateReturnType<T> {
-  const [loading, setLoading] = useState<boolean>(false);
+  const [loading, setLoading] = useState<boolean>(true);
   const [posts, setPosts] = useState<T[]>([]);
   const [totalPageCount, setTotalPageCount] = useState<number | null>(null);
 

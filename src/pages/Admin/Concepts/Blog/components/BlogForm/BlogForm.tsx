@@ -27,14 +27,14 @@ const defaultValuesForm: BlockCardEditableProps = {
 
 export default function BlogForm({ data, onSubmit }: BlogFormProps) {
   const [markdownText, setMarkdownText] = useState<string | null>(null);
-  const [slugText, setSlugText] = useState<string>('');
+  // const [slugText, setSlugText] = useState<string>('');
 
   useEffect(() => {
     if (!data) return;
     setValue('heading', data.heading);
     setValue('slug', data.slug);
     setValue('short_description', data.short_description);
-    setSlugText(transliterateToLatin(data.heading));
+    // setSlugText(transliterateToLatin(data.heading));
     setMarkdownText(data.rich_text || '');
   }, [data]);
 
@@ -60,7 +60,7 @@ export default function BlogForm({ data, onSubmit }: BlogFormProps) {
 
   function onChangeHeading(value: string) {
     const convertedStr = transliterateToLatin(value).trim();
-    setSlugText(convertedStr);
+    // setSlugText(convertedStr);
     setValue('slug', convertedStr);
   }
 
