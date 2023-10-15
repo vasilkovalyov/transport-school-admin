@@ -116,6 +116,9 @@ export default function HeroForm({
           defaultValue={data?.heading}
           error={!!errors['heading']?.message}
           helperText={errors['heading']?.message}
+          InputLabelProps={{
+            shrink: true,
+          }}
         />
       </Box>
       <Box mb={4}>
@@ -128,6 +131,9 @@ export default function HeroForm({
           multiline
           rows={4}
           defaultValue={data?.subheading}
+          InputLabelProps={{
+            shrink: true,
+          }}
         />
       </Box>
       <Box>

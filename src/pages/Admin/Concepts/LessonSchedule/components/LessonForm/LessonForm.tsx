@@ -105,6 +105,9 @@ export default function LessonForm({ data, onSubmit }: LessonFormProps) {
             label="Heading lesson"
             variant="outlined"
             fullWidth
+            InputLabelProps={{
+              shrink: true,
+            }}
           />
         </Grid>
         <Grid item xs={12} md={6}>
@@ -148,6 +151,9 @@ export default function LessonForm({ data, onSubmit }: LessonFormProps) {
             label="Date event end"
             variant="outlined"
             fullWidth
+            InputLabelProps={{
+              shrink: true,
+            }}
           />
         </Grid>
         <Grid item xs={12} md={6}>
@@ -196,6 +202,9 @@ export default function LessonForm({ data, onSubmit }: LessonFormProps) {
             variant="outlined"
             fullWidth
             type="time"
+            InputLabelProps={{
+              shrink: true,
+            }}
           />
         </Grid>
         <Grid item xs={12} md={6}>
@@ -206,6 +215,9 @@ export default function LessonForm({ data, onSubmit }: LessonFormProps) {
             variant="outlined"
             fullWidth
             type="time"
+            InputLabelProps={{
+              shrink: true,
+            }}
           />
         </Grid>
         <Grid item xs={12} md={6}></Grid>

@@ -78,6 +78,9 @@ export default function BlogForm({ data, onSubmit }: BlogFormProps) {
             fullWidth
             multiline
             rows={6}
+            InputLabelProps={{
+              shrink: true,
+            }}
             onChange={(e) => onChangeHeading(e.currentTarget.value)}
           />
         </Grid>
@@ -91,6 +94,9 @@ export default function BlogForm({ data, onSubmit }: BlogFormProps) {
             multiline
             rows={6}
             value={slugText}
+            InputLabelProps={{
+              shrink: true,
+            }}
           />
         </Grid>
         <Grid item xs={12}>
@@ -102,6 +108,9 @@ export default function BlogForm({ data, onSubmit }: BlogFormProps) {
             fullWidth
             multiline
             rows="6"
+            InputLabelProps={{
+              shrink: true,
+            }}
           />
         </Grid>
       </Grid>

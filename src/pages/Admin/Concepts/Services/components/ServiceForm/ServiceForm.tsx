@@ -79,6 +79,9 @@ export default function ServiceForm({ data, onSubmit }: ServiceFormProps) {
             label="Heading service"
             variant="outlined"
             fullWidth
+            InputLabelProps={{
+              shrink: true,
+            }}
           />
         </Grid>
         <Grid item xs={12} md={6}>
@@ -89,6 +92,9 @@ export default function ServiceForm({ data, onSubmit }: ServiceFormProps) {
             variant="outlined"
             fullWidth
             type="number"
+            InputLabelProps={{
+              shrink: true,
+            }}
           />
         </Grid>
         <Grid item xs={12}>
@@ -102,6 +108,9 @@ export default function ServiceForm({ data, onSubmit }: ServiceFormProps) {
                   label="Heading top list item"
                   variant="outlined"
                   fullWidth
+                  InputLabelProps={{
+                    shrink: true,
+                  }}
                 />
               </Box>
               <Box mb={2}>
@@ -126,6 +135,9 @@ export default function ServiceForm({ data, onSubmit }: ServiceFormProps) {
                   label="Heading bottom list item"
                   variant="outlined"
                   fullWidth
+                  InputLabelProps={{
+                    shrink: true,
+                  }}
                 />
               </Box>
               <Box mb={2}>

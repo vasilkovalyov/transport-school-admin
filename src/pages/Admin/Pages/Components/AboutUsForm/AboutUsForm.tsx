@@ -88,6 +88,9 @@ export default function AboutUsForm({
               defaultValue={data?.heading}
               error={!!errors['heading']?.message}
               helperText={errors['heading']?.message}
+              InputLabelProps={{
+                shrink: true,
+              }}
             />
           </Box>
           <Box mb={4}>

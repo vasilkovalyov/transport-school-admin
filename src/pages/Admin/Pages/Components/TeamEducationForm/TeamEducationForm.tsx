@@ -119,6 +119,9 @@ export default function TeamEducationForm({
           fullWidth
           multiline
           rows={2}
+          InputLabelProps={{
+            shrink: true,
+          }}
         />
       </Box>
       <Box mb={4}>
@@ -130,6 +133,9 @@ export default function TeamEducationForm({
           fullWidth
           multiline
           rows={4}
+          InputLabelProps={{
+            shrink: true,
+          }}
         />
       </Box>
       <Typography variant="h4">Education list</Typography>
@@ -142,6 +148,9 @@ export default function TeamEducationForm({
               label="Type"
               variant="outlined"
               fullWidth
+              InputLabelProps={{
+                shrink: true,
+              }}
             />
           </Box>
           <Box mb={2}>
@@ -151,6 +160,9 @@ export default function TeamEducationForm({
               label="Heading"
               variant="outlined"
               fullWidth
+              InputLabelProps={{
+                shrink: true,
+              }}
             />
           </Box>
           <Box mb={2}>
@@ -160,6 +172,9 @@ export default function TeamEducationForm({
               label="Discount"
               variant="outlined"
               fullWidth
+              InputLabelProps={{
+                shrink: true,
+              }}
             />
           </Box>
           <Box mb={2}>

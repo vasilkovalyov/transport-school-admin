@@ -46,6 +46,9 @@ export default function AchivmentForm() {
             label="Heading"
             variant="outlined"
             fullWidth
+            InputLabelProps={{
+              shrink: true,
+            }}
           />
         </Box>
       </Box>

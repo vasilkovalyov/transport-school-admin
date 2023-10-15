@@ -46,6 +46,9 @@ export default function BlogForm({ data, onUpdate }: SeoFormProps) {
           variant="outlined"
           fullWidth
           rows={2}
+          InputLabelProps={{
+            shrink: true,
+          }}
         />
       </Box>
       <Box mb={4}>
@@ -57,6 +60,9 @@ export default function BlogForm({ data, onUpdate }: SeoFormProps) {
           fullWidth
           multiline
           rows={4}
+          InputLabelProps={{
+            shrink: true,
+          }}
         />
       </Box>
       <Box mb={4}>
@@ -68,6 +74,9 @@ export default function BlogForm({ data, onUpdate }: SeoFormProps) {
           fullWidth
           multiline
           rows={2}
+          InputLabelProps={{
+            shrink: true,
+          }}
         />
       </Box>
       <Button

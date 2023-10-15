@@ -82,6 +82,9 @@ export default function AboutCourseForm({
             fullWidth
             multiline
             rows={2}
+            InputLabelProps={{
+              shrink: true,
+            }}
           />
         </Box>
         <Box mb={4}>

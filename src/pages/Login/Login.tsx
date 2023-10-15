@@ -74,6 +74,9 @@ export default function LoginPage() {
               fullWidth
               error={!!errors.login?.message}
               helperText={errors.login?.message}
+              InputLabelProps={{
+                shrink: true,
+              }}
             />
           </Box>
           <Box mb={2}>
@@ -85,6 +88,9 @@ export default function LoginPage() {
               fullWidth
               error={!!errors.password?.message}
               helperText={errors.password?.message}
+              InputLabelProps={{
+                shrink: true,
+              }}
             />
           </Box>
           <Box textAlign="center">

@@ -59,6 +59,9 @@ export default function ScheduleForm({
           fullWidth
           multiline
           rows={2}
+          InputLabelProps={{
+            shrink: true,
+          }}
         />
       </Box>
       <Box mb={4}>
@@ -69,6 +72,9 @@ export default function ScheduleForm({
           variant="outlined"
           fullWidth
           type="number"
+          InputLabelProps={{
+            shrink: true,
+          }}
         />
       </Box>
       <Stack spacing={2} direction="row">

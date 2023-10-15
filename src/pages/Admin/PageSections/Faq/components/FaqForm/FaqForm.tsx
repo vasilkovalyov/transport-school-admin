@@ -73,6 +73,9 @@ export default function FaqForm() {
               label="Heading"
               variant="outlined"
               fullWidth
+              InputLabelProps={{
+                shrink: true,
+              }}
             />
           </Box>
           <Typography variant="h4">Faq list</Typography>

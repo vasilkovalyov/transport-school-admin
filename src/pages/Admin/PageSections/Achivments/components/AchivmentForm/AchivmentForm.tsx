@@ -78,6 +78,9 @@ export default function AchivmentForm() {
             label="Heading"
             variant="outlined"
             fullWidth
+            InputLabelProps={{
+              shrink: true,
+            }}
           />
         </Box>
         <Box mb={2}>
@@ -87,6 +90,9 @@ export default function AchivmentForm() {
             label="Subheading"
             variant="outlined"
             fullWidth
+            InputLabelProps={{
+              shrink: true,
+            }}
           />
         </Box>
       </Box>

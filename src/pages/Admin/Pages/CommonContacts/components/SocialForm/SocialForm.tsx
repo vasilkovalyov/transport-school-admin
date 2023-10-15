@@ -98,6 +98,9 @@ export default function FormSocial() {
                 variant="outlined"
                 fullWidth
                 defaultValue={item.social_url}
+                InputLabelProps={{
+                  shrink: true,
+                }}
               />
               <DynamicFieldTogglers
                 fieldLength={fields.length}

@@ -68,6 +68,9 @@ export default function StructEducationForm({
           fullWidth
           multiline
           rows={2}
+          InputLabelProps={{
+            shrink: true,
+          }}
         />
       </Box>
       <Stack spacing={2} direction="row">

@@ -66,6 +66,9 @@ export default function ContactsForm() {
             label="Heading"
             variant="outlined"
             fullWidth
+            InputLabelProps={{
+              shrink: true,
+            }}
           />
         </Grid>
         <Grid item xs={12}>
@@ -75,6 +78,9 @@ export default function ContactsForm() {
             label="Address"
             variant="outlined"
             fullWidth
+            InputLabelProps={{
+              shrink: true,
+            }}
           />
         </Grid>
         <Grid item xs={12} md={6}>
@@ -84,6 +90,9 @@ export default function ContactsForm() {
             label="Phone"
             variant="outlined"
             fullWidth
+            InputLabelProps={{
+              shrink: true,
+            }}
           />
         </Grid>
         <Grid item xs={12} md={6}>
@@ -93,6 +102,9 @@ export default function ContactsForm() {
             label="Email"
             variant="outlined"
             fullWidth
+            InputLabelProps={{
+              shrink: true,
+            }}
           />
         </Grid>
         <Grid item xs={12} md={6} mb={4}>
@@ -104,6 +116,9 @@ export default function ContactsForm() {
             fullWidth
             multiline
             rows={9}
+            InputLabelProps={{
+              shrink: true,
+            }}
             onChange={(e) => setMapUrl(e.currentTarget.value)}
           />
         </Grid>

@@ -60,6 +60,9 @@ export default function BlogForm({
           fullWidth
           multiline
           rows={2}
+          InputLabelProps={{
+            shrink: true,
+          }}
         />
       </Box>
       <Box mb={4}>
@@ -69,6 +72,9 @@ export default function BlogForm({
           label="Post number"
           variant="outlined"
           fullWidth
+          InputLabelProps={{
+            shrink: true,
+          }}
         />
       </Box>
       <Stack spacing={2} direction="row">

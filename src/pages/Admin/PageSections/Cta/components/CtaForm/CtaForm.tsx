@@ -70,6 +70,9 @@ export default function CtaForm() {
             label="Heading"
             variant="outlined"
             fullWidth
+            InputLabelProps={{
+              shrink: true,
+            }}
           />
         </Box>
         <Box mb={2}>

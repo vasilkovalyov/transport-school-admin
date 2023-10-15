@@ -70,6 +70,9 @@ export default function ReviewForm({ data, onSubmit }: ReviewFormProps) {
               label="Name"
               variant="outlined"
               fullWidth
+              InputLabelProps={{
+                shrink: true,
+              }}
             />
           </Box>
           <Box mb={4}>
@@ -81,6 +84,9 @@ export default function ReviewForm({ data, onSubmit }: ReviewFormProps) {
               fullWidth
               multiline
               rows="8"
+              InputLabelProps={{
+                shrink: true,
+              }}
             />
           </Box>
           <Box>

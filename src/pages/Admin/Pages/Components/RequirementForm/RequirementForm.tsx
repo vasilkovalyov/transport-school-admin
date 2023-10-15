@@ -80,10 +80,6 @@ export default function RequirementForm({
       });
   }
 
-  // function onUploadImage(image: string, index: number) {
-  // setValue(`requirements_list.${index}.image`, image);
-  // }
-
   return (
     <Box component="form" maxWidth={800} marginBottom={4}>
       <Box mb={4}>
@@ -95,6 +91,9 @@ export default function RequirementForm({
           fullWidth
           multiline
           rows={2}
+          InputLabelProps={{
+            shrink: true,
+          }}
         />
       </Box>
       <Typography variant="h4">Requirement list</Typography>
@@ -121,6 +120,9 @@ export default function RequirementForm({
                 label="Heading"
                 variant="outlined"
                 fullWidth
+                InputLabelProps={{
+                  shrink: true,
+                }}
               />
             </Box>
             <Box mb={2}>
@@ -132,6 +134,9 @@ export default function RequirementForm({
                 fullWidth
                 multiline
                 rows={4}
+                InputLabelProps={{
+                  shrink: true,
+                }}
               />
             </Box>
             <Box mb={2}>

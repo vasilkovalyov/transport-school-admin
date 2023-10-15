@@ -52,6 +52,9 @@ export default function FormContacts() {
             label="Email"
             variant="outlined"
             fullWidth
+            InputLabelProps={{
+              shrink: true,
+            }}
           />
         </Box>
         <Box mb={2}>
@@ -61,6 +64,9 @@ export default function FormContacts() {
             label="Address"
             variant="outlined"
             fullWidth
+            InputLabelProps={{
+              shrink: true,
+            }}
           />
         </Box>
         <Box mb={2}>
@@ -70,6 +76,9 @@ export default function FormContacts() {
             label="Phone"
             variant="outlined"
             fullWidth
+            InputLabelProps={{
+              shrink: true,
+            }}
           />
         </Box>
         <Box>
