@@ -1,5 +1,6 @@
 import { Box } from '@mui/material';
 import Typography from '@mui/material/Typography';
+import LinearProgress from '@mui/material/LinearProgress';
 
 import {
   ContactsForm,
@@ -24,11 +25,12 @@ const blockInfoPage: IBlockInfoPage = {
 };
 
 export default function SectionContacts() {
-  const { data, onCreate, onPublish } = useApisReuseBlock({
-    service: service,
-    page: currentPage,
-    blockInfoPage: blockInfoPage,
-  });
+  const { data, loadingType, loadingForPublishLabel, onCreate, onPublish } =
+    useApisReuseBlock({
+      service: service,
+      page: currentPage,
+      blockInfoPage: blockInfoPage,
+    });
 
   function createAdapter(): IContactsBlockFullData {
     return {
@@ -39,18 +41,31 @@ export default function SectionContacts() {
 
   return (
     <Box>
-      <BlockHeading heading="Section contacts" publish={data?.publish} />
-      {data === null ? (
-        <Typography variant="h4">
-          First of all you have to create{' '}
-          <Link to={LinksPageSections.CONTACTS}>section contacts</Link>
-        </Typography>
+      <BlockHeading
+        heading="Section contacts"
+        loading={loadingForPublishLabel}
+        publish={data?.publish}
+      />
+      {loadingType === 'loading' ? (
+        <Box mb={2}>
+          <LinearProgress />
+        </Box>
       ) : (
-        <ContactsForm
-          data={data}
-          onCreate={() => onCreate(createAdapter())}
-          onPublish={onPublish}
-        />
+        <Box>
+          {data === null ? (
+            <Typography variant="h4">
+              First of all you have to create{' '}
+              <Link to={LinksPageSections.CONTACTS}>section contacts</Link>
+            </Typography>
+          ) : (
+            <ContactsForm
+              data={data}
+              loadingType={loadingType}
+              onCreate={() => onCreate(createAdapter())}
+              onPublish={onPublish}
+            />
+          )}
+        </Box>
       )}
     </Box>
   );

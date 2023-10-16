@@ -20,6 +20,7 @@ import {
 } from './FormatLessonsForm.type';
 
 import schemaValidation from './FormatLessonsForm.validation';
+import { BlockTogglers } from '../BlockTogglers';
 
 const defaultValuesForm: IFormatLessonsFormData = {
   heading: '',
@@ -135,26 +136,14 @@ export default function FormatLessonsForm({
           onChange={(value) => onChangeRichTextEditor(value)}
         />
       </Box>
-      <Stack spacing={2} direction="row">
-        <Button
-          variant="contained"
-          size="medium"
-          color="success"
-          onClick={handleSubmit(handleSave)}
-        >
-          {data ? 'Update' : 'Create'}
-        </Button>
-        {data ? (
-          <Button
-            variant="contained"
-            size="medium"
-            color={data?.publish ? 'info' : 'warning'}
-            onClick={() => onPublish && onPublish(!data?.publish)}
-          >
-            {data?.publish ? 'Unpublish' : 'Publish'}
-          </Button>
-        ) : null}
-      </Stack>
+      <BlockTogglers
+        typeToggle={!data ? 'create' : 'update'}
+        publish={data?.publish}
+        loadingType={loadingType}
+        showPublishButton={data !== null}
+        onSubmit={handleSubmit(handleSave)}
+        onPublish={onPublish}
+      />
     </Box>
   );
 }

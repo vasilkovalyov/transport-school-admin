@@ -33,12 +33,18 @@ const getAdapterSectionParams = (
 };
 
 export default function SectionSchedule() {
-  const { data, updateSection, createSection, publishToggleSection } =
-    useApisBlock<IScheduleBlockFullData>({
-      page: currentPage,
-      service: service,
-      blockInfoPage: blockInfoPage,
-    });
+  const {
+    data,
+    loadingType,
+    loadingForPublishLabel,
+    updateSection,
+    createSection,
+    publishToggleSection,
+  } = useApisBlock<IScheduleBlockFullData>({
+    page: currentPage,
+    service: service,
+    blockInfoPage: blockInfoPage,
+  });
 
   function onHandleCreateSection(params: IScheduleFormData) {
     createSection(getAdapterSectionParams(params, blockInfoPage));
@@ -50,9 +56,14 @@ export default function SectionSchedule() {
 
   return (
     <Box>
-      <BlockHeading heading="Section schedule" publish={data?.publish} />
+      <BlockHeading
+        heading="Section schedule"
+        loading={loadingForPublishLabel}
+        publish={data?.publish}
+      />
       <ScheduleForm
         data={data}
+        loadingType={loadingType}
         onCreate={onHandleCreateSection}
         onUpdate={onHandleUpdateSection}
         onPublish={publishToggleSection}

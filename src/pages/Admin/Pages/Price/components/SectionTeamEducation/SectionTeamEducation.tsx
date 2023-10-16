@@ -33,12 +33,18 @@ const getAdapterSectionParams = (
 };
 
 export default function SectionTeamEducation() {
-  const { data, updateSection, createSection, publishToggleSection } =
-    useApisBlock<ITeamEducationBlockFullData>({
-      page: currentPage,
-      service: service,
-      blockInfoPage: blockInfoPage,
-    });
+  const {
+    data,
+    loadingType,
+    loadingForPublishLabel,
+    updateSection,
+    createSection,
+    publishToggleSection,
+  } = useApisBlock<ITeamEducationBlockFullData>({
+    page: currentPage,
+    service: service,
+    blockInfoPage: blockInfoPage,
+  });
 
   function onHandleCreateSection(params: ITeamEducationFormData) {
     createSection(getAdapterSectionParams(params, blockInfoPage));
@@ -50,9 +56,14 @@ export default function SectionTeamEducation() {
 
   return (
     <Box>
-      <BlockHeading heading="Section team education" publish={data?.publish} />
+      <BlockHeading
+        heading="Section team education"
+        loading={loadingForPublishLabel}
+        publish={data?.publish}
+      />
       <TeamEducationForm
         data={data}
+        loadingType={loadingType}
         onCreate={onHandleCreateSection}
         onUpdate={onHandleUpdateSection}
         onPublish={publishToggleSection}

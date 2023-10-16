@@ -33,12 +33,18 @@ const getAdapterSectionParams = (
 };
 
 export default function SectionBlog() {
-  const { data, updateSection, createSection, publishToggleSection } =
-    useApisBlock<IBlogBlockFullData>({
-      page: currentPage,
-      service: service,
-      blockInfoPage: blockInfoPage,
-    });
+  const {
+    data,
+    loadingType,
+    loadingForPublishLabel,
+    updateSection,
+    createSection,
+    publishToggleSection,
+  } = useApisBlock<IBlogBlockFullData>({
+    page: currentPage,
+    service: service,
+    blockInfoPage: blockInfoPage,
+  });
 
   function onHandleCreateSection(params: IBlogFormData) {
     createSection(getAdapterSectionParams(params, blockInfoPage));
@@ -50,9 +56,14 @@ export default function SectionBlog() {
 
   return (
     <Box>
-      <BlockHeading heading="Section blog" publish={data?.publish} />
+      <BlockHeading
+        heading="Section blog"
+        loading={loadingForPublishLabel}
+        publish={data?.publish}
+      />
       <BlogForm
         data={data}
+        loadingType={loadingType}
         onCreate={onHandleCreateSection}
         onUpdate={onHandleUpdateSection}
         onPublish={publishToggleSection}

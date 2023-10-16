@@ -33,12 +33,18 @@ const getAdapterSectionParams = (
 };
 
 export default function SectionRequirement() {
-  const { data, updateSection, createSection, publishToggleSection } =
-    useApisBlock<IRequirementBlockFullData>({
-      page: currentPage,
-      service: service,
-      blockInfoPage: blockInfoPage,
-    });
+  const {
+    data,
+    loadingType,
+    loadingForPublishLabel,
+    updateSection,
+    createSection,
+    publishToggleSection,
+  } = useApisBlock<IRequirementBlockFullData>({
+    page: currentPage,
+    service: service,
+    blockInfoPage: blockInfoPage,
+  });
 
   function onHandleCreateSection(params: IRequirementFormData) {
     createSection(getAdapterSectionParams(params, blockInfoPage));
@@ -50,9 +56,14 @@ export default function SectionRequirement() {
 
   return (
     <Box>
-      <BlockHeading heading="Section  requirement" publish={data?.publish} />
+      <BlockHeading
+        heading="Section requirement"
+        loading={loadingForPublishLabel}
+        publish={data?.publish}
+      />
       <RequirementForm
         data={data}
+        loadingType={loadingType}
         onCreate={onHandleCreateSection}
         onUpdate={onHandleUpdateSection}
         onPublish={publishToggleSection}
