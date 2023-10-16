@@ -5,6 +5,8 @@ import { Box } from '@mui/material';
 import Button from '@mui/material/Button';
 import LinearProgress from '@mui/material/LinearProgress';
 
+import { AlertMessageModal, useAlertMessageModal } from '@/src/components';
+
 import ServiceForm from '../ServiceForm/ServiceForm';
 import { ServiceEditableFormData } from '../ServiceForm/ServiceForm.type';
 import { LinksConcepts } from '@/src/constants/routes';
@@ -24,6 +26,8 @@ export default function BlockServiceEdit() {
   const navigate = useNavigate();
   const [loading, setLoading] = useState<boolean>(true);
   const [data, setData] = useState<ServiceEditableFormData>(initialData);
+  const [loadingRemove, setLoadingRemove] = useState<boolean>(false);
+  const { openModal, onCloseModal, onOpenModal } = useAlertMessageModal();
 
   async function loadData() {
     try {
@@ -57,12 +61,15 @@ export default function BlockServiceEdit() {
     }
   }
 
-  async function handleDelete() {
+  async function onDeleteService() {
     try {
+      setLoadingRemove(true);
       await service.delete(id || '');
       navigate(LinksConcepts.SERVICES);
     } catch (e) {
       console.log(e);
+    } finally {
+      setLoadingRemove(false);
     }
   }
 
@@ -79,11 +86,22 @@ export default function BlockServiceEdit() {
           variant="contained"
           size="medium"
           color="error"
-          onClick={handleDelete}
+          onClick={() => {
+            if (id) {
+              onOpenModal(id);
+            }
+          }}
         >
           Delete
         </Button>
       </Box>
+      <AlertMessageModal
+        open={openModal}
+        loading={loadingRemove}
+        title="Do you want to remove service?"
+        handleAgree={onDeleteService}
+        handleClose={onCloseModal}
+      />
     </Box>
   );
 }

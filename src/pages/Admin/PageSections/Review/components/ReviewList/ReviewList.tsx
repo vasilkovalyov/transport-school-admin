@@ -12,13 +12,18 @@ import Paper from '@mui/material/Paper';
 
 import { IReview, ReviewRow } from '../ReviewRow';
 import ServiceReview from '../../Review.service';
+import { AlertMessageModal, useAlertMessageModal } from '@/src/components';
 
 const headCells: string[] = ['Image', 'Name', 'Text', 'Rating'];
 
 const service = new ServiceReview();
 
 export default function ReviewList() {
+  const { selectedId, openModal, onCloseModal, onOpenModal } =
+    useAlertMessageModal();
+
   const [loading, setLoading] = useState<boolean>(true);
+  const [loadingRemove, setLoadingRemove] = useState<boolean>(false);
   const [reviews, setReviews] = useState<IReview[]>([]);
 
   async function loadData() {
@@ -33,13 +38,18 @@ export default function ReviewList() {
     }
   }
 
-  async function onDeleteReview(id: string) {
+  async function onDeleteReview() {
+    if (!selectedId) return null;
     try {
-      await service.delete(id);
-      const updatedReviews = reviews.filter((item) => item._id !== id);
+      setLoadingRemove(true);
+      await service.delete(selectedId);
+      const updatedReviews = reviews.filter((item) => item._id !== selectedId);
       setReviews(updatedReviews);
     } catch (e) {
       console.log(e);
+    } finally {
+      setLoadingRemove(false);
+      onCloseModal();
     }
   }
 
@@ -71,7 +81,7 @@ export default function ReviewList() {
                     <ReviewRow
                       key={rowReview._id}
                       data={rowReview}
-                      onDelete={onDeleteReview}
+                      onDelete={onOpenModal}
                     />
                   ))
                 : null}
@@ -81,6 +91,13 @@ export default function ReviewList() {
       ) : (
         <Typography variant="h4">No reviews</Typography>
       )}
+      <AlertMessageModal
+        open={openModal}
+        loading={loadingRemove}
+        title="Do you want to remove review?"
+        handleAgree={onDeleteReview}
+        handleClose={onCloseModal}
+      />
     </Box>
   );
 }

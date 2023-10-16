@@ -9,6 +9,7 @@ import LessonForm from '../LessonForm/LessonForm';
 import LessonScheduleService from '../../LessonSchedule.service';
 import { LessonScheduleEditableProps } from '../LessonRow';
 import { LinksConcepts } from '@/src/constants/routes';
+import { AlertMessageModal, useAlertMessageModal } from '@/src/components';
 
 const service = new LessonScheduleService();
 const initialData: LessonScheduleEditableProps = {
@@ -27,6 +28,8 @@ export default function BlockEditLesson() {
   const navigate = useNavigate();
   const [loading, setLoading] = useState<boolean>(true);
   const [data, setData] = useState<LessonScheduleEditableProps>(initialData);
+  const [loadingRemove, setLoadingRemove] = useState<boolean>(false);
+  const { openModal, onCloseModal, onOpenModal } = useAlertMessageModal();
 
   async function loadData() {
     try {
@@ -59,12 +62,16 @@ export default function BlockEditLesson() {
     }
   }
 
-  async function handleDelete() {
+  async function onDeleteLesson() {
     try {
+      setLoadingRemove(true);
       await service.delete(id || '');
       navigate(LinksConcepts.LESSON_SCHEDULE);
     } catch (e) {
       console.log(e);
+    } finally {
+      setLoadingRemove(false);
+      onCloseModal();
     }
   }
 
@@ -81,11 +88,22 @@ export default function BlockEditLesson() {
           variant="contained"
           size="medium"
           color="error"
-          onClick={handleDelete}
+          onClick={() => {
+            if (id) {
+              onOpenModal(id);
+            }
+          }}
         >
           Delete
         </Button>
       </Box>
+      <AlertMessageModal
+        open={openModal}
+        loading={loadingRemove}
+        title="Do you want to remove lesson?"
+        handleAgree={onDeleteLesson}
+        handleClose={onCloseModal}
+      />
     </Box>
   );
 }
