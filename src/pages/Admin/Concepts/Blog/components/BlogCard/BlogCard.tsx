@@ -25,7 +25,7 @@ export default function BlogCard({
   };
 
   return (
-    <Card style={{ display: 'flex', flexDirection: 'column' }}>
+    <Card style={{ display: 'flex', flexDirection: 'column', width: '100%' }}>
       {image ? (
         <CardMedia sx={{ height: 140 }} image={image} title={heading} />
       ) : null}

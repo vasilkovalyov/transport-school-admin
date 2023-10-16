@@ -1,6 +1,9 @@
 import { useEffect, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
-import { Box, Button } from '@mui/material';
+
+import { Box } from '@mui/material';
+import Button from '@mui/material/Button';
+import CircularProgress from '@mui/material/CircularProgress';
 
 import LessonForm from '../LessonForm/LessonForm';
 import LessonScheduleService from '../../LessonSchedule.service';
@@ -22,10 +25,12 @@ const initialData: LessonScheduleEditableProps = {
 export default function BlockEditLesson() {
   let { id } = useParams();
   const navigate = useNavigate();
+  const [loading, setLoading] = useState<boolean>(true);
   const [data, setData] = useState<LessonScheduleEditableProps>(initialData);
 
   async function loadData() {
     try {
+      setLoading(true);
       const response = await service.getPost(id || '');
       if (response.data === null) {
         navigate(LinksConcepts.LESSON_SCHEDULE);
@@ -33,6 +38,8 @@ export default function BlockEditLesson() {
       setData(response.data);
     } catch (e) {
       navigate(LinksConcepts.LESSON_SCHEDULE);
+    } finally {
+      setLoading(false);
     }
   }
 
@@ -59,6 +66,14 @@ export default function BlockEditLesson() {
     } catch (e) {
       console.log(e);
     }
+  }
+
+  if (loading) {
+    return (
+      <Box py={4} sx={{ display: 'flex', justifyContent: 'center' }}>
+        <CircularProgress />
+      </Box>
+    );
   }
 
   return (

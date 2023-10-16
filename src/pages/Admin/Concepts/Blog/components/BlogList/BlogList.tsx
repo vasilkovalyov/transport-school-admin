@@ -9,7 +9,7 @@ import { BlogCard, BlogCardProps } from '../BlogCard';
 import { usePostPaginate } from '@/src/hooks/usePostPaginate';
 
 export default function BlogList() {
-  const { loading, posts, totalPageCount, handleChangePage } =
+  const { loading, page, posts, totalPageCount, handleChangePage } =
     usePostPaginate<BlogCardProps>({
       apiUrl: 'posts',
       postSizePage: 4,
@@ -40,6 +40,7 @@ export default function BlogList() {
         <Box py={4} display="flex" justifyContent="center">
           <Pagination
             count={totalPageCount}
+            page={page}
             shape="rounded"
             onChange={handleChangePage}
           />

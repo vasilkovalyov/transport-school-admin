@@ -24,7 +24,7 @@ const initialData: BlogCardProps = {
 export default function BlockBlogEdit() {
   let { id } = useParams();
   const navigate = useNavigate();
-  const [loading, setLoading] = useState<boolean>(false);
+  const [loading, setLoading] = useState<boolean>(true);
   const [data, setData] = useState<BlogCardProps>(initialData);
 
   async function loadData() {

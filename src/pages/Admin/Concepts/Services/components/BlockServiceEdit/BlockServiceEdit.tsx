@@ -1,7 +1,9 @@
 import { useEffect, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
+
 import { Box } from '@mui/material';
 import Button from '@mui/material/Button';
+import CircularProgress from '@mui/material/CircularProgress';
 
 import ServiceForm from '../ServiceForm/ServiceForm';
 import { ServiceEditableFormData } from '../ServiceForm/ServiceForm.type';
@@ -20,10 +22,12 @@ const initialData: ServiceEditableFormData = {
 export default function BlockServiceEdit() {
   let { id } = useParams();
   const navigate = useNavigate();
+  const [loading, setLoading] = useState<boolean>(true);
   const [data, setData] = useState<ServiceEditableFormData>(initialData);
 
   async function loadData() {
     try {
+      setLoading(true);
       const response = await service.getPost(id || '');
       if (response.data === null) {
         navigate(LinksConcepts.SERVICES);
@@ -32,6 +36,8 @@ export default function BlockServiceEdit() {
     } catch (e) {
       console.log(e);
       navigate(LinksConcepts.SERVICES);
+    } finally {
+      setLoading(false);
     }
   }
 
@@ -58,6 +64,14 @@ export default function BlockServiceEdit() {
     } catch (e) {
       console.log(e);
     }
+  }
+
+  if (loading) {
+    return (
+      <Box py={4} sx={{ display: 'flex', justifyContent: 'center' }}>
+        <CircularProgress />
+      </Box>
+    );
   }
 
   return (

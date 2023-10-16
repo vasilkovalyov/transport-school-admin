@@ -7,6 +7,7 @@ import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
+import CircularProgress from '@mui/material/CircularProgress';
 
 import { LessonRow, LessonScheduleProps } from '../LessonRow';
 import { usePostPaginate } from '@/src/hooks/usePostPaginate';
@@ -23,7 +24,7 @@ const headCells: string[] = [
 ];
 
 export default function LessonsList() {
-  const { posts, totalPageCount, handleChangePage } =
+  const { loading, page, posts, totalPageCount, handleChangePage } =
     usePostPaginate<LessonScheduleProps>({
       apiUrl: 'lesson-schedules',
       postSizePage: 4,
@@ -31,7 +32,11 @@ export default function LessonsList() {
 
   return (
     <Box>
-      {posts && posts.length ? (
+      {loading ? (
+        <Box py={4} sx={{ display: 'flex', justifyContent: 'center' }}>
+          <CircularProgress />
+        </Box>
+      ) : posts.length ? (
         <Box>
           <TableContainer component={Paper} elevation={3}>
             <Table sx={{ minWidth: 650 }} aria-label="simple table">
@@ -55,6 +60,7 @@ export default function LessonsList() {
             <Box py={4} display="flex" justifyContent="center">
               <Pagination
                 count={totalPageCount}
+                page={page}
                 shape="rounded"
                 onChange={handleChangePage}
               />
