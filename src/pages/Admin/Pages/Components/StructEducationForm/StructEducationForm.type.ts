@@ -9,10 +9,12 @@ export interface IStructEducationFormData extends IBaseBlock {
 }
 
 export interface IStructEducationData {
-  id?: string;
+  _id?: string;
   heading: string;
   rich_text: string;
 }
+
+export type StructEducationRichTextType = Omit<IStructEducationData, 'heading'>;
 
 export interface IStructEducationBlockFullData
   extends IStructEducationFormData,

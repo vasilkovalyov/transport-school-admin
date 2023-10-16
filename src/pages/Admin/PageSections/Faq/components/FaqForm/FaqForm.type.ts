@@ -5,7 +5,9 @@ export interface IFaqSectionFormData {
 }
 
 export interface IFaq {
-  id?: string;
+  _id?: string;
   heading: string;
-  text: string;
+  rich_text: string;
 }
+
+export type FaqRichTextType = Omit<IFaq, 'heading'>;

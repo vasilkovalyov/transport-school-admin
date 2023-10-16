@@ -12,12 +12,13 @@ import CircularProgress from '@mui/material/CircularProgress';
 
 import { DynamicFieldTogglers } from '@/src/components';
 
-import { IFaq, IFaqSectionFormData } from './FaqForm.type';
+import { FaqRichTextType, IFaq, IFaqSectionFormData } from './FaqForm.type';
 import FaqSectionFormService from './FaqForm.service';
+import ReactQuill from 'react-quill';
 
 const defaultFaqListItem: IFaq = {
   heading: '',
-  text: '',
+  rich_text: '',
 };
 
 const defaultValuesForm: IFaqSectionFormData = {
@@ -31,6 +32,11 @@ const serviceSectionFaq = new FaqSectionFormService();
 export default function FaqForm() {
   const [loading, setLoading] = useState<boolean>(true);
   const [loadingUpdate, setLoadingUpdate] = useState<boolean>(false);
+
+  const [markdownTextArray, setMarkdownTextArray] = useState<FaqRichTextType[]>(
+    []
+  );
+
   const { handleSubmit, register, control, setValue } =
     useForm<IFaqSectionFormData>({
       mode: 'onSubmit',
@@ -40,7 +46,7 @@ export default function FaqForm() {
   const { fields, remove, append } = useFieldArray({
     control,
     name: 'list_faq',
-    keyName: 'id',
+    keyName: '_id',
   });
 
   async function loadData() {
@@ -49,7 +55,10 @@ export default function FaqForm() {
       const response = await serviceSectionFaq.getInfo();
       const { heading, list_faq } = response.data;
       setValue('heading', heading);
-      setValue('list_faq', list_faq);
+      if (list_faq.length) {
+        setValue('list_faq', list_faq);
+        fillRichTextEditorArray(list_faq);
+      }
     } catch (e) {
       console.log(e);
     } finally {
@@ -60,6 +69,28 @@ export default function FaqForm() {
   useEffect(() => {
     loadData();
   }, []);
+
+  function fillRichTextEditorArray(array: FaqRichTextType[]) {
+    if (!array.length) return null;
+    const items: FaqRichTextType[] = [];
+    array.forEach((item) => {
+      items.push({
+        _id: item._id,
+        rich_text: item.rich_text,
+      });
+    });
+    setMarkdownTextArray(items);
+  }
+
+  function onChangeRichTextEditor(index: number, value: string) {
+    const updatedItems = [...markdownTextArray];
+    updatedItems[index] = {
+      ...updatedItems[index],
+      rich_text: value,
+    };
+    setMarkdownTextArray(updatedItems);
+    setValue(`list_faq.${index}.rich_text`, value);
+  }
 
   function onHandleAddAchivmentItem() {
     append(defaultFaqListItem);
@@ -105,7 +136,7 @@ export default function FaqForm() {
           </Box>
           <Typography variant="h4">Faq list</Typography>
           {fields.map((item, index) => (
-            <Box key={item.id} mb={4}>
+            <Box key={item._id} mb={4}>
               <Box mb={2}>
                 <TextField
                   {...register(`list_faq.${index}.heading`)}
@@ -115,15 +146,15 @@ export default function FaqForm() {
                   fullWidth
                 />
               </Box>
-              <Box mb={2}>
-                <TextField
-                  {...register(`list_faq.${index}.text`)}
-                  id={`list_faq.${index}.text`}
-                  label="Text achivment"
-                  variant="outlined"
-                  multiline
-                  fullWidth
-                  rows={4}
+              <Box mb={4}>
+                <ReactQuill
+                  theme="snow"
+                  value={
+                    markdownTextArray[index]
+                      ? markdownTextArray[index].rich_text
+                      : ''
+                  }
+                  onChange={(value) => onChangeRichTextEditor(index, value)}
                 />
               </Box>
               <Box mb={2}>
