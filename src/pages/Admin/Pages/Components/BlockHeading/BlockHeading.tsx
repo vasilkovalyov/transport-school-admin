@@ -4,7 +4,11 @@ import Typography from '@mui/material/Typography';
 
 import { BlockHeadingProps } from './BlockHeading.type';
 
-export default function BlockHeading({ heading, publish }: BlockHeadingProps) {
+export default function BlockHeading({
+  heading,
+  loading,
+  publish,
+}: BlockHeadingProps) {
   return (
     <Stack
       marginBottom={4}
@@ -14,10 +18,14 @@ export default function BlockHeading({ heading, publish }: BlockHeadingProps) {
       alignItems="center"
     >
       <Typography variant="h2">{heading}</Typography>
-      <Chip
-        label={publish ? 'Publish' : 'Not publish'}
-        color={publish ? 'success' : 'error'}
-      />
+      {loading ? (
+        <Chip label="Loading" />
+      ) : (
+        <Chip
+          label={publish ? 'Publish' : 'Not publish'}
+          color={publish ? 'success' : 'error'}
+        />
+      )}
     </Stack>
   );
 }

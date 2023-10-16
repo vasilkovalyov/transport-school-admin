@@ -9,6 +9,7 @@ import TextField from '@mui/material/TextField';
 import Typography from '@mui/material/Typography';
 import Checkbox from '@mui/material/Checkbox';
 import FormControlLabel from '@mui/material/FormControlLabel';
+import LinearProgress from '@mui/material/LinearProgress';
 
 import ReactQuill from 'react-quill';
 
@@ -28,6 +29,7 @@ const defaultValuesForm: IFormatLessonsFormData = {
 
 export default function FormatLessonsForm({
   data,
+  loadingType,
   onCreate,
   onUpdate,
   onPublish,
@@ -91,65 +93,68 @@ export default function FormatLessonsForm({
   }
 
   return (
-    <Box>
-      <Box component="form" maxWidth={800} marginBottom={4}>
-        <Box mb={4}>
-          <Typography>Theme</Typography>
-          <FormControlLabel
-            control={
-              <Checkbox
-                checked={checkboxValues.use_dark_theme}
-                onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
-                  onChangeCheckbox('use_dark_theme', e.target.checked)
-                }
-                color="success"
-              />
-            }
-            label="Use dark theme"
-          />
+    <Box component="form" maxWidth={800} marginBottom={4}>
+      {loadingType === 'loading' ? (
+        <Box mb={2}>
+          <LinearProgress />
         </Box>
-        <Box mb={4}>
-          <TextField
-            {...register('heading')}
-            id="heading"
-            label="Heading"
-            variant="outlined"
-            fullWidth
-            multiline
-            rows={2}
-            InputLabelProps={{
-              shrink: true,
-            }}
-          />
-        </Box>
-        <Box mb={4}>
-          <ReactQuill
-            theme="snow"
-            value={markdownText as string}
-            onChange={(value) => onChangeRichTextEditor(value)}
-          />
-        </Box>
-        <Stack spacing={2} direction="row">
+      ) : null}
+      <Box mb={4}>
+        <Typography>Theme</Typography>
+        <FormControlLabel
+          control={
+            <Checkbox
+              checked={checkboxValues.use_dark_theme}
+              onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
+                onChangeCheckbox('use_dark_theme', e.target.checked)
+              }
+              color="success"
+            />
+          }
+          label="Use dark theme"
+        />
+      </Box>
+      <Box mb={4}>
+        <TextField
+          {...register('heading')}
+          id="heading"
+          label="Heading"
+          variant="outlined"
+          fullWidth
+          multiline
+          rows={2}
+          InputLabelProps={{
+            shrink: true,
+          }}
+        />
+      </Box>
+      <Box mb={4}>
+        <ReactQuill
+          theme="snow"
+          value={markdownText as string}
+          onChange={(value) => onChangeRichTextEditor(value)}
+        />
+      </Box>
+      <Stack spacing={2} direction="row">
+        <Button
+          variant="contained"
+          size="medium"
+          color="success"
+          onClick={handleSubmit(handleSave)}
+        >
+          {data ? 'Update' : 'Create'}
+        </Button>
+        {data ? (
           <Button
             variant="contained"
             size="medium"
-            color="success"
-            onClick={handleSubmit(handleSave)}
+            color={data?.publish ? 'info' : 'warning'}
+            onClick={() => onPublish && onPublish(!data?.publish)}
           >
-            {data ? 'Update' : 'Create'}
+            {data?.publish ? 'Unpublish' : 'Publish'}
           </Button>
-          {data ? (
-            <Button
-              variant="contained"
-              size="medium"
-              color={data?.publish ? 'info' : 'warning'}
-              onClick={() => onPublish && onPublish(!data?.publish)}
-            >
-              {data?.publish ? 'Unpublish' : 'Publish'}
-            </Button>
-          ) : null}
-        </Stack>
-      </Box>
+        ) : null}
+      </Stack>
     </Box>
   );
 }

@@ -1,5 +1,9 @@
 import { useEffect, useState } from 'react';
-import { IBlockInfoPage, IBlockService } from '../Components/types';
+import {
+  BaseBlockFormLoadingType,
+  IBlockInfoPage,
+  IBlockService,
+} from '../Components/types';
 import { PageEnum } from '../pages-enum';
 
 export function useApisBlock<T>({
@@ -9,9 +13,16 @@ export function useApisBlock<T>({
 }: {
   service: IBlockService<T>;
   page: PageEnum;
+  loadingForPublishLabel?: boolean;
+  loadingType?: BaseBlockFormLoadingType;
   blockInfoPage: IBlockInfoPage;
 }) {
   const [data, setData] = useState<T | null>(null);
+  const [loadingType, setLoadingType] =
+    useState<BaseBlockFormLoadingType | null>('loading');
+
+  const loadingForPublishLabel =
+    loadingType !== null && loadingType === 'loading' ? true : false;
 
   useEffect(() => {
     loadData();
@@ -19,16 +30,20 @@ export function useApisBlock<T>({
 
   async function loadData() {
     try {
+      setLoadingType('loading');
       const response = await service.getBlock(page);
       setData(response.data);
     } catch (e) {
       console.log(e);
+    } finally {
+      setLoadingType(null);
     }
   }
 
   async function createSection(params: T) {
     if (!service.create) return;
     try {
+      setLoadingType('update');
       const data = {
         ...params,
         ...blockInfoPage,
@@ -38,6 +53,8 @@ export function useApisBlock<T>({
       setData(data);
     } catch (e) {
       console.log(e);
+    } finally {
+      setLoadingType(null);
     }
   }
 
@@ -45,6 +62,7 @@ export function useApisBlock<T>({
     if (!service.update) return;
 
     try {
+      setLoadingType('update');
       const data = {
         ...params,
         ...blockInfoPage,
@@ -52,11 +70,14 @@ export function useApisBlock<T>({
       await service.update(data);
     } catch (e) {
       console.log(e);
+    } finally {
+      setLoadingType(null);
     }
   }
 
   async function publishToggleSection(value: boolean) {
     try {
+      setLoadingType('publish');
       if (value) {
         await service.publish(page);
       } else {
@@ -72,7 +93,16 @@ export function useApisBlock<T>({
       }
     } catch (e) {
       console.log(e);
+    } finally {
+      setLoadingType(null);
     }
   }
-  return { data, createSection, updateSection, publishToggleSection };
+  return {
+    data,
+    loadingType,
+    loadingForPublishLabel,
+    createSection,
+    updateSection,
+    publishToggleSection,
+  };
 }

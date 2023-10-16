@@ -1,5 +1,9 @@
 import { useEffect, useState } from 'react';
-import { IBlockInfoPage, IBlockService } from '../Components/types';
+import {
+  BaseBlockFormLoadingType,
+  IBlockInfoPage,
+  IBlockService,
+} from '../Components/types';
 import { PageEnum } from '../pages-enum';
 
 export function useApisReuseBlock<T>({
@@ -9,47 +13,75 @@ export function useApisReuseBlock<T>({
 }: {
   service: IBlockService<T>;
   page: PageEnum;
+  loading?: boolean;
+  loadingForPublishLabel?: boolean;
   blockInfoPage: IBlockInfoPage;
 }) {
+  const [loadingType, setLoadingType] =
+    useState<BaseBlockFormLoadingType | null>('loading');
   const [data, setData] = useState<T | null>(null);
+
+  const loadingForPublishLabel =
+    loadingType !== null && loadingType === 'loading' ? true : false;
 
   useEffect(() => {
     loadData();
   }, []);
 
   async function loadData() {
-    const response = await service.getBlock(page);
-    setData(response.data);
+    try {
+      setLoadingType('loading');
+      const response = await service.getBlock(page);
+      setData(response.data);
+    } catch (e) {
+      console.log(e);
+    } finally {
+      setLoadingType(null);
+    }
   }
 
   async function onCreate(params: T) {
-    if (service.create) {
-      await service.create({
-        ...params,
-        ...blockInfoPage,
-      });
+    try {
+      setLoadingType('update');
+      if (service.create) {
+        await service.create({
+          ...params,
+          ...blockInfoPage,
+        });
 
-      setData({
-        ...params,
-        ...blockInfoPage,
-      });
+        setData({
+          ...params,
+          ...blockInfoPage,
+        });
+      }
+    } catch (e) {
+      console.log(e);
+    } finally {
+      setLoadingType(null);
     }
   }
 
   async function onPublish(value: boolean) {
-    if (value) {
-      await service.publish(page);
-    } else {
-      await service.unpublish(page);
+    try {
+      setLoadingType('publish');
+      if (value) {
+        await service.publish(page);
+      } else {
+        await service.unpublish(page);
+      }
+
+      const params = {
+        ...data,
+        publish: value,
+      };
+
+      setData(params as T);
+    } catch (e) {
+      console.log(e);
+    } finally {
+      setLoadingType(null);
     }
-
-    const params = {
-      ...data,
-      publish: value,
-    };
-
-    setData(params as T);
   }
 
-  return { data, onCreate, onPublish };
+  return { data, loadingType, loadingForPublishLabel, onCreate, onPublish };
 }

@@ -10,6 +10,7 @@ import {
 import { PageEnum } from '@/src/pages/Admin/Pages/pages-enum';
 import { IBlockInfoPage } from '@/src/pages/Admin/Pages/Components/types';
 import { useApisBlock } from '@/src/pages/Admin/Pages/hooks/useApisBlock';
+
 import { BlocsEnum } from '@/src/pages/Admin/Pages/blocks-enum';
 
 const service = new AboutUsFormService();
@@ -33,12 +34,18 @@ const getAdapterSectionParams = (
 };
 
 export default function SectionAboutUs() {
-  const { data, updateSection, createSection, publishToggleSection } =
-    useApisBlock<IAboutUsBlockFullData>({
-      page: currentPage,
-      service: service,
-      blockInfoPage: blockInfoPage,
-    });
+  const {
+    data,
+    loadingType,
+    loadingForPublishLabel,
+    updateSection,
+    createSection,
+    publishToggleSection,
+  } = useApisBlock<IAboutUsBlockFullData>({
+    page: currentPage,
+    service: service,
+    blockInfoPage: blockInfoPage,
+  });
 
   function onHandleCreateSection(params: IAboutUsFormData) {
     createSection(getAdapterSectionParams(params, blockInfoPage));
@@ -50,9 +57,14 @@ export default function SectionAboutUs() {
 
   return (
     <Box>
-      <BlockHeading heading="Section about us" publish={data?.publish} />
+      <BlockHeading
+        heading="Section about us"
+        loading={loadingForPublishLabel}
+        publish={data?.publish}
+      />
       <AboutUsForm
         data={data}
+        loadingType={loadingType}
         onCreate={onHandleCreateSection}
         onUpdate={onHandleUpdateSection}
         onPublish={publishToggleSection}

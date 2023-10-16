@@ -1,8 +1,11 @@
 import { AxiosPromise } from 'axios';
 import { BlocsEnum } from '../blocks-enum';
 
+export type BaseBlockFormLoadingType = 'loading' | 'update' | 'publish';
+
 export type BaseBlockFormProps<T> = {
   data?: T | null;
+  loadingType?: BaseBlockFormLoadingType | null;
   onUpdate?: (data: T) => void;
   onCreate?: (data: T) => void;
   onPublish?: (value: boolean) => void;
@@ -10,6 +13,7 @@ export type BaseBlockFormProps<T> = {
 
 export type BaseBlockCutDownFormProps<T> = {
   data?: T | null;
+  loadingType?: BaseBlockFormLoadingType | null;
   onCreate?: () => void;
   onPublish?: (value: boolean) => void;
 };

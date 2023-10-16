@@ -33,12 +33,18 @@ const getAdapterSectionParams = (
 };
 
 export default function SectionFormatLessons() {
-  const { data, updateSection, createSection, publishToggleSection } =
-    useApisBlock<IFormatLessonsBlockFullData>({
-      page: currentPage,
-      service: service,
-      blockInfoPage: blockInfoPage,
-    });
+  const {
+    data,
+    loadingType,
+    loadingForPublishLabel,
+    updateSection,
+    createSection,
+    publishToggleSection,
+  } = useApisBlock<IFormatLessonsBlockFullData>({
+    page: currentPage,
+    service: service,
+    blockInfoPage: blockInfoPage,
+  });
 
   function onHandleCreateSection(params: IFormatLessonsFormData) {
     createSection(getAdapterSectionParams(params, blockInfoPage));
@@ -50,9 +56,14 @@ export default function SectionFormatLessons() {
 
   return (
     <Box>
-      <BlockHeading heading="Section format lessons" publish={data?.publish} />
+      <BlockHeading
+        heading="Section format lessons"
+        loading={loadingForPublishLabel}
+        publish={data?.publish}
+      />
       <FormatLessonsForm
         data={data}
+        loadingType={loadingType}
         onCreate={onHandleCreateSection}
         onUpdate={onHandleUpdateSection}
         onPublish={publishToggleSection}

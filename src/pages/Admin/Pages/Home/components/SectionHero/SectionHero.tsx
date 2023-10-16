@@ -33,12 +33,18 @@ const getAdapterSectionParams = (
 };
 
 export default function SectionHero() {
-  const { data, updateSection, createSection, publishToggleSection } =
-    useApisBlock<IHeroBlockFullData>({
-      page: currentPage,
-      service: service,
-      blockInfoPage: blockInfoPage,
-    });
+  const {
+    data,
+    loadingType,
+    loadingForPublishLabel,
+    updateSection,
+    createSection,
+    publishToggleSection,
+  } = useApisBlock<IHeroBlockFullData>({
+    page: currentPage,
+    service: service,
+    blockInfoPage: blockInfoPage,
+  });
 
   function onHandleCreateSection(params: IHeroFormData) {
     createSection(getAdapterSectionParams(params, blockInfoPage));
@@ -50,15 +56,18 @@ export default function SectionHero() {
 
   return (
     <Box>
-      <BlockHeading heading="Section hero" publish={data?.publish} />
-      {data ? (
-        <HeroForm
-          data={data}
-          onCreate={onHandleCreateSection}
-          onUpdate={onHandleUpdateSection}
-          onPublish={publishToggleSection}
-        />
-      ) : null}
+      <BlockHeading
+        heading="Section hero"
+        loading={loadingForPublishLabel}
+        publish={data?.publish}
+      />
+      <HeroForm
+        data={data}
+        loadingType={loadingType}
+        onCreate={onHandleCreateSection}
+        onUpdate={onHandleUpdateSection}
+        onPublish={publishToggleSection}
+      />
     </Box>
   );
 }

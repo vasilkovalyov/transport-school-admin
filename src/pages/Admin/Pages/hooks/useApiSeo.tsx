@@ -5,14 +5,22 @@ const service = new SeoFormService();
 
 export default function useApiSeo(page: string) {
   const [data, setData] = useState<ISeoFullData | null>(null);
+  const [loading, setLoading] = useState<boolean>(true);
 
   useEffect(() => {
     loadData();
   }, []);
 
   async function loadData() {
-    const response = await service.getInfo(page);
-    setData(response.data);
+    try {
+      setLoading(true);
+      const response = await service.getInfo(page);
+      setData(response.data);
+    } catch (e) {
+      console.log(e);
+    } finally {
+      setLoading(false);
+    }
   }
 
   async function onHandleUpdate(params: ISeoFormData) {
@@ -34,6 +42,7 @@ export default function useApiSeo(page: string) {
 
   return {
     data,
+    loading,
     getAdapterSectionParams,
     onHandleUpdate,
   };
