@@ -1,5 +1,6 @@
 import { Box } from '@mui/material';
 import Typography from '@mui/material/Typography';
+import LinearProgress from '@mui/material/LinearProgress';
 
 import {
   ReviewForm,
@@ -24,11 +25,12 @@ const blockInfoPage: IBlockInfoPage = {
 };
 
 export default function SectionReview() {
-  const { data, onCreate, onPublish } = useApisReuseBlock({
-    service: service,
-    page: currentPage,
-    blockInfoPage: blockInfoPage,
-  });
+  const { data, loadingType, loadingForPublishLabel, onCreate, onPublish } =
+    useApisReuseBlock({
+      service: service,
+      page: currentPage,
+      blockInfoPage: blockInfoPage,
+    });
 
   function createAdapter(): IReviewFormBlockFullData {
     return {
@@ -39,18 +41,32 @@ export default function SectionReview() {
 
   return (
     <Box>
-      <BlockHeading heading="Section Review" publish={data?.publish} />
-      {data === null ? (
-        <Typography variant="h4">
-          First of all you have to create{' '}
-          <Link to={LinksPageSections.REVIEW}>section faq</Link>
-        </Typography>
+      <BlockHeading
+        heading="Section Review"
+        loading={loadingForPublishLabel}
+        publish={data?.publish}
+      />
+
+      {loadingType === 'loading' ? (
+        <Box mb={2}>
+          <LinearProgress />
+        </Box>
       ) : (
-        <ReviewForm
-          data={data}
-          onCreate={() => onCreate(createAdapter())}
-          onPublish={onPublish}
-        />
+        <Box>
+          {data === null ? (
+            <Typography variant="h4">
+              First of all you have to create{' '}
+              <Link to={LinksPageSections.REVIEW}>section faq</Link>
+            </Typography>
+          ) : (
+            <ReviewForm
+              data={data}
+              loadingType={loadingType}
+              onCreate={() => onCreate(createAdapter())}
+              onPublish={onPublish}
+            />
+          )}
+        </Box>
       )}
     </Box>
   );

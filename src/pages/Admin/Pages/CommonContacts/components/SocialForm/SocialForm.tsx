@@ -1,4 +1,4 @@
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { useForm, useFieldArray } from 'react-hook-form';
 
 import { Box } from '@mui/material';
@@ -9,6 +9,7 @@ import MenuItem from '@mui/material/MenuItem';
 import Select from '@mui/material/Select';
 import TextField from '@mui/material/TextField';
 import Typography from '@mui/material/Typography';
+import LinearProgress from '@mui/material/LinearProgress';
 
 import { DynamicFieldTogglers } from '@/src/components';
 
@@ -27,6 +28,7 @@ const defaultValuesForm: ISocialFormData = {
 const service = new SocialFormService();
 
 export default function FormSocial() {
+  const [loading, setLoading] = useState<boolean>(true);
   const { control, handleSubmit, register, setValue } =
     useForm<ISocialFormData>({
       mode: 'onSubmit',
@@ -52,8 +54,15 @@ export default function FormSocial() {
   }
 
   async function loadData() {
-    const response = await service.getInfo();
-    setValue('social_list', response.data.social_list);
+    try {
+      setLoading(true);
+      const response = await service.getInfo();
+      setValue('social_list', response.data.social_list);
+    } catch (e) {
+      console.log(e);
+    } finally {
+      setLoading(false);
+    }
   }
 
   useEffect(() => {
@@ -62,6 +71,11 @@ export default function FormSocial() {
 
   return (
     <Box>
+      {loading ? (
+        <Box mb={4}>
+          <LinearProgress />
+        </Box>
+      ) : null}
       <Typography variant="h4" marginBottom={2}>
         Social
       </Typography>

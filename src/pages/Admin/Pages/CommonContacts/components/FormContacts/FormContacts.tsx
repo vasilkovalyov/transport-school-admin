@@ -1,10 +1,11 @@
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
 
 import { Box } from '@mui/material';
 import Button from '@mui/material/Button';
 import TextField from '@mui/material/TextField';
 import Typography from '@mui/material/Typography';
+import LinearProgress from '@mui/material/LinearProgress';
 
 import { IFormContactsData } from './FormContacts.type';
 import ContactFormService from './FormContacts.service';
@@ -18,6 +19,7 @@ const defaultValuesForm: IFormContactsData = {
 const service = new ContactFormService();
 
 export default function FormContacts() {
+  const [loading, setLoading] = useState<boolean>(true);
   const { handleSubmit, register, setValue } = useForm<IFormContactsData>({
     mode: 'onSubmit',
     defaultValues: defaultValuesForm,
@@ -28,11 +30,18 @@ export default function FormContacts() {
   }
 
   async function loadData() {
-    const response = await service.getInfo();
-    const { address, email, phone } = response.data;
-    setValue('address', address);
-    setValue('email', email);
-    setValue('phone', phone);
+    try {
+      setLoading(true);
+      const response = await service.getInfo();
+      const { address, email, phone } = response.data;
+      setValue('address', address);
+      setValue('email', email);
+      setValue('phone', phone);
+    } catch (e) {
+      console.log(3);
+    } finally {
+      setLoading(false);
+    }
   }
 
   useEffect(() => {
@@ -41,6 +50,11 @@ export default function FormContacts() {
 
   return (
     <Box>
+      {loading ? (
+        <Box mb={4}>
+          <LinearProgress />
+        </Box>
+      ) : null}
       <Typography variant="h4" marginBottom={2}>
         Contacts
       </Typography>

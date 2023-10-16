@@ -3,10 +3,9 @@ import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 
 import { Box } from '@mui/material';
-import Stack from '@mui/material/Stack';
-import Button from '@mui/material/Button';
 import Grid from '@mui/material/Grid';
 import TextField from '@mui/material/TextField';
+import LinearProgress from '@mui/material/LinearProgress';
 
 import ReactQuill from 'react-quill';
 
@@ -14,6 +13,7 @@ import { ImageUpload } from '@/src/components';
 
 import { ContactFormProps, IContactFormData } from './ContactForm.type';
 import schemaValidation from './ContactForm.validation';
+import { BlockTogglers } from '../BlockTogglers';
 
 const defaultValuesForm: IContactFormData = {
   heading: '',
@@ -26,6 +26,7 @@ const defaultValuesForm: IContactFormData = {
 
 export default function ContactForm({
   data,
+  loadingType,
   onCreate,
   onUpdate,
   onPublish,
@@ -75,6 +76,13 @@ export default function ContactForm({
   return (
     <Box component="form" marginBottom={4}>
       <Grid container columnSpacing={4}>
+        <Grid item xs={12}>
+          {loadingType === 'loading' ? (
+            <Box mb={4}>
+              <LinearProgress />
+            </Box>
+          ) : null}
+        </Grid>
         <Grid item xs={12} lg={7} xl={7}>
           <Box mb={4}>
             <TextField
@@ -125,26 +133,14 @@ export default function ContactForm({
               }}
             />
           </Box>
-          <Stack spacing={2} direction="row">
-            <Button
-              variant="contained"
-              size="medium"
-              color="success"
-              onClick={handleSubmit(handleSave)}
-            >
-              {data ? 'Update' : 'Create'}
-            </Button>
-            {data ? (
-              <Button
-                variant="contained"
-                size="medium"
-                color={data?.publish ? 'info' : 'warning'}
-                onClick={() => onPublish && onPublish(!data?.publish)}
-              >
-                {data?.publish ? 'Unpublish' : 'Publish'}
-              </Button>
-            ) : null}
-          </Stack>
+          <BlockTogglers
+            typeToggle={!data ? 'create' : 'update'}
+            publish={data?.publish}
+            loadingType={loadingType}
+            showPublishButton={data !== null}
+            onSubmit={handleSubmit(handleSave)}
+            onPublish={onPublish}
+          />
         </Grid>
         <Grid item xs={12} lg={5}>
           <Box mb={4}>

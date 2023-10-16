@@ -1,5 +1,6 @@
 import { Box } from '@mui/material';
 import Typography from '@mui/material/Typography';
+import LinearProgress from '@mui/material/LinearProgress';
 
 import {
   AchivmentsForm,
@@ -24,11 +25,12 @@ const blockInfoPage: IBlockInfoPage = {
 };
 
 export default function SectionAchivments() {
-  const { data, onCreate, onPublish } = useApisReuseBlock({
-    service: service,
-    page: currentPage,
-    blockInfoPage: blockInfoPage,
-  });
+  const { data, loadingType, loadingForPublishLabel, onCreate, onPublish } =
+    useApisReuseBlock({
+      service: service,
+      page: currentPage,
+      blockInfoPage: blockInfoPage,
+    });
 
   function createAdapter(): IAchivmentsFormBlockFullData {
     return {
@@ -39,18 +41,31 @@ export default function SectionAchivments() {
 
   return (
     <Box>
-      <BlockHeading heading="Section achivments" publish={data?.publish} />
-      {data === null ? (
-        <Typography variant="h4">
-          First of all you have to create{' '}
-          <Link to={LinksPageSections.ACHIVMENTS}>section achivments</Link>
-        </Typography>
+      <BlockHeading
+        heading="Section achivments"
+        loading={loadingForPublishLabel}
+        publish={data?.publish}
+      />
+      {loadingType === 'loading' ? (
+        <Box mb={2}>
+          <LinearProgress />
+        </Box>
       ) : (
-        <AchivmentsForm
-          data={data}
-          onCreate={() => onCreate(createAdapter())}
-          onPublish={onPublish}
-        />
+        <Box>
+          {data === null ? (
+            <Typography variant="h4">
+              First of all you have to create{' '}
+              <Link to={LinksPageSections.ACHIVMENTS}>section achivments</Link>
+            </Typography>
+          ) : (
+            <AchivmentsForm
+              data={data}
+              loadingType={loadingType}
+              onCreate={() => onCreate(createAdapter())}
+              onPublish={onPublish}
+            />
+          )}
+        </Box>
       )}
     </Box>
   );

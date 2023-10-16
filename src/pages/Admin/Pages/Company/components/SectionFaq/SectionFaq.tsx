@@ -1,5 +1,6 @@
 import { Box } from '@mui/material';
 import Typography from '@mui/material/Typography';
+import LinearProgress from '@mui/material/LinearProgress';
 
 import {
   FaqForm,
@@ -24,11 +25,12 @@ const blockInfoPage: IBlockInfoPage = {
 };
 
 export default function SectionFaq() {
-  const { data, onCreate, onPublish } = useApisReuseBlock({
-    service: service,
-    page: currentPage,
-    blockInfoPage: blockInfoPage,
-  });
+  const { data, loadingType, loadingForPublishLabel, onCreate, onPublish } =
+    useApisReuseBlock({
+      service: service,
+      page: currentPage,
+      blockInfoPage: blockInfoPage,
+    });
 
   function createAdapter(): IFaqFormBlockFullData {
     return {
@@ -39,18 +41,31 @@ export default function SectionFaq() {
 
   return (
     <Box>
-      <BlockHeading heading="Section faq" publish={data?.publish} />
-      {data === null ? (
-        <Typography variant="h4">
-          First of all you have to create{' '}
-          <Link to={LinksPageSections.FAQ}>section faq</Link>
-        </Typography>
+      <BlockHeading
+        heading="Section faq"
+        loading={loadingForPublishLabel}
+        publish={data?.publish}
+      />
+      {loadingType === 'loading' ? (
+        <Box mb={2}>
+          <LinearProgress />
+        </Box>
       ) : (
-        <FaqForm
-          data={data}
-          onCreate={() => onCreate(createAdapter())}
-          onPublish={onPublish}
-        />
+        <Box>
+          {data === null ? (
+            <Typography variant="h4">
+              First of all you have to create{' '}
+              <Link to={LinksPageSections.FAQ}>section faq</Link>
+            </Typography>
+          ) : (
+            <FaqForm
+              data={data}
+              loadingType={loadingType}
+              onCreate={() => onCreate(createAdapter())}
+              onPublish={onPublish}
+            />
+          )}
+        </Box>
       )}
     </Box>
   );

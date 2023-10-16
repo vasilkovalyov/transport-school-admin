@@ -33,12 +33,18 @@ const getAdapterSectionParams = (
 };
 
 export default function SectionContactForm() {
-  const { data, updateSection, createSection, publishToggleSection } =
-    useApisBlock<IContactBlockFullData>({
-      page: currentPage,
-      service: service,
-      blockInfoPage: blockInfoPage,
-    });
+  const {
+    data,
+    loadingType,
+    loadingForPublishLabel,
+    updateSection,
+    createSection,
+    publishToggleSection,
+  } = useApisBlock<IContactBlockFullData>({
+    page: currentPage,
+    service: service,
+    blockInfoPage: blockInfoPage,
+  });
 
   function onHandleCreateSection(params: IContactFormData) {
     createSection(getAdapterSectionParams(params, blockInfoPage));
@@ -50,9 +56,14 @@ export default function SectionContactForm() {
 
   return (
     <Box>
-      <BlockHeading heading="Section contact form" publish={data?.publish} />
+      <BlockHeading
+        heading="Section contact form"
+        loading={loadingForPublishLabel}
+        publish={data?.publish}
+      />
       <ContactForm
         data={data}
+        loadingType={loadingType}
         onCreate={onHandleCreateSection}
         onUpdate={onHandleUpdateSection}
         onPublish={publishToggleSection}
