@@ -1,6 +1,4 @@
 import { Box } from '@mui/material';
-import Stack from '@mui/material/Stack';
-import Button from '@mui/material/Button';
 
 import { ContactsFormProps } from './ContactsForm.type';
 import { ReuseBlockTogglers } from '../ReuseBlockTogglers';
