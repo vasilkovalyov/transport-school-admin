@@ -33,12 +33,18 @@ const getAdapterSectionParams = (
 };
 
 export default function SectionWhoTeach() {
-  const { data, updateSection, createSection, publishToggleSection } =
-    useApisBlock<IWhoTeachBlockFullData>({
-      page: currentPage,
-      service: service,
-      blockInfoPage: blockInfoPage,
-    });
+  const {
+    data,
+    loadingType,
+    loadingForPublishLabel,
+    updateSection,
+    createSection,
+    publishToggleSection,
+  } = useApisBlock<IWhoTeachBlockFullData>({
+    page: currentPage,
+    service: service,
+    blockInfoPage: blockInfoPage,
+  });
 
   function onHandleCreateSection(params: IWhoTeachFormData) {
     createSection(getAdapterSectionParams(params, blockInfoPage));
@@ -50,11 +56,16 @@ export default function SectionWhoTeach() {
 
   return (
     <Box>
-      <BlockHeading heading="Section who teach" publish={data?.publish} />
+      <BlockHeading
+        heading="Section who teach"
+        loading={loadingForPublishLabel}
+        publish={data?.publish}
+      />
       <WhoTeachForm
         data={data}
-        onUpdate={onHandleUpdateSection}
+        loadingType={loadingType}
         onCreate={onHandleCreateSection}
+        onUpdate={onHandleUpdateSection}
         onPublish={publishToggleSection}
       />
     </Box>

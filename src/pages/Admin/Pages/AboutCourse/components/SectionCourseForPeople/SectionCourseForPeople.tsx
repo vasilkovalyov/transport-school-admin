@@ -34,12 +34,18 @@ const getAdapterSectionParams = (
 };
 
 export default function SectionCourseForPeople() {
-  const { data, updateSection, createSection, publishToggleSection } =
-    useApisBlock<ICourseForPeopleFullData>({
-      page: currentPage,
-      service: service,
-      blockInfoPage: blockInfoPage,
-    });
+  const {
+    data,
+    loadingType,
+    loadingForPublishLabel,
+    updateSection,
+    createSection,
+    publishToggleSection,
+  } = useApisBlock<ICourseForPeopleFullData>({
+    page: currentPage,
+    service: service,
+    blockInfoPage: blockInfoPage,
+  });
 
   function onHandleCreateSection(params: ICourseForPeopleFormData) {
     createSection(getAdapterSectionParams(params, blockInfoPage));
@@ -53,12 +59,14 @@ export default function SectionCourseForPeople() {
     <Box>
       <BlockHeading
         heading="Section course for people"
+        loading={loadingForPublishLabel}
         publish={data?.publish}
       />
       <CourseForPeopleForm
         data={data}
-        onUpdate={onHandleUpdateSection}
+        loadingType={loadingType}
         onCreate={onHandleCreateSection}
+        onUpdate={onHandleUpdateSection}
         onPublish={publishToggleSection}
       />
     </Box>

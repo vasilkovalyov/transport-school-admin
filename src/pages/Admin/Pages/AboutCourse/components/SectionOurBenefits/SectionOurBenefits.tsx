@@ -33,12 +33,18 @@ const getAdapterSectionParams = (
 };
 
 export default function SectionOurBenefits() {
-  const { data, updateSection, createSection, publishToggleSection } =
-    useApisBlock<IOurBenefitsBlockFullData>({
-      page: currentPage,
-      service: service,
-      blockInfoPage: blockInfoPage,
-    });
+  const {
+    data,
+    loadingType,
+    loadingForPublishLabel,
+    updateSection,
+    createSection,
+    publishToggleSection,
+  } = useApisBlock<IOurBenefitsBlockFullData>({
+    page: currentPage,
+    service: service,
+    blockInfoPage: blockInfoPage,
+  });
 
   function onHandleCreateSection(params: IOurBenefitsFormData) {
     createSection(getAdapterSectionParams(params, blockInfoPage));
@@ -50,11 +56,16 @@ export default function SectionOurBenefits() {
 
   return (
     <Box>
-      <BlockHeading heading="Section our benefits" publish={data?.publish} />
+      <BlockHeading
+        heading="Section our benefits"
+        loading={loadingForPublishLabel}
+        publish={data?.publish}
+      />
       <OurBenefitsForm
         data={data}
-        onUpdate={onHandleUpdateSection}
+        loadingType={loadingType}
         onCreate={onHandleCreateSection}
+        onUpdate={onHandleUpdateSection}
         onPublish={publishToggleSection}
       />
     </Box>

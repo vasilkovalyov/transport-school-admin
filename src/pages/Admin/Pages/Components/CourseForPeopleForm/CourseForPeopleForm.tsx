@@ -8,6 +8,7 @@ import Stack from '@mui/material/Stack';
 import Button from '@mui/material/Button';
 import Grid from '@mui/material/Grid';
 import TextField from '@mui/material/TextField';
+import LinearProgress from '@mui/material/LinearProgress';
 
 import ReactQuill from 'react-quill';
 
@@ -16,6 +17,7 @@ import {
   ICourseForPeopleFormData,
 } from './CourseForPeopleForm.type';
 import schemaValidation from './CourseForPeopleForm.validation';
+import { BlockTogglers } from '../BlockTogglers';
 
 const defaultValuesForm: ICourseForPeopleFormData = {
   heading: '',
@@ -25,6 +27,7 @@ const defaultValuesForm: ICourseForPeopleFormData = {
 
 export default function CourseForPeopleForm({
   data,
+  loadingType,
   onCreate,
   onUpdate,
   onPublish,
@@ -68,6 +71,11 @@ export default function CourseForPeopleForm({
 
   return (
     <Box component="form" marginBottom={4}>
+      {loadingType === 'loading' ? (
+        <Box mb={4}>
+          <LinearProgress />
+        </Box>
+      ) : null}
       <Grid container columnSpacing={4}>
         <Grid item xs={12} lg={7} xl={7}>
           <Box mb={4}>
@@ -91,26 +99,14 @@ export default function CourseForPeopleForm({
               onChange={(value) => onChangeRichTextEditor(value)}
             />
           </Box>
-          <Stack spacing={2} direction="row">
-            <Button
-              variant="contained"
-              size="medium"
-              color="success"
-              onClick={handleSubmit(handleSave)}
-            >
-              {data ? 'Update' : 'Create'}
-            </Button>
-            {data ? (
-              <Button
-                variant="contained"
-                size="medium"
-                color={data?.publish ? 'info' : 'warning'}
-                onClick={() => onPublish && onPublish(!data?.publish)}
-              >
-                {data?.publish ? 'Unpublish' : 'Publish'}
-              </Button>
-            ) : null}
-          </Stack>
+          <BlockTogglers
+            typeToggle={!data ? 'create' : 'update'}
+            publish={data?.publish}
+            loadingType={loadingType}
+            showPublishButton={data !== null}
+            onSubmit={handleSubmit(handleSave)}
+            onPublish={onPublish}
+          />
         </Grid>
       </Grid>
     </Box>

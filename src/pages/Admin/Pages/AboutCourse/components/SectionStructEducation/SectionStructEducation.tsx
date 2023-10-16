@@ -33,12 +33,18 @@ const getAdapterSectionParams = (
 };
 
 export default function SectionStructEducation() {
-  const { data, updateSection, createSection, publishToggleSection } =
-    useApisBlock<IStructEducationBlockFullData>({
-      page: currentPage,
-      service: service,
-      blockInfoPage: blockInfoPage,
-    });
+  const {
+    data,
+    loadingType,
+    loadingForPublishLabel,
+    updateSection,
+    createSection,
+    publishToggleSection,
+  } = useApisBlock<IStructEducationBlockFullData>({
+    page: currentPage,
+    service: service,
+    blockInfoPage: blockInfoPage,
+  });
 
   function onHandleCreateSection(params: IStructEducationFormData) {
     createSection(getAdapterSectionParams(params, blockInfoPage));
@@ -52,12 +58,14 @@ export default function SectionStructEducation() {
     <Box>
       <BlockHeading
         heading="Section struct education"
+        loading={loadingForPublishLabel}
         publish={data?.publish}
       />
       <StructEducationForm
         data={data}
-        onUpdate={onHandleUpdateSection}
+        loadingType={loadingType}
         onCreate={onHandleCreateSection}
+        onUpdate={onHandleUpdateSection}
         onPublish={publishToggleSection}
       />
     </Box>

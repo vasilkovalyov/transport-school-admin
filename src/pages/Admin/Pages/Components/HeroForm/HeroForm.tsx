@@ -99,7 +99,7 @@ export default function HeroForm({
   return (
     <Box component="form" maxWidth={800} marginBottom={4}>
       {loadingType === 'loading' ? (
-        <Box mb={2}>
+        <Box mb={4}>
           <LinearProgress />
         </Box>
       ) : null}

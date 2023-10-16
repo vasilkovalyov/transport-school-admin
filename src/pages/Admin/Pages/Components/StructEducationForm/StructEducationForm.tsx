@@ -5,6 +5,7 @@ import { Box } from '@mui/material';
 import Stack from '@mui/material/Stack';
 import Button from '@mui/material/Button';
 import TextField from '@mui/material/TextField';
+import LinearProgress from '@mui/material/LinearProgress';
 
 import {
   StructEducationFormProps,
@@ -13,6 +14,7 @@ import {
 } from './StructEducationForm.type';
 import schemaValidation from './StructEducationForm.validation';
 import { useEffect } from 'react';
+import { BlockTogglers } from '../BlockTogglers';
 
 const defaultStructEducationItem: IStructEducationData = {
   heading: '',
@@ -27,6 +29,7 @@ const defaultValuesForm: IStructEducationFormData = {
 
 export default function StructEducationForm({
   data,
+  loadingType,
   onCreate,
   onUpdate,
   onPublish,
@@ -59,6 +62,11 @@ export default function StructEducationForm({
 
   return (
     <Box component="form" maxWidth={800} marginBottom={4}>
+      {loadingType === 'loading' ? (
+        <Box mb={4}>
+          <LinearProgress />
+        </Box>
+      ) : null}
       <Box mb={4}>
         <TextField
           {...register('heading')}
@@ -73,26 +81,14 @@ export default function StructEducationForm({
           }}
         />
       </Box>
-      <Stack spacing={2} direction="row">
-        <Button
-          variant="contained"
-          size="medium"
-          color="success"
-          onClick={handleSubmit(handleSave)}
-        >
-          {data ? 'Update' : 'Create'}
-        </Button>
-        {data ? (
-          <Button
-            variant="contained"
-            size="medium"
-            color={data?.publish ? 'info' : 'warning'}
-            onClick={() => onPublish && onPublish(!data?.publish)}
-          >
-            {data?.publish ? 'Unpublish' : 'Publish'}
-          </Button>
-        ) : null}
-      </Stack>
+      <BlockTogglers
+        typeToggle={!data ? 'create' : 'update'}
+        publish={data?.publish}
+        loadingType={loadingType}
+        showPublishButton={data !== null}
+        onSubmit={handleSubmit(handleSave)}
+        onPublish={onPublish}
+      />
     </Box>
   );
 }
