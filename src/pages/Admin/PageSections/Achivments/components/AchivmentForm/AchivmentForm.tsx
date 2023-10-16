@@ -1,10 +1,13 @@
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { useForm, useFieldArray } from 'react-hook-form';
 
 import { Box } from '@mui/material';
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 import TextField from '@mui/material/TextField';
+import Stack from '@mui/material/Stack';
+import LinearProgress from '@mui/material/LinearProgress';
+import CircularProgress from '@mui/material/CircularProgress';
 
 import { DynamicFieldTogglers } from '@/src/components';
 
@@ -28,6 +31,8 @@ const defaultValuesForm: IAchivmentSectionFormData = {
 const serviceSectionAchivment = new AchivmentSectionFormService();
 
 export default function AchivmentForm() {
+  const [loading, setLoading] = useState<boolean>(true);
+  const [loadingUpdate, setLoadingUpdate] = useState<boolean>(false);
   const { handleSubmit, register, control, setValue } =
     useForm<IAchivmentSectionFormData>({
       mode: 'onSubmit',
@@ -41,15 +46,22 @@ export default function AchivmentForm() {
   });
 
   async function loadData() {
-    const response = await serviceSectionAchivment.getInfo();
-    const { heading, subheading, list_achivments } = response.data;
-    if (!list_achivments.length) {
-      setValue('list_achivments', [defaultAchivmentListItem]);
-    } else {
-      setValue('list_achivments', list_achivments);
+    try {
+      setLoading(true);
+      const response = await serviceSectionAchivment.getInfo();
+      const { heading, subheading, list_achivments } = response.data;
+      if (!list_achivments.length) {
+        setValue('list_achivments', [defaultAchivmentListItem]);
+      } else {
+        setValue('list_achivments', list_achivments);
+      }
+      setValue('heading', heading);
+      setValue('subheading', subheading);
+    } catch (e) {
+      console.log(e);
+    } finally {
+      setLoading(false);
     }
-    setValue('heading', heading);
-    setValue('subheading', subheading);
   }
 
   useEffect(() => {
@@ -64,12 +76,24 @@ export default function AchivmentForm() {
     remove(numberAchivment);
   }
 
-  function handleSave(data: IAchivmentSectionFormData) {
-    serviceSectionAchivment.update(data);
+  async function handleSave(data: IAchivmentSectionFormData) {
+    try {
+      setLoadingUpdate(true);
+      await serviceSectionAchivment.update(data);
+    } catch (e) {
+      console.log(e);
+    } finally {
+      setLoadingUpdate(false);
+    }
   }
 
   return (
     <Box component="form" maxWidth={800} marginBottom={4}>
+      {loading ? (
+        <Box mb={4}>
+          <LinearProgress />
+        </Box>
+      ) : null}
       <Box mb={4}>
         <Box mb={2}>
           <TextField
@@ -129,16 +153,18 @@ export default function AchivmentForm() {
           </Box>
         </Box>
       ))}
-      <Box>
+      <Stack spacing={2} direction="row" alignItems="center">
         <Button
           variant="contained"
           size="medium"
           color="success"
+          disabled={loadingUpdate}
           onClick={handleSubmit(handleSave)}
         >
           Save
         </Button>
-      </Box>
+        {loadingUpdate ? <CircularProgress size={20} /> : null}
+      </Stack>
     </Box>
   );
 }

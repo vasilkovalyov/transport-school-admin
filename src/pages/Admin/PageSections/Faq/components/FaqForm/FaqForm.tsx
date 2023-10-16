@@ -1,4 +1,4 @@
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { useForm, useFieldArray } from 'react-hook-form';
 
 import { Box } from '@mui/material';
@@ -7,6 +7,8 @@ import Grid from '@mui/material/Grid';
 import TextField from '@mui/material/TextField';
 import Typography from '@mui/material/Typography';
 import Stack from '@mui/material/Stack';
+import LinearProgress from '@mui/material/LinearProgress';
+import CircularProgress from '@mui/material/CircularProgress';
 
 import { DynamicFieldTogglers } from '@/src/components';
 
@@ -27,6 +29,8 @@ const defaultValuesForm: IFaqSectionFormData = {
 const serviceSectionFaq = new FaqSectionFormService();
 
 export default function FaqForm() {
+  const [loading, setLoading] = useState<boolean>(true);
+  const [loadingUpdate, setLoadingUpdate] = useState<boolean>(false);
   const { handleSubmit, register, control, setValue } =
     useForm<IFaqSectionFormData>({
       mode: 'onSubmit',
@@ -40,10 +44,17 @@ export default function FaqForm() {
   });
 
   async function loadData() {
-    const response = await serviceSectionFaq.getInfo();
-    const { heading, list_faq } = response.data;
-    setValue('heading', heading);
-    setValue('list_faq', list_faq);
+    try {
+      setLoading(true);
+      const response = await serviceSectionFaq.getInfo();
+      const { heading, list_faq } = response.data;
+      setValue('heading', heading);
+      setValue('list_faq', list_faq);
+    } catch (e) {
+      console.log(e);
+    } finally {
+      setLoading(false);
+    }
   }
 
   useEffect(() => {
@@ -58,13 +69,27 @@ export default function FaqForm() {
     remove(numberAchivment);
   }
 
-  function handleSave(data: IFaqSectionFormData) {
-    serviceSectionFaq.update(data);
+  async function handleSave(data: IFaqSectionFormData) {
+    try {
+      setLoadingUpdate(true);
+      await serviceSectionFaq.update(data);
+    } catch (e) {
+      console.log(e);
+    } finally {
+      setLoadingUpdate(false);
+    }
   }
 
   return (
     <Box component="form" marginBottom={4}>
       <Grid container columnSpacing={4}>
+        <Grid item xs={12}>
+          {loading ? (
+            <Box mb={4}>
+              <LinearProgress />
+            </Box>
+          ) : null}
+        </Grid>
         <Grid item xs={12} lg={7} xl={5}>
           <Box mb={4}>
             <TextField
@@ -111,15 +136,17 @@ export default function FaqForm() {
               </Box>
             </Box>
           ))}
-          <Stack spacing={2} direction="row">
+          <Stack spacing={2} direction="row" alignItems="center">
             <Button
               variant="contained"
               size="medium"
               color="success"
+              disabled={loadingUpdate}
               onClick={handleSubmit(handleSave)}
             >
               Save
             </Button>
+            {loadingUpdate ? <CircularProgress size={20} /> : null}
           </Stack>
         </Grid>
         {/* <Grid item xs={12} lg={5}>

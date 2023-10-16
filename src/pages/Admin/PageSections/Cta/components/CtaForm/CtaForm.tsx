@@ -6,6 +6,9 @@ import Button from '@mui/material/Button';
 import TextField from '@mui/material/TextField';
 import Checkbox from '@mui/material/Checkbox';
 import FormControlLabel from '@mui/material/FormControlLabel';
+import LinearProgress from '@mui/material/LinearProgress';
+import Stack from '@mui/material/Stack';
+import CircularProgress from '@mui/material/CircularProgress';
 
 import { ICtaSectionFormData, CtaSectionCheckboxTypes } from './CtaForm.type';
 import CtaSectionFormService from './CtaForm.service';
@@ -19,6 +22,8 @@ const defaultValuesForm: ICtaSectionFormData = {
 const serviceSectionCta = new CtaSectionFormService();
 
 export default function CtaForm() {
+  const [loading, setLoading] = useState<boolean>(true);
+  const [loadingUpdate, setLoadingUpdate] = useState<boolean>(false);
   const [checkboxValues, setCheckboxValues] = useState<CtaSectionCheckboxTypes>(
     {
       use_link_to_contact_page: false,
@@ -32,12 +37,19 @@ export default function CtaForm() {
   });
 
   async function loadData() {
-    const response = await serviceSectionCta.getInfo();
-    setValue('heading', response.data?.heading);
-    setCheckboxValues({
-      use_link_to_contact_page: response.data.use_link_to_contact_page,
-      use_phone_cta: response.data.use_phone_cta,
-    });
+    try {
+      setLoading(true);
+      const response = await serviceSectionCta.getInfo();
+      setValue('heading', response.data?.heading);
+      setCheckboxValues({
+        use_link_to_contact_page: response.data.use_link_to_contact_page,
+        use_phone_cta: response.data.use_phone_cta,
+      });
+    } catch (e) {
+      console.log(e);
+    } finally {
+      setLoading(false);
+    }
   }
 
   useEffect(() => {
@@ -56,12 +68,24 @@ export default function CtaForm() {
     });
   }
 
-  function handleSave(data: ICtaSectionFormData) {
-    serviceSectionCta.update(data);
+  async function handleSave(data: ICtaSectionFormData) {
+    try {
+      setLoadingUpdate(true);
+      await serviceSectionCta.update(data);
+    } catch (e) {
+      console.log(e);
+    } finally {
+      setLoadingUpdate(false);
+    }
   }
 
   return (
     <Box component="form" maxWidth={500} marginBottom={4}>
+      {loading ? (
+        <Box mb={4}>
+          <LinearProgress />
+        </Box>
+      ) : null}
       <Box mb={4}>
         <Box mb={2}>
           <TextField
@@ -106,16 +130,18 @@ export default function CtaForm() {
           />
         </Box>
       </Box>
-      <Box>
+      <Stack spacing={2} direction="row" alignItems="center">
         <Button
           variant="contained"
           size="medium"
           color="success"
+          disabled={loadingUpdate}
           onClick={handleSubmit(handleSave)}
         >
           Save
         </Button>
-      </Box>
+        {loadingUpdate ? <CircularProgress size={20} /> : null}
+      </Stack>
     </Box>
   );
 }

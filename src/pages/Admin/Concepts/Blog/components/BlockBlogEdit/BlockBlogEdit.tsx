@@ -4,7 +4,7 @@ import { useNavigate, useParams } from 'react-router-dom';
 import { Box } from '@mui/material';
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
-import CircularProgress from '@mui/material/CircularProgress';
+import LinearProgress from '@mui/material/LinearProgress';
 
 import BlogForm from '../BlogForm/BlogForm';
 import { BlockCardEditableProps, BlogCardProps } from '../BlogCard';
@@ -67,16 +67,13 @@ export default function BlockBlogEdit() {
     }
   }
 
-  if (loading) {
-    return (
-      <Box py={4} sx={{ display: 'flex', justifyContent: 'center' }}>
-        <CircularProgress />
-      </Box>
-    );
-  }
-
   return (
     <Box component="section">
+      {loading ? (
+        <Box pb={4}>
+          <LinearProgress />
+        </Box>
+      ) : null}
       <Typography variant="body2">
         Date post - {dayjs(data.createdAt).format('HH:MM | DD MMM YYYY')}
       </Typography>

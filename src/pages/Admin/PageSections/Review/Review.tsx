@@ -28,7 +28,7 @@ export default function PageSectionReview() {
                 navigate(LinksPageSections.REVIEW_CREATE);
               }}
             >
-              Create Lesson
+              Create Review
             </Button>
           </Grid>
         </Grid>

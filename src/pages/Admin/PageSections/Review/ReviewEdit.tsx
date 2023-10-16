@@ -5,6 +5,7 @@ import { Box } from '@mui/material';
 import Container from '@mui/material/Container';
 import Typography from '@mui/material/Typography';
 import Breadcrumbs from '@mui/material/Breadcrumbs';
+import LinearProgress from '@mui/material/LinearProgress';
 
 import { Links, LinksPageSections } from '@/src/constants/routes';
 import { IReview, IReviewFormData, ReviewForm } from './components';
@@ -15,11 +16,20 @@ const service = new ServiceReview();
 export default function PageSectionReviewEdit() {
   let { id } = useParams();
   const navigate = useNavigate();
+  const [loading, setLoading] = useState<boolean>(true);
+  const [loadingSubmit, setLoadingSubmit] = useState<boolean>(false);
   const [review, setReview] = useState<IReview>();
 
   async function loadData() {
-    const response = await service.getPost(id || '');
-    setReview(response.data);
+    try {
+      setLoading(true);
+      const response = await service.getPost(id || '');
+      setReview(response.data);
+    } catch (e) {
+      console.log(e);
+    } finally {
+      setLoading(false);
+    }
   }
 
   useEffect(() => {
@@ -28,6 +38,7 @@ export default function PageSectionReviewEdit() {
 
   async function onUpdate(data: IReviewFormData) {
     try {
+      setLoadingSubmit(true);
       await service.update({
         ...data,
         _id: id as string,
@@ -35,6 +46,8 @@ export default function PageSectionReviewEdit() {
       navigate(LinksPageSections.REVIEW);
     } catch (e) {
       console.log(e);
+    } finally {
+      setLoadingSubmit(false);
     }
   }
 
@@ -49,7 +62,16 @@ export default function PageSectionReviewEdit() {
             <Typography>Edit review</Typography>
           </Breadcrumbs>
         </Box>
-        <ReviewForm data={review} onSubmit={onUpdate} />
+        {loading ? (
+          <Box mb={4}>
+            <LinearProgress />
+          </Box>
+        ) : null}
+        <ReviewForm
+          data={review}
+          loadingSubmit={loadingSubmit}
+          onSubmit={onUpdate}
+        />
       </Container>
     </Box>
   );

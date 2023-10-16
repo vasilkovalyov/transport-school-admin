@@ -3,7 +3,7 @@ import { useNavigate, useParams } from 'react-router-dom';
 
 import { Box } from '@mui/material';
 import Button from '@mui/material/Button';
-import CircularProgress from '@mui/material/CircularProgress';
+import LinearProgress from '@mui/material/LinearProgress';
 
 import LessonForm from '../LessonForm/LessonForm';
 import LessonScheduleService from '../../LessonSchedule.service';
@@ -68,16 +68,13 @@ export default function BlockEditLesson() {
     }
   }
 
-  if (loading) {
-    return (
-      <Box py={4} sx={{ display: 'flex', justifyContent: 'center' }}>
-        <CircularProgress />
-      </Box>
-    );
-  }
-
   return (
     <Box component="section">
+      {loading ? (
+        <Box pb={4}>
+          <LinearProgress />
+        </Box>
+      ) : null}
       <LessonForm data={data} onSubmit={onUpdate} />
       <Box>
         <Button

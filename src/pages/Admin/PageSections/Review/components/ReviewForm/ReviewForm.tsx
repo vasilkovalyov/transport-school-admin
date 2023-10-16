@@ -10,6 +10,8 @@ import RadioGroup from '@mui/material/RadioGroup';
 import FormControlLabel from '@mui/material/FormControlLabel';
 import FormControl from '@mui/material/FormControl';
 import FormLabel from '@mui/material/FormLabel';
+import Stack from '@mui/material/Stack';
+import CircularProgress from '@mui/material/CircularProgress';
 
 // import { ImageUpload } from '@/src/components';
 
@@ -21,7 +23,11 @@ const defaultValuesForm: IReviewFormData = {
   rating: null,
 };
 
-export default function ReviewForm({ data, onSubmit }: ReviewFormProps) {
+export default function ReviewForm({
+  data,
+  loadingSubmit = false,
+  onSubmit,
+}: ReviewFormProps) {
   const ratingCount = 5;
   const [ratingValue, setRatingValue] = useState<number | null>(null);
 
@@ -107,16 +113,18 @@ export default function ReviewForm({ data, onSubmit }: ReviewFormProps) {
           </Box>
         </Grid>
       </Grid>
-      <Box>
+      <Stack spacing={2} direction="row" alignItems="center">
         <Button
           variant="contained"
           size="medium"
           color="success"
+          disabled={loadingSubmit}
           onClick={handleSubmit(handleSave)}
         >
           Save
         </Button>
-      </Box>
+        {loadingSubmit ? <CircularProgress size={20} /> : null}
+      </Stack>
     </Box>
   );
 }

@@ -4,7 +4,10 @@ import { useForm } from 'react-hook-form';
 import { Box } from '@mui/material';
 import Button from '@mui/material/Button';
 import Grid from '@mui/material/Grid';
+import Stack from '@mui/material/Stack';
 import TextField from '@mui/material/TextField';
+import LinearProgress from '@mui/material/LinearProgress';
+import CircularProgress from '@mui/material/CircularProgress';
 
 import { IContactsSectionFormData, FormValuesKey } from './ContactsForm.type';
 import ContactsSectionFormService from './ContactsForm.service';
@@ -28,6 +31,8 @@ const valuesKeys: FormValuesKey[] = [
 const serviceSectionContacts = new ContactsSectionFormService();
 
 export default function ContactsForm() {
+  const [loading, setLoading] = useState<boolean>(true);
+  const [loadingUpdate, setLoadingUpdate] = useState<boolean>(false);
   const [mapUrl, setMapUrl] = useState<string | null>(null);
   const { handleSubmit, register, setValue } =
     useForm<IContactsSectionFormData>({
@@ -36,9 +41,16 @@ export default function ContactsForm() {
     });
 
   async function loadData() {
-    const response = await serviceSectionContacts.getInfo();
-    fillValues(valuesKeys, response.data);
-    setMapUrl(response.data.map_url);
+    try {
+      setLoading(true);
+      const response = await serviceSectionContacts.getInfo();
+      fillValues(valuesKeys, response.data);
+      setMapUrl(response.data.map_url);
+    } catch (e) {
+      console.log(e);
+    } finally {
+      setLoading(false);
+    }
   }
 
   useEffect(() => {
@@ -52,12 +64,24 @@ export default function ContactsForm() {
     });
   }
 
-  function handleSave(data: IContactsSectionFormData) {
-    serviceSectionContacts.update(data);
+  async function handleSave(data: IContactsSectionFormData) {
+    try {
+      setLoadingUpdate(true);
+      await serviceSectionContacts.update(data);
+    } catch (e) {
+      console.log(e);
+    } finally {
+      setLoadingUpdate(false);
+    }
   }
 
   return (
     <Box component="form" maxWidth={800} marginBottom={4}>
+      {loading ? (
+        <Box mb={4}>
+          <LinearProgress />
+        </Box>
+      ) : null}
       <Grid container spacing={4}>
         <Grid item xs={12}>
           <TextField
@@ -136,16 +160,18 @@ export default function ContactsForm() {
           ) : null}
         </Grid>
       </Grid>
-      <Box>
+      <Stack spacing={2} direction="row" alignItems="center">
         <Button
           variant="contained"
           size="medium"
           color="success"
+          disabled={loadingUpdate}
           onClick={handleSubmit(handleSave)}
         >
           Save
         </Button>
-      </Box>
+        {loadingUpdate ? <CircularProgress size={20} /> : null}
+      </Stack>
     </Box>
   );
 }

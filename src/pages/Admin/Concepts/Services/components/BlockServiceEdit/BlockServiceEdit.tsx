@@ -3,7 +3,7 @@ import { useNavigate, useParams } from 'react-router-dom';
 
 import { Box } from '@mui/material';
 import Button from '@mui/material/Button';
-import CircularProgress from '@mui/material/CircularProgress';
+import LinearProgress from '@mui/material/LinearProgress';
 
 import ServiceForm from '../ServiceForm/ServiceForm';
 import { ServiceEditableFormData } from '../ServiceForm/ServiceForm.type';
@@ -66,16 +66,13 @@ export default function BlockServiceEdit() {
     }
   }
 
-  if (loading) {
-    return (
-      <Box py={4} sx={{ display: 'flex', justifyContent: 'center' }}>
-        <CircularProgress />
-      </Box>
-    );
-  }
-
   return (
     <Box component="section">
+      {loading ? (
+        <Box pb={4}>
+          <LinearProgress />
+        </Box>
+      ) : null}
       <ServiceForm data={data} onSubmit={onUpdate} />
       <Box>
         <Button

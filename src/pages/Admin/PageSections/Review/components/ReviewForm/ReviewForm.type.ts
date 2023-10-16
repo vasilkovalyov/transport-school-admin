@@ -2,6 +2,7 @@ import { IReview } from '../ReviewRow';
 
 export type ReviewFormProps = {
   data?: IReviewFormData;
+  loadingSubmit?: boolean;
   onSubmit?: (data: IReviewFormData) => void;
 };
 
