@@ -1,5 +1,5 @@
 // libs
-import { useRef, useState, ChangeEvent } from 'react';
+import { useRef, useState, ChangeEvent, useEffect } from 'react';
 import cn from 'classnames';
 
 // material ui components
@@ -23,6 +23,12 @@ export default function ImageUpload({
 }: ImageUploadProps) {
   const [fileImage, setFileImage] = useState<string>(image ?? '');
   const refFieldInputFile = useRef<HTMLInputElement>(null);
+
+  useEffect(() => {
+    if (image) {
+      setFileImage(image);
+    }
+  }, [image]);
 
   const viewTypeCn = cn({
     'image-upload--square': viewType === 'square',
