@@ -46,12 +46,17 @@ export default function TeamEducationForm({
       use_cta_link: false,
     });
 
-  const { handleSubmit, register, setValue, control } =
-    useForm<ITeamEducationFormData>({
-      mode: 'onSubmit',
-      defaultValues: data ?? defaultValuesForm,
-      resolver: yupResolver(schemaValidation),
-    });
+  const {
+    handleSubmit,
+    register,
+    setValue,
+    control,
+    formState: { errors },
+  } = useForm<ITeamEducationFormData>({
+    mode: 'onSubmit',
+    defaultValues: data ?? defaultValuesForm,
+    resolver: yupResolver(schemaValidation),
+  });
 
   const { fields, append, remove } = useFieldArray({
     control,
@@ -125,6 +130,8 @@ export default function TeamEducationForm({
           fullWidth
           multiline
           rows={2}
+          error={!!errors['heading']?.message}
+          helperText={errors['heading']?.message}
           InputLabelProps={{
             shrink: true,
           }}

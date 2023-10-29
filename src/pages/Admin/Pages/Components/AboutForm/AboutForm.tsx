@@ -29,7 +29,12 @@ export default function AboutForm({
 }: AboutFormProps) {
   const [markdownText, setMarkdownText] = useState<string | null>(null);
 
-  const { handleSubmit, register, setValue } = useForm<AboutFormDataType>({
+  const {
+    handleSubmit,
+    register,
+    setValue,
+    formState: { errors },
+  } = useForm<AboutFormDataType>({
     mode: 'onSubmit',
     defaultValues: data ?? defaultValuesForm,
     resolver: yupResolver(schemaValidation),
@@ -83,6 +88,8 @@ export default function AboutForm({
               fullWidth
               multiline
               rows={2}
+              error={!!errors['heading']?.message}
+              helperText={errors['heading']?.message}
               InputLabelProps={{
                 shrink: true,
               }}

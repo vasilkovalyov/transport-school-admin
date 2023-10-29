@@ -40,12 +40,16 @@ export default function FormatLessonsForm({
       use_dark_theme: false,
     });
 
-  const { handleSubmit, register, setValue } =
-    useForm<FormatLessonsFormDataType>({
-      mode: 'onSubmit',
-      defaultValues: data ?? defaultValuesForm,
-      resolver: yupResolver(schemaValidation),
-    });
+  const {
+    handleSubmit,
+    register,
+    setValue,
+    formState: { errors },
+  } = useForm<FormatLessonsFormDataType>({
+    mode: 'onSubmit',
+    defaultValues: data ?? defaultValuesForm,
+    resolver: yupResolver(schemaValidation),
+  });
 
   useEffect(() => {
     if (!data) return;
@@ -123,6 +127,8 @@ export default function FormatLessonsForm({
           fullWidth
           multiline
           rows={2}
+          error={!!errors['heading']?.message}
+          helperText={errors['heading']?.message}
           InputLabelProps={{
             shrink: true,
           }}

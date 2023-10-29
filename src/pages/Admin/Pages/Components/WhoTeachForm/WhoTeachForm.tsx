@@ -32,7 +32,12 @@ export default function WhoTeachForm({
 }: WhoTeachFormProps) {
   const [markdownText, setMarkdownText] = useState<string | null>(null);
 
-  const { handleSubmit, register, setValue } = useForm<WhoTeachFormDataType>({
+  const {
+    handleSubmit,
+    register,
+    setValue,
+    formState: { errors },
+  } = useForm<WhoTeachFormDataType>({
     mode: 'onSubmit',
     defaultValues: data ?? defaultValuesForm,
     resolver: yupResolver(schemaValidation),
@@ -90,6 +95,8 @@ export default function WhoTeachForm({
               fullWidth
               multiline
               rows={2}
+              error={!!errors['heading']?.message}
+              helperText={errors['heading']?.message}
               InputLabelProps={{
                 shrink: true,
               }}

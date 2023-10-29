@@ -37,12 +37,17 @@ export default function RequirementForm({
   onUpdate,
   onPublish,
 }: RequirementFormProps) {
-  const { handleSubmit, register, setValue, control } =
-    useForm<RequirementFormDataType>({
-      mode: 'onSubmit',
-      defaultValues: data ?? defaultValuesForm,
-      resolver: yupResolver(schemaValidation),
-    });
+  const {
+    handleSubmit,
+    register,
+    setValue,
+    control,
+    formState: { errors },
+  } = useForm<RequirementFormDataType>({
+    mode: 'onSubmit',
+    defaultValues: data ?? defaultValuesForm,
+    resolver: yupResolver(schemaValidation),
+  });
 
   const { fields, append, remove } = useFieldArray({
     control,
@@ -97,6 +102,8 @@ export default function RequirementForm({
           fullWidth
           multiline
           rows={2}
+          error={!!errors['heading']?.message}
+          helperText={errors['heading']?.message}
           InputLabelProps={{
             shrink: true,
           }}

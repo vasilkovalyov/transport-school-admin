@@ -34,13 +34,16 @@ export default function AboutCourseForm({
 }: AboutCourseFormProps) {
   const [markdownText, setMarkdownText] = useState<string | null>(null);
 
-  const { handleSubmit, register, setValue } = useForm<AboutCourseFormDataType>(
-    {
-      mode: 'onSubmit',
-      defaultValues: data ?? defaultValuesForm,
-      resolver: yupResolver(schemaValidation),
-    }
-  );
+  const {
+    handleSubmit,
+    register,
+    setValue,
+    formState: { errors },
+  } = useForm<AboutCourseFormDataType>({
+    mode: 'onSubmit',
+    defaultValues: data ?? defaultValuesForm,
+    resolver: yupResolver(schemaValidation),
+  });
 
   useEffect(() => {
     if (!data) return;
@@ -93,6 +96,8 @@ export default function AboutCourseForm({
             fullWidth
             multiline
             rows={2}
+            error={!!errors['heading']?.message}
+            helperText={errors['heading']?.message}
             InputLabelProps={{
               shrink: true,
             }}

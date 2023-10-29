@@ -12,7 +12,7 @@ import { BlockTogglers } from '../BlockTogglers';
 
 const defaultValuesForm: ScheduleFormDataType = {
   heading: '',
-  post_number: null,
+  post_number: 0,
   publish: false,
 };
 
@@ -23,7 +23,12 @@ export default function ScheduleForm({
   onUpdate,
   onPublish,
 }: ScheduleFormProps) {
-  const { handleSubmit, register, setValue } = useForm<ScheduleFormDataType>({
+  const {
+    handleSubmit,
+    register,
+    setValue,
+    formState: { errors },
+  } = useForm<ScheduleFormDataType>({
     mode: 'onSubmit',
     defaultValues: data ?? defaultValuesForm,
     resolver: yupResolver(schemaValidation),
@@ -65,6 +70,8 @@ export default function ScheduleForm({
           fullWidth
           multiline
           rows={2}
+          error={!!errors['heading']?.message}
+          helperText={errors['heading']?.message}
           InputLabelProps={{
             shrink: true,
           }}

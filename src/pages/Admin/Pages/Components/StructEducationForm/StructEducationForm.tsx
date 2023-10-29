@@ -39,12 +39,17 @@ export default function StructEducationForm({
     StructEducationRichTextType[]
   >([]);
 
-  const { control, handleSubmit, register, setValue } =
-    useForm<StructEducationFormDataType>({
-      mode: 'onSubmit',
-      defaultValues: data ?? defaultValuesForm,
-      resolver: yupResolver(schemaValidation),
-    });
+  const {
+    control,
+    handleSubmit,
+    register,
+    setValue,
+    formState: { errors },
+  } = useForm<StructEducationFormDataType>({
+    mode: 'onSubmit',
+    defaultValues: data ?? defaultValuesForm,
+    resolver: yupResolver(schemaValidation),
+  });
 
   const { fields, append, remove } = useFieldArray({
     control,
@@ -125,6 +130,8 @@ export default function StructEducationForm({
           fullWidth
           multiline
           rows={2}
+          error={!!errors['heading']?.message}
+          helperText={errors['heading']?.message}
           InputLabelProps={{
             shrink: true,
           }}
