@@ -1,5 +1,7 @@
 import { useEffect, useState } from 'react';
 import { useForm, useFieldArray } from 'react-hook-form';
+import { yupResolver } from '@hookform/resolvers/yup';
+import ReactQuill from 'react-quill';
 
 import { Box } from '@mui/material';
 import Button from '@mui/material/Button';
@@ -18,7 +20,7 @@ import {
   FaqSectionFormDataType,
 } from './FaqForm.type';
 import FaqSectionFormService from './FaqForm.service';
-import ReactQuill from 'react-quill';
+import schemaValidation from './FaqForm.validation';
 
 const defaultFaqListItem: FaqType = {
   heading: '',
@@ -41,11 +43,17 @@ export default function FaqForm() {
     []
   );
 
-  const { handleSubmit, register, control, setValue } =
-    useForm<FaqSectionFormDataType>({
-      mode: 'onSubmit',
-      defaultValues: defaultValuesForm,
-    });
+  const {
+    handleSubmit,
+    register,
+    control,
+    setValue,
+    formState: { errors },
+  } = useForm<FaqSectionFormDataType>({
+    mode: 'onSubmit',
+    defaultValues: defaultValuesForm,
+    resolver: yupResolver(schemaValidation),
+  });
 
   const { fields, remove, append } = useFieldArray({
     control,
@@ -59,7 +67,7 @@ export default function FaqForm() {
       const response = await serviceSectionFaq.getInfo();
       const { heading, list_faq } = response.data;
       setValue('heading', heading);
-      if (list_faq.length) {
+      if (list_faq && list_faq.length) {
         setValue('list_faq', list_faq);
         fillRichTextEditorArray(list_faq);
       }
@@ -133,6 +141,8 @@ export default function FaqForm() {
               label="Heading"
               variant="outlined"
               fullWidth
+              error={!!errors['heading']?.message}
+              helperText={errors['heading']?.message}
               InputLabelProps={{
                 shrink: true,
               }}

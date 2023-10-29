@@ -1,7 +1,7 @@
 export type FaqSectionFormDataType = {
   image?: string;
   heading: string;
-  list_faq: FaqType[];
+  list_faq?: FaqType[];
 };
 
 export type FaqType = {
