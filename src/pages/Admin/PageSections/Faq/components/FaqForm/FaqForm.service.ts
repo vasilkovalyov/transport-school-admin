@@ -1,6 +1,6 @@
 import { AxiosPromise } from 'axios';
 import api from '@/src/api/axios';
-import { IFaqSectionFormData } from './FaqForm.type';
+import { FaqSectionFormDataType } from './FaqForm.type';
 
 enum EndpointFaqSectionEnum {
   UPDATE = 'block/reuse-faq',
@@ -8,14 +8,16 @@ enum EndpointFaqSectionEnum {
 }
 
 class FaqSectionFormService {
-  async update(params: IFaqSectionFormData): AxiosPromise<{ message: string }> {
+  async update(
+    params: FaqSectionFormDataType
+  ): AxiosPromise<{ message: string }> {
     const response = await api.patch(EndpointFaqSectionEnum.UPDATE, {
       ...params,
     });
     return response;
   }
 
-  async getInfo(): AxiosPromise<IFaqSectionFormData> {
+  async getInfo(): AxiosPromise<FaqSectionFormDataType> {
     const response = await api.get(`${EndpointFaqSectionEnum.GET_INFO}`);
     return response;
   }

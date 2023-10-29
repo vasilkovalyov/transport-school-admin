@@ -1,14 +1,13 @@
 import {
   BaseBlockCutDownFormProps,
-  IBaseBlock,
-  IBlockInfoPage,
+  BaseBlockType,
+  BlockInfoPageType,
 } from '../types';
 
 export type ContactsFormProps =
-  BaseBlockCutDownFormProps<IContactsSectionFormData>;
+  BaseBlockCutDownFormProps<ContactsSectionFormDataType>;
 
-export interface IContactsSectionFormData extends IBaseBlock {}
+export type ContactsSectionFormDataType = BaseBlockType;
 
-export interface IContactsBlockFullData
-  extends IContactsSectionFormData,
-    IBlockInfoPage {}
+export type ContactsBlockFullDataType = ContactsSectionFormDataType &
+  BlockInfoPageType;

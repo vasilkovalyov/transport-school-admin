@@ -1,7 +1,7 @@
-import { IServiceFormData } from '../ServiceForm';
+import { ServiceFormDataType } from '../ServiceForm';
 
 export type ServiceRowProps = Pick<
-  IServiceFormData,
+  ServiceFormDataType,
   'heading' | 'price' | 'image'
 > & {
   _id: string;

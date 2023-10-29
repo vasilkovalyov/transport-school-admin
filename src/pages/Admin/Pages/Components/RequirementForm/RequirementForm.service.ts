@@ -1,6 +1,6 @@
 import { AxiosPromise } from 'axios';
 import api from '@/src/api/axios';
-import { IRequirementBlockFullData } from './RequirementForm.type';
+import { RequirementBlockFullDataType } from './RequirementForm.type';
 import { IBlockService } from '../types';
 
 enum EndpointBlockRequirmentEnum {
@@ -12,7 +12,7 @@ enum EndpointBlockRequirmentEnum {
 }
 
 class RequirementFormService
-  implements IBlockService<IRequirementBlockFullData>
+  implements IBlockService<RequirementBlockFullDataType>
 {
   async publish(page: string): AxiosPromise<boolean> {
     const response = await api.patch(EndpointBlockRequirmentEnum.PUBLISH, {
@@ -29,7 +29,7 @@ class RequirementFormService
   }
 
   async create(
-    params: IRequirementBlockFullData
+    params: RequirementBlockFullDataType
   ): AxiosPromise<{ message: string }> {
     const response = await api.post(EndpointBlockRequirmentEnum.CREATE, {
       ...params,
@@ -38,7 +38,7 @@ class RequirementFormService
   }
 
   async update(
-    params: IRequirementBlockFullData
+    params: RequirementBlockFullDataType
   ): AxiosPromise<{ message: string }> {
     const response = await api.patch(EndpointBlockRequirmentEnum.UPDATE, {
       ...params,
@@ -46,7 +46,7 @@ class RequirementFormService
     return response;
   }
 
-  async getBlock(page: string): AxiosPromise<IRequirementBlockFullData> {
+  async getBlock(page: string): AxiosPromise<RequirementBlockFullDataType> {
     const response = await api.get(
       `${EndpointBlockRequirmentEnum.GET_BLOCK}${page}`
     );

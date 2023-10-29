@@ -9,10 +9,13 @@ import TextField from '@mui/material/TextField';
 import LinearProgress from '@mui/material/LinearProgress';
 import CircularProgress from '@mui/material/CircularProgress';
 
-import { IContactsSectionFormData, FormValuesKey } from './ContactsForm.type';
+import {
+  ContactsSectionFormDataType,
+  FormValuesKey,
+} from './ContactsForm.type';
 import ContactsSectionFormService from './ContactsForm.service';
 
-const defaultValuesForm: IContactsSectionFormData = {
+const defaultValuesForm: ContactsSectionFormDataType = {
   heading: '',
   address: '',
   phone: '',
@@ -35,7 +38,7 @@ export default function ContactsForm() {
   const [loadingUpdate, setLoadingUpdate] = useState<boolean>(false);
   const [mapUrl, setMapUrl] = useState<string | null>(null);
   const { handleSubmit, register, setValue } =
-    useForm<IContactsSectionFormData>({
+    useForm<ContactsSectionFormDataType>({
       mode: 'onSubmit',
       defaultValues: defaultValuesForm,
     });
@@ -57,14 +60,17 @@ export default function ContactsForm() {
     loadData();
   }, []);
 
-  function fillValues(keys: FormValuesKey[], values: IContactsSectionFormData) {
+  function fillValues(
+    keys: FormValuesKey[],
+    values: ContactsSectionFormDataType
+  ) {
     if (!values) return;
     keys.forEach((key) => {
       setValue(key, values[key]);
     });
   }
 
-  async function handleSave(data: IContactsSectionFormData) {
+  async function handleSave(data: ContactsSectionFormDataType) {
     try {
       setLoadingUpdate(true);
       await serviceSectionContacts.update(data);

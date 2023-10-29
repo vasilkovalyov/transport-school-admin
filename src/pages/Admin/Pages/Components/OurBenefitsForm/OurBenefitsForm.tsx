@@ -14,11 +14,11 @@ import schemaValidation from './OurBenefitsForm.validation';
 
 import {
   OurBenefitsFormProps,
-  IOurBenefitsFormData,
+  OurBenefitsFormDataType,
 } from './OurBenefitsForm.type';
 import { BlockTogglers } from '../BlockTogglers';
 
-const defaultValuesForm: IOurBenefitsFormData = {
+const defaultValuesForm: OurBenefitsFormDataType = {
   image: '',
   heading: '',
   rich_text: '',
@@ -34,11 +34,13 @@ export default function OurBenefitsForm({
 }: OurBenefitsFormProps) {
   const [markdownText, setMarkdownText] = useState<string | null>(null);
 
-  const { handleSubmit, register, setValue } = useForm<IOurBenefitsFormData>({
-    mode: 'onSubmit',
-    defaultValues: data ?? defaultValuesForm,
-    resolver: yupResolver(schemaValidation),
-  });
+  const { handleSubmit, register, setValue } = useForm<OurBenefitsFormDataType>(
+    {
+      mode: 'onSubmit',
+      defaultValues: data ?? defaultValuesForm,
+      resolver: yupResolver(schemaValidation),
+    }
+  );
 
   useEffect(() => {
     if (!data) return;
@@ -57,7 +59,7 @@ export default function OurBenefitsForm({
     setValue('rich_text', value);
   }
 
-  function handleSave(params: IOurBenefitsFormData) {
+  function handleSave(params: OurBenefitsFormDataType) {
     if (data) {
       onUpdate &&
         onUpdate({

@@ -1,15 +1,13 @@
-import { BaseBlockFormProps, IBaseBlock, IBlockInfoPage } from '../types';
+import { BaseBlockFormProps, BaseBlockType, BlockInfoPageType } from '../types';
 
-export type ContactFormProps = BaseBlockFormProps<IContactFormData>;
+export type ContactFormProps = BaseBlockFormProps<ContactFormDataType>;
 
-export interface IContactFormData extends IBaseBlock {
+export type ContactFormDataType = BaseBlockType & {
   image?: string;
   heading: string;
   rich_text?: string;
   form_heading?: string;
   require_message?: string;
-}
+};
 
-export interface IContactBlockFullData
-  extends IContactFormData,
-    IBlockInfoPage {}
+export type ContactBlockFullDataType = ContactFormDataType & BlockInfoPageType;

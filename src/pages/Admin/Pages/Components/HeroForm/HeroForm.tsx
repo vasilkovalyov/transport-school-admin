@@ -12,7 +12,7 @@ import { ImageUpload } from '@/src/components';
 
 import {
   HeroFormProps,
-  IHeroFormData,
+  HeroFormDataType,
   HeroFormFieldsNecessary,
   HeroFormCheckboxTypes,
 } from './HeroForm.type';
@@ -20,7 +20,7 @@ import {
 import schemaValidation from './HeroForm.validation';
 import { BlockTogglers } from '../BlockTogglers';
 
-const defaultValuesForm: IHeroFormData = {
+const defaultValuesForm: HeroFormDataType = {
   image: '',
   heading: '',
   subheading: '',
@@ -46,7 +46,7 @@ export default function HeroForm({
     register,
     setValue,
     formState: { errors },
-  } = useForm<IHeroFormData>({
+  } = useForm<HeroFormDataType>({
     mode: 'onSubmit',
     defaultValues: data ?? defaultValuesForm,
     resolver: yupResolver(schemaValidation),

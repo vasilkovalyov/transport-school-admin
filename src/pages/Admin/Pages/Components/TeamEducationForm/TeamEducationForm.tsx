@@ -14,13 +14,13 @@ import { DynamicFieldTogglers } from '@/src/components';
 import {
   TeamEducationFormProps,
   ITeamEducationFormData,
-  ITeamEducationData,
+  TeamEducationDataType,
   TeamEducationFormCheckboxTypes,
 } from './TeamEducationForm.type';
 import schemaValidation from './TeamEducationForm.validation';
 import { BlockTogglers } from '../BlockTogglers';
 
-const defaultEducationItem: ITeamEducationData = {
+const defaultEducationItem: TeamEducationDataType = {
   type: '',
   discount: '',
   heading: '',

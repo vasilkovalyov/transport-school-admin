@@ -1,3 +1,3 @@
-export interface IReviewContentFormSectionFormData {
+export type ReviewContentFormSectionFormDataType = {
   heading: string;
-}
+};

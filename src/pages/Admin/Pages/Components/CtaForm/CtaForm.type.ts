@@ -1,13 +1,12 @@
 import {
   BaseBlockCutDownFormProps,
-  IBaseBlock,
-  IBlockInfoPage,
+  BaseBlockType,
+  BlockInfoPageType,
 } from '../types';
 
-export type CtaFormProps = BaseBlockCutDownFormProps<ICtaSectionFormData>;
+export type CtaFormProps = BaseBlockCutDownFormProps<CtaSectionFormDataType>;
 
-export interface ICtaSectionFormData extends IBaseBlock {}
+export type CtaSectionFormDataType = BaseBlockType;
 
-export interface ICtaFormBlockFullData
-  extends ICtaSectionFormData,
-    IBlockInfoPage {}
+export type CtaFormBlockFullDataType = CtaSectionFormDataType &
+  BlockInfoPageType;

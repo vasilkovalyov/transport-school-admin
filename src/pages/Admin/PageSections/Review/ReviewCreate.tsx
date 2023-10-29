@@ -6,7 +6,7 @@ import Typography from '@mui/material/Typography';
 import Breadcrumbs from '@mui/material/Breadcrumbs';
 
 import { Links, LinksPageSections } from '@/src/constants/routes';
-import { IReviewFormData, ReviewForm } from './components';
+import { ReviewFormDataType, ReviewForm } from './components';
 import ServiceReview from './Review.service';
 
 const service = new ServiceReview();
@@ -14,7 +14,7 @@ const service = new ServiceReview();
 export default function PageSectionReviewCreate() {
   const navigate = useNavigate();
 
-  async function onCreate(data: IReviewFormData) {
+  async function onCreate(data: ReviewFormDataType) {
     try {
       await service.create(data);
       navigate(LinksPageSections.REVIEW);

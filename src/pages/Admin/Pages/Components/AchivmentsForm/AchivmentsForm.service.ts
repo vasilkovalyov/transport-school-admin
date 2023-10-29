@@ -1,6 +1,6 @@
 import { AxiosPromise } from 'axios';
 import api from '@/src/api/axios';
-import { IAchivmentsFormBlockFullData } from './AchivmentsForm.type';
+import { AchivmentsFormBlockFullDataType } from './AchivmentsForm.type';
 import { IBlockService } from '../types';
 
 enum EndpointBlockAchivmentsEnum {
@@ -12,7 +12,7 @@ enum EndpointBlockAchivmentsEnum {
 }
 
 class AchivmentsFormService
-  implements IBlockService<IAchivmentsFormBlockFullData>
+  implements IBlockService<AchivmentsFormBlockFullDataType>
 {
   async publish(page: string): AxiosPromise<boolean> {
     const response = await api.patch(EndpointBlockAchivmentsEnum.PUBLISH, {
@@ -29,7 +29,7 @@ class AchivmentsFormService
   }
 
   async create(
-    params: IAchivmentsFormBlockFullData
+    params: AchivmentsFormBlockFullDataType
   ): AxiosPromise<{ message: string }> {
     const response = await api.post(EndpointBlockAchivmentsEnum.CREATE, {
       ...params,
@@ -38,7 +38,7 @@ class AchivmentsFormService
   }
 
   async update(
-    params: IAchivmentsFormBlockFullData
+    params: AchivmentsFormBlockFullDataType
   ): AxiosPromise<{ message: string }> {
     const response = await api.patch(EndpointBlockAchivmentsEnum.UPDATE, {
       ...params,
@@ -46,7 +46,7 @@ class AchivmentsFormService
     return response;
   }
 
-  async getBlock(page: string): AxiosPromise<IAchivmentsFormBlockFullData> {
+  async getBlock(page: string): AxiosPromise<AchivmentsFormBlockFullDataType> {
     const response = await api.get(
       `${EndpointBlockAchivmentsEnum.GET_BLOCK}${page}`
     );

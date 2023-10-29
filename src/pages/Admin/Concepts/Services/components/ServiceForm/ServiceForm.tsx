@@ -11,8 +11,8 @@ import { DynamicFieldTogglers } from '@/src/components';
 
 import {
   ServiceFormProps,
-  IServiceFormData,
-  IServiceInfoItemData,
+  ServiceFormDataType,
+  ServiceInfoItemDataType,
   ServiceEditableFormData,
   FormValuesKey,
 } from './ServiceForm.type';
@@ -24,7 +24,7 @@ const valuesKeys: FormValuesKey[] = [
   'bottom_list_info',
 ];
 
-const defaultInfoItem: IServiceInfoItemData = {
+const defaultInfoItem: ServiceInfoItemDataType = {
   text: '',
 };
 
@@ -37,7 +37,7 @@ const defaultValuesForm: ServiceEditableFormData = {
 
 export default function ServiceForm({ data, onSubmit }: ServiceFormProps) {
   const { handleSubmit, register, control, setValue } =
-    useForm<IServiceFormData>({
+    useForm<ServiceFormDataType>({
       mode: 'onSubmit',
       defaultValues: data ?? defaultValuesForm,
     });
@@ -89,7 +89,7 @@ export default function ServiceForm({ data, onSubmit }: ServiceFormProps) {
     bottomFieldsRemove(numberAchivment);
   }
 
-  function handleSave(data: IServiceFormData) {
+  function handleSave(data: ServiceFormDataType) {
     onSubmit && onSubmit(data);
   }
 

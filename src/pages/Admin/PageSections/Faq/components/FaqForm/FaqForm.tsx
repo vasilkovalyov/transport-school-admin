@@ -12,16 +12,20 @@ import CircularProgress from '@mui/material/CircularProgress';
 
 import { DynamicFieldTogglers } from '@/src/components';
 
-import { FaqRichTextType, IFaq, IFaqSectionFormData } from './FaqForm.type';
+import {
+  FaqRichTextType,
+  FaqType,
+  FaqSectionFormDataType,
+} from './FaqForm.type';
 import FaqSectionFormService from './FaqForm.service';
 import ReactQuill from 'react-quill';
 
-const defaultFaqListItem: IFaq = {
+const defaultFaqListItem: FaqType = {
   heading: '',
   rich_text: '',
 };
 
-const defaultValuesForm: IFaqSectionFormData = {
+const defaultValuesForm: FaqSectionFormDataType = {
   image: '',
   heading: '',
   list_faq: [defaultFaqListItem],
@@ -38,7 +42,7 @@ export default function FaqForm() {
   );
 
   const { handleSubmit, register, control, setValue } =
-    useForm<IFaqSectionFormData>({
+    useForm<FaqSectionFormDataType>({
       mode: 'onSubmit',
       defaultValues: defaultValuesForm,
     });
@@ -100,7 +104,7 @@ export default function FaqForm() {
     remove(numberAchivment);
   }
 
-  async function handleSave(data: IFaqSectionFormData) {
+  async function handleSave(data: FaqSectionFormDataType) {
     try {
       setLoadingUpdate(true);
       await serviceSectionFaq.update(data);

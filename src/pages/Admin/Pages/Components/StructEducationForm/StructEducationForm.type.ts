@@ -1,21 +1,23 @@
-import { BaseBlockFormProps, IBaseBlock, IBlockInfoPage } from '../types';
+import { BaseBlockFormProps, BaseBlockType, BlockInfoPageType } from '../types';
 
 export type StructEducationFormProps =
-  BaseBlockFormProps<IStructEducationFormData>;
+  BaseBlockFormProps<StructEducationFormDataType>;
 
-export interface IStructEducationFormData extends IBaseBlock {
+export type StructEducationFormDataType = BaseBlockType & {
   heading: string;
-  struct_education_list?: IStructEducationData[];
-}
+  struct_education_list?: StructEducationDataType[];
+};
 
-export interface IStructEducationData {
+export type StructEducationDataType = {
   _id?: string;
   heading: string;
   rich_text: string;
-}
+};
 
-export type StructEducationRichTextType = Omit<IStructEducationData, 'heading'>;
+export type StructEducationRichTextType = Omit<
+  StructEducationDataType,
+  'heading'
+>;
 
-export interface IStructEducationBlockFullData
-  extends IStructEducationFormData,
-    IBlockInfoPage {}
+export type StructEducationBlockFullDataType = StructEducationFormDataType &
+  BlockInfoPageType;

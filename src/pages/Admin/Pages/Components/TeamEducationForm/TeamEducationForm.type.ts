@@ -1,31 +1,30 @@
-import { BaseBlockFormProps, IBaseBlock, IBlockInfoPage } from '../types';
+import { BaseBlockFormProps, BaseBlockType, BlockInfoPageType } from '../types';
 
 export type TeamEducationFormProps = BaseBlockFormProps<ITeamEducationFormData>;
 
-export interface ITeamEducationFormData extends IBaseBlock {
+export type ITeamEducationFormData = BaseBlockType & {
   heading: string;
   subheading?: string;
   use_cta_link?: boolean;
-  education_list?: ITeamEducationData[];
-}
+  education_list?: TeamEducationDataType[];
+};
 
-export interface ITeamEducationData {
+export type TeamEducationDataType = {
   id?: string;
   heading: string;
   type: string;
   discount: string;
-}
+};
 
 export type TeamEducationFormCheckboxFields = 'use_cta_link';
 export type TeamEducationFormCheckboxTypes = Pick<
   ITeamEducationFormData,
   TeamEducationFormCheckboxFields
 >;
-export type TeamEducationFormFieldsNecessary = Omit<
+export type TeamEducationFormFieldsNecessaryType = Omit<
   ITeamEducationFormData,
   TeamEducationFormCheckboxFields
 >;
 
-export interface ITeamEducationBlockFullData
-  extends ITeamEducationFormData,
-    IBlockInfoPage {}
+export type TeamEducationBlockFullDataType = ITeamEducationFormData &
+  BlockInfoPageType;

@@ -1,19 +1,19 @@
 import { AxiosPromise } from 'axios';
 import api from '@/src/api/axios';
-import { IReview, IReviewFormData } from './components';
+import { ReviewType, ReviewFormDataType } from './components';
 
 const endpointReview = 'review';
 const endpointReviews = 'reviews';
 
 class ReviewSectionFormService {
-  async create(params: IReviewFormData): AxiosPromise<{ message: string }> {
+  async create(params: ReviewFormDataType): AxiosPromise<{ message: string }> {
     const response = await api.post(endpointReview, {
       ...params,
     });
     return response;
   }
 
-  async update(params: IReview): AxiosPromise<{ message: string }> {
+  async update(params: ReviewType): AxiosPromise<{ message: string }> {
     const response = await api.patch(endpointReview, {
       ...params,
     });
@@ -25,12 +25,12 @@ class ReviewSectionFormService {
     return response;
   }
 
-  async getPost(id: string): AxiosPromise<IReview> {
+  async getPost(id: string): AxiosPromise<ReviewType> {
     const response = await api.get(`${endpointReview}/${id}`);
     return response;
   }
 
-  async getAll(): AxiosPromise<IReview[]> {
+  async getAll(): AxiosPromise<ReviewType[]> {
     const response = await api.get(endpointReviews);
     return response;
   }

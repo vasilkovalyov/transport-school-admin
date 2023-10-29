@@ -3,28 +3,28 @@ import { Box } from '@mui/material';
 import {
   BlogForm,
   BlogFormService,
-  IBlogBlockFullData,
-  IBlogFormData,
+  BlogBlockFullDataType,
+  BlogFormDataType,
   BlockHeading,
 } from '@/src/pages/Admin/Pages/Components';
 import { PageEnum } from '@/src/pages/Admin/Pages/pages-enum';
-import { IBlockInfoPage } from '@/src/pages/Admin/Pages/Components/types';
+import { BlockInfoPageType } from '@/src/pages/Admin/Pages/Components/types';
 import { useApisBlock } from '@/src/pages/Admin/Pages/hooks/useApisBlock';
 import { BlocsEnum } from '@/src/pages/Admin/Pages/blocks-enum';
 
 const service = new BlogFormService();
 const currentPage = PageEnum.BLOG;
 
-const blockInfoPage: IBlockInfoPage = {
+const blockInfoPage: BlockInfoPageType = {
   block_order: 1,
   block_page: currentPage,
   block_name: BlocsEnum.BlockBlog,
 };
 
 const getAdapterSectionParams = (
-  params: IBlogFormData,
-  additionalParams: IBlockInfoPage
-): IBlogBlockFullData => {
+  params: BlogFormDataType,
+  additionalParams: BlockInfoPageType
+): BlogBlockFullDataType => {
   const { publish, ...props } = params;
   return {
     ...props,
@@ -40,17 +40,17 @@ export default function SectionBlog() {
     updateSection,
     createSection,
     publishToggleSection,
-  } = useApisBlock<IBlogBlockFullData>({
+  } = useApisBlock<BlogBlockFullDataType>({
     page: currentPage,
     service: service,
     blockInfoPage: blockInfoPage,
   });
 
-  function onHandleCreateSection(params: IBlogFormData) {
+  function onHandleCreateSection(params: BlogFormDataType) {
     createSection(getAdapterSectionParams(params, blockInfoPage));
   }
 
-  function onHandleUpdateSection(params: IBlogFormData) {
+  function onHandleUpdateSection(params: BlogFormDataType) {
     updateSection(getAdapterSectionParams(params, blockInfoPage));
   }
 

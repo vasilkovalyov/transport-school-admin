@@ -10,10 +10,13 @@ import LinearProgress from '@mui/material/LinearProgress';
 import Stack from '@mui/material/Stack';
 import CircularProgress from '@mui/material/CircularProgress';
 
-import { ICtaSectionFormData, CtaSectionCheckboxTypes } from './CtaForm.type';
+import {
+  CtaSectionFormDataType,
+  CtaSectionCheckboxTypes,
+} from './CtaForm.type';
 import CtaSectionFormService from './CtaForm.service';
 
-const defaultValuesForm: ICtaSectionFormData = {
+const defaultValuesForm: CtaSectionFormDataType = {
   heading: '',
   use_link_to_contact_page: false,
   use_phone_cta: false,
@@ -31,7 +34,7 @@ export default function CtaForm() {
     }
   );
 
-  const { handleSubmit, register, setValue } = useForm<ICtaSectionFormData>({
+  const { handleSubmit, register, setValue } = useForm<CtaSectionFormDataType>({
     mode: 'onSubmit',
     defaultValues: defaultValuesForm,
   });
@@ -68,7 +71,7 @@ export default function CtaForm() {
     });
   }
 
-  async function handleSave(data: ICtaSectionFormData) {
+  async function handleSave(data: CtaSectionFormDataType) {
     try {
       setLoadingUpdate(true);
       await serviceSectionCta.update(data);

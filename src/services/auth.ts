@@ -1,5 +1,5 @@
 import { AxiosPromise } from 'axios';
-import { ILogin } from '../pages';
+import { LoginType } from '../pages';
 import api from '@/src/api/axios';
 import { EndpointsEnum } from '../api/endpoints';
 
@@ -16,7 +16,7 @@ export type RefreshTokenType = {
 };
 
 class AuthService {
-  async login(params: ILogin): AxiosPromise<LoginResponseType> {
+  async login(params: LoginType): AxiosPromise<LoginResponseType> {
     const response = await api.post(EndpointsEnum.LOGIN, {
       ...params,
     });

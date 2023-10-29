@@ -1,13 +1,11 @@
-import { BaseBlockFormProps, IBaseBlock, IBlockInfoPage } from '../types';
+import { BaseBlockFormProps, BaseBlockType, BlockInfoPageType } from '../types';
 
-export type AboutUsFormProps = BaseBlockFormProps<IAboutUsFormData>;
+export type AboutUsFormProps = BaseBlockFormProps<AboutUsFormDataType>;
 
-export interface IAboutUsFormData extends IBaseBlock {
+export type AboutUsFormDataType = BaseBlockType & {
   image?: string;
   heading: string;
   rich_text?: string;
-}
+};
 
-export interface IAboutUsBlockFullData
-  extends IAboutUsFormData,
-    IBlockInfoPage {}
+export type AboutUsBlockFullDataType = AboutUsFormDataType & BlockInfoPageType;

@@ -1,6 +1,6 @@
 import { AxiosPromise } from 'axios';
 import api from '@/src/api/axios';
-import { ITeamEducationBlockFullData } from './TeamEducationForm.type';
+import { TeamEducationBlockFullDataType } from './TeamEducationForm.type';
 import { IBlockService } from '../types';
 
 enum EndpointBlockTeamEducationEnum {
@@ -12,7 +12,7 @@ enum EndpointBlockTeamEducationEnum {
 }
 
 class TeamEducationFormService
-  implements IBlockService<ITeamEducationBlockFullData>
+  implements IBlockService<TeamEducationBlockFullDataType>
 {
   async publish(page: string): AxiosPromise<boolean> {
     const response = await api.patch(EndpointBlockTeamEducationEnum.PUBLISH, {
@@ -29,7 +29,7 @@ class TeamEducationFormService
   }
 
   async create(
-    params: ITeamEducationBlockFullData
+    params: TeamEducationBlockFullDataType
   ): AxiosPromise<{ message: string }> {
     const response = await api.post(EndpointBlockTeamEducationEnum.CREATE, {
       ...params,
@@ -38,7 +38,7 @@ class TeamEducationFormService
   }
 
   async update(
-    params: ITeamEducationBlockFullData
+    params: TeamEducationBlockFullDataType
   ): AxiosPromise<{ message: string }> {
     const response = await api.patch(EndpointBlockTeamEducationEnum.UPDATE, {
       ...params,
@@ -46,7 +46,7 @@ class TeamEducationFormService
     return response;
   }
 
-  async getBlock(page: string): AxiosPromise<ITeamEducationBlockFullData> {
+  async getBlock(page: string): AxiosPromise<TeamEducationBlockFullDataType> {
     const response = await api.get(
       `${EndpointBlockTeamEducationEnum.GET_BLOCK}${page}`
     );

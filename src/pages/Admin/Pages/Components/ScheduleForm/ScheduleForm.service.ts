@@ -1,6 +1,6 @@
 import { AxiosPromise } from 'axios';
 import api from '@/src/api/axios';
-import { IScheduleBlockFullData } from './ScheduleForm.type';
+import { ScheduleBlockFullDataType } from './ScheduleForm.type';
 import { IBlockService } from '../types';
 
 enum EndpointBlockScheduleEnum {
@@ -11,7 +11,7 @@ enum EndpointBlockScheduleEnum {
   GET_BLOCK = 'blocks/schedule/',
 }
 
-class ScheduleFormService implements IBlockService<IScheduleBlockFullData> {
+class ScheduleFormService implements IBlockService<ScheduleBlockFullDataType> {
   async publish(page: string): AxiosPromise<boolean> {
     const response = await api.patch(EndpointBlockScheduleEnum.PUBLISH, {
       page: page,
@@ -27,7 +27,7 @@ class ScheduleFormService implements IBlockService<IScheduleBlockFullData> {
   }
 
   async create(
-    params: IScheduleBlockFullData
+    params: ScheduleBlockFullDataType
   ): AxiosPromise<{ message: string }> {
     const response = await api.post(EndpointBlockScheduleEnum.CREATE, {
       ...params,
@@ -36,7 +36,7 @@ class ScheduleFormService implements IBlockService<IScheduleBlockFullData> {
   }
 
   async update(
-    params: IScheduleBlockFullData
+    params: ScheduleBlockFullDataType
   ): AxiosPromise<{ message: string }> {
     const response = await api.patch(EndpointBlockScheduleEnum.UPDATE, {
       ...params,
@@ -44,7 +44,7 @@ class ScheduleFormService implements IBlockService<IScheduleBlockFullData> {
     return response;
   }
 
-  async getBlock(page: string): AxiosPromise<IScheduleBlockFullData> {
+  async getBlock(page: string): AxiosPromise<ScheduleBlockFullDataType> {
     const response = await api.get(
       `${EndpointBlockScheduleEnum.GET_BLOCK}${page}`
     );

@@ -15,9 +15,9 @@ import CircularProgress from '@mui/material/CircularProgress';
 
 // import { ImageUpload } from '@/src/components';
 
-import { ReviewFormProps, IReviewFormData } from './ReviewForm.type';
+import { ReviewFormProps, ReviewFormDataType } from './ReviewForm.type';
 
-const defaultValuesForm: IReviewFormData = {
+const defaultValuesForm: ReviewFormDataType = {
   name: '',
   text: '',
   rating: null,
@@ -31,7 +31,7 @@ export default function ReviewForm({
   const ratingCount = 5;
   const [ratingValue, setRatingValue] = useState<number | null>(null);
 
-  const { handleSubmit, register, setValue } = useForm<IReviewFormData>({
+  const { handleSubmit, register, setValue } = useForm<ReviewFormDataType>({
     mode: 'onSubmit',
     defaultValues: data ?? defaultValuesForm,
   });
@@ -43,7 +43,7 @@ export default function ReviewForm({
     setRatingValue(data.rating);
   }, [data]);
 
-  function handleSave(data: IReviewFormData) {
+  function handleSave(data: ReviewFormDataType) {
     onSubmit && onSubmit(data);
   }
 

@@ -1,10 +1,10 @@
-import { BaseBlockFormProps, IBaseBlock, IBlockInfoPage } from '../types';
+import { BaseBlockFormProps, BaseBlockType, BlockInfoPageType } from '../types';
 
-export type BlogFormProps = BaseBlockFormProps<IBlogFormData>;
+export type BlogFormProps = BaseBlockFormProps<BlogFormDataType>;
 
-export interface IBlogFormData extends IBaseBlock {
+export type BlogFormDataType = BaseBlockType & {
   heading: string;
   post_number?: number | null;
-}
+};
 
-export interface IBlogBlockFullData extends IBlogFormData, IBlockInfoPage {}
+export type BlogBlockFullDataType = BlogFormDataType & BlockInfoPageType;

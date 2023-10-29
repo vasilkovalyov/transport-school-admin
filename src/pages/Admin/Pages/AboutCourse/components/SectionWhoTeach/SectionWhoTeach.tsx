@@ -3,28 +3,28 @@ import { Box } from '@mui/material';
 import {
   WhoTeachForm,
   WhoTeachFormService,
-  IWhoTeachBlockFullData,
-  IWhoTeachFormData,
+  WhoTeachBlockFullDataType,
+  WhoTeachFormDataType,
   BlockHeading,
 } from '@/src/pages/Admin/Pages/Components';
 import { PageEnum } from '@/src/pages/Admin/Pages/pages-enum';
-import { IBlockInfoPage } from '@/src/pages/Admin/Pages/Components/types';
+import { BlockInfoPageType } from '@/src/pages/Admin/Pages/Components/types';
 import { useApisBlock } from '@/src/pages/Admin/Pages/hooks/useApisBlock';
 import { BlocsEnum } from '@/src/pages/Admin/Pages/blocks-enum';
 
 const service = new WhoTeachFormService();
 const currentPage = PageEnum.ABOUT_COURSE;
 
-const blockInfoPage: IBlockInfoPage = {
+const blockInfoPage: BlockInfoPageType = {
   block_order: 4,
   block_page: currentPage,
   block_name: BlocsEnum.BlockWhoTeach,
 };
 
 const getAdapterSectionParams = (
-  params: IWhoTeachFormData,
-  additionalParams: IBlockInfoPage
-): IWhoTeachBlockFullData => {
+  params: WhoTeachFormDataType,
+  additionalParams: BlockInfoPageType
+): WhoTeachBlockFullDataType => {
   const { publish, ...props } = params;
   return {
     ...props,
@@ -40,17 +40,17 @@ export default function SectionWhoTeach() {
     updateSection,
     createSection,
     publishToggleSection,
-  } = useApisBlock<IWhoTeachBlockFullData>({
+  } = useApisBlock<WhoTeachBlockFullDataType>({
     page: currentPage,
     service: service,
     blockInfoPage: blockInfoPage,
   });
 
-  function onHandleCreateSection(params: IWhoTeachFormData) {
+  function onHandleCreateSection(params: WhoTeachFormDataType) {
     createSection(getAdapterSectionParams(params, blockInfoPage));
   }
 
-  function onHandleUpdateSection(params: IWhoTeachFormData) {
+  function onHandleUpdateSection(params: WhoTeachFormDataType) {
     updateSection(getAdapterSectionParams(params, blockInfoPage));
   }
 

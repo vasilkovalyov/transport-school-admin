@@ -3,28 +3,28 @@ import { Box } from '@mui/material';
 import {
   RequirementForm,
   RequirementFormService,
-  IRequirementBlockFullData,
-  IRequirementFormData,
+  RequirementBlockFullDataType,
+  RequirementFormDataType,
   BlockHeading,
 } from '@/src/pages/Admin/Pages/Components';
 import { PageEnum } from '@/src/pages/Admin/Pages/pages-enum';
-import { IBlockInfoPage } from '@/src/pages/Admin/Pages/Components/types';
+import { BlockInfoPageType } from '@/src/pages/Admin/Pages/Components/types';
 import { useApisBlock } from '@/src/pages/Admin/Pages/hooks/useApisBlock';
 import { BlocsEnum } from '@/src/pages/Admin/Pages/blocks-enum';
 
 const service = new RequirementFormService();
 const currentPage = PageEnum.PRICE;
 
-const blockInfoPage: IBlockInfoPage = {
+const blockInfoPage: BlockInfoPageType = {
   block_order: 3,
   block_page: currentPage,
   block_name: BlocsEnum.BlockRequirement,
 };
 
 const getAdapterSectionParams = (
-  params: IRequirementFormData,
-  additionalParams: IBlockInfoPage
-): IRequirementBlockFullData => {
+  params: RequirementFormDataType,
+  additionalParams: BlockInfoPageType
+): RequirementBlockFullDataType => {
   const { publish, ...props } = params;
   return {
     ...props,
@@ -40,17 +40,17 @@ export default function SectionRequirement() {
     updateSection,
     createSection,
     publishToggleSection,
-  } = useApisBlock<IRequirementBlockFullData>({
+  } = useApisBlock<RequirementBlockFullDataType>({
     page: currentPage,
     service: service,
     blockInfoPage: blockInfoPage,
   });
 
-  function onHandleCreateSection(params: IRequirementFormData) {
+  function onHandleCreateSection(params: RequirementFormDataType) {
     createSection(getAdapterSectionParams(params, blockInfoPage));
   }
 
-  function onHandleUpdateSection(params: IRequirementFormData) {
+  function onHandleUpdateSection(params: RequirementFormDataType) {
     updateSection(getAdapterSectionParams(params, blockInfoPage));
   }
 

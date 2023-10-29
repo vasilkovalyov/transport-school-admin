@@ -1,22 +1,25 @@
-import { BaseBlockFormProps, IBaseBlock, IBlockInfoPage } from '../types';
+import { BaseBlockFormProps, BaseBlockType, BlockInfoPageType } from '../types';
 
-export type HeroFormProps = BaseBlockFormProps<IHeroFormData>;
+export type HeroFormProps = BaseBlockFormProps<HeroFormDataType>;
 
-export interface IHeroFormData extends IBaseBlock {
+export type HeroFormDataType = BaseBlockType & {
   image?: string;
   heading: string;
   subheading?: string;
   use_link_to_contact_page?: boolean;
   use_phone_cta?: boolean;
-}
+};
 
 export type HeroFormCheckboxFields =
   | 'use_link_to_contact_page'
   | 'use_phone_cta';
-export type HeroFormCheckboxTypes = Pick<IHeroFormData, HeroFormCheckboxFields>;
+export type HeroFormCheckboxTypes = Pick<
+  HeroFormDataType,
+  HeroFormCheckboxFields
+>;
 export type HeroFormFieldsNecessary = Omit<
-  IHeroFormData,
+  HeroFormDataType,
   HeroFormCheckboxFields
 >;
 
-export interface IHeroBlockFullData extends IHeroFormData, IBlockInfoPage {}
+export type HeroBlockFullDataType = HeroFormDataType & BlockInfoPageType;

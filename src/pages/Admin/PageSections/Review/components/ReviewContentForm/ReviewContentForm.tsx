@@ -6,10 +6,10 @@ import Button from '@mui/material/Button';
 import TextField from '@mui/material/TextField';
 import LinearProgress from '@mui/material/LinearProgress';
 
-import { IReviewContentFormSectionFormData } from './ReviewContentForm.type';
+import { ReviewContentFormSectionFormDataType } from './ReviewContentForm.type';
 import ReviewContentFormSectionFormService from './ReviewContentForm.service';
 
-const defaultValuesForm: IReviewContentFormSectionFormData = {
+const defaultValuesForm: ReviewContentFormSectionFormDataType = {
   heading: '',
 };
 
@@ -19,7 +19,7 @@ export default function AchivmentForm() {
   const [loading, setLoading] = useState<boolean>(true);
 
   const { handleSubmit, register, setValue } =
-    useForm<IReviewContentFormSectionFormData>({
+    useForm<ReviewContentFormSectionFormDataType>({
       mode: 'onSubmit',
       defaultValues: defaultValuesForm,
     });
@@ -41,7 +41,7 @@ export default function AchivmentForm() {
     loadData();
   }, []);
 
-  function handleSave(data: IReviewContentFormSectionFormData) {
+  function handleSave(data: ReviewContentFormSectionFormDataType) {
     serviceSectionAchivment.update(data);
   }
 

@@ -8,7 +8,7 @@ import Breadcrumbs from '@mui/material/Breadcrumbs';
 import LinearProgress from '@mui/material/LinearProgress';
 
 import { Links, LinksPageSections } from '@/src/constants/routes';
-import { IReview, IReviewFormData, ReviewForm } from './components';
+import { ReviewType, ReviewFormDataType, ReviewForm } from './components';
 import ServiceReview from './Review.service';
 
 const service = new ServiceReview();
@@ -18,7 +18,7 @@ export default function PageSectionReviewEdit() {
   const navigate = useNavigate();
   const [loading, setLoading] = useState<boolean>(true);
   const [loadingSubmit, setLoadingSubmit] = useState<boolean>(false);
-  const [review, setReview] = useState<IReview>();
+  const [review, setReview] = useState<ReviewType>();
 
   async function loadData() {
     try {
@@ -36,7 +36,7 @@ export default function PageSectionReviewEdit() {
     loadData();
   }, []);
 
-  async function onUpdate(data: IReviewFormData) {
+  async function onUpdate(data: ReviewFormDataType) {
     try {
       setLoadingSubmit(true);
       await service.update({

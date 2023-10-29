@@ -1,5 +1,5 @@
 import { AxiosPromise } from 'axios';
-import { IServiceFormData, ServiceEditableFormData } from './components';
+import { ServiceFormDataType, ServiceEditableFormData } from './components';
 import api from '@/src/api/axios';
 
 enum EndpointLessonScheduleEnum {
@@ -19,7 +19,7 @@ class ServicesService {
     return response;
   }
 
-  async update(params: IServiceFormData): AxiosPromise<{ message: string }> {
+  async update(params: ServiceFormDataType): AxiosPromise<{ message: string }> {
     const response = await api.patch(EndpointLessonScheduleEnum.UPDATE, {
       ...params,
     });
@@ -33,12 +33,12 @@ class ServicesService {
     return response;
   }
 
-  async getPosts(): AxiosPromise<IServiceFormData[]> {
+  async getPosts(): AxiosPromise<ServiceFormDataType[]> {
     const response = await api.get(EndpointLessonScheduleEnum.GET_POSTS);
     return response;
   }
 
-  async getPost(id: string): AxiosPromise<IServiceFormData> {
+  async getPost(id: string): AxiosPromise<ServiceFormDataType> {
     const response = await api.get(
       `${EndpointLessonScheduleEnum.GET_POSTS}/${id}`
     );

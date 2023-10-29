@@ -1,6 +1,6 @@
 import { AxiosPromise } from 'axios';
 import api from '@/src/api/axios';
-import { IStructEducationBlockFullData } from './StructEducationForm.type';
+import { StructEducationBlockFullDataType } from './StructEducationForm.type';
 import { IBlockService } from '../types';
 
 enum EndpointBlockStructEducationEnum {
@@ -12,7 +12,7 @@ enum EndpointBlockStructEducationEnum {
 }
 
 class StructEducationFormService
-  implements IBlockService<IStructEducationBlockFullData>
+  implements IBlockService<StructEducationBlockFullDataType>
 {
   async publish(page: string): AxiosPromise<boolean> {
     const response = await api.patch(EndpointBlockStructEducationEnum.PUBLISH, {
@@ -32,7 +32,7 @@ class StructEducationFormService
   }
 
   async create(
-    params: IStructEducationBlockFullData
+    params: StructEducationBlockFullDataType
   ): AxiosPromise<{ message: string }> {
     const response = await api.post(EndpointBlockStructEducationEnum.CREATE, {
       ...params,
@@ -41,7 +41,7 @@ class StructEducationFormService
   }
 
   async update(
-    params: IStructEducationBlockFullData
+    params: StructEducationBlockFullDataType
   ): AxiosPromise<{ message: string }> {
     const response = await api.patch(EndpointBlockStructEducationEnum.UPDATE, {
       ...params,
@@ -49,7 +49,7 @@ class StructEducationFormService
     return response;
   }
 
-  async getBlock(page: string): AxiosPromise<IStructEducationBlockFullData> {
+  async getBlock(page: string): AxiosPromise<StructEducationBlockFullDataType> {
     const response = await api.get(
       `${EndpointBlockStructEducationEnum.GET_BLOCK}${page}`
     );

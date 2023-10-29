@@ -1,6 +1,6 @@
 import { AxiosPromise } from 'axios';
 import api from '@/src/api/axios';
-import { IContactBlockFullData } from './ContactForm.type';
+import { ContactBlockFullDataType } from './ContactForm.type';
 import { IBlockService } from '../types';
 
 enum EndpointBlockContactFormEnum {
@@ -11,7 +11,9 @@ enum EndpointBlockContactFormEnum {
   GET_BLOCK = 'blocks/contact-form/',
 }
 
-class ContactFormFormService implements IBlockService<IContactBlockFullData> {
+class ContactFormFormService
+  implements IBlockService<ContactBlockFullDataType>
+{
   async publish(page: string): AxiosPromise<boolean> {
     const response = await api.patch(EndpointBlockContactFormEnum.PUBLISH, {
       page: page,
@@ -27,7 +29,7 @@ class ContactFormFormService implements IBlockService<IContactBlockFullData> {
   }
 
   async create(
-    params: IContactBlockFullData
+    params: ContactBlockFullDataType
   ): AxiosPromise<{ message: string }> {
     const response = await api.post(EndpointBlockContactFormEnum.CREATE, {
       ...params,
@@ -36,7 +38,7 @@ class ContactFormFormService implements IBlockService<IContactBlockFullData> {
   }
 
   async update(
-    params: IContactBlockFullData
+    params: ContactBlockFullDataType
   ): AxiosPromise<{ message: string }> {
     const response = await api.patch(EndpointBlockContactFormEnum.UPDATE, {
       ...params,
@@ -44,7 +46,7 @@ class ContactFormFormService implements IBlockService<IContactBlockFullData> {
     return response;
   }
 
-  async getBlock(page: string): AxiosPromise<IContactBlockFullData> {
+  async getBlock(page: string): AxiosPromise<ContactBlockFullDataType> {
     const response = await api.get(
       `${EndpointBlockContactFormEnum.GET_BLOCK}${page}`
     );

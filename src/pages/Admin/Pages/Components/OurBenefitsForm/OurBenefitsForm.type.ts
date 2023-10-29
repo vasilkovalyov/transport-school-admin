@@ -1,13 +1,12 @@
-import { BaseBlockFormProps, IBaseBlock, IBlockInfoPage } from '../types';
+import { BaseBlockFormProps, BaseBlockType, BlockInfoPageType } from '../types';
 
-export type OurBenefitsFormProps = BaseBlockFormProps<IOurBenefitsFormData>;
+export type OurBenefitsFormProps = BaseBlockFormProps<OurBenefitsFormDataType>;
 
-export interface IOurBenefitsFormData extends IBaseBlock {
+export type OurBenefitsFormDataType = BaseBlockType & {
   image?: string;
   heading: string;
   rich_text?: string;
-}
+};
 
-export interface IOurBenefitsBlockFullData
-  extends IOurBenefitsFormData,
-    IBlockInfoPage {}
+export type OurBenefitsBlockFullDataType = OurBenefitsFormDataType &
+  BlockInfoPageType;

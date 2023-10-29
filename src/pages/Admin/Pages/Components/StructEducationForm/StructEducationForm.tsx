@@ -9,20 +9,20 @@ import LinearProgress from '@mui/material/LinearProgress';
 import { DynamicFieldTogglers } from '@/src/components';
 import {
   StructEducationFormProps,
-  IStructEducationFormData,
-  IStructEducationData,
+  StructEducationFormDataType,
+  StructEducationDataType,
   StructEducationRichTextType,
 } from './StructEducationForm.type';
 import schemaValidation from './StructEducationForm.validation';
 import { BlockTogglers } from '../BlockTogglers';
 import ReactQuill from 'react-quill';
 
-const defaultStructEducationItem: IStructEducationData = {
+const defaultStructEducationItem: StructEducationDataType = {
   heading: '',
   rich_text: '',
 };
 
-const defaultValuesForm: IStructEducationFormData = {
+const defaultValuesForm: StructEducationFormDataType = {
   heading: '',
   struct_education_list: [defaultStructEducationItem],
   publish: false,
@@ -40,7 +40,7 @@ export default function StructEducationForm({
   >([]);
 
   const { control, handleSubmit, register, setValue } =
-    useForm<IStructEducationFormData>({
+    useForm<StructEducationFormDataType>({
       mode: 'onSubmit',
       defaultValues: data ?? defaultValuesForm,
       resolver: yupResolver(schemaValidation),
@@ -73,7 +73,7 @@ export default function StructEducationForm({
     }
   }, [data]);
 
-  function handleSave(params: IStructEducationFormData) {
+  function handleSave(params: StructEducationFormDataType) {
     if (data) {
       onUpdate &&
         onUpdate({

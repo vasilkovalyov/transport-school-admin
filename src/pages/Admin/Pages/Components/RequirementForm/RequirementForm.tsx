@@ -11,20 +11,20 @@ import { DynamicFieldTogglers } from '@/src/components';
 
 import {
   RequirementFormProps,
-  IRequirementFormData,
-  IRequirementItem,
+  RequirementFormDataType,
+  RequirementItemType,
 } from './RequirementForm.type';
 import schemaValidation from './RequirementForm.validation';
 import { useEffect } from 'react';
 import { BlockTogglers } from '../BlockTogglers';
 
-const defaultRequirementItem: IRequirementItem = {
+const defaultRequirementItem: RequirementItemType = {
   heading: '',
   text: '',
   image: '',
 };
 
-const defaultValuesForm: IRequirementFormData = {
+const defaultValuesForm: RequirementFormDataType = {
   heading: '',
   requirements_list: [defaultRequirementItem],
   publish: false,
@@ -38,7 +38,7 @@ export default function RequirementForm({
   onPublish,
 }: RequirementFormProps) {
   const { handleSubmit, register, setValue, control } =
-    useForm<IRequirementFormData>({
+    useForm<RequirementFormDataType>({
       mode: 'onSubmit',
       defaultValues: data ?? defaultValuesForm,
       resolver: yupResolver(schemaValidation),
@@ -67,7 +67,7 @@ export default function RequirementForm({
     remove(number);
   }
 
-  function handleSave({ publish, ...params }: IRequirementFormData) {
+  function handleSave({ publish, ...params }: RequirementFormDataType) {
     if (data) {
       onUpdate &&
         onUpdate({

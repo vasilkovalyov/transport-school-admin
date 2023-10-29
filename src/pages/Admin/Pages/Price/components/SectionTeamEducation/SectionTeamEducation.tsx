@@ -3,19 +3,19 @@ import { Box } from '@mui/material';
 import {
   TeamEducationForm,
   TeamEducationFormService,
-  ITeamEducationBlockFullData,
+  TeamEducationBlockFullDataType,
   ITeamEducationFormData,
   BlockHeading,
 } from '@/src/pages/Admin/Pages/Components';
 import { PageEnum } from '@/src/pages/Admin/Pages/pages-enum';
-import { IBlockInfoPage } from '@/src/pages/Admin/Pages/Components/types';
+import { BlockInfoPageType } from '@/src/pages/Admin/Pages/Components/types';
 import { useApisBlock } from '@/src/pages/Admin/Pages/hooks/useApisBlock';
 import { BlocsEnum } from '@/src/pages/Admin/Pages/blocks-enum';
 
 const service = new TeamEducationFormService();
 const currentPage = PageEnum.PRICE;
 
-const blockInfoPage: IBlockInfoPage = {
+const blockInfoPage: BlockInfoPageType = {
   block_order: 2,
   block_page: currentPage,
   block_name: BlocsEnum.BlockTeamEducation,
@@ -23,8 +23,8 @@ const blockInfoPage: IBlockInfoPage = {
 
 const getAdapterSectionParams = (
   params: ITeamEducationFormData,
-  additionalParams: IBlockInfoPage
-): ITeamEducationBlockFullData => {
+  additionalParams: BlockInfoPageType
+): TeamEducationBlockFullDataType => {
   const { publish, ...props } = params;
   return {
     ...props,
@@ -40,7 +40,7 @@ export default function SectionTeamEducation() {
     updateSection,
     createSection,
     publishToggleSection,
-  } = useApisBlock<ITeamEducationBlockFullData>({
+  } = useApisBlock<TeamEducationBlockFullDataType>({
     page: currentPage,
     service: service,
     blockInfoPage: blockInfoPage,

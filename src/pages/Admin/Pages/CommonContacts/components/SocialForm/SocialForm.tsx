@@ -13,15 +13,15 @@ import LinearProgress from '@mui/material/LinearProgress';
 
 import { DynamicFieldTogglers } from '@/src/components';
 
-import { ISocialFormData, ISocialFormItem } from './SocialForm.type';
+import { SocialFormDataType, SocialFormItemType } from './SocialForm.type';
 import SocialFormService from './SocialForm.service';
 
-const defaultSocialItem: ISocialFormItem = {
+const defaultSocialItem: SocialFormItemType = {
   social_icon: '',
   social_url: '',
 };
 
-const defaultValuesForm: ISocialFormData = {
+const defaultValuesForm: SocialFormDataType = {
   social_list: [defaultSocialItem],
 };
 
@@ -30,7 +30,7 @@ const service = new SocialFormService();
 export default function FormSocial() {
   const [loading, setLoading] = useState<boolean>(true);
   const { control, handleSubmit, register, setValue } =
-    useForm<ISocialFormData>({
+    useForm<SocialFormDataType>({
       mode: 'onSubmit',
       defaultValues: defaultValuesForm,
     });
@@ -41,7 +41,7 @@ export default function FormSocial() {
     keyName: 'id',
   });
 
-  function handleSave(data: ISocialFormData) {
+  function handleSave(data: SocialFormDataType) {
     service.update(data);
   }
 

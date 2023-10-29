@@ -1,12 +1,12 @@
 import { useEffect, useState } from 'react';
-import { IBlockReusableService, IBlockReusableInfo } from '../types';
+import { IBlockReusableService, BlockReusableInfoType } from '../types';
 
 export function useApiPageBlocks<T>({
   service,
   blockInfoPage,
 }: {
   service: IBlockReusableService<T>;
-  blockInfoPage: IBlockReusableInfo;
+  blockInfoPage: BlockReusableInfoType;
 }) {
   const [data, setData] = useState<T | null>(null);
 

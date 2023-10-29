@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import {
   BaseBlockFormLoadingType,
-  IBlockInfoPage,
+  BlockInfoPageType,
   IBlockService,
 } from '../Components/types';
 import { PageEnum } from '../pages-enum';
@@ -15,7 +15,7 @@ export function useApisReuseBlock<T>({
   page: PageEnum;
   loading?: boolean;
   loadingForPublishLabel?: boolean;
-  blockInfoPage: IBlockInfoPage;
+  blockInfoPage: BlockInfoPageType;
 }) {
   const [loadingType, setLoadingType] =
     useState<BaseBlockFormLoadingType | null>('loading');

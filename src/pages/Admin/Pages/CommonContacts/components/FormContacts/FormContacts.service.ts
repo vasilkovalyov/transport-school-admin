@@ -1,6 +1,6 @@
 import { AxiosPromise } from 'axios';
 import api from '@/src/api/axios';
-import { IFormContactsData } from './FormContacts.type';
+import { FormContactsDataType } from './FormContacts.type';
 
 enum EndpointContactEnum {
   UPDATE = 'contacts',
@@ -8,11 +8,11 @@ enum EndpointContactEnum {
 }
 
 class ContactFormService {
-  async update(params: IFormContactsData): AxiosPromise<string> {
+  async update(params: FormContactsDataType): AxiosPromise<string> {
     const response = await api.patch(EndpointContactEnum.UPDATE, params);
     return response;
   }
-  async getInfo(): AxiosPromise<IFormContactsData> {
+  async getInfo(): AxiosPromise<FormContactsDataType> {
     const response = await api.get(EndpointContactEnum.GET_INFO);
     return response;
   }

@@ -18,15 +18,15 @@ export type BaseBlockCutDownFormProps<T> = {
   onPublish?: (value: boolean) => void;
 };
 
-export interface IBaseBlock {
+export type BaseBlockType = {
   publish?: boolean;
-}
+};
 
-export interface IBlockInfoPage {
+export type BlockInfoPageType = {
   block_order: number;
   block_name: BlocsEnum;
   block_page: string;
-}
+};
 
 export interface IBlockService<T> {
   publish: (page: string) => AxiosPromise<boolean>;

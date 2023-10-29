@@ -4,12 +4,12 @@ import LinearProgress from '@mui/material/LinearProgress';
 
 import {
   AchivmentsForm,
-  IAchivmentsFormBlockFullData,
+  AchivmentsFormBlockFullDataType,
   AchivmentsFormService,
   BlockHeading,
 } from '@/src/pages/Admin/Pages/Components';
 import { PageEnum } from '@/src/pages/Admin/Pages/pages-enum';
-import { IBlockInfoPage } from '@/src/pages/Admin/Pages/Components/types';
+import { BlockInfoPageType } from '@/src/pages/Admin/Pages/Components/types';
 import { BlocsEnum } from '@/src/pages/Admin/Pages/blocks-enum';
 import { Link } from 'react-router-dom';
 import { LinksPageSections } from '@/src/constants/routes';
@@ -18,7 +18,7 @@ import { useApisReuseBlock } from '@/src/pages/Admin/Pages/hooks/useApisReuseBlo
 const service = new AchivmentsFormService();
 const currentPage = PageEnum.COMPANY;
 
-const blockInfoPage: IBlockInfoPage = {
+const blockInfoPage: BlockInfoPageType = {
   block_order: 3,
   block_page: currentPage,
   block_name: BlocsEnum.BlockAchivments,
@@ -32,7 +32,7 @@ export default function SectionAchivments() {
       blockInfoPage: blockInfoPage,
     });
 
-  function createAdapter(): IAchivmentsFormBlockFullData {
+  function createAdapter(): AchivmentsFormBlockFullDataType {
     return {
       ...blockInfoPage,
       publish: false,

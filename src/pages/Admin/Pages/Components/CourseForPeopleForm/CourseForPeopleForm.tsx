@@ -12,12 +12,12 @@ import ReactQuill from 'react-quill';
 
 import {
   CourseForPeopleFormProps,
-  ICourseForPeopleFormData,
+  CourseForPeopleFormDataType,
 } from './CourseForPeopleForm.type';
 import schemaValidation from './CourseForPeopleForm.validation';
 import { BlockTogglers } from '../BlockTogglers';
 
-const defaultValuesForm: ICourseForPeopleFormData = {
+const defaultValuesForm: CourseForPeopleFormDataType = {
   heading: '',
   rich_text: '',
   publish: false,
@@ -33,7 +33,7 @@ export default function CourseForPeopleForm({
   const [markdownText, setMarkdownText] = useState<string | null>(null);
 
   const { handleSubmit, register, setValue } =
-    useForm<ICourseForPeopleFormData>({
+    useForm<CourseForPeopleFormDataType>({
       mode: 'onSubmit',
       defaultValues: data ?? defaultValuesForm,
       resolver: yupResolver(schemaValidation),
@@ -53,7 +53,7 @@ export default function CourseForPeopleForm({
     setValue('rich_text', value);
   }
 
-  function handleSave(params: ICourseForPeopleFormData) {
+  function handleSave(params: CourseForPeopleFormDataType) {
     if (data) {
       onUpdate &&
         onUpdate({

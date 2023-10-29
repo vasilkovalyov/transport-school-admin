@@ -1,13 +1,11 @@
 import {
   BaseBlockCutDownFormProps,
-  IBaseBlock,
-  IBlockInfoPage,
+  BaseBlockType,
+  BlockInfoPageType,
 } from '../types';
 
-export type FaqFormProps = BaseBlockCutDownFormProps<IFaqSectionFormData>;
+export type FaqFormProps = BaseBlockCutDownFormProps<FaqSectionFormDataType>;
 
-export interface IFaqSectionFormData extends IBaseBlock {}
+export type FaqSectionFormDataType = BaseBlockType;
 
-export interface IFaqFormBlockFullData
-  extends IFaqSectionFormData,
-    IBlockInfoPage {}
+export type IFaqFormBlockFullData = FaqSectionFormDataType & BlockInfoPageType;

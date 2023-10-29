@@ -7,9 +7,9 @@ export type BaseBlockReusableFormProps<T> = {
   onCreate?: (data: T) => void;
 };
 
-export interface IBlockReusableInfo {
+export type BlockReusableInfoType = {
   block_name: BlocsEnum;
-}
+};
 
 export interface IBlockReusableService<T> {
   getBlock: () => AxiosPromise<T>;

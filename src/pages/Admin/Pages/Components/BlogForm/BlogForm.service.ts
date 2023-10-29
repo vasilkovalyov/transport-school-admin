@@ -1,6 +1,6 @@
 import { AxiosPromise } from 'axios';
 import api from '@/src/api/axios';
-import { IBlogBlockFullData } from './BlogForm.type';
+import { BlogBlockFullDataType } from './BlogForm.type';
 import { IBlockService } from '../types';
 
 enum EndpointBlockBlogEnum {
@@ -11,7 +11,7 @@ enum EndpointBlockBlogEnum {
   GET_BLOCK = 'blocks/blog/',
 }
 
-class BlogFormService implements IBlockService<IBlogBlockFullData> {
+class BlogFormService implements IBlockService<BlogBlockFullDataType> {
   async publish(page: string): AxiosPromise<boolean> {
     const response = await api.patch(EndpointBlockBlogEnum.PUBLISH, {
       page: page,
@@ -26,21 +26,25 @@ class BlogFormService implements IBlockService<IBlogBlockFullData> {
     return response;
   }
 
-  async create(params: IBlogBlockFullData): AxiosPromise<{ message: string }> {
+  async create(
+    params: BlogBlockFullDataType
+  ): AxiosPromise<{ message: string }> {
     const response = await api.post(EndpointBlockBlogEnum.CREATE, {
       ...params,
     });
     return response;
   }
 
-  async update(params: IBlogBlockFullData): AxiosPromise<{ message: string }> {
+  async update(
+    params: BlogBlockFullDataType
+  ): AxiosPromise<{ message: string }> {
     const response = await api.patch(EndpointBlockBlogEnum.UPDATE, {
       ...params,
     });
     return response;
   }
 
-  async getBlock(page: string): AxiosPromise<IBlogBlockFullData> {
+  async getBlock(page: string): AxiosPromise<BlogBlockFullDataType> {
     const response = await api.get(`${EndpointBlockBlogEnum.GET_BLOCK}${page}`);
     return response;
   }

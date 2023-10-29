@@ -1,6 +1,6 @@
 import { AxiosPromise } from 'axios';
 import api from '@/src/api/axios';
-import { IFormatLessonsBlockFullData } from './FormatLessonsForm.type';
+import { FormatLessonsBlockFullDataType } from './FormatLessonsForm.type';
 import { IBlockService } from '../types';
 
 enum EndpointBlockFormatLessonEnum {
@@ -12,7 +12,7 @@ enum EndpointBlockFormatLessonEnum {
 }
 
 class FormatLessonsFormService
-  implements IBlockService<IFormatLessonsBlockFullData>
+  implements IBlockService<FormatLessonsBlockFullDataType>
 {
   async publish(page: string): AxiosPromise<boolean> {
     const response = await api.patch(EndpointBlockFormatLessonEnum.PUBLISH, {
@@ -29,7 +29,7 @@ class FormatLessonsFormService
   }
 
   async create(
-    params: IFormatLessonsBlockFullData
+    params: FormatLessonsBlockFullDataType
   ): AxiosPromise<{ message: string }> {
     const response = await api.post(EndpointBlockFormatLessonEnum.CREATE, {
       ...params,
@@ -38,7 +38,7 @@ class FormatLessonsFormService
   }
 
   async update(
-    params: IFormatLessonsBlockFullData
+    params: FormatLessonsBlockFullDataType
   ): AxiosPromise<{ message: string }> {
     const response = await api.patch(EndpointBlockFormatLessonEnum.UPDATE, {
       ...params,
@@ -46,7 +46,7 @@ class FormatLessonsFormService
     return response;
   }
 
-  async getBlock(page: string): AxiosPromise<IFormatLessonsBlockFullData> {
+  async getBlock(page: string): AxiosPromise<FormatLessonsBlockFullDataType> {
     const response = await api.get(
       `${EndpointBlockFormatLessonEnum.GET_BLOCK}${page}`
     );

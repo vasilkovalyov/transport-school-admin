@@ -12,11 +12,11 @@ import ReactQuill from 'react-quill';
 
 import { ImageUpload } from '@/src/components';
 
-import { WhoTeachFormProps, IWhoTeachFormData } from './WhoTeachForm.type';
+import { WhoTeachFormProps, WhoTeachFormDataType } from './WhoTeachForm.type';
 import schemaValidation from './WhoTeachForm.validation';
 import { BlockTogglers } from '../BlockTogglers';
 
-const defaultValuesForm: IWhoTeachFormData = {
+const defaultValuesForm: WhoTeachFormDataType = {
   image: '',
   heading: '',
   rich_text: '',
@@ -32,7 +32,7 @@ export default function WhoTeachForm({
 }: WhoTeachFormProps) {
   const [markdownText, setMarkdownText] = useState<string | null>(null);
 
-  const { handleSubmit, register, setValue } = useForm<IWhoTeachFormData>({
+  const { handleSubmit, register, setValue } = useForm<WhoTeachFormDataType>({
     mode: 'onSubmit',
     defaultValues: data ?? defaultValuesForm,
     resolver: yupResolver(schemaValidation),
@@ -56,7 +56,7 @@ export default function WhoTeachForm({
     setValue('rich_text', value);
   }
 
-  function handleSave(params: IWhoTeachFormData) {
+  function handleSave(params: WhoTeachFormDataType) {
     if (data) {
       onUpdate &&
         onUpdate({

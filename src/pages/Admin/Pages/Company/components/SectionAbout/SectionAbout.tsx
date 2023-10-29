@@ -3,28 +3,28 @@ import { Box } from '@mui/material';
 import {
   AboutForm,
   AboutFormService,
-  IAboutBlockFullData,
-  IAboutFormData,
+  AboutBlockFullDataType,
+  AboutFormDataType,
   BlockHeading,
 } from '@/src/pages/Admin/Pages/Components';
 import { PageEnum } from '@/src/pages/Admin/Pages/pages-enum';
-import { IBlockInfoPage } from '@/src/pages/Admin/Pages/Components/types';
+import { BlockInfoPageType } from '@/src/pages/Admin/Pages/Components/types';
 import { useApisBlock } from '@/src/pages/Admin/Pages/hooks/useApisBlock';
 import { BlocsEnum } from '@/src/pages/Admin/Pages/blocks-enum';
 
 const service = new AboutFormService();
 const currentPage = PageEnum.COMPANY;
 
-const blockInfoPage: IBlockInfoPage = {
+const blockInfoPage: BlockInfoPageType = {
   block_order: 1,
   block_page: currentPage,
   block_name: BlocsEnum.BlockAbout,
 };
 
 const getAdapterSectionParams = (
-  params: IAboutFormData,
-  additionalParams: IBlockInfoPage
-): IAboutBlockFullData => {
+  params: AboutFormDataType,
+  additionalParams: BlockInfoPageType
+): AboutBlockFullDataType => {
   const { publish, ...props } = params;
   return {
     ...props,
@@ -40,17 +40,17 @@ export default function SectionAbout() {
     updateSection,
     createSection,
     publishToggleSection,
-  } = useApisBlock<IAboutBlockFullData>({
+  } = useApisBlock<AboutBlockFullDataType>({
     page: currentPage,
     service: service,
     blockInfoPage: blockInfoPage,
   });
 
-  function onHandleCreateSection(params: IAboutFormData) {
+  function onHandleCreateSection(params: AboutFormDataType) {
     createSection(getAdapterSectionParams(params, blockInfoPage));
   }
 
-  function onHandleUpdateSection(params: IAboutFormData) {
+  function onHandleUpdateSection(params: AboutFormDataType) {
     updateSection(getAdapterSectionParams(params, blockInfoPage));
   }
 

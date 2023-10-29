@@ -10,7 +10,7 @@ import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
 
-import { IReview, ReviewRow } from '../ReviewRow';
+import { ReviewType, ReviewRow } from '../ReviewRow';
 import ServiceReview from '../../Review.service';
 import { AlertMessageModal, useAlertMessageModal } from '@/src/components';
 
@@ -24,7 +24,7 @@ export default function ReviewList() {
 
   const [loading, setLoading] = useState<boolean>(true);
   const [loadingRemove, setLoadingRemove] = useState<boolean>(false);
-  const [reviews, setReviews] = useState<IReview[]>([]);
+  const [reviews, setReviews] = useState<ReviewType[]>([]);
 
   async function loadData() {
     try {

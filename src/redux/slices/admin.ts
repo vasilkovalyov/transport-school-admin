@@ -1,20 +1,20 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { IAdmin } from '../types/admin';
+import { AdminType } from '../types/admin';
 
-export const defaultAdminState: IAdmin = {
+export const defaultAdminState: AdminType = {
   _id: '',
   login: '',
   token: '',
 };
 
-export interface IAdminAuthState {
-  admin: IAdmin;
+export type AdminAuthStateType = {
+  admin: AdminType;
   isAuth: boolean;
   loading: boolean;
   error?: string | null;
-}
+};
 
-const initialState: IAdminAuthState = {
+const initialState: AdminAuthStateType = {
   admin: defaultAdminState,
   isAuth: false,
   loading: false,
@@ -25,14 +25,17 @@ export const adminAuthSlice = createSlice({
   name: 'adminAuthSlice',
   initialState,
   reducers: {
-    saveAdmin: (state: IAdminAuthState, action: PayloadAction<IAdmin>) => {
+    saveAdmin: (
+      state: AdminAuthStateType,
+      action: PayloadAction<AdminType>
+    ) => {
       state.admin = {
         ...state.admin,
         ...action.payload,
       };
       state.isAuth = true;
     },
-    removeAdmin: (state: IAdminAuthState) => {
+    removeAdmin: (state: AdminAuthStateType) => {
       (state.admin = defaultAdminState), (state.isAuth = false);
     },
   },

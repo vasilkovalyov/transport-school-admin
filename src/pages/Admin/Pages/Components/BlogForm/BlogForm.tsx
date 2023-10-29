@@ -6,11 +6,11 @@ import { Box } from '@mui/material';
 import TextField from '@mui/material/TextField';
 import LinearProgress from '@mui/material/LinearProgress';
 
-import { BlogFormProps, IBlogFormData } from './BlogForm.type';
+import { BlogFormProps, BlogFormDataType } from './BlogForm.type';
 import schemaValidation from './BlogForm.validation';
 import { BlockTogglers } from '../BlockTogglers';
 
-const defaultValuesForm: IBlogFormData = {
+const defaultValuesForm: BlogFormDataType = {
   heading: '',
   post_number: null,
   publish: false,
@@ -23,7 +23,7 @@ export default function BlogForm({
   onUpdate,
   onPublish,
 }: BlogFormProps) {
-  const { handleSubmit, register, setValue } = useForm<IBlogFormData>({
+  const { handleSubmit, register, setValue } = useForm<BlogFormDataType>({
     mode: 'onSubmit',
     defaultValues: data ?? defaultValuesForm,
     resolver: yupResolver(schemaValidation),
@@ -35,7 +35,7 @@ export default function BlogForm({
     setValue('post_number', data?.post_number);
   }, [data]);
 
-  function handleSave(params: IBlogFormData) {
+  function handleSave(params: BlogFormDataType) {
     console.log(params);
     if (data) {
       onUpdate &&

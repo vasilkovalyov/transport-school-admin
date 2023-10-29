@@ -1,6 +1,5 @@
-import { IBlockReusableInfo } from '../types';
-import { IFaqSectionFormData } from './components';
+import { BlockReusableInfoType } from '../types';
+import { FaqSectionFormDataType } from './components';
 
-export interface IFaqBlockReusableFullData
-  extends IBlockReusableInfo,
-    IFaqSectionFormData {}
+export type FaqBlockReusableFullDataType = BlockReusableInfoType &
+  FaqSectionFormDataType;

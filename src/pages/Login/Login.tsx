@@ -12,7 +12,7 @@ import Container from '@mui/material/Container';
 import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
 
-import { ILogin } from './Login.type';
+import { LoginType } from './Login.type';
 import { loginValidationSchema } from './Login.validation';
 import { AxiosError } from 'axios';
 import AuthService from '@/src/services/auth';
@@ -30,12 +30,12 @@ export default function LoginPage() {
     handleSubmit,
     register,
     formState: { errors },
-  } = useForm<ILogin>({
+  } = useForm<LoginType>({
     mode: 'onSubmit',
     resolver: yupResolver(loginValidationSchema),
   });
 
-  async function handleLogin(params: ILogin) {
+  async function handleLogin(params: LoginType) {
     try {
       setLoading(true);
       const response = await authService.login(params);

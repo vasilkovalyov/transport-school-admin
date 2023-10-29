@@ -1,19 +1,18 @@
-import { BaseBlockFormProps, IBaseBlock, IBlockInfoPage } from '../types';
+import { BaseBlockFormProps, BaseBlockType, BlockInfoPageType } from '../types';
 
-export type RequirementFormProps = BaseBlockFormProps<IRequirementFormData>;
+export type RequirementFormProps = BaseBlockFormProps<RequirementFormDataType>;
 
-export interface IRequirementFormData extends IBaseBlock {
+export type RequirementFormDataType = BaseBlockType & {
   heading: string;
-  requirements_list?: IRequirementItem[];
-}
+  requirements_list?: RequirementItemType[];
+};
 
-export interface IRequirementItem {
+export type RequirementItemType = {
   id?: string;
   image?: string;
   heading: string;
   text: string;
-}
+};
 
-export interface IRequirementBlockFullData
-  extends IRequirementFormData,
-    IBlockInfoPage {}
+export type RequirementBlockFullDataType = RequirementFormDataType &
+  BlockInfoPageType;

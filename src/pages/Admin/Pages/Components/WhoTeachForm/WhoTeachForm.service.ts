@@ -1,6 +1,6 @@
 import { AxiosPromise } from 'axios';
 import api from '@/src/api/axios';
-import { IWhoTeachBlockFullData } from './WhoTeachForm.type';
+import { WhoTeachBlockFullDataType } from './WhoTeachForm.type';
 import { IBlockService } from '../types';
 
 enum EndpointBlockWhoTeachEnum {
@@ -11,7 +11,7 @@ enum EndpointBlockWhoTeachEnum {
   GET_BLOCK = 'blocks/who-teach/',
 }
 
-class WhoTeachFormService implements IBlockService<IWhoTeachBlockFullData> {
+class WhoTeachFormService implements IBlockService<WhoTeachBlockFullDataType> {
   async publish(page: string): AxiosPromise<boolean> {
     const response = await api.patch(EndpointBlockWhoTeachEnum.PUBLISH, {
       page: page,
@@ -27,7 +27,7 @@ class WhoTeachFormService implements IBlockService<IWhoTeachBlockFullData> {
   }
 
   async create(
-    params: IWhoTeachBlockFullData
+    params: WhoTeachBlockFullDataType
   ): AxiosPromise<{ message: string }> {
     const response = await api.post(EndpointBlockWhoTeachEnum.CREATE, {
       ...params,
@@ -36,7 +36,7 @@ class WhoTeachFormService implements IBlockService<IWhoTeachBlockFullData> {
   }
 
   async update(
-    params: IWhoTeachBlockFullData
+    params: WhoTeachBlockFullDataType
   ): AxiosPromise<{ message: string }> {
     const response = await api.patch(EndpointBlockWhoTeachEnum.UPDATE, {
       ...params,
@@ -44,7 +44,7 @@ class WhoTeachFormService implements IBlockService<IWhoTeachBlockFullData> {
     return response;
   }
 
-  async getBlock(page: string): AxiosPromise<IWhoTeachBlockFullData> {
+  async getBlock(page: string): AxiosPromise<WhoTeachBlockFullDataType> {
     const response = await api.get(
       `${EndpointBlockWhoTeachEnum.GET_BLOCK}${page}`
     );

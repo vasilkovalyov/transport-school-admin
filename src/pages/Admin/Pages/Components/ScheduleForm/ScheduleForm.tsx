@@ -6,11 +6,11 @@ import { Box } from '@mui/material';
 import TextField from '@mui/material/TextField';
 import LinearProgress from '@mui/material/LinearProgress';
 
-import { ScheduleFormProps, IScheduleFormData } from './ScheduleForm.type';
+import { ScheduleFormProps, ScheduleFormDataType } from './ScheduleForm.type';
 import schemaValidation from './ScheduleForm.validation';
 import { BlockTogglers } from '../BlockTogglers';
 
-const defaultValuesForm: IScheduleFormData = {
+const defaultValuesForm: ScheduleFormDataType = {
   heading: '',
   post_number: null,
   publish: false,
@@ -23,7 +23,7 @@ export default function ScheduleForm({
   onUpdate,
   onPublish,
 }: ScheduleFormProps) {
-  const { handleSubmit, register, setValue } = useForm<IScheduleFormData>({
+  const { handleSubmit, register, setValue } = useForm<ScheduleFormDataType>({
     mode: 'onSubmit',
     defaultValues: data ?? defaultValuesForm,
     resolver: yupResolver(schemaValidation),
@@ -35,7 +35,7 @@ export default function ScheduleForm({
     setValue('post_number', data?.post_number);
   }, [data]);
 
-  function handleSave(params: IScheduleFormData) {
+  function handleSave(params: ScheduleFormDataType) {
     if (data) {
       onUpdate &&
         onUpdate({

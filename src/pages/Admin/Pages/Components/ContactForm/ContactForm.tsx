@@ -11,11 +11,11 @@ import ReactQuill from 'react-quill';
 
 import { ImageUpload } from '@/src/components';
 
-import { ContactFormProps, IContactFormData } from './ContactForm.type';
+import { ContactFormProps, ContactFormDataType } from './ContactForm.type';
 import schemaValidation from './ContactForm.validation';
 import { BlockTogglers } from '../BlockTogglers';
 
-const defaultValuesForm: IContactFormData = {
+const defaultValuesForm: ContactFormDataType = {
   heading: '',
   rich_text: '',
   form_heading: '',
@@ -33,7 +33,7 @@ export default function ContactForm({
 }: ContactFormProps) {
   const [markdownText, setMarkdownText] = useState<string | null>(null);
 
-  const { handleSubmit, register, setValue } = useForm<IContactFormData>({
+  const { handleSubmit, register, setValue } = useForm<ContactFormDataType>({
     mode: 'onSubmit',
     defaultValues: data ?? defaultValuesForm,
     resolver: yupResolver(schemaValidation),
@@ -59,7 +59,7 @@ export default function ContactForm({
     setValue('rich_text', value);
   }
 
-  function handleSave(params: IContactFormData) {
+  function handleSave(params: ContactFormDataType) {
     if (data) {
       onUpdate &&
         onUpdate({

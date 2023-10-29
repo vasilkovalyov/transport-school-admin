@@ -4,12 +4,12 @@ import LinearProgress from '@mui/material/LinearProgress';
 
 import {
   CtaForm,
-  ICtaFormBlockFullData,
+  CtaFormBlockFullDataType,
   CtaFormService,
   BlockHeading,
 } from '@/src/pages/Admin/Pages/Components';
 import { PageEnum } from '@/src/pages/Admin/Pages/pages-enum';
-import { IBlockInfoPage } from '@/src/pages/Admin/Pages/Components/types';
+import { BlockInfoPageType } from '@/src/pages/Admin/Pages/Components/types';
 import { BlocsEnum } from '@/src/pages/Admin/Pages/blocks-enum';
 import { Link } from 'react-router-dom';
 import { LinksPageSections } from '@/src/constants/routes';
@@ -18,7 +18,7 @@ import { useApisReuseBlock } from '@/src/pages/Admin/Pages/hooks/useApisReuseBlo
 const service = new CtaFormService();
 const currentPage = PageEnum.BLOG;
 
-const blockInfoPage: IBlockInfoPage = {
+const blockInfoPage: BlockInfoPageType = {
   block_order: 2,
   block_page: currentPage,
   block_name: BlocsEnum.BlockCta,
@@ -32,7 +32,7 @@ export default function SectionCta() {
       blockInfoPage: blockInfoPage,
     });
 
-  function createAdapter(): ICtaFormBlockFullData {
+  function createAdapter(): CtaFormBlockFullDataType {
     return {
       ...blockInfoPage,
       publish: false,

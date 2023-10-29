@@ -4,12 +4,12 @@ import LinearProgress from '@mui/material/LinearProgress';
 
 import {
   ContactsForm,
-  IContactsBlockFullData,
+  ContactsBlockFullDataType,
   ContactsFormService,
   BlockHeading,
 } from '@/src/pages/Admin/Pages/Components';
 import { PageEnum } from '@/src/pages/Admin/Pages/pages-enum';
-import { IBlockInfoPage } from '@/src/pages/Admin/Pages/Components/types';
+import { BlockInfoPageType } from '@/src/pages/Admin/Pages/Components/types';
 import { BlocsEnum } from '@/src/pages/Admin/Pages/blocks-enum';
 import { Link } from 'react-router-dom';
 import { LinksPageSections } from '@/src/constants/routes';
@@ -18,7 +18,7 @@ import { useApisReuseBlock } from '@/src/pages/Admin/Pages/hooks/useApisReuseBlo
 const service = new ContactsFormService();
 const currentPage = PageEnum.PRICE;
 
-const blockInfoPage: IBlockInfoPage = {
+const blockInfoPage: BlockInfoPageType = {
   block_order: 4,
   block_page: currentPage,
   block_name: BlocsEnum.BlockContacts,
@@ -32,7 +32,7 @@ export default function SectionContacts() {
       blockInfoPage: blockInfoPage,
     });
 
-  function createAdapter(): IContactsBlockFullData {
+  function createAdapter(): ContactsBlockFullDataType {
     return {
       ...blockInfoPage,
       publish: false,

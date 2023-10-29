@@ -3,28 +3,28 @@ import { Box } from '@mui/material';
 import {
   ScheduleForm,
   ScheduleFormService,
-  IScheduleBlockFullData,
-  IScheduleFormData,
+  ScheduleBlockFullDataType,
+  ScheduleFormDataType,
   BlockHeading,
 } from '@/src/pages/Admin/Pages/Components';
 import { PageEnum } from '@/src/pages/Admin/Pages/pages-enum';
-import { IBlockInfoPage } from '@/src/pages/Admin/Pages/Components/types';
+import { BlockInfoPageType } from '@/src/pages/Admin/Pages/Components/types';
 import { useApisBlock } from '@/src/pages/Admin/Pages/hooks/useApisBlock';
 import { BlocsEnum } from '@/src/pages/Admin/Pages/blocks-enum';
 
 const service = new ScheduleFormService();
 const currentPage = PageEnum.SCHEDULE;
 
-const blockInfoPage: IBlockInfoPage = {
+const blockInfoPage: BlockInfoPageType = {
   block_order: 1,
   block_page: currentPage,
   block_name: BlocsEnum.BlockSchedule,
 };
 
 const getAdapterSectionParams = (
-  params: IScheduleFormData,
-  additionalParams: IBlockInfoPage
-): IScheduleBlockFullData => {
+  params: ScheduleFormDataType,
+  additionalParams: BlockInfoPageType
+): ScheduleBlockFullDataType => {
   const { publish, ...props } = params;
   return {
     ...props,
@@ -40,17 +40,17 @@ export default function SectionSchedule() {
     updateSection,
     createSection,
     publishToggleSection,
-  } = useApisBlock<IScheduleBlockFullData>({
+  } = useApisBlock<ScheduleBlockFullDataType>({
     page: currentPage,
     service: service,
     blockInfoPage: blockInfoPage,
   });
 
-  function onHandleCreateSection(params: IScheduleFormData) {
+  function onHandleCreateSection(params: ScheduleFormDataType) {
     createSection(getAdapterSectionParams(params, blockInfoPage));
   }
 
-  function onHandleUpdateSection(params: IScheduleFormData) {
+  function onHandleUpdateSection(params: ScheduleFormDataType) {
     updateSection(getAdapterSectionParams(params, blockInfoPage));
   }
 

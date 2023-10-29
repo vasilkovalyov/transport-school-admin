@@ -14,13 +14,13 @@ import ReactQuill from 'react-quill';
 import {
   FormatLessonsFormProps,
   FormatLessonsSectionCheckboxTypes,
-  IFormatLessonsFormData,
+  FormatLessonsFormDataType,
 } from './FormatLessonsForm.type';
 
 import schemaValidation from './FormatLessonsForm.validation';
 import { BlockTogglers } from '../BlockTogglers';
 
-const defaultValuesForm: IFormatLessonsFormData = {
+const defaultValuesForm: FormatLessonsFormDataType = {
   heading: '',
   rich_text: '',
   publish: false,
@@ -40,11 +40,12 @@ export default function FormatLessonsForm({
       use_dark_theme: false,
     });
 
-  const { handleSubmit, register, setValue } = useForm<IFormatLessonsFormData>({
-    mode: 'onSubmit',
-    defaultValues: data ?? defaultValuesForm,
-    resolver: yupResolver(schemaValidation),
-  });
+  const { handleSubmit, register, setValue } =
+    useForm<FormatLessonsFormDataType>({
+      mode: 'onSubmit',
+      defaultValues: data ?? defaultValuesForm,
+      resolver: yupResolver(schemaValidation),
+    });
 
   useEffect(() => {
     if (!data) return;
@@ -63,7 +64,7 @@ export default function FormatLessonsForm({
     setValue('rich_text', value);
   }
 
-  function handleSave(params: IFormatLessonsFormData) {
+  function handleSave(params: FormatLessonsFormDataType) {
     if (data) {
       onUpdate &&
         onUpdate({

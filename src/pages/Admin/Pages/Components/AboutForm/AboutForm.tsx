@@ -10,11 +10,11 @@ import LinearProgress from '@mui/material/LinearProgress';
 
 import ReactQuill from 'react-quill';
 
-import { AboutFormProps, IAboutFormData } from './AboutForm.type';
+import { AboutFormProps, AboutFormDataType } from './AboutForm.type';
 import schemaValidation from './AboutForm.validation';
 import { BlockTogglers } from '../BlockTogglers';
 
-const defaultValuesForm: IAboutFormData = {
+const defaultValuesForm: AboutFormDataType = {
   heading: '',
   rich_text: '',
   publish: false,
@@ -29,7 +29,7 @@ export default function AboutForm({
 }: AboutFormProps) {
   const [markdownText, setMarkdownText] = useState<string | null>(null);
 
-  const { handleSubmit, register, setValue } = useForm<IAboutFormData>({
+  const { handleSubmit, register, setValue } = useForm<AboutFormDataType>({
     mode: 'onSubmit',
     defaultValues: data ?? defaultValuesForm,
     resolver: yupResolver(schemaValidation),
@@ -49,7 +49,7 @@ export default function AboutForm({
     setValue('rich_text', value);
   }
 
-  function handleSave(params: IAboutFormData) {
+  function handleSave(params: AboutFormDataType) {
     if (data) {
       onUpdate &&
         onUpdate({

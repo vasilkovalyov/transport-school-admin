@@ -1,9 +1,9 @@
-import { IReview } from '../ReviewRow';
+import { ReviewType } from '../ReviewRow';
 
 export type ReviewFormProps = {
-  data?: IReviewFormData;
+  data?: ReviewFormDataType;
   loadingSubmit?: boolean;
-  onSubmit?: (data: IReviewFormData) => void;
+  onSubmit?: (data: ReviewFormDataType) => void;
 };
 
-export interface IReviewFormData extends Omit<IReview, '_id'> {}
+export type ReviewFormDataType = Omit<ReviewType, '_id'>;

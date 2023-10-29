@@ -1,6 +1,6 @@
 import { AxiosPromise } from 'axios';
 import api from '@/src/api/axios';
-import { IHeroBlockFullData } from './HeroForm.type';
+import { HeroBlockFullDataType } from './HeroForm.type';
 import { IBlockService } from '../types';
 
 enum EndpointBlockHeroEnum {
@@ -11,7 +11,7 @@ enum EndpointBlockHeroEnum {
   GET_BLOCK = 'blocks/hero/',
 }
 
-class HeroFormService implements IBlockService<IHeroBlockFullData> {
+class HeroFormService implements IBlockService<HeroBlockFullDataType> {
   async publish(page: string): AxiosPromise<boolean> {
     const response = await api.patch(EndpointBlockHeroEnum.PUBLISH, {
       page: page,
@@ -26,21 +26,25 @@ class HeroFormService implements IBlockService<IHeroBlockFullData> {
     return response;
   }
 
-  async create(params: IHeroBlockFullData): AxiosPromise<{ message: string }> {
+  async create(
+    params: HeroBlockFullDataType
+  ): AxiosPromise<{ message: string }> {
     const response = await api.post(EndpointBlockHeroEnum.CREATE, {
       ...params,
     });
     return response;
   }
 
-  async update(params: IHeroBlockFullData): AxiosPromise<{ message: string }> {
+  async update(
+    params: HeroBlockFullDataType
+  ): AxiosPromise<{ message: string }> {
     const response = await api.patch(EndpointBlockHeroEnum.UPDATE, {
       ...params,
     });
     return response;
   }
 
-  async getBlock(page: string): AxiosPromise<IHeroBlockFullData> {
+  async getBlock(page: string): AxiosPromise<HeroBlockFullDataType> {
     const response = await api.get(`${EndpointBlockHeroEnum.GET_BLOCK}${page}`);
     return response;
   }

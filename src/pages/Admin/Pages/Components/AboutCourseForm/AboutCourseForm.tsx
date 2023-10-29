@@ -13,12 +13,12 @@ import { ImageUpload } from '@/src/components';
 
 import {
   AboutCourseFormProps,
-  IAboutCourseFormData,
+  AboutCourseFormDataType,
 } from './AboutCourseForm.type';
 import schemaValidation from './AboutCourseForm.validation';
 import { BlockTogglers } from '../BlockTogglers';
 
-const defaultValuesForm: IAboutCourseFormData = {
+const defaultValuesForm: AboutCourseFormDataType = {
   image: '',
   heading: '',
   rich_text: '',
@@ -34,11 +34,13 @@ export default function AboutCourseForm({
 }: AboutCourseFormProps) {
   const [markdownText, setMarkdownText] = useState<string | null>(null);
 
-  const { handleSubmit, register, setValue } = useForm<IAboutCourseFormData>({
-    mode: 'onSubmit',
-    defaultValues: data ?? defaultValuesForm,
-    resolver: yupResolver(schemaValidation),
-  });
+  const { handleSubmit, register, setValue } = useForm<AboutCourseFormDataType>(
+    {
+      mode: 'onSubmit',
+      defaultValues: data ?? defaultValuesForm,
+      resolver: yupResolver(schemaValidation),
+    }
+  );
 
   useEffect(() => {
     if (!data) return;
@@ -58,7 +60,7 @@ export default function AboutCourseForm({
     setValue('rich_text', value);
   }
 
-  function handleSave(params: IAboutCourseFormData) {
+  function handleSave(params: AboutCourseFormDataType) {
     if (data) {
       onUpdate &&
         onUpdate({

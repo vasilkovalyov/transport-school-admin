@@ -3,28 +3,28 @@ import { Box } from '@mui/material';
 import {
   ContactForm,
   ContactFormFormService,
-  IContactBlockFullData,
-  IContactFormData,
+  ContactBlockFullDataType,
+  ContactFormDataType,
   BlockHeading,
 } from '@/src/pages/Admin/Pages/Components';
 import { PageEnum } from '@/src/pages/Admin/Pages/pages-enum';
-import { IBlockInfoPage } from '@/src/pages/Admin/Pages/Components/types';
+import { BlockInfoPageType } from '@/src/pages/Admin/Pages/Components/types';
 import { useApisBlock } from '@/src/pages/Admin/Pages/hooks/useApisBlock';
 import { BlocsEnum } from '@/src/pages/Admin/Pages/blocks-enum';
 
 const service = new ContactFormFormService();
 const currentPage = PageEnum.CONTACT;
 
-const blockInfoPage: IBlockInfoPage = {
+const blockInfoPage: BlockInfoPageType = {
   block_order: 0,
   block_page: currentPage,
   block_name: BlocsEnum.BlockContactForm,
 };
 
 const getAdapterSectionParams = (
-  params: IContactFormData,
-  additionalParams: IBlockInfoPage
-): IContactBlockFullData => {
+  params: ContactFormDataType,
+  additionalParams: BlockInfoPageType
+): ContactBlockFullDataType => {
   const { publish, ...props } = params;
   return {
     ...props,
@@ -40,17 +40,17 @@ export default function SectionContactForm() {
     updateSection,
     createSection,
     publishToggleSection,
-  } = useApisBlock<IContactBlockFullData>({
+  } = useApisBlock<ContactBlockFullDataType>({
     page: currentPage,
     service: service,
     blockInfoPage: blockInfoPage,
   });
 
-  function onHandleCreateSection(params: IContactFormData) {
+  function onHandleCreateSection(params: ContactFormDataType) {
     createSection(getAdapterSectionParams(params, blockInfoPage));
   }
 
-  function onHandleUpdateSection(params: IContactFormData) {
+  function onHandleUpdateSection(params: ContactFormDataType) {
     updateSection(getAdapterSectionParams(params, blockInfoPage));
   }
 

@@ -1,6 +1,6 @@
 import { AxiosPromise } from 'axios';
 import api from '@/src/api/axios';
-import { ISeoFullData } from './SeoForm.type';
+import { SeoFullDataType } from './SeoForm.type';
 
 enum EndpointSeoEnum {
   UPDATE = 'seo',
@@ -8,14 +8,14 @@ enum EndpointSeoEnum {
 }
 
 class SeoFormService {
-  async update(params: ISeoFullData): AxiosPromise<{ message: string }> {
+  async update(params: SeoFullDataType): AxiosPromise<{ message: string }> {
     const response = await api.patch(EndpointSeoEnum.UPDATE, {
       ...params,
     });
     return response;
   }
 
-  async getInfo(page: string): AxiosPromise<ISeoFullData> {
+  async getInfo(page: string): AxiosPromise<SeoFullDataType> {
     const response = await api.get(`${EndpointSeoEnum.GET_INFO}${page}`);
     return response;
   }

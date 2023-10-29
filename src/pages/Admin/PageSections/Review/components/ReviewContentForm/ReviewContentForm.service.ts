@@ -1,6 +1,6 @@
 import { AxiosPromise } from 'axios';
 import api from '@/src/api/axios';
-import { IReviewContentFormSectionFormData } from './ReviewContentForm.type';
+import { ReviewContentFormSectionFormDataType } from './ReviewContentForm.type';
 
 enum EndpointAchivmentSectionEnum {
   UPDATE = 'block/reuse-review',
@@ -9,7 +9,7 @@ enum EndpointAchivmentSectionEnum {
 
 class AchivmentSectionFormService {
   async update(
-    params: IReviewContentFormSectionFormData
+    params: ReviewContentFormSectionFormDataType
   ): AxiosPromise<{ message: string }> {
     const response = await api.patch(EndpointAchivmentSectionEnum.UPDATE, {
       ...params,
@@ -17,7 +17,7 @@ class AchivmentSectionFormService {
     return response;
   }
 
-  async getInfo(): AxiosPromise<IReviewContentFormSectionFormData> {
+  async getInfo(): AxiosPromise<ReviewContentFormSectionFormDataType> {
     const response = await api.get(`${EndpointAchivmentSectionEnum.GET_INFO}`);
     return response;
   }

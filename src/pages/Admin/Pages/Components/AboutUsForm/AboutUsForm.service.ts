@@ -1,6 +1,6 @@
 import { AxiosPromise } from 'axios';
 import api from '@/src/api/axios';
-import { IAboutUsBlockFullData } from './AboutUsForm.type';
+import { AboutUsBlockFullDataType } from './AboutUsForm.type';
 import { IBlockService } from '../types';
 
 enum EndpointBlockAboutUsEnum {
@@ -11,7 +11,7 @@ enum EndpointBlockAboutUsEnum {
   GET_BLOCK = 'blocks/about-us/',
 }
 
-class AboutUsFormService implements IBlockService<IAboutUsBlockFullData> {
+class AboutUsFormService implements IBlockService<AboutUsBlockFullDataType> {
   async publish(page: string): AxiosPromise<boolean> {
     const response = await api.patch(EndpointBlockAboutUsEnum.PUBLISH, {
       page: page,
@@ -27,7 +27,7 @@ class AboutUsFormService implements IBlockService<IAboutUsBlockFullData> {
   }
 
   async create(
-    params: IAboutUsBlockFullData
+    params: AboutUsBlockFullDataType
   ): AxiosPromise<{ message: string }> {
     const response = await api.post(EndpointBlockAboutUsEnum.CREATE, {
       ...params,
@@ -36,7 +36,7 @@ class AboutUsFormService implements IBlockService<IAboutUsBlockFullData> {
   }
 
   async update(
-    params: IAboutUsBlockFullData
+    params: AboutUsBlockFullDataType
   ): AxiosPromise<{ message: string }> {
     const response = await api.patch(EndpointBlockAboutUsEnum.UPDATE, {
       ...params,
@@ -44,7 +44,7 @@ class AboutUsFormService implements IBlockService<IAboutUsBlockFullData> {
     return response;
   }
 
-  async getBlock(page: string): AxiosPromise<IAboutUsBlockFullData> {
+  async getBlock(page: string): AxiosPromise<AboutUsBlockFullDataType> {
     const response = await api.get(
       `${EndpointBlockAboutUsEnum.GET_BLOCK}${page}`
     );

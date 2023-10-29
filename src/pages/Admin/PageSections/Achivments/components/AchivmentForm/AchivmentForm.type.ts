@@ -1,11 +1,11 @@
-export interface IAchivmentSectionFormData {
+export type AchivmentSectionFormDataType = {
   heading: string;
   subheading: string;
-  list_achivments: IAchivmentSectionListItemData[];
-}
+  list_achivments: AchivmentSectionListItemDataType[];
+};
 
-export interface IAchivmentSectionListItemData {
+export type AchivmentSectionListItemDataType = {
   id?: string;
   heading: string;
   text: string;
-}
+};

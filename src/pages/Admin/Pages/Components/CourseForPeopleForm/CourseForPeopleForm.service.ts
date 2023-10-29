@@ -1,6 +1,6 @@
 import { AxiosPromise } from 'axios';
 import api from '@/src/api/axios';
-import { ICourseForPeopleFullData } from './CourseForPeopleForm.type';
+import { CourseForPeopleFullDataType } from './CourseForPeopleForm.type';
 import { IBlockService } from '../types';
 
 enum EndpointBlockCourseForPeopleEnum {
@@ -12,7 +12,7 @@ enum EndpointBlockCourseForPeopleEnum {
 }
 
 class CourseForPeopleFormService
-  implements IBlockService<ICourseForPeopleFullData>
+  implements IBlockService<CourseForPeopleFullDataType>
 {
   async publish(page: string): AxiosPromise<boolean> {
     const response = await api.patch(EndpointBlockCourseForPeopleEnum.PUBLISH, {
@@ -32,7 +32,7 @@ class CourseForPeopleFormService
   }
 
   async create(
-    params: ICourseForPeopleFullData
+    params: CourseForPeopleFullDataType
   ): AxiosPromise<{ message: string }> {
     const response = await api.post(EndpointBlockCourseForPeopleEnum.CREATE, {
       ...params,
@@ -41,7 +41,7 @@ class CourseForPeopleFormService
   }
 
   async update(
-    params: ICourseForPeopleFullData
+    params: CourseForPeopleFullDataType
   ): AxiosPromise<{ message: string }> {
     const response = await api.patch(EndpointBlockCourseForPeopleEnum.UPDATE, {
       ...params,
@@ -49,7 +49,7 @@ class CourseForPeopleFormService
     return response;
   }
 
-  async getBlock(page: string): AxiosPromise<ICourseForPeopleFullData> {
+  async getBlock(page: string): AxiosPromise<CourseForPeopleFullDataType> {
     const response = await api.get(
       `${EndpointBlockCourseForPeopleEnum.GET_BLOCK}${page}`
     );

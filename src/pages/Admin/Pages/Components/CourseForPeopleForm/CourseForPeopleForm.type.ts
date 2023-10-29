@@ -1,13 +1,12 @@
-import { BaseBlockFormProps, IBaseBlock, IBlockInfoPage } from '../types';
+import { BaseBlockFormProps, BaseBlockType, BlockInfoPageType } from '../types';
 
 export type CourseForPeopleFormProps =
-  BaseBlockFormProps<ICourseForPeopleFormData>;
+  BaseBlockFormProps<CourseForPeopleFormDataType>;
 
-export interface ICourseForPeopleFormData extends IBaseBlock {
+export type CourseForPeopleFormDataType = BaseBlockType & {
   heading: string;
   rich_text?: string;
-}
+};
 
-export interface ICourseForPeopleFullData
-  extends ICourseForPeopleFormData,
-    IBlockInfoPage {}
+export type CourseForPeopleFullDataType = CourseForPeopleFormDataType &
+  BlockInfoPageType;

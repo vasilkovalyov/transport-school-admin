@@ -1,13 +1,12 @@
-import { BaseBlockFormProps, IBaseBlock, IBlockInfoPage } from '../types';
+import { BaseBlockFormProps, BaseBlockType, BlockInfoPageType } from '../types';
 
-export type WhoTeachFormProps = BaseBlockFormProps<IWhoTeachFormData>;
+export type WhoTeachFormProps = BaseBlockFormProps<WhoTeachFormDataType>;
 
-export interface IWhoTeachFormData extends IBaseBlock {
+export type WhoTeachFormDataType = BaseBlockType & {
   image?: string;
   heading: string;
   rich_text?: string;
-}
+};
 
-export interface IWhoTeachBlockFullData
-  extends IWhoTeachFormData,
-    IBlockInfoPage {}
+export type WhoTeachBlockFullDataType = WhoTeachFormDataType &
+  BlockInfoPageType;

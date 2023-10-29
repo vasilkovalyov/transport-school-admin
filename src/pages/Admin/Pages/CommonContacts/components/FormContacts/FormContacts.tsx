@@ -7,10 +7,10 @@ import TextField from '@mui/material/TextField';
 import Typography from '@mui/material/Typography';
 import LinearProgress from '@mui/material/LinearProgress';
 
-import { IFormContactsData } from './FormContacts.type';
+import { FormContactsDataType } from './FormContacts.type';
 import ContactFormService from './FormContacts.service';
 
-const defaultValuesForm: IFormContactsData = {
+const defaultValuesForm: FormContactsDataType = {
   address: '',
   email: '',
   phone: '',
@@ -20,12 +20,12 @@ const service = new ContactFormService();
 
 export default function FormContacts() {
   const [loading, setLoading] = useState<boolean>(true);
-  const { handleSubmit, register, setValue } = useForm<IFormContactsData>({
+  const { handleSubmit, register, setValue } = useForm<FormContactsDataType>({
     mode: 'onSubmit',
     defaultValues: defaultValuesForm,
   });
 
-  function handleSave(data: IFormContactsData) {
+  function handleSave(data: FormContactsDataType) {
     service.update(data);
   }
 

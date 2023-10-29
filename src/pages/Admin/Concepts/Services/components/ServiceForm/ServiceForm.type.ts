@@ -3,20 +3,20 @@ export type ServiceFormProps = {
   onSubmit?: (data: ServiceEditableFormData) => void;
 };
 
-export interface IServiceFormData {
+export type ServiceFormDataType = {
   _id: string;
   image?: string;
   heading: string;
   price: number | null;
-  top_list_info: IServiceInfoItemData[];
-  bottom_list_info: IServiceInfoItemData[];
-}
+  top_list_info: ServiceInfoItemDataType[];
+  bottom_list_info: ServiceInfoItemDataType[];
+};
 
-export type ServiceEditableFormData = Omit<IServiceFormData, '_id'>;
+export type ServiceEditableFormData = Omit<ServiceFormDataType, '_id'>;
 
 export type FormValuesKey = keyof ServiceEditableFormData;
 
-export interface IServiceInfoItemData {
+export type ServiceInfoItemDataType = {
   id?: string;
   text: string;
-}
+};

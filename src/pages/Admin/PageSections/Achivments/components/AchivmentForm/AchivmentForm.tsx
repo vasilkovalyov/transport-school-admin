@@ -12,17 +12,17 @@ import CircularProgress from '@mui/material/CircularProgress';
 import { DynamicFieldTogglers } from '@/src/components';
 
 import {
-  IAchivmentSectionFormData,
-  IAchivmentSectionListItemData,
+  AchivmentSectionFormDataType,
+  AchivmentSectionListItemDataType,
 } from './AchivmentForm.type';
 import AchivmentSectionFormService from './AchivmentForm.service';
 
-const defaultAchivmentListItem: IAchivmentSectionListItemData = {
+const defaultAchivmentListItem: AchivmentSectionListItemDataType = {
   heading: '',
   text: '',
 };
 
-const defaultValuesForm: IAchivmentSectionFormData = {
+const defaultValuesForm: AchivmentSectionFormDataType = {
   heading: '',
   subheading: '',
   list_achivments: [defaultAchivmentListItem],
@@ -34,7 +34,7 @@ export default function AchivmentForm() {
   const [loading, setLoading] = useState<boolean>(true);
   const [loadingUpdate, setLoadingUpdate] = useState<boolean>(false);
   const { handleSubmit, register, control, setValue } =
-    useForm<IAchivmentSectionFormData>({
+    useForm<AchivmentSectionFormDataType>({
       mode: 'onSubmit',
       defaultValues: defaultValuesForm,
     });
@@ -76,7 +76,7 @@ export default function AchivmentForm() {
     remove(numberAchivment);
   }
 
-  async function handleSave(data: IAchivmentSectionFormData) {
+  async function handleSave(data: AchivmentSectionFormDataType) {
     try {
       setLoadingUpdate(true);
       await serviceSectionAchivment.update(data);

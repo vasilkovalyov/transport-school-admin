@@ -1,13 +1,13 @@
 export type SocialFormProps = {
-  data: ISocialFormData;
+  data: SocialFormDataType;
 };
 
-export interface ISocialFormData {
-  social_list: ISocialFormItem[];
-}
+export type SocialFormDataType = {
+  social_list: SocialFormItemType[];
+};
 
-export interface ISocialFormItem {
+export type SocialFormItemType = {
   id?: string;
   social_icon: string;
   social_url: string;
-}
+};

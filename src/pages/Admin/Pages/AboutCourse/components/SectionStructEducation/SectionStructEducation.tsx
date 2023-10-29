@@ -3,28 +3,28 @@ import { Box } from '@mui/material';
 import {
   StructEducationForm,
   StructEducationFormService,
-  IStructEducationBlockFullData,
-  IStructEducationFormData,
+  StructEducationBlockFullDataType,
+  StructEducationFormDataType,
   BlockHeading,
 } from '@/src/pages/Admin/Pages/Components';
 import { PageEnum } from '@/src/pages/Admin/Pages/pages-enum';
-import { IBlockInfoPage } from '@/src/pages/Admin/Pages/Components/types';
+import { BlockInfoPageType } from '@/src/pages/Admin/Pages/Components/types';
 import { useApisBlock } from '@/src/pages/Admin/Pages/hooks/useApisBlock';
 import { BlocsEnum } from '@/src/pages/Admin/Pages/blocks-enum';
 
 const service = new StructEducationFormService();
 const currentPage = PageEnum.ABOUT_COURSE;
 
-const blockInfoPage: IBlockInfoPage = {
+const blockInfoPage: BlockInfoPageType = {
   block_order: 2,
   block_page: currentPage,
   block_name: BlocsEnum.BlockStructEducation,
 };
 
 const getAdapterSectionParams = (
-  params: IStructEducationFormData,
-  additionalParams: IBlockInfoPage
-): IStructEducationBlockFullData => {
+  params: StructEducationFormDataType,
+  additionalParams: BlockInfoPageType
+): StructEducationBlockFullDataType => {
   const { publish, ...props } = params;
   return {
     ...props,
@@ -40,17 +40,17 @@ export default function SectionStructEducation() {
     updateSection,
     createSection,
     publishToggleSection,
-  } = useApisBlock<IStructEducationBlockFullData>({
+  } = useApisBlock<StructEducationBlockFullDataType>({
     page: currentPage,
     service: service,
     blockInfoPage: blockInfoPage,
   });
 
-  function onHandleCreateSection(params: IStructEducationFormData) {
+  function onHandleCreateSection(params: StructEducationFormDataType) {
     createSection(getAdapterSectionParams(params, blockInfoPage));
   }
 
-  function onHandleUpdateSection(params: IStructEducationFormData) {
+  function onHandleUpdateSection(params: StructEducationFormDataType) {
     updateSection(getAdapterSectionParams(params, blockInfoPage));
   }
 

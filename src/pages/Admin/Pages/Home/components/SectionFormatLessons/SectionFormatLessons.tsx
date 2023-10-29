@@ -2,29 +2,29 @@ import { Box } from '@mui/material';
 
 import {
   FormatLessonsForm,
-  IFormatLessonsBlockFullData,
-  IFormatLessonsFormData,
+  FormatLessonsBlockFullDataType,
+  FormatLessonsFormDataType,
   FormatLessonsFormService,
   BlockHeading,
 } from '@/src/pages/Admin/Pages/Components';
 import { PageEnum } from '@/src/pages/Admin/Pages/pages-enum';
-import { IBlockInfoPage } from '@/src/pages/Admin/Pages/Components/types';
+import { BlockInfoPageType } from '@/src/pages/Admin/Pages/Components/types';
 import { useApisBlock } from '@/src/pages/Admin/Pages/hooks/useApisBlock';
 import { BlocsEnum } from '@/src/pages/Admin/Pages/blocks-enum';
 
 const service = new FormatLessonsFormService();
 const currentPage = PageEnum.HOME;
 
-const blockInfoPage: IBlockInfoPage = {
+const blockInfoPage: BlockInfoPageType = {
   block_order: 3,
   block_page: currentPage,
   block_name: BlocsEnum.BlockFormatLessons,
 };
 
 const getAdapterSectionParams = (
-  params: IFormatLessonsFormData,
-  additionalParams: IBlockInfoPage
-): IFormatLessonsBlockFullData => {
+  params: FormatLessonsFormDataType,
+  additionalParams: BlockInfoPageType
+): FormatLessonsBlockFullDataType => {
   const { publish, ...props } = params;
   return {
     ...props,
@@ -40,17 +40,17 @@ export default function SectionFormatLessons() {
     updateSection,
     createSection,
     publishToggleSection,
-  } = useApisBlock<IFormatLessonsBlockFullData>({
+  } = useApisBlock<FormatLessonsBlockFullDataType>({
     page: currentPage,
     service: service,
     blockInfoPage: blockInfoPage,
   });
 
-  function onHandleCreateSection(params: IFormatLessonsFormData) {
+  function onHandleCreateSection(params: FormatLessonsFormDataType) {
     createSection(getAdapterSectionParams(params, blockInfoPage));
   }
 
-  function onHandleUpdateSection(params: IFormatLessonsFormData) {
+  function onHandleUpdateSection(params: FormatLessonsFormDataType) {
     updateSection(getAdapterSectionParams(params, blockInfoPage));
   }
 

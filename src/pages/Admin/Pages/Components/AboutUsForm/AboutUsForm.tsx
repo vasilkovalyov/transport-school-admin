@@ -11,11 +11,11 @@ import ReactQuill from 'react-quill';
 
 import { ImageUpload } from '@/src/components';
 
-import { AboutUsFormProps, IAboutUsFormData } from './AboutUsForm.type';
+import { AboutUsFormProps, AboutUsFormDataType } from './AboutUsForm.type';
 import schemaValidation from './AboutUsForm.validation';
 import { BlockTogglers } from '../BlockTogglers';
 
-const defaultValuesForm: IAboutUsFormData = {
+const defaultValuesForm: AboutUsFormDataType = {
   image: '',
   heading: '',
   rich_text: '',
@@ -36,7 +36,7 @@ export default function AboutUsForm({
     register,
     setValue,
     formState: { errors },
-  } = useForm<IAboutUsFormData>({
+  } = useForm<AboutUsFormDataType>({
     mode: 'onSubmit',
     defaultValues: data ?? defaultValuesForm,
     resolver: yupResolver(schemaValidation),
@@ -60,7 +60,7 @@ export default function AboutUsForm({
     setValue('rich_text', value);
   }
 
-  function handleSave(params: IAboutUsFormData) {
+  function handleSave(params: AboutUsFormDataType) {
     if (data) {
       onUpdate &&
         onUpdate({

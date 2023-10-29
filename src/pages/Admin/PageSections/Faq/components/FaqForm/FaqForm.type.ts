@@ -1,13 +1,13 @@
-export interface IFaqSectionFormData {
+export type FaqSectionFormDataType = {
   image?: string;
   heading: string;
-  list_faq: IFaq[];
-}
+  list_faq: FaqType[];
+};
 
-export interface IFaq {
+export type FaqType = {
   _id?: string;
   heading: string;
   rich_text: string;
-}
+};
 
-export type FaqRichTextType = Omit<IFaq, 'heading'>;
+export type FaqRichTextType = Omit<FaqType, 'heading'>;

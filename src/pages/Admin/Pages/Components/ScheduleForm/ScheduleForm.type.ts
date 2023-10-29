@@ -1,12 +1,11 @@
-import { BaseBlockFormProps, IBaseBlock, IBlockInfoPage } from '../types';
+import { BaseBlockFormProps, BaseBlockType, BlockInfoPageType } from '../types';
 
-export type ScheduleFormProps = BaseBlockFormProps<IScheduleFormData>;
+export type ScheduleFormProps = BaseBlockFormProps<ScheduleFormDataType>;
 
-export interface IScheduleFormData extends IBaseBlock {
+export type ScheduleFormDataType = BaseBlockType & {
   heading: string;
   post_number?: number | null;
-}
+};
 
-export interface IScheduleBlockFullData
-  extends IScheduleFormData,
-    IBlockInfoPage {}
+export type ScheduleBlockFullDataType = ScheduleFormDataType &
+  BlockInfoPageType;

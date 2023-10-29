@@ -1,6 +1,6 @@
 import { AxiosPromise } from 'axios';
 import api from '@/src/api/axios';
-import { ICtaFormBlockFullData } from './CtaForm.type';
+import { CtaFormBlockFullDataType } from './CtaForm.type';
 import { IBlockService } from '../types';
 
 enum EndpointBlockCtaEnum {
@@ -11,7 +11,7 @@ enum EndpointBlockCtaEnum {
   GET_BLOCK = 'blocks/cta/',
 }
 
-class CtaFormService implements IBlockService<ICtaFormBlockFullData> {
+class CtaFormService implements IBlockService<CtaFormBlockFullDataType> {
   async publish(page: string): AxiosPromise<boolean> {
     const response = await api.patch(EndpointBlockCtaEnum.PUBLISH, {
       page: page,
@@ -27,7 +27,7 @@ class CtaFormService implements IBlockService<ICtaFormBlockFullData> {
   }
 
   async create(
-    params: ICtaFormBlockFullData
+    params: CtaFormBlockFullDataType
   ): AxiosPromise<{ message: string }> {
     const response = await api.post(EndpointBlockCtaEnum.CREATE, {
       ...params,
@@ -36,7 +36,7 @@ class CtaFormService implements IBlockService<ICtaFormBlockFullData> {
   }
 
   async update(
-    params: ICtaFormBlockFullData
+    params: CtaFormBlockFullDataType
   ): AxiosPromise<{ message: string }> {
     const response = await api.patch(EndpointBlockCtaEnum.UPDATE, {
       ...params,
@@ -44,7 +44,7 @@ class CtaFormService implements IBlockService<ICtaFormBlockFullData> {
     return response;
   }
 
-  async getBlock(page: string): AxiosPromise<ICtaFormBlockFullData> {
+  async getBlock(page: string): AxiosPromise<CtaFormBlockFullDataType> {
     const response = await api.get(`${EndpointBlockCtaEnum.GET_BLOCK}${page}`);
     return response;
   }

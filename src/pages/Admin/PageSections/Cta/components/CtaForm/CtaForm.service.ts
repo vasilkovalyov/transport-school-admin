@@ -1,6 +1,6 @@
 import { AxiosPromise } from 'axios';
 import api from '@/src/api/axios';
-import { ICtaSectionFormData } from './CtaForm.type';
+import { CtaSectionFormDataType } from './CtaForm.type';
 
 enum EndpointCtaSectionEnum {
   UPDATE = 'block/reuse-cta',
@@ -8,14 +8,16 @@ enum EndpointCtaSectionEnum {
 }
 
 class CtaSectionFormService {
-  async update(params: ICtaSectionFormData): AxiosPromise<{ message: string }> {
+  async update(
+    params: CtaSectionFormDataType
+  ): AxiosPromise<{ message: string }> {
     const response = await api.patch(EndpointCtaSectionEnum.UPDATE, {
       ...params,
     });
     return response;
   }
 
-  async getInfo(): AxiosPromise<ICtaSectionFormData> {
+  async getInfo(): AxiosPromise<CtaSectionFormDataType> {
     const response = await api.get(`${EndpointCtaSectionEnum.GET_INFO}`);
     return response;
   }
