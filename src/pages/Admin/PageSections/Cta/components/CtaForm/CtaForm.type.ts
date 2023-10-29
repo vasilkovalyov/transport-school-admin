@@ -1,7 +1,7 @@
 export type CtaSectionFormDataType = {
   heading: string;
-  use_link_to_contact_page: boolean;
-  use_phone_cta: boolean;
+  use_link_to_contact_page?: boolean;
+  use_phone_cta?: boolean;
 };
 
 export type CtaSectionCheckboxTypes = Pick<

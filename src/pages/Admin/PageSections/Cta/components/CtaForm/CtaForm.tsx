@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
+import { yupResolver } from '@hookform/resolvers/yup';
 
 import { Box } from '@mui/material';
 import Button from '@mui/material/Button';
@@ -15,6 +16,8 @@ import {
   CtaSectionCheckboxTypes,
 } from './CtaForm.type';
 import CtaSectionFormService from './CtaForm.service';
+
+import schemaValidation from './CtaForm.validation';
 
 const defaultValuesForm: CtaSectionFormDataType = {
   heading: '',
@@ -34,9 +37,15 @@ export default function CtaForm() {
     }
   );
 
-  const { handleSubmit, register, setValue } = useForm<CtaSectionFormDataType>({
+  const {
+    handleSubmit,
+    register,
+    setValue,
+    formState: { errors },
+  } = useForm<CtaSectionFormDataType>({
     mode: 'onSubmit',
     defaultValues: defaultValuesForm,
+    resolver: yupResolver(schemaValidation),
   });
 
   async function loadData() {
@@ -97,6 +106,8 @@ export default function CtaForm() {
             label="Heading"
             variant="outlined"
             fullWidth
+            error={!!errors['heading']?.message}
+            helperText={errors['heading']?.message}
             InputLabelProps={{
               shrink: true,
             }}
