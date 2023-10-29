@@ -1,7 +1,7 @@
 export type AchivmentSectionFormDataType = {
   heading: string;
-  subheading: string;
-  list_achivments: AchivmentSectionListItemDataType[];
+  subheading?: string;
+  list_achivments?: AchivmentSectionListItemDataType[];
 };
 
 export type AchivmentSectionListItemDataType = {

@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 import { useForm, useFieldArray } from 'react-hook-form';
+import { yupResolver } from '@hookform/resolvers/yup';
 
 import { Box } from '@mui/material';
 import Button from '@mui/material/Button';
@@ -16,6 +17,7 @@ import {
   AchivmentSectionListItemDataType,
 } from './AchivmentForm.type';
 import AchivmentSectionFormService from './AchivmentForm.service';
+import schemaValidation from './AchivmentForm.validation';
 
 const defaultAchivmentListItem: AchivmentSectionListItemDataType = {
   heading: '',
@@ -33,11 +35,17 @@ const serviceSectionAchivment = new AchivmentSectionFormService();
 export default function AchivmentForm() {
   const [loading, setLoading] = useState<boolean>(true);
   const [loadingUpdate, setLoadingUpdate] = useState<boolean>(false);
-  const { handleSubmit, register, control, setValue } =
-    useForm<AchivmentSectionFormDataType>({
-      mode: 'onSubmit',
-      defaultValues: defaultValuesForm,
-    });
+  const {
+    handleSubmit,
+    register,
+    control,
+    setValue,
+    formState: { errors },
+  } = useForm<AchivmentSectionFormDataType>({
+    mode: 'onSubmit',
+    defaultValues: defaultValuesForm,
+    resolver: yupResolver(schemaValidation),
+  });
 
   const { fields, remove, append } = useFieldArray({
     control,
@@ -50,7 +58,7 @@ export default function AchivmentForm() {
       setLoading(true);
       const response = await serviceSectionAchivment.getInfo();
       const { heading, subheading, list_achivments } = response.data;
-      if (!list_achivments.length) {
+      if (list_achivments && !list_achivments.length) {
         setValue('list_achivments', [defaultAchivmentListItem]);
       } else {
         setValue('list_achivments', list_achivments);
@@ -101,6 +109,8 @@ export default function AchivmentForm() {
             id="heading"
             label="Heading"
             variant="outlined"
+            error={!!errors['heading']?.message}
+            helperText={errors['heading']?.message}
             fullWidth
             InputLabelProps={{
               shrink: true,
