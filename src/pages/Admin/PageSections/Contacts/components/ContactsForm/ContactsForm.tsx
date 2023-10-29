@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
+import { yupResolver } from '@hookform/resolvers/yup';
 
 import { Box } from '@mui/material';
 import Button from '@mui/material/Button';
@@ -14,6 +15,7 @@ import {
   FormValuesKey,
 } from './ContactsForm.type';
 import ContactsSectionFormService from './ContactsForm.service';
+import schemaValidation from './ContactForm.validation';
 
 const defaultValuesForm: ContactsSectionFormDataType = {
   heading: '',
@@ -37,18 +39,25 @@ export default function ContactsForm() {
   const [loading, setLoading] = useState<boolean>(true);
   const [loadingUpdate, setLoadingUpdate] = useState<boolean>(false);
   const [mapUrl, setMapUrl] = useState<string | null>(null);
-  const { handleSubmit, register, setValue } =
-    useForm<ContactsSectionFormDataType>({
-      mode: 'onSubmit',
-      defaultValues: defaultValuesForm,
-    });
+  const {
+    handleSubmit,
+    register,
+    setValue,
+    formState: { errors },
+  } = useForm<ContactsSectionFormDataType>({
+    mode: 'onSubmit',
+    defaultValues: defaultValuesForm,
+    resolver: yupResolver(schemaValidation),
+  });
 
   async function loadData() {
     try {
       setLoading(true);
       const response = await serviceSectionContacts.getInfo();
       fillValues(valuesKeys, response.data);
-      setMapUrl(response.data.map_url);
+      if (response.data.map_url) {
+        setMapUrl(response.data.map_url);
+      }
     } catch (e) {
       console.log(e);
     } finally {
@@ -96,6 +105,8 @@ export default function ContactsForm() {
             label="Heading"
             variant="outlined"
             fullWidth
+            error={!!errors['heading']?.message}
+            helperText={errors['heading']?.message}
             InputLabelProps={{
               shrink: true,
             }}
@@ -107,6 +118,8 @@ export default function ContactsForm() {
             id="address"
             label="Address"
             variant="outlined"
+            error={!!errors['address']?.message}
+            helperText={errors['address']?.message}
             fullWidth
             InputLabelProps={{
               shrink: true,
@@ -119,6 +132,8 @@ export default function ContactsForm() {
             id="phone"
             label="Phone"
             variant="outlined"
+            error={!!errors['phone']?.message}
+            helperText={errors['phone']?.message}
             fullWidth
             InputLabelProps={{
               shrink: true,
@@ -131,6 +146,8 @@ export default function ContactsForm() {
             id="email"
             label="Email"
             variant="outlined"
+            error={!!errors['email']?.message}
+            helperText={errors['email']?.message}
             fullWidth
             InputLabelProps={{
               shrink: true,

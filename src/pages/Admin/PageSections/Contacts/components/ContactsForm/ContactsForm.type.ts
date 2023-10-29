@@ -3,7 +3,7 @@ export type ContactsSectionFormDataType = {
   address: string;
   phone: string;
   email: string;
-  map_url: string;
+  map_url?: string;
 };
 
 export type FormValuesKey = keyof ContactsSectionFormDataType;
