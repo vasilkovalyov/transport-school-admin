@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
+import { yupResolver } from '@hookform/resolvers/yup';
 
 import { Box } from '@mui/material';
 import Button from '@mui/material/Button';
@@ -16,6 +17,7 @@ import CircularProgress from '@mui/material/CircularProgress';
 // import { ImageUpload } from '@/src/components';
 
 import { ReviewFormProps, ReviewFormDataType } from './ReviewForm.type';
+import schemaValidation from './ReviewForm.validation';
 
 const defaultValuesForm: ReviewFormDataType = {
   name: '',
@@ -31,16 +33,22 @@ export default function ReviewForm({
   const ratingCount = 5;
   const [ratingValue, setRatingValue] = useState<number | null>(null);
 
-  const { handleSubmit, register, setValue } = useForm<ReviewFormDataType>({
+  const {
+    handleSubmit,
+    register,
+    setValue,
+    formState: { errors },
+  } = useForm<ReviewFormDataType>({
     mode: 'onSubmit',
     defaultValues: data ?? defaultValuesForm,
+    resolver: yupResolver(schemaValidation),
   });
 
   useEffect(() => {
     if (!data) return;
     setValue('name', data.name);
     setValue('text', data.text);
-    setRatingValue(data.rating);
+    setRatingValue(data.rating || null);
   }, [data]);
 
   function handleSave(data: ReviewFormDataType) {
@@ -71,6 +79,8 @@ export default function ReviewForm({
               label="Name"
               variant="outlined"
               fullWidth
+              error={!!errors['name']?.message}
+              helperText={errors['name']?.message}
               InputLabelProps={{
                 shrink: true,
               }}
@@ -85,6 +95,8 @@ export default function ReviewForm({
               fullWidth
               multiline
               rows="8"
+              error={!!errors['text']?.message}
+              helperText={errors['text']?.message}
               InputLabelProps={{
                 shrink: true,
               }}

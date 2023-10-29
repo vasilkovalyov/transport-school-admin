@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 
 import { Box } from '@mui/material';
@@ -13,13 +14,17 @@ const service = new ServiceReview();
 
 export default function PageSectionReviewCreate() {
   const navigate = useNavigate();
+  const [loadingSubmit, setLoadingSubmit] = useState<boolean>(false);
 
   async function onCreate(data: ReviewFormDataType) {
     try {
-      await service.create(data);
-      navigate(LinksPageSections.REVIEW);
+      setLoadingSubmit(true);
+      // await service.create(data);
+      // navigate(LinksPageSections.REVIEW);
     } catch (e) {
       console.log(e);
+    } finally {
+      // setLoadingSubmit(true);
     }
   }
 
@@ -34,7 +39,7 @@ export default function PageSectionReviewCreate() {
             <Typography>Create review</Typography>
           </Breadcrumbs>
         </Box>
-        <ReviewForm onSubmit={onCreate} />
+        <ReviewForm loadingSubmit={loadingSubmit} onSubmit={onCreate} />
       </Container>
     </Box>
   );

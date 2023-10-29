@@ -6,6 +6,6 @@ export type ReviewRowProps = {
 export type ReviewType = {
   _id: string;
   name: string;
-  text?: string;
-  rating: number | null;
+  text: string;
+  rating?: number | null;
 };
