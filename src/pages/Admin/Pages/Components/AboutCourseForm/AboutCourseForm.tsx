@@ -3,13 +3,10 @@ import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 
 import { Box } from '@mui/material';
-import Grid from '@mui/material/Grid';
 import TextField from '@mui/material/TextField';
 import LinearProgress from '@mui/material/LinearProgress';
 
 import ReactQuill from 'react-quill';
-
-import { ImageUpload } from '@/src/components';
 
 import {
   AboutCourseFormProps,
@@ -19,7 +16,6 @@ import schemaValidation from './AboutCourseForm.validation';
 import { BlockTogglers } from '../BlockTogglers';
 
 const defaultValuesForm: AboutCourseFormDataType = {
-  image: '',
   heading: '',
   rich_text: '',
   publish: false,
@@ -54,10 +50,6 @@ export default function AboutCourseForm({
     }
   }, [data]);
 
-  function onUploadImage(image: string) {
-    setValue('image', image);
-  }
-
   function onChangeRichTextEditor(value: string) {
     setMarkdownText(value);
     setValue('rich_text', value);
@@ -78,15 +70,15 @@ export default function AboutCourseForm({
   }
 
   return (
-    <Grid container columnSpacing={4}>
-      <Grid item xs={12}>
+    <Box>
+      <Box>
         {loadingType === 'loading' ? (
           <Box mb={2}>
             <LinearProgress />
           </Box>
         ) : null}
-      </Grid>
-      <Grid item xs={12} lg={7} xl={7}>
+      </Box>
+      <Box>
         <Box mb={4}>
           <TextField
             {...register('heading')}
@@ -118,16 +110,7 @@ export default function AboutCourseForm({
           onSubmit={handleSubmit(handleSave)}
           onPublish={onPublish}
         />
-      </Grid>
-      <Grid item xs={12} lg={5}>
-        <Box mb={4}>
-          <ImageUpload
-            viewType="square"
-            image={data?.image}
-            onChange={onUploadImage}
-          />
-        </Box>
-      </Grid>
-    </Grid>
+      </Box>
+    </Box>
   );
 }
