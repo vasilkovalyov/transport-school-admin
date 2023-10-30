@@ -2,6 +2,7 @@ import { Box } from '@mui/material';
 
 import { ContactsFormProps } from './ContactsForm.type';
 import { ReuseBlockTogglers } from '../ReuseBlockTogglers';
+import { isPublishBlockButton } from '../utils/common';
 
 export default function ContactsForm({
   data,
@@ -14,7 +15,7 @@ export default function ContactsForm({
       <ReuseBlockTogglers
         publish={data?.publish}
         loadingType={loadingType}
-        showPublishButton={data !== null}
+        showPublishButton={isPublishBlockButton(data?.publish ?? null)}
         onSubmit={() => onCreate && onCreate()}
         onPublish={onPublish}
       />

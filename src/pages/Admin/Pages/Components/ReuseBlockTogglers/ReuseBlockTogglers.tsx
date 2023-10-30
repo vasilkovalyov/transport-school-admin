@@ -7,13 +7,13 @@ import { ReuseBlockTogglersProps } from './ReuseBlockTogglers.type';
 export default function ReuseBlockTogglers({
   publish = false,
   loadingType,
-  showPublishButton = false,
+  showPublishButton,
   onSubmit,
   onPublish,
 }: ReuseBlockTogglersProps) {
   return (
     <Stack spacing={2} direction="row">
-      {!showPublishButton ? (
+      {showPublishButton === null ? (
         <Stack spacing={2} direction="row" alignItems="center">
           <Button
             variant="contained"
@@ -26,8 +26,7 @@ export default function ReuseBlockTogglers({
           </Button>
           {loadingType === 'update' ? <CircularProgress size={20} /> : null}
         </Stack>
-      ) : null}
-      {showPublishButton ? (
+      ) : (
         <Stack spacing={2} direction="row" alignItems="center">
           <Button
             variant="contained"
@@ -40,7 +39,7 @@ export default function ReuseBlockTogglers({
           </Button>
           {loadingType === 'publish' ? <CircularProgress size={20} /> : null}
         </Stack>
-      ) : null}
+      )}
     </Stack>
   );
 }

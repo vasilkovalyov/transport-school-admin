@@ -3,6 +3,8 @@ import { ReuseBlockTogglers } from '../ReuseBlockTogglers';
 
 import { AchivmentsFormProps } from './AchivmentsForm.type';
 
+import { isPublishBlockButton } from '../utils/common';
+
 export default function AchivmentsForm({
   data,
   loadingType,
@@ -14,7 +16,7 @@ export default function AchivmentsForm({
       <ReuseBlockTogglers
         publish={data?.publish}
         loadingType={loadingType}
-        showPublishButton={data !== null}
+        showPublishButton={isPublishBlockButton(data?.publish ?? null)}
         onSubmit={() => onCreate && onCreate()}
         onPublish={onPublish}
       />

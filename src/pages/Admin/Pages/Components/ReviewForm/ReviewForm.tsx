@@ -2,6 +2,7 @@ import { Box } from '@mui/material';
 
 import { ReviewFormProps } from './ReviewForm.type';
 import { ReuseBlockTogglers } from '../ReuseBlockTogglers';
+import { isPublishBlockButton } from '../utils/common';
 
 export default function ReviewForm({
   data,
@@ -14,7 +15,7 @@ export default function ReviewForm({
       <ReuseBlockTogglers
         publish={data?.publish}
         loadingType={loadingType}
-        showPublishButton={data !== null}
+        showPublishButton={isPublishBlockButton(data?.publish ?? null)}
         onSubmit={() => onCreate && onCreate()}
         onPublish={onPublish}
       />
