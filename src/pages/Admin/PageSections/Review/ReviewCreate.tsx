@@ -19,12 +19,12 @@ export default function PageSectionReviewCreate() {
   async function onCreate(data: ReviewFormDataType) {
     try {
       setLoadingSubmit(true);
-      // await service.create(data);
-      // navigate(LinksPageSections.REVIEW);
+      await service.create(data);
+      navigate(LinksPageSections.REVIEW);
     } catch (e) {
       console.log(e);
     } finally {
-      // setLoadingSubmit(true);
+      setLoadingSubmit(true);
     }
   }
 

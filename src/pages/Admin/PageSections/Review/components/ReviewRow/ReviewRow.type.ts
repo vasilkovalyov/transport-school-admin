@@ -8,4 +8,5 @@ export type ReviewType = {
   name: string;
   text: string;
   rating?: number | null;
+  image?: string;
 };
