@@ -78,41 +78,37 @@ export default function CourseForPeopleForm({
           <LinearProgress />
         </Box>
       ) : null}
-      <Grid container columnSpacing={4}>
-        <Grid item xs={12} lg={7} xl={7}>
-          <Box mb={4}>
-            <TextField
-              {...register('heading')}
-              id="heading"
-              label="Heading"
-              variant="outlined"
-              fullWidth
-              multiline
-              rows={2}
-              error={!!errors['heading']?.message}
-              helperText={errors['heading']?.message}
-              InputLabelProps={{
-                shrink: true,
-              }}
-            />
-          </Box>
-          <Box mb={4}>
-            <ReactQuill
-              theme="snow"
-              value={markdownText as string}
-              onChange={(value) => onChangeRichTextEditor(value)}
-            />
-          </Box>
-          <BlockTogglers
-            typeToggle={!data ? 'create' : 'update'}
-            publish={data?.publish}
-            loadingType={loadingType}
-            showPublishButton={data !== null}
-            onSubmit={handleSubmit(handleSave)}
-            onPublish={onPublish}
-          />
-        </Grid>
-      </Grid>
+      <Box mb={4}>
+        <TextField
+          {...register('heading')}
+          id="heading"
+          label="Heading"
+          variant="outlined"
+          fullWidth
+          multiline
+          rows={2}
+          error={!!errors['heading']?.message}
+          helperText={errors['heading']?.message}
+          InputLabelProps={{
+            shrink: true,
+          }}
+        />
+      </Box>
+      <Box mb={4}>
+        <ReactQuill
+          theme="snow"
+          value={markdownText as string}
+          onChange={(value) => onChangeRichTextEditor(value)}
+        />
+      </Box>
+      <BlockTogglers
+        typeToggle={!data ? 'create' : 'update'}
+        publish={data?.publish}
+        loadingType={loadingType}
+        showPublishButton={data !== null}
+        onSubmit={handleSubmit(handleSave)}
+        onPublish={onPublish}
+      />
     </Box>
   );
 }

@@ -46,6 +46,7 @@ export default function WhoTeachForm({
   useEffect(() => {
     if (!data) return;
     setValue('heading', data.heading);
+    setValue('image', data.image);
 
     if (data.rich_text) {
       setMarkdownText(data.rich_text);
