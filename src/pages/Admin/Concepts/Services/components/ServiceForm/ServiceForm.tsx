@@ -1,13 +1,16 @@
 import { useEffect } from 'react';
 import { useForm, useFieldArray } from 'react-hook-form';
+import { yupResolver } from '@hookform/resolvers/yup';
 
 import { Box } from '@mui/material';
 import Typography from '@mui/material/Typography';
+import Stack from '@mui/material/Stack';
 import Button from '@mui/material/Button';
 import Grid from '@mui/material/Grid';
+import CircularProgress from '@mui/material/CircularProgress';
 import TextField from '@mui/material/TextField';
 
-import { DynamicFieldTogglers } from '@/src/components';
+import { DynamicFieldTogglers, ImageUpload } from '@/src/components';
 
 import {
   ServiceFormProps,
@@ -17,8 +20,11 @@ import {
   FormValuesKey,
 } from './ServiceForm.type';
 
+import schemaValidation from './ServiceForm.validation';
+
 const valuesKeys: FormValuesKey[] = [
   'heading',
+  'image',
   'price',
   'top_list_info',
   'bottom_list_info',
@@ -30,17 +36,27 @@ const defaultInfoItem: ServiceInfoItemDataType = {
 
 const defaultValuesForm: ServiceEditableFormData = {
   heading: '',
-  price: null,
+  price: 0,
   top_list_info: [defaultInfoItem],
   bottom_list_info: [defaultInfoItem],
 };
 
-export default function ServiceForm({ data, onSubmit }: ServiceFormProps) {
-  const { handleSubmit, register, control, setValue } =
-    useForm<ServiceFormDataType>({
-      mode: 'onSubmit',
-      defaultValues: data ?? defaultValuesForm,
-    });
+export default function ServiceForm({
+  data,
+  loading,
+  onSubmit,
+}: ServiceFormProps) {
+  const {
+    handleSubmit,
+    register,
+    control,
+    setValue,
+    formState: { errors },
+  } = useForm<ServiceFormDataType>({
+    mode: 'onSubmit',
+    defaultValues: data ?? defaultValuesForm,
+    resolver: yupResolver(schemaValidation),
+  });
 
   const {
     fields: topFields,
@@ -93,9 +109,22 @@ export default function ServiceForm({ data, onSubmit }: ServiceFormProps) {
     onSubmit && onSubmit(data);
   }
 
+  function onUploadImage(image: string) {
+    setValue('image', image);
+  }
+
   return (
     <Box component="form" maxWidth={800} marginBottom={4}>
       <Grid container spacing={4} mb={4}>
+        <Grid item xs={12}>
+          <Box maxWidth={200}>
+            <ImageUpload
+              viewType="wide"
+              image={data?.image}
+              onChange={onUploadImage}
+            />
+          </Box>
+        </Grid>
         <Grid item xs={12} md={6}>
           <TextField
             {...register('heading')}
@@ -103,6 +132,8 @@ export default function ServiceForm({ data, onSubmit }: ServiceFormProps) {
             label="Heading service"
             variant="outlined"
             fullWidth
+            error={!!errors['heading']?.message}
+            helperText={errors['heading']?.message}
             InputLabelProps={{
               shrink: true,
             }}
@@ -116,6 +147,8 @@ export default function ServiceForm({ data, onSubmit }: ServiceFormProps) {
             variant="outlined"
             fullWidth
             type="number"
+            error={!!errors['price']?.message}
+            helperText={errors['price']?.message}
             InputLabelProps={{
               shrink: true,
             }}
@@ -180,16 +213,18 @@ export default function ServiceForm({ data, onSubmit }: ServiceFormProps) {
           ))}
         </Grid>
       </Grid>
-      <Box>
+      <Stack spacing={2} direction="row" alignItems="center">
         <Button
           variant="contained"
           size="medium"
           color="success"
+          disabled={loading}
           onClick={handleSubmit(handleSave)}
         >
           Save
         </Button>
-      </Box>
+        {loading ? <CircularProgress size={20} /> : null}
+      </Stack>
     </Box>
   );
 }

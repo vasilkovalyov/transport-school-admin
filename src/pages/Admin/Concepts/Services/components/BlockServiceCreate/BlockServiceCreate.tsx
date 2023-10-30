@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Box } from '@mui/material';
 
@@ -10,19 +11,23 @@ const service = new ServicesService();
 
 export default function BlockServiceCreate() {
   const navigate = useNavigate();
+  const [loading, setLoading] = useState<boolean>(false);
 
   async function onCreate(params: ServiceEditableFormData) {
     try {
+      setLoading(true);
       await service.create(params);
       navigate(LinksConcepts.SERVICES);
     } catch (e) {
       console.log(e);
+    } finally {
+      setLoading(false);
     }
   }
 
   return (
     <Box component="section">
-      <ServiceForm onSubmit={onCreate} />
+      <ServiceForm loading={loading} onSubmit={onCreate} />
     </Box>
   );
 }

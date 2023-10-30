@@ -16,23 +16,25 @@ const service = new ServicesService();
 
 const initialData: ServiceEditableFormData = {
   heading: '',
-  price: null,
+  price: 0,
   top_list_info: [],
   bottom_list_info: [],
 };
 
+type LoadingType = 'loading' | 'loadingRemove' | 'loadingUpdate';
+
 export default function BlockServiceEdit() {
   let { id } = useParams();
   const navigate = useNavigate();
-  const [loading, setLoading] = useState<boolean>(true);
   const [data, setData] = useState<ServiceEditableFormData>(initialData);
-  const [loadingRemove, setLoadingRemove] = useState<boolean>(false);
+  const [loading, setLoading] = useState<LoadingType | null>('loading');
   const { openModal, onCloseModal, onOpenModal } = useAlertMessageModal();
 
   async function loadData() {
     try {
-      setLoading(true);
+      setLoading('loading');
       const response = await service.getPost(id || '');
+      console.log('response', response);
       if (response.data === null) {
         navigate(LinksConcepts.SERVICES);
       }
@@ -41,7 +43,7 @@ export default function BlockServiceEdit() {
       console.log(e);
       navigate(LinksConcepts.SERVICES);
     } finally {
-      setLoading(false);
+      setLoading(null);
     }
   }
 
@@ -51,6 +53,7 @@ export default function BlockServiceEdit() {
 
   async function onUpdate(params: ServiceEditableFormData) {
     try {
+      setLoading('loadingUpdate');
       await service.update({
         ...params,
         _id: id || '',
@@ -58,29 +61,35 @@ export default function BlockServiceEdit() {
       navigate(LinksConcepts.SERVICES);
     } catch (e) {
       console.log(e);
+    } finally {
+      setLoading(null);
     }
   }
 
   async function onDeleteService() {
     try {
-      setLoadingRemove(true);
+      setLoading('loadingRemove');
       await service.delete(id || '');
       navigate(LinksConcepts.SERVICES);
     } catch (e) {
       console.log(e);
     } finally {
-      setLoadingRemove(false);
+      setLoading(null);
     }
   }
 
   return (
     <Box component="section">
-      {loading ? (
+      {loading === 'loading' ? (
         <Box pb={4}>
           <LinearProgress />
         </Box>
       ) : null}
-      <ServiceForm data={data} onSubmit={onUpdate} />
+      <ServiceForm
+        data={data}
+        loading={loading === 'loadingUpdate'}
+        onSubmit={onUpdate}
+      />
       <Box>
         <Button
           variant="contained"
@@ -97,7 +106,7 @@ export default function BlockServiceEdit() {
       </Box>
       <AlertMessageModal
         open={openModal}
-        loading={loadingRemove}
+        loading={loading === 'loadingRemove'}
         title="Do you want to remove service?"
         handleAgree={onDeleteService}
         handleClose={onCloseModal}

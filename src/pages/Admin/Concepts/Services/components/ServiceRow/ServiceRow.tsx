@@ -24,7 +24,7 @@ export default function ServiceRow({
         ) : null}
       </TableCell>
       <TableCell>{heading}</TableCell>
-      <TableCell>{price}</TableCell>
+      <TableCell>{price} $</TableCell>
       <TableCell>
         <Button
           size="small"
