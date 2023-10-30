@@ -7,7 +7,7 @@ import TextField from '@mui/material/TextField';
 import Typography from '@mui/material/Typography';
 import LinearProgress from '@mui/material/LinearProgress';
 
-import { DynamicFieldTogglers } from '@/src/components';
+import { DynamicFieldTogglers, ImageUpload } from '@/src/components';
 
 import {
   RequirementFormProps,
@@ -60,6 +60,7 @@ export default function RequirementForm({
     setValue('heading', data?.heading);
 
     if (data.requirements_list?.length) {
+      console.log(data.requirements_list);
       setValue(`requirements_list`, data.requirements_list);
     }
   }, [data]);
@@ -84,6 +85,10 @@ export default function RequirementForm({
       onCreate({
         ...params,
       });
+  }
+
+  function onUploadImage(image: string, index: number) {
+    setValue(`requirements_list.${index}.image`, image);
   }
 
   return (
@@ -113,16 +118,16 @@ export default function RequirementForm({
       {fields.map((item, index) => (
         <Grid container key={item.id} mb={4} columnSpacing={4}>
           <Grid item xs={12} lg={4}>
-            <Box mb={2}>
-              {/* <ImageUpload
+            <Box mb={2} maxWidth={60}>
+              <ImageUpload
                 viewType="square"
                 image={
-                  data?.requirements_list?.length
-                    ? data?.requirements_list[index].image
+                  data?.requirements_list
+                    ? data?.requirements_list[index]?.image
                     : '/'
                 }
                 onChange={(image) => onUploadImage(image, index)}
-              /> */}
+              />
             </Box>
           </Grid>
           <Grid item xs={12} lg={8}>
