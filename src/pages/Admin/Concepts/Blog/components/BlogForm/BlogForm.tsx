@@ -6,7 +6,9 @@ import ReactQuill from 'react-quill';
 import { Box } from '@mui/material';
 import Button from '@mui/material/Button';
 import Grid from '@mui/material/Grid';
+import Stack from '@mui/material/Stack';
 import TextField from '@mui/material/TextField';
+import CircularProgress from '@mui/material/CircularProgress';
 import { Typography } from '@mui/material';
 
 import { ImageUpload } from '@/src/components';
@@ -25,12 +27,13 @@ const defaultValuesForm: BlockCardEditableProps = {
   rich_text: '',
 };
 
-export default function BlogForm({ data, onSubmit }: BlogFormProps) {
+export default function BlogForm({ data, loading, onSubmit }: BlogFormProps) {
   const [markdownText, setMarkdownText] = useState<string | null>(null);
 
   useEffect(() => {
     if (!data) return;
     setValue('heading', data.heading);
+    setValue('image', data.image);
     setValue('slug', data.slug);
     setValue('short_description', data.short_description);
     setMarkdownText(data.rich_text || '');
@@ -132,16 +135,18 @@ export default function BlogForm({ data, onSubmit }: BlogFormProps) {
           onChange={(value) => onChangeRichTextEditor(value)}
         />
       </Box>
-      <Box>
+      <Stack spacing={2} direction="row" alignItems="center">
         <Button
           variant="contained"
           size="medium"
           color="success"
+          disabled={loading}
           onClick={handleSubmit(handleSave)}
         >
           Save
         </Button>
-      </Box>
+        {loading ? <CircularProgress size={20} /> : null}
+      </Stack>
     </Box>
   );
 }

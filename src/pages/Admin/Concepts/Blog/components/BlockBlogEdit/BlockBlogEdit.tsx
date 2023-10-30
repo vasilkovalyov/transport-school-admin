@@ -22,18 +22,19 @@ const initialData: BlogCardProps = {
   short_description: '',
 };
 
+type LoadingType = 'loading' | 'loadingRemove' | 'loadingUpdate';
+
 export default function BlockBlogEdit() {
   let { id } = useParams();
   const navigate = useNavigate();
-  const [loading, setLoading] = useState<boolean>(true);
+  const [loading, setLoading] = useState<LoadingType | null>('loading');
   const [data, setData] = useState<BlogCardProps>(initialData);
-  const [loadingRemove, setLoadingRemove] = useState<boolean>(false);
   const { selectedId, openModal, onCloseModal, onOpenModal } =
     useAlertMessageModal();
 
   async function loadData() {
     try {
-      setLoading(true);
+      setLoading('loading');
       const response = await service.getPost(id || '');
       if (response.data === null) {
         navigate(LinksConcepts.BLOG);
@@ -42,7 +43,7 @@ export default function BlockBlogEdit() {
     } catch (e) {
       navigate(LinksConcepts.BLOG);
     } finally {
-      setLoading(false);
+      setLoading(null);
     }
   }
 
@@ -53,19 +54,20 @@ export default function BlockBlogEdit() {
   async function onDeleteBlog() {
     if (!selectedId) return null;
     try {
-      setLoadingRemove(true);
+      setLoading('loadingRemove');
       await service.delete(selectedId);
       navigate(LinksConcepts.BLOG);
     } catch (e) {
       console.log(e);
     } finally {
-      setLoadingRemove(false);
+      setLoading(null);
       onCloseModal();
     }
   }
 
   async function onUpdate(params: BlockCardEditableProps) {
     try {
+      setLoading('loadingUpdate');
       await service.update({
         ...params,
         _id: id || '',
@@ -73,12 +75,14 @@ export default function BlockBlogEdit() {
       navigate(LinksConcepts.BLOG);
     } catch (e) {
       console.log(e);
+    } finally {
+      setLoading(null);
     }
   }
 
   return (
     <Box component="section">
-      {loading ? (
+      {loading === 'loading' ? (
         <Box pb={4}>
           <LinearProgress />
         </Box>
@@ -86,7 +90,11 @@ export default function BlockBlogEdit() {
       <Typography variant="body2">
         Date post - {dayjs(data.createdAt).format('HH:MM | DD MMM YYYY')}
       </Typography>
-      <BlogForm data={data} onSubmit={onUpdate} />
+      <BlogForm
+        data={data}
+        loading={loading === 'loadingUpdate'}
+        onSubmit={onUpdate}
+      />
       <Box>
         <Button
           variant="contained"
@@ -99,7 +107,7 @@ export default function BlockBlogEdit() {
       </Box>
       <AlertMessageModal
         open={openModal}
-        loading={loadingRemove}
+        loading={loading === 'loadingUpdate'}
         title="Do you want to remove blog?"
         handleAgree={onDeleteBlog}
         handleClose={onCloseModal}

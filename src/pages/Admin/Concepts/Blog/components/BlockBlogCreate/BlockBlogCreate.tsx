@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Box } from '@mui/material';
 
@@ -10,19 +11,23 @@ const service = new PostService();
 
 export default function BlockBlogCreate() {
   const navigate = useNavigate();
+  const [loading, setLoading] = useState<boolean>(false);
 
   async function onCreate(params: BlockCardEditableProps) {
     try {
+      setLoading(true);
       await service.create(params);
       navigate(LinksConcepts.BLOG);
     } catch (e) {
       console.log(e);
+    } finally {
+      setLoading(false);
     }
   }
 
   return (
     <Box component="section">
-      <BlogForm onSubmit={onCreate} />
+      <BlogForm loading={loading} onSubmit={onCreate} />
     </Box>
   );
 }
