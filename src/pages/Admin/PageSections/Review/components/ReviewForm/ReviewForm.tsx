@@ -18,6 +18,7 @@ import CircularProgress from '@mui/material/CircularProgress';
 
 import { ReviewFormProps, ReviewFormDataType } from './ReviewForm.type';
 import schemaValidation from './ReviewForm.validation';
+import { ImageUpload } from '@/src/components';
 
 const defaultValuesForm: ReviewFormDataType = {
   name: '',
@@ -59,17 +60,21 @@ export default function ReviewForm({
     setRatingValue(number);
   }
 
+  function onUploadImage(image: string) {
+    setValue('image', image);
+  }
+
   return (
     <Box component="form" maxWidth={800} marginBottom={4}>
       <Grid container spacing={4} mb={4}>
         <Grid item xs={12} md={4}>
-          {/* <ImageUpload
+          <ImageUpload
             viewType="avatar"
             width={100}
             height={100}
             image={data?.image}
             onChange={onUploadImage}
-          /> */}
+          />
         </Grid>
         <Grid item xs={12} md={6}>
           <Box mb={4}>

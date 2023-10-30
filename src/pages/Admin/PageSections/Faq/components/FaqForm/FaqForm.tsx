@@ -12,7 +12,7 @@ import Stack from '@mui/material/Stack';
 import LinearProgress from '@mui/material/LinearProgress';
 import CircularProgress from '@mui/material/CircularProgress';
 
-import { DynamicFieldTogglers } from '@/src/components';
+import { DynamicFieldTogglers, ImageUpload } from '@/src/components';
 
 import {
   FaqRichTextType,
@@ -36,6 +36,7 @@ const defaultValuesForm: FaqSectionFormDataType = {
 const serviceSectionFaq = new FaqSectionFormService();
 
 export default function FaqForm() {
+  const [image, setImage] = useState<string | null>(null);
   const [loading, setLoading] = useState<boolean>(true);
   const [loadingUpdate, setLoadingUpdate] = useState<boolean>(false);
 
@@ -65,8 +66,13 @@ export default function FaqForm() {
     try {
       setLoading(true);
       const response = await serviceSectionFaq.getInfo();
-      const { heading, list_faq } = response.data;
+      const { heading, list_faq, image } = response.data;
       setValue('heading', heading);
+
+      if (image) {
+        setImage(image);
+      }
+
       if (list_faq && list_faq.length) {
         setValue('list_faq', list_faq);
         fillRichTextEditorArray(list_faq);
@@ -81,6 +87,10 @@ export default function FaqForm() {
   useEffect(() => {
     loadData();
   }, []);
+
+  function onUploadImage(image: string) {
+    setValue('image', image);
+  }
 
   function fillRichTextEditorArray(array: FaqRichTextType[]) {
     if (!array.length) return null;
@@ -194,13 +204,13 @@ export default function FaqForm() {
             {loadingUpdate ? <CircularProgress size={20} /> : null}
           </Stack>
         </Grid>
-        {/* <Grid item xs={12} lg={5}>
+        <Grid item xs={12} lg={5}>
           <ImageUpload
             viewType="square"
             image={image}
             onChange={onUploadImage}
           />
-        </Grid> */}
+        </Grid>
       </Grid>
     </Box>
   );
