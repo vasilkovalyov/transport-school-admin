@@ -12,14 +12,13 @@ import { LinksConcepts } from '@/src/constants/routes';
 import { AlertMessageModal, useAlertMessageModal } from '@/src/components';
 
 const service = new LessonScheduleService();
+
 const initialData: LessonScheduleEditableProps = {
   heading: '',
   type_group: '',
   type_lesson: '',
   time_start: '',
   time_end: '',
-  day_start: '',
-  day_end: '',
   date_start_event: '',
 };
 
