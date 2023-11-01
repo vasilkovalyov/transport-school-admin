@@ -14,11 +14,6 @@ export const menuNavigaton: NavigationLinkItemProps[] = [
     path: Links.ADMIN,
   },
   {
-    id: '2',
-    name: 'Account',
-    path: Links.ADMIN_ACCOUNT,
-  },
-  {
     id: '3',
     name: 'Concepts',
     children: [

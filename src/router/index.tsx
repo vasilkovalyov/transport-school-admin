@@ -3,7 +3,7 @@ import { createBrowserRouter, Outlet, RouterProvider } from 'react-router-dom';
 import { PublicLayout, PrivateLayout } from 'src/layouts';
 import { Links, LinksPages } from 'src/constants/routes';
 
-import { AdminHomePage, LoginPage, ErrorPage, AdminAccount } from 'src/pages';
+import { AdminOverview, LoginPage, ErrorPage, AdminAccount } from 'src/pages';
 
 import {
   PageHome,
@@ -48,11 +48,7 @@ const router = createBrowserRouter([
       {
         index: true,
         path: Links.ADMIN,
-        element: <AdminHomePage />,
-      },
-      {
-        path: Links.ADMIN_ACCOUNT,
-        element: <AdminAccount />,
+        element: <AdminOverview />,
       },
       {
         element: <Outlet />,

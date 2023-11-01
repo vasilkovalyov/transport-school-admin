@@ -1,0 +1,14 @@
+.upcoming-events {
+  & &__link {
+    display: inline-flex;
+    align-items: center;
+    text-decoration: none;
+    color: inherit;
+
+    svg {
+      margin-left: 4px;
+      width: 18px;
+      height: 18px;
+    }
+  }
+}
