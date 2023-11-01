@@ -8,6 +8,8 @@ export type LessonScheduleProps = {
   time_end: string;
   date_start_event: string;
   createdAt?: string;
+  max_people: number;
+  students?: number;
 };
 
 export type LessonScheduleEditableProps = Omit<

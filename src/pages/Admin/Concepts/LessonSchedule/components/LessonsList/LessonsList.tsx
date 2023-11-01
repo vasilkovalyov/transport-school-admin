@@ -19,7 +19,8 @@ const headCells: string[] = [
   'Days Shedule',
   'Time Schedule',
   'Date Start',
-  'Date Create',
+  'Students count',
+  'Max People',
   'Status',
 ];
 
@@ -39,12 +40,13 @@ export default function LessonsList() {
       ) : posts.length ? (
         <Box>
           <TableContainer component={Paper} elevation={3}>
-            <Table sx={{ minWidth: 650 }} aria-label="simple table">
+            <Table sx={{ minWidth: 850 }} aria-label="simple table">
               <TableHead>
                 <TableRow>
                   {headCells.map((cell) => (
                     <TableCell key={cell}>{cell}</TableCell>
                   ))}
+                  <TableCell></TableCell>
                   <TableCell></TableCell>
                 </TableRow>
               </TableHead>

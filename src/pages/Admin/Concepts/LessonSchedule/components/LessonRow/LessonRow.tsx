@@ -15,40 +15,58 @@ export default function LessonRow({
   _id,
   heading,
   date_start_event,
-  day_end,
-  day_start,
+  days,
   time_end,
   time_start,
   type_group,
   type_lesson,
-  createdAt,
+  max_people,
+  students = 0,
 }: LessonScheduleProps) {
   const navigate = useNavigate();
   const editLink = `${LinksConcepts.LESSON_SCHEDULE_EDIT}/${_id}`;
+  const studentsLink = LinksConcepts.LESSON_SCHEDULE_STUDENTS;
 
   const isElapsedDate = () =>
     new Date(date_start_event).getTime() < new Date().getTime();
+
+  const getDays = (days: number[]) => {
+    if (days.length === 2) {
+      return `${shortNames[days[0]].name} - ${shortNames[days[1]].name}`;
+    }
+    let daysStr = '';
+    days.forEach((day) => {
+      daysStr += shortNames[day].name + ', ';
+    });
+    return daysStr;
+  };
 
   return (
     <TableRow key={_id}>
       <TableCell>{heading}</TableCell>
       <TableCell>{type_group}</TableCell>
       <TableCell>{type_lesson}</TableCell>
-      {}
-      <TableCell>
-        {shortNames[parseInt(day_start)].name} -{' '}
-        {shortNames[parseInt(day_end)].name}
-      </TableCell>
+      <TableCell>{days ? getDays(days) : null}</TableCell>
       <TableCell>
         {time_start} - {time_end}
       </TableCell>
       <TableCell>{dayjs(date_start_event).format('DD MMM YYYY')}</TableCell>
-      <TableCell>{dayjs(createdAt).format('DD MMM YYYY | HH:MM')}</TableCell>
+      <TableCell>{students}</TableCell>
+      <TableCell>{max_people}</TableCell>
       <TableCell>
         <Chip
           label={isElapsedDate() ? 'Done' : 'Waiting'}
           color={isElapsedDate() ? 'error' : 'success'}
         />
+      </TableCell>
+      <TableCell>
+        <Button
+          size="small"
+          variant="contained"
+          onClick={() => navigate(studentsLink)}
+        >
+          Studens
+        </Button>
       </TableCell>
       <TableCell>
         <Button

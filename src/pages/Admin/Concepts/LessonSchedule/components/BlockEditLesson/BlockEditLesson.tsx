@@ -20,6 +20,7 @@ const initialData: LessonScheduleEditableProps = {
   time_start: '',
   time_end: '',
   date_start_event: '',
+  max_people: 0,
 };
 
 export default function BlockEditLesson() {

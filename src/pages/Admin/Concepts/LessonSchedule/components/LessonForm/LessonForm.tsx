@@ -31,6 +31,7 @@ const defaultValuesForm: LessonScheduleEditableProps = {
   time_start: '',
   time_end: '',
   date_start_event: '',
+  max_people: 0,
   days: [],
 };
 
@@ -50,6 +51,7 @@ const valuesKeys: FormValuesKey[] = [
   'time_end',
   'days',
   'date_start_event',
+  'max_people',
 ];
 
 type SelectTypeKeys = Pick<
@@ -219,6 +221,21 @@ export default function LessonForm({ data, onSubmit }: LessonFormProps) {
             }}
             error={!!errors['time_end']?.message}
             helperText={errors['time_end']?.message}
+          />
+        </Grid>
+        <Grid item xs={12} md={6}>
+          <TextField
+            {...register('max_people')}
+            id="max_people"
+            label="Max people"
+            variant="outlined"
+            fullWidth
+            type="number"
+            InputLabelProps={{
+              shrink: true,
+            }}
+            error={!!errors['max_people']?.message}
+            helperText={errors['max_people']?.message}
           />
         </Grid>
         <Grid item xs={12}>

@@ -7,4 +7,5 @@ export default yup.object().shape({
   date_start_event: yup.string().required('Date start event is required'),
   time_start: yup.string().required('Time start is required'),
   time_end: yup.string().required('Time end is required'),
+  max_people: yup.number().required('Max people is required'),
 });
