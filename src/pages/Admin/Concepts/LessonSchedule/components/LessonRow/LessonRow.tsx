@@ -25,7 +25,7 @@ export default function LessonRow({
 }: LessonScheduleProps) {
   const navigate = useNavigate();
   const editLink = `${LinksConcepts.LESSON_SCHEDULE_EDIT}/${_id}`;
-  const studentsLink = LinksConcepts.LESSON_SCHEDULE_STUDENTS;
+  const studentsLink = `${LinksConcepts.LESSON_SCHEDULE_STUDENTS}/${_id}`;
 
   const isElapsedDate = () =>
     new Date(date_start_event).getTime() < new Date().getTime();
@@ -60,13 +60,15 @@ export default function LessonRow({
         />
       </TableCell>
       <TableCell>
-        <Button
-          size="small"
-          variant="contained"
-          onClick={() => navigate(studentsLink)}
-        >
-          Studens
-        </Button>
+        {students ? (
+          <Button
+            size="small"
+            variant="contained"
+            onClick={() => navigate(studentsLink)}
+          >
+            Studens
+          </Button>
+        ) : null}
       </TableCell>
       <TableCell>
         <Button

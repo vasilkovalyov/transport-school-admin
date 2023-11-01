@@ -35,7 +35,7 @@ export const pages = [
     element: <LessonScheduleEdit />,
   },
   {
-    path: LinksConcepts.LESSON_SCHEDULE_STUDENTS,
+    path: `${LinksConcepts.LESSON_SCHEDULE_STUDENTS}/:id`,
     element: <LessonScheduleStudents />,
   },
   {

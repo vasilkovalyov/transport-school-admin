@@ -6,6 +6,7 @@ enum EndpointLessonScheduleEnum {
   CREATE = 'lesson-schedule-create',
   UPDATE = 'lesson-schedule-update',
   DELETE = 'lesson-schedule-delete',
+  DELETE_STUDENT = 'lesson-schedule-student',
   GET_POSTS = 'lesson-schedules',
 }
 
@@ -29,6 +30,19 @@ class LessonScheduleService {
   async delete(id: string): AxiosPromise<{ message: string }> {
     const response = await api.delete(
       `${EndpointLessonScheduleEnum.DELETE}/${id}`
+    );
+    return response;
+  }
+
+  async deleteStudent(isLesson: string, idStudent: string) {
+    const response = await api.delete(
+      `${EndpointLessonScheduleEnum.DELETE_STUDENT}`,
+      {
+        params: {
+          id_lesson: isLesson,
+          id_student: idStudent,
+        },
+      }
     );
     return response;
   }

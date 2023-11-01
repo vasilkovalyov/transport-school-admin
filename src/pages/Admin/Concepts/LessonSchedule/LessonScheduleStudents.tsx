@@ -5,6 +5,8 @@ import Container from '@mui/material/Container';
 import Typography from '@mui/material/Typography';
 import Breadcrumbs from '@mui/material/Breadcrumbs';
 
+import { StudentsList } from './components';
+
 import { Links, LinksConcepts } from '@/src/constants/routes';
 
 export default function LessonScheduleStudents() {
@@ -21,6 +23,7 @@ export default function LessonScheduleStudents() {
             <Typography>Lesson students</Typography>
           </Breadcrumbs>
         </Box>
+        <StudentsList />
       </Container>
     </Box>
   );
