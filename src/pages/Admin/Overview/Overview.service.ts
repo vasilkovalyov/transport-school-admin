@@ -5,7 +5,7 @@ import { UpcomingEventProps } from './components/UpcomingEvent/UpcomingEvent.typ
 
 enum EndpointLessonScheduleEnum {
   GET_INFO = 'overview-info',
-  GET_UPCOMING_EVENTS = 'overview-upcomming-events',
+  GET_UPCOMING_EVENTS = 'overview-upcoming-events',
 }
 
 class OverviewService {
