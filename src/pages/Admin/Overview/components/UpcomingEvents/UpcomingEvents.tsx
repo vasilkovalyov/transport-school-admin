@@ -19,16 +19,18 @@ export default function UpcomingEvents({ events, link }: UpcomingEventsType) {
         <Box marginBottom={2}>
           {events.length ? (
             <>
-              {events.map((event) => (
-                <UpcomingEvent key={event._id} {...event} />
-              ))}
+              <Box>
+                {events.map((event) => (
+                  <UpcomingEvent key={event._id} {...event} />
+                ))}
+              </Box>
+              <Link to={link.path} className="upcoming-events__link">
+                <Typography component="span">{link.name}</Typography>{' '}
+                <ArrowForwardIcon fontSize="small" />
+              </Link>
             </>
           ) : null}
         </Box>
-        <Link to={link.path} className="upcoming-events__link">
-          <Typography component="span">{link.name}</Typography>{' '}
-          <ArrowForwardIcon fontSize="small" />
-        </Link>
       </Box>
     </Paper>
   );
