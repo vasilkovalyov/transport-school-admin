@@ -3,7 +3,7 @@ import { createBrowserRouter, Outlet, RouterProvider } from 'react-router-dom';
 import { PublicLayout, PrivateLayout } from 'src/layouts';
 import { Links, LinksPages } from 'src/constants/routes';
 
-import { AdminOverview, LoginPage, ErrorPage, AdminAccount } from 'src/pages';
+import { AdminOverview, LoginPage, ErrorPage } from 'src/pages';
 
 import {
   PageHome,
