@@ -16,6 +16,8 @@ import {
   PageCommonContacts,
 } from 'src/pages/Admin/Pages';
 
+import HomePage from 'src/pages/Home';
+
 import { pages as conceptsRoutes } from 'src/pages/Admin/Concepts';
 import { pages as pageSectionRoutes } from '../pages/Admin/PageSections';
 
@@ -30,7 +32,7 @@ import { pages as contactSectionsRoutes } from '../pages/Admin/Pages/Contact/com
 const router = createBrowserRouter([
   {
     path: '/',
-    element: <Outlet />,
+    element: <HomePage />,
   },
   {
     path: Links.LOGIN,
