@@ -1,7 +1,7 @@
 import { AxiosPromise } from 'axios';
 import { BlogCardProps, BlockCardEditableProps } from './components';
 import api from '@/src/api/axios';
-import { PaginationPostsType } from '@/src/types/pagination.type';
+import { PaginationPostsType } from '@/src/types/pagination';
 
 enum EndpointPostEnum {
   CREATE = 'post-create',

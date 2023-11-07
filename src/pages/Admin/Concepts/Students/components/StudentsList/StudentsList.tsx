@@ -11,10 +11,7 @@ import {
   StudentsTable,
   useAlertMessageModal,
 } from '@/src/components';
-import ServiceLessonSchedule from '../../LessonSchedule.service';
 import { StudentType } from '@/src/types/student';
-
-const service = new ServiceLessonSchedule();
 
 export default function StudentsList() {
   let { id } = useParams();
@@ -43,7 +40,7 @@ export default function StudentsList() {
     if (!selectedId) return null;
     try {
       setLoadingRemove(true);
-      await service.deleteStudent(id, selectedId);
+      // await service.deleteStudent(id, selectedId);
       const updatedReviews = students.filter((item) => item._id !== selectedId);
       setStudents(updatedReviews);
     } catch (e) {

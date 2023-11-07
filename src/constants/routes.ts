@@ -27,6 +27,7 @@ export enum LinksConcepts {
   SERVICES = '/admin/services',
   SERVICES_CREATE = '/admin/services/create',
   SERVICES_EDIT = '/admin/services/edit',
+  STUDENTS = '/admin/students',
 }
 
 export enum LinksPageHomeSections {

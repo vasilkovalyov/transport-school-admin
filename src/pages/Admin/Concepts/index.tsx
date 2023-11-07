@@ -8,6 +8,7 @@ import {
   LessonScheduleStudents,
 } from './LessonSchedule';
 import { Services, ServiceCreate, ServiceEdit } from './Services';
+import { Students, Student } from './Students';
 
 export const pages = [
   {
@@ -49,5 +50,13 @@ export const pages = [
   {
     path: `${LinksConcepts.SERVICES_EDIT}/:id`,
     element: <ServiceEdit />,
+  },
+  {
+    path: LinksConcepts.STUDENTS,
+    element: <Students />,
+  },
+  {
+    path: `${LinksConcepts.STUDENTS}/:id`,
+    element: <Student />,
   },
 ];

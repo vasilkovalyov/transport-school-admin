@@ -3,3 +3,4 @@ export * from './Icon';
 export * from './DynamicFieldTogglers';
 export * from './ImageUpload';
 export * from './AlertMessageModal';
+export * from './StudentsTable';

@@ -33,6 +33,11 @@ export const menuNavigaton: NavigationLinkItemProps[] = [
         name: 'Services',
         path: LinksConcepts.SERVICES,
       },
+      {
+        id: '3-4',
+        name: 'Students',
+        path: LinksConcepts.STUDENTS,
+      },
     ],
   },
   {
