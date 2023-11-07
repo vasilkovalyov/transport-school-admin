@@ -1,6 +1,7 @@
-import axios from 'axios';
+import axios, { AxiosError } from 'axios';
 import { getTokenFromLC } from '../utils/localStorage';
 import AuthService from '../services/auth';
+import { Links } from '../constants/routes';
 
 const api = axios.create({
   baseURL: `${import.meta.env.VITE_REACT_API_URL}/api/dashboard/`,
@@ -19,9 +20,7 @@ api.interceptors.request.use((request) => {
 });
 
 api.interceptors.response.use(
-  (response) => {
-    return response;
-  },
+  (response) => response,
   async (error) => {
     if (!getTokenFromLC()) {
       return Promise.reject(error);
@@ -35,16 +34,20 @@ api.interceptors.response.use(
       !originalRequest._retry
     ) {
       error.config._isRetry = true;
+      axios.interceptors.response.eject;
       try {
         const authService = new AuthService();
         const response = await authService.refreshToken();
         const { token } = await response.data;
-
         localStorage.setItem('token', token);
-
         return api.request(originalRequest);
       } catch (e) {
-        console.log('User doesn`t authorized');
+        if (e instanceof AxiosError) {
+          if (e.response?.data.message === 'Refresh token expired') {
+            localStorage.removeItem('token');
+            window.location.href = Links.LOGIN;
+          }
+        }
         return Promise.reject(error);
       }
     }

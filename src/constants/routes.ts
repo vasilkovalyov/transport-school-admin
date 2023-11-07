@@ -1,5 +1,6 @@
 export enum Links {
   LOGIN = '/login',
+  REGISTRATION_ADMIN = '/registration-admin',
   ADMIN = '/admin',
   ADMIN_ACCOUNT = '/admin/account',
 }

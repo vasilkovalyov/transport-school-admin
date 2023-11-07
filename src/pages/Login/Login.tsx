@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
@@ -50,6 +50,17 @@ export default function LoginPage() {
       setLoading(false);
     }
   }
+
+  async function hasAdminLoad() {
+    const response = await authService.hasAdmin();
+    if (!response.data.hasAdmin) {
+      navigate(Links.REGISTRATION_ADMIN);
+    }
+  }
+
+  useEffect(() => {
+    hasAdminLoad();
+  }, []);
 
   return (
     <Box

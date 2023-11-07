@@ -49,8 +49,6 @@ export default function Overview() {
     try {
       setLoadingEvents(true);
       const response = await overviewService.getUpcomingEvents();
-
-      console.log(response);
       setEvents(response.data.lessons);
     } catch (e) {
       console.log(e);

@@ -34,7 +34,6 @@ export default function BlockServiceEdit() {
     try {
       setLoading('loading');
       const response = await service.getPost(id || '');
-      console.log('response', response);
       if (response.data === null) {
         navigate(LinksConcepts.SERVICES);
       }

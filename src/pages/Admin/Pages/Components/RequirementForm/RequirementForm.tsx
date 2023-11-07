@@ -58,9 +58,7 @@ export default function RequirementForm({
   useEffect(() => {
     if (!data) return;
     setValue('heading', data?.heading);
-
     if (data.requirements_list?.length) {
-      console.log(data.requirements_list);
       setValue(`requirements_list`, data.requirements_list);
     }
   }, [data]);

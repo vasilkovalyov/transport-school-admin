@@ -3,7 +3,7 @@ import { createBrowserRouter, Outlet, RouterProvider } from 'react-router-dom';
 import { PublicLayout, PrivateLayout } from 'src/layouts';
 import { Links, LinksPages } from 'src/constants/routes';
 
-import { AdminOverview, LoginPage, ErrorPage } from 'src/pages';
+import { AdminOverview, LoginPage, RegisterAdmin, ErrorPage } from 'src/pages';
 
 import {
   PageHome,
@@ -41,6 +41,16 @@ const router = createBrowserRouter([
       {
         index: true,
         element: <LoginPage />,
+      },
+    ],
+  },
+  {
+    path: Links.REGISTRATION_ADMIN,
+    element: <PublicLayout />,
+    children: [
+      {
+        index: true,
+        element: <RegisterAdmin />,
       },
     ],
   },

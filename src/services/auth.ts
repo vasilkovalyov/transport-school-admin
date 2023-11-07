@@ -1,7 +1,13 @@
 import { AxiosPromise } from 'axios';
-import { LoginType } from '../pages';
+import { LoginType, RegisterAdminType } from '../pages';
 import api from '@/src/api/axios';
-import { EndpointsEnum } from '../api/endpoints';
+
+export enum EndpointsEnum {
+  LOGIN = 'login',
+  REFRESH = 'refresh-token',
+  HAS_ADMIN = 'has-admin',
+  ADMIN_REGISTRATION = 'registration',
+}
 
 export type LoginResponseType = {
   _id: string;
@@ -20,6 +26,20 @@ class AuthService {
     const response = await api.post(EndpointsEnum.LOGIN, {
       ...params,
     });
+    return response;
+  }
+
+  async adminRegistration(
+    params: Omit<RegisterAdminType, 'confirm_password'>
+  ): AxiosPromise<{ message: string }> {
+    const response = await api.post(EndpointsEnum.ADMIN_REGISTRATION, {
+      ...params,
+    });
+    return response;
+  }
+
+  async hasAdmin(): AxiosPromise<{ hasAdmin: boolean }> {
+    const response = await api.get(EndpointsEnum.HAS_ADMIN);
     return response;
   }
 
