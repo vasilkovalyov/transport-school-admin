@@ -47,10 +47,10 @@ export default function StudentsTable({
                     <Button
                       size="small"
                       variant="contained"
-                      color="error"
+                      color="info"
                       onClick={() => {
                         linkToSinglePage &&
-                          navigate(`${linkToSinglePage}${_id}`);
+                          navigate(`${linkToSinglePage}/${_id}`);
                       }}
                     >
                       View
