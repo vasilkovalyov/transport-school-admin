@@ -9,7 +9,8 @@ import Breadcrumbs from '@mui/material/Breadcrumbs';
 
 import { BlogList } from './components';
 
-import { Links, LinksConcepts } from '@/src/constants/routes';
+import { Concepts } from '@/src/constants/routes/concepts';
+import { Dashboard } from '@/src/constants/routes/dashboard';
 
 export default function Blog() {
   const navigate = useNavigate();
@@ -26,7 +27,7 @@ export default function Blog() {
               variant="contained"
               size="small"
               onClick={() => {
-                navigate(LinksConcepts.BLOG_CREATE);
+                navigate(Concepts.BLOG_CREATE);
               }}
             >
               Create Blog
@@ -35,7 +36,7 @@ export default function Blog() {
         </Grid>
         <Box mb={4}>
           <Breadcrumbs aria-label="breadcrumb">
-            <Link to={Links.ADMIN}>Home</Link>
+            <Link to={Dashboard.ADMIN}>Home</Link>
             <Typography>Blog</Typography>
           </Breadcrumbs>
         </Box>

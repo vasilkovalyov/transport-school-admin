@@ -1,5 +1,3 @@
-import { LinksPageCompanySections } from 'src/constants/routes';
-
 import Seo from './Seo/Seo';
 import SectionHero from './SectionHero/SectionHero';
 import SectionAbout from './SectionAbout/SectionAbout';
@@ -8,38 +6,39 @@ import SectionBlog from './SectionBlog/SectionBlog';
 import SectionFaq from './SectionFaq/SectionFaq';
 import SectionReview from './SectionReview/SectionReview';
 import SectionsContacts from './SectionsContacts/SectionsContacts';
+import { PageCompanySections } from '@/src/constants/routes/pages';
 
 export const pages = [
   {
-    path: LinksPageCompanySections.SEO,
+    path: PageCompanySections.SEO,
     element: <Seo />,
   },
   {
-    path: LinksPageCompanySections.HERO,
+    path: PageCompanySections.HERO,
     element: <SectionHero />,
   },
   {
-    path: LinksPageCompanySections.ABOUT,
+    path: PageCompanySections.ABOUT,
     element: <SectionAbout />,
   },
   {
-    path: LinksPageCompanySections.ACHIVMENTS,
+    path: PageCompanySections.ACHIVMENTS,
     element: <SectionAchivments />,
   },
   {
-    path: LinksPageCompanySections.BLOG,
+    path: PageCompanySections.BLOG,
     element: <SectionBlog />,
   },
   {
-    path: LinksPageCompanySections.FAQ,
+    path: PageCompanySections.FAQ,
     element: <SectionFaq />,
   },
   {
-    path: LinksPageCompanySections.REVIEWS,
+    path: PageCompanySections.REVIEWS,
     element: <SectionReview />,
   },
   {
-    path: LinksPageCompanySections.CONTACTS,
+    path: PageCompanySections.CONTACTS,
     element: <SectionsContacts />,
   },
 ];

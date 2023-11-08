@@ -8,7 +8,7 @@ import TableRow from '@mui/material/TableRow';
 import dayjs from 'dayjs';
 
 import { LessonScheduleProps } from './LessonRow.type';
-import { LinksConcepts } from '@/src/constants/routes';
+import { Concepts } from '@/src/constants/routes/concepts';
 import { shortNames } from '@/src/utils/dayNames';
 
 export default function LessonRow({
@@ -24,8 +24,8 @@ export default function LessonRow({
   students = 0,
 }: LessonScheduleProps) {
   const navigate = useNavigate();
-  const editLink = `${LinksConcepts.LESSON_SCHEDULE_EDIT}/${_id}`;
-  const studentsLink = `${LinksConcepts.LESSON_SCHEDULE_STUDENTS}/${_id}`;
+  const editLink = `${Concepts.LESSON_SCHEDULE_EDIT}/${_id}`;
+  const studentsLink = `${Concepts.LESSON_SCHEDULE_STUDENTS}/${_id}`;
 
   const isElapsedDate = () =>
     new Date(date_start_event).getTime() < new Date().getTime();

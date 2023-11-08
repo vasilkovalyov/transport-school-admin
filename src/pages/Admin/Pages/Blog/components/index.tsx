@@ -1,25 +1,24 @@
-import { LinksPageBlogSections } from 'src/constants/routes';
-
 import Seo from './Seo/Seo';
 import SectionHero from './SectionHero/SectionHero';
 import SectionBlog from './SectionBlog/SectionBlog';
 import SectionCta from './SectionCta/SectionCta';
+import { PageBlogSections } from '@/src/constants/routes/pages';
 
 export const pages = [
   {
-    path: LinksPageBlogSections.SEO,
+    path: PageBlogSections.SEO,
     element: <Seo />,
   },
   {
-    path: LinksPageBlogSections.HERO,
+    path: PageBlogSections.HERO,
     element: <SectionHero />,
   },
   {
-    path: LinksPageBlogSections.BLOG,
+    path: PageBlogSections.BLOG,
     element: <SectionBlog />,
   },
   {
-    path: LinksPageBlogSections.CTA,
+    path: PageBlogSections.CTA,
     element: <SectionCta />,
   },
 ];

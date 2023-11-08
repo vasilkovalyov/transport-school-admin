@@ -6,8 +6,7 @@ import Typography from '@mui/material/Typography';
 import Breadcrumbs from '@mui/material/Breadcrumbs';
 
 import { StudentsList } from './components';
-
-import { Links } from '@/src/constants/routes';
+import { Dashboard } from '@/src/constants/routes/dashboard';
 
 export default function Students() {
   return (
@@ -18,7 +17,7 @@ export default function Students() {
         </Box>
         <Box mb={4}>
           <Breadcrumbs aria-label="breadcrumb">
-            <Link to={Links.ADMIN}>Home</Link>
+            <Link to={Dashboard.ADMIN}>Home</Link>
             <Typography>Students</Typography>
           </Breadcrumbs>
         </Box>

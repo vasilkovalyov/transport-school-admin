@@ -1,5 +1,3 @@
-import { LinksPageHomeSections } from 'src/constants/routes';
-
 import Seo from './Seo/Seo';
 import SectionHero from './SectionHero/SectionHero';
 import SectionAboutCourse from './SectionAboutCourse/SectionAboutCourse';
@@ -7,34 +5,35 @@ import SectionAboutUs from './SectionAboutUs/SectionAboutUs';
 import SectionAchivments from './SectionAchivments/SectionAchivments';
 import SectionFaq from './SectionFaq/SectionFaq';
 import SectionFormatLessons from './SectionFormatLessons/SectionFormatLessons';
+import { PageHomeSections } from '@/src/constants/routes/pages';
 
 export const pages = [
   {
-    path: LinksPageHomeSections.SEO,
+    path: PageHomeSections.SEO,
     element: <Seo />,
   },
   {
-    path: LinksPageHomeSections.HERO,
+    path: PageHomeSections.HERO,
     element: <SectionHero />,
   },
   {
-    path: LinksPageHomeSections.ABOUT_COURSE,
+    path: PageHomeSections.ABOUT_COURSE,
     element: <SectionAboutCourse />,
   },
   {
-    path: LinksPageHomeSections.ABOUT_US,
+    path: PageHomeSections.ABOUT_US,
     element: <SectionAboutUs />,
   },
   {
-    path: LinksPageHomeSections.ACHIVMENTS,
+    path: PageHomeSections.ACHIVMENTS,
     element: <SectionAchivments />,
   },
   {
-    path: LinksPageHomeSections.FAQ,
+    path: PageHomeSections.FAQ,
     element: <SectionFaq />,
   },
   {
-    path: LinksPageHomeSections.FORMAT_LESSONS,
+    path: PageHomeSections.FORMAT_LESSONS,
     element: <SectionFormatLessons />,
   },
 ];

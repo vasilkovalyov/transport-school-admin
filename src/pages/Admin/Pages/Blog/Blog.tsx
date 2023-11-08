@@ -6,14 +6,15 @@ import Breadcrumbs from '@mui/material/Breadcrumbs';
 import { SectionsContentLayout } from 'src/layouts';
 
 import { navigation } from './Blog.data';
-import { Links, LinksPages } from '@/src/constants/routes';
+import { Dashboard } from '@/src/constants/routes/dashboard';
+import { Pages } from '@/src/constants/routes/pages';
 
 export default function PageBlog() {
   return (
     <SectionsContentLayout heading="Page blog" navigation={navigation}>
       <Breadcrumbs aria-label="breadcrumb">
-        <Link to={Links.ADMIN}>Home</Link>
-        <Link to={LinksPages.HOME}>Pages</Link>
+        <Link to={Dashboard.ADMIN}>Home</Link>
+        <Link to={Pages.HOME}>Pages</Link>
         <Typography>Blog</Typography>
       </Breadcrumbs>
     </SectionsContentLayout>

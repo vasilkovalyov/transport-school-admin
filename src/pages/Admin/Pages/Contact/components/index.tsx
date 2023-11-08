@@ -1,25 +1,24 @@
-import { LinksPageContactSections } from 'src/constants/routes';
-
 import Seo from './Seo/Seo';
 import SectionsContacts from './SectionsContacts/SectionsContacts';
 import SectionCta from './SectionCta/SectionCta';
 import SectionContactForm from './SectionContactForm/SectionContactForm';
+import { PageContactSections } from '@/src/constants/routes/pages';
 
 export const pages = [
   {
-    path: LinksPageContactSections.SEO,
+    path: PageContactSections.SEO,
     element: <Seo />,
   },
   {
-    path: LinksPageContactSections.CONTACTS,
+    path: PageContactSections.CONTACTS,
     element: <SectionsContacts />,
   },
   {
-    path: LinksPageContactSections.CTA,
+    path: PageContactSections.CTA,
     element: <SectionCta />,
   },
   {
-    path: LinksPageContactSections.CONTACT_FORM,
+    path: PageContactSections.CONTACT_FORM,
     element: <SectionContactForm />,
   },
 ];

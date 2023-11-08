@@ -5,7 +5,7 @@ import { Box } from '@mui/material';
 import BlogForm from '../BlogForm/BlogForm';
 import { BlockCardEditableProps } from '../BlogCard';
 import PostService from '../../Blog.service';
-import { LinksConcepts } from '@/src/constants/routes';
+import { Concepts } from '@/src/constants/routes/concepts';
 
 const service = new PostService();
 
@@ -17,7 +17,7 @@ export default function BlockBlogCreate() {
     try {
       setLoading(true);
       await service.create(params);
-      navigate(LinksConcepts.BLOG);
+      navigate(Concepts.BLOG);
     } catch (e) {
       console.log(e);
     } finally {

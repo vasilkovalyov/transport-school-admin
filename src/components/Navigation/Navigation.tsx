@@ -9,9 +9,9 @@ import List from '@mui/material/List';
 import './Navigation.scss';
 
 import { menuNavigaton } from './Navigation.data';
-import { Links } from '@/src/constants/routes';
 
 import NavigationMenuItem from './NavigationMenuItem';
+import { Dashboard } from '@/src/constants/routes/dashboard';
 
 export default function Navigation() {
   return (
@@ -19,7 +19,7 @@ export default function Navigation() {
       <Drawer variant="permanent" anchor="left" className="navigation__drawer">
         <Toolbar>
           <Typography variant="h6" margin={0} className="navigation__logo">
-            <Link to={Links.ADMIN}>Transport school Admin</Link>
+            <Link to={Dashboard.ADMIN}>Transport school Admin</Link>
           </Typography>
         </Toolbar>
         <Divider />

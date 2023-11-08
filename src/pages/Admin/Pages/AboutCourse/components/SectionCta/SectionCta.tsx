@@ -12,8 +12,8 @@ import { PageEnum } from '@/src/pages/Admin/Pages/pages-enum';
 import { BlockInfoPageType } from '@/src/pages/Admin/Pages/Components/types';
 import { BlocsEnum } from '@/src/pages/Admin/Pages/blocks-enum';
 import { Link } from 'react-router-dom';
-import { LinksPageSections } from '@/src/constants/routes';
 import { useApisReuseBlock } from '@/src/pages/Admin/Pages/hooks/useApisReuseBlock';
+import { PageSections } from '@/src/constants/routes/sections';
 
 const service = new CtaFormService();
 const currentPage = PageEnum.ABOUT_COURSE;
@@ -55,7 +55,7 @@ export default function SectionCta() {
           {data === null ? (
             <Typography variant="h4">
               First of all you have to create{' '}
-              <Link to={LinksPageSections.CTA}>section cta</Link>
+              <Link to={PageSections.CTA}>section cta</Link>
             </Typography>
           ) : (
             <CtaForm

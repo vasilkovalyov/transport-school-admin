@@ -1,6 +1,7 @@
 import { AxiosPromise } from 'axios';
 import { LessonScheduleProps, LessonScheduleEditableProps } from './components';
 import api from '@/src/api/axios';
+import { StudentType } from '@/src/types/student';
 
 enum EndpointLessonScheduleEnum {
   CREATE = 'lesson-schedule-create',
@@ -8,6 +9,7 @@ enum EndpointLessonScheduleEnum {
   DELETE = 'lesson-schedule-delete',
   DELETE_STUDENT = 'lesson-schedule-student',
   GET_POSTS = 'lesson-schedules',
+  GET_STUDENTS_FROM_LESSON = 'lesson-schedule-students',
 }
 
 class LessonScheduleService {
@@ -55,6 +57,13 @@ class LessonScheduleService {
   async getPost(id: string): AxiosPromise<LessonScheduleProps> {
     const response = await api.get(
       `${EndpointLessonScheduleEnum.GET_POSTS}/${id}`
+    );
+    return response;
+  }
+
+  async getStudentsFromLesson(id: string): AxiosPromise<StudentType[]> {
+    const response = await api.get(
+      `${EndpointLessonScheduleEnum.GET_STUDENTS_FROM_LESSON}/${id}`
     );
     return response;
   }

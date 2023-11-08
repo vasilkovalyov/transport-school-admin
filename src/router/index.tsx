@@ -1,7 +1,6 @@
 import { createBrowserRouter, Outlet, RouterProvider } from 'react-router-dom';
 
 import { PublicLayout, PrivateLayout } from 'src/layouts';
-import { Links, LinksPages } from 'src/constants/routes';
 
 import { AdminOverview, LoginPage, RegisterAdmin, ErrorPage } from 'src/pages';
 
@@ -28,6 +27,8 @@ import { pages as priceSectionsRoutes } from '../pages/Admin/Pages/Price/compone
 import { pages as companySectionsRoutes } from '../pages/Admin/Pages/Company/components';
 import { pages as blogSectionsRoutes } from '../pages/Admin/Pages/Blog/components';
 import { pages as contactSectionsRoutes } from '../pages/Admin/Pages/Contact/components';
+import { Dashboard } from '../constants/routes/dashboard';
+import { Pages } from '../constants/routes/pages';
 
 const router = createBrowserRouter([
   {
@@ -35,7 +36,7 @@ const router = createBrowserRouter([
     element: <HomePage />,
   },
   {
-    path: Links.LOGIN,
+    path: Dashboard.LOGIN,
     element: <PublicLayout />,
     children: [
       {
@@ -45,7 +46,7 @@ const router = createBrowserRouter([
     ],
   },
   {
-    path: Links.REGISTRATION_ADMIN,
+    path: Dashboard.REGISTRATION_ADMIN,
     element: <PublicLayout />,
     children: [
       {
@@ -59,49 +60,49 @@ const router = createBrowserRouter([
     children: [
       {
         index: true,
-        path: Links.ADMIN,
+        path: Dashboard.ADMIN,
         element: <AdminOverview />,
       },
       {
         element: <Outlet />,
         children: [
           {
-            path: LinksPages.HOME,
+            path: Pages.HOME,
             element: <PageHome />,
             children: homeSectionRoutes,
           },
           {
-            path: LinksPages.ABOUT_COURSE,
+            path: Pages.ABOUT_COURSE,
             element: <PageAboutCourse />,
             children: aboutCourseSectionRoutes,
           },
           {
-            path: LinksPages.BLOG,
+            path: Pages.BLOG,
             element: <PageBlog />,
             children: blogSectionsRoutes,
           },
           {
-            path: LinksPages.COMPANY,
+            path: Pages.COMPANY,
             element: <PageCompany />,
             children: companySectionsRoutes,
           },
           {
-            path: LinksPages.CONTACT,
+            path: Pages.CONTACT,
             element: <PageContact />,
             children: contactSectionsRoutes,
           },
           {
-            path: LinksPages.PRICE,
+            path: Pages.PRICE,
             element: <PagePrice />,
             children: priceSectionsRoutes,
           },
           {
-            path: LinksPages.SCHEDULE,
+            path: Pages.SCHEDULE,
             element: <PageSchedule />,
             children: aboutScheduleSectionRoutes,
           },
           {
-            path: LinksPages.COMMON_CONTACTS,
+            path: Pages.COMMON_CONTACTS,
             element: <PageCommonContacts />,
           },
         ],

@@ -1,25 +1,24 @@
-import { LinksPageScheduleSections } from 'src/constants/routes';
-
 import Seo from './Seo/Seo';
 import SectionHero from './SectionHero/SectionHero';
 import SectionSchedule from './SectionSchedule/SectionSchedule';
 import SectionsContacts from './SectionsContacts/SectionsContacts';
+import { PageScheduleSections } from '@/src/constants/routes/pages';
 
 export const pages = [
   {
-    path: LinksPageScheduleSections.SEO,
+    path: PageScheduleSections.SEO,
     element: <Seo />,
   },
   {
-    path: LinksPageScheduleSections.HERO,
+    path: PageScheduleSections.HERO,
     element: <SectionHero />,
   },
   {
-    path: LinksPageScheduleSections.SCHEDULE,
+    path: PageScheduleSections.SCHEDULE,
     element: <SectionSchedule />,
   },
   {
-    path: LinksPageScheduleSections.CONTACTS,
+    path: PageScheduleSections.CONTACTS,
     element: <SectionsContacts />,
   },
 ];

@@ -1,39 +1,39 @@
-import { LinksPageHomeSections } from '@/src/constants/routes';
+import { PageHomeSections } from '@/src/constants/routes/pages';
 
 export const navigation = [
   {
     id: '0',
-    path: LinksPageHomeSections.SEO,
+    path: PageHomeSections.SEO,
     name: 'Seo',
   },
   {
     id: '1',
-    path: LinksPageHomeSections.HERO,
+    path: PageHomeSections.HERO,
     name: 'Section Hero',
   },
   {
     id: '2',
-    path: LinksPageHomeSections.ABOUT_US,
+    path: PageHomeSections.ABOUT_US,
     name: 'Section About Us',
   },
   {
     id: '3',
-    path: LinksPageHomeSections.ABOUT_COURSE,
+    path: PageHomeSections.ABOUT_COURSE,
     name: 'Section About Course',
   },
   {
     id: '4',
-    path: LinksPageHomeSections.FORMAT_LESSONS,
+    path: PageHomeSections.FORMAT_LESSONS,
     name: 'Section Format Lessons',
   },
   {
     id: '5',
-    path: LinksPageHomeSections.FAQ,
+    path: PageHomeSections.FAQ,
     name: 'Section Faq',
   },
   {
     id: '6',
-    path: LinksPageHomeSections.ACHIVMENTS,
+    path: PageHomeSections.ACHIVMENTS,
     name: 'Section Achivments',
   },
 ];

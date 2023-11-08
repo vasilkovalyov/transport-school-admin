@@ -7,7 +7,8 @@ import Container from '@mui/material/Container';
 import Typography from '@mui/material/Typography';
 import Breadcrumbs from '@mui/material/Breadcrumbs';
 
-import { Links, LinksConcepts } from '@/src/constants/routes';
+import { Concepts } from '@/src/constants/routes/concepts';
+import { Dashboard } from '@/src/constants/routes/dashboard';
 import { LessonsList } from './components';
 
 export default function LessonSchedule() {
@@ -25,7 +26,7 @@ export default function LessonSchedule() {
               variant="contained"
               size="small"
               onClick={() => {
-                navigate(LinksConcepts.LESSON_SCHEDULE_CREATE);
+                navigate(Concepts.LESSON_SCHEDULE_CREATE);
               }}
             >
               Create Lesson
@@ -34,7 +35,7 @@ export default function LessonSchedule() {
         </Grid>
         <Box mb={4}>
           <Breadcrumbs aria-label="breadcrumb">
-            <Link to={Links.ADMIN}>Home</Link>
+            <Link to={Dashboard.ADMIN}>Home</Link>
             <Typography>Lesson shedule</Typography>
           </Breadcrumbs>
         </Box>

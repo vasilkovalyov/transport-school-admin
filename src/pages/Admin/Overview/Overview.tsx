@@ -11,13 +11,13 @@ import MiscellaneousServicesIcon from '@mui/icons-material/MiscellaneousServices
 import PlayLessonIcon from '@mui/icons-material/PlayLesson';
 import GroupIcon from '@mui/icons-material/Group';
 
-import { LinksConcepts } from '@/src/constants/routes';
 import { OverviewInfo, UpcomingEvents } from './components';
 
 import { OverviewInfoType } from './Overview.type';
 import { UpcomingEventProps } from './components/UpcomingEvent/UpcomingEvent.type';
 
 import OverviewService from './Overview.service';
+import { Concepts } from '@/src/constants/routes/concepts';
 
 const overviewService = new OverviewService();
 
@@ -82,7 +82,7 @@ export default function Overview() {
               heading="Blog"
               value={overviewInfo.blog}
               link={{
-                path: LinksConcepts.BLOG,
+                path: Concepts.BLOG,
                 name: 'See all blog',
               }}
             />
@@ -102,7 +102,7 @@ export default function Overview() {
               heading="Services"
               value={overviewInfo.services}
               link={{
-                path: LinksConcepts.SERVICES,
+                path: Concepts.SERVICES,
                 name: 'See all services',
               }}
             />
@@ -122,7 +122,7 @@ export default function Overview() {
               heading="Lessons"
               value={overviewInfo.lessons}
               link={{
-                path: LinksConcepts.LESSON_SCHEDULE,
+                path: Concepts.LESSON_SCHEDULE,
                 name: 'See all lessons',
               }}
             />
@@ -148,7 +148,7 @@ export default function Overview() {
             <UpcomingEvents
               events={events}
               link={{
-                path: LinksConcepts.LESSON_SCHEDULE,
+                path: Concepts.LESSON_SCHEDULE,
                 name: 'See all',
               }}
             />

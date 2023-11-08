@@ -8,7 +8,7 @@ import LinearProgress from '@mui/material/LinearProgress';
 import LessonForm from '../LessonForm/LessonForm';
 import LessonScheduleService from '../../LessonSchedule.service';
 import { LessonScheduleEditableProps } from '../LessonRow';
-import { LinksConcepts } from '@/src/constants/routes';
+import { Concepts } from '@/src/constants/routes/concepts';
 import { AlertMessageModal, useAlertMessageModal } from '@/src/components';
 
 const service = new LessonScheduleService();
@@ -36,11 +36,11 @@ export default function BlockEditLesson() {
       setLoading(true);
       const response = await service.getPost(id || '');
       if (response.data === null) {
-        navigate(LinksConcepts.LESSON_SCHEDULE);
+        navigate(Concepts.LESSON_SCHEDULE);
       }
       setData(response.data);
     } catch (e) {
-      navigate(LinksConcepts.LESSON_SCHEDULE);
+      navigate(Concepts.LESSON_SCHEDULE);
     } finally {
       setLoading(false);
     }
@@ -56,7 +56,7 @@ export default function BlockEditLesson() {
         ...params,
         _id: id || '',
       });
-      navigate(LinksConcepts.LESSON_SCHEDULE);
+      navigate(Concepts.LESSON_SCHEDULE);
     } catch (e) {
       console.log(e);
     }
@@ -66,7 +66,7 @@ export default function BlockEditLesson() {
     try {
       setLoadingRemove(true);
       await service.delete(id || '');
-      navigate(LinksConcepts.LESSON_SCHEDULE);
+      navigate(Concepts.LESSON_SCHEDULE);
     } catch (e) {
       console.log(e);
     } finally {

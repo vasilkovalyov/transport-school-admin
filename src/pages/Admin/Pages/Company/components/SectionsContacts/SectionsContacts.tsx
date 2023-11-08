@@ -12,7 +12,7 @@ import { PageEnum } from '@/src/pages/Admin/Pages/pages-enum';
 import { BlockInfoPageType } from '@/src/pages/Admin/Pages/Components/types';
 import { BlocsEnum } from '@/src/pages/Admin/Pages/blocks-enum';
 import { Link } from 'react-router-dom';
-import { LinksPageSections } from '@/src/constants/routes';
+import { PageSections } from '@/src/constants/routes/sections';
 import { useApisReuseBlock } from '@/src/pages/Admin/Pages/hooks/useApisReuseBlock';
 
 const service = new ContactsFormService();
@@ -55,7 +55,7 @@ export default function SectionContacts() {
           {data === null ? (
             <Typography variant="h4">
               First of all you have to create{' '}
-              <Link to={LinksPageSections.CONTACTS}>section contacts</Link>
+              <Link to={PageSections.CONTACTS}>section contacts</Link>
             </Typography>
           ) : (
             <ContactsForm

@@ -15,10 +15,10 @@ import { RegisterAdminType } from './RegistrerAdmin.type';
 import { registerAdminValidationSchema } from './RegisterAdmin.validation';
 import { AxiosError } from 'axios';
 import AuthService from '@/src/services/auth';
-import { Links } from '@/src/constants/routes';
 
 import Visibility from '@mui/icons-material/Visibility';
 import VisibilityOff from '@mui/icons-material/VisibilityOff';
+import { Dashboard } from '@/src/constants/routes/dashboard';
 
 const authService = new AuthService();
 
@@ -50,7 +50,7 @@ export default function RegisterAdminPage() {
       setLoading(true);
       const response = await authService.adminRegistration(params);
       if (response.data.message === 'User created') {
-        navigate(Links.LOGIN);
+        navigate(Dashboard.LOGIN);
       }
     } catch (e) {
       if (e instanceof AxiosError) {

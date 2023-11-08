@@ -9,7 +9,7 @@ import CardMedia from '@mui/material/CardMedia';
 import Typography from '@mui/material/Typography';
 
 import { BlogCardProps } from './BlogCard.type';
-import { LinksConcepts } from '@/src/constants/routes';
+import { Concepts } from '@/src/constants/routes/concepts';
 
 export default function BlogCard({
   _id,
@@ -18,7 +18,7 @@ export default function BlogCard({
   short_description,
 }: BlogCardProps) {
   const navigate = useNavigate();
-  const editLink = `${LinksConcepts.BLOG_EDIT}/${_id}`;
+  const editLink = `${Concepts.BLOG_EDIT}/${_id}`;
 
   const cutOfString = (str: string, wordCount: number): string => {
     return str.split(' ').splice(0, wordCount).join(' ') + '...';

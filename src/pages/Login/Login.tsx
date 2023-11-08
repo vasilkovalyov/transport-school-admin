@@ -16,7 +16,7 @@ import { LoginType } from './Login.type';
 import { loginValidationSchema } from './Login.validation';
 import { AxiosError } from 'axios';
 import AuthService from '@/src/services/auth';
-import { Links } from '@/src/constants/routes';
+import { Dashboard } from '@/src/constants/routes/dashboard';
 
 const authService = new AuthService();
 
@@ -41,7 +41,7 @@ export default function LoginPage() {
       const response = await authService.login(params);
       dispatch(saveAdmin(response.data));
       localStorage.setItem('token', response.data.token);
-      navigate(Links.ADMIN);
+      navigate(Dashboard.ADMIN);
     } catch (e) {
       if (e instanceof AxiosError) {
         setErrorMessage(e.response?.data.error);
@@ -54,7 +54,7 @@ export default function LoginPage() {
   async function hasAdminLoad() {
     const response = await authService.hasAdmin();
     if (!response.data.hasAdmin) {
-      navigate(Links.REGISTRATION_ADMIN);
+      navigate(Dashboard.REGISTRATION_ADMIN);
     }
   }
 

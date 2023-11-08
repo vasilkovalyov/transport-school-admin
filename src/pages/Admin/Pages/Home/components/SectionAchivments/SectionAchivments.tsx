@@ -12,8 +12,8 @@ import {
 import { PageEnum } from '@/src/pages/Admin/Pages/pages-enum';
 import { BlockInfoPageType } from '@/src/pages/Admin/Pages/Components/types';
 import { BlocsEnum } from '@/src/pages/Admin/Pages/blocks-enum';
-import { LinksPageSections } from '@/src/constants/routes';
 import { useApisReuseBlock } from '@/src/pages/Admin/Pages/hooks/useApisReuseBlock';
+import { PageSections } from '@/src/constants/routes/sections';
 
 const service = new AchivmentsFormService();
 const currentPage = PageEnum.HOME;
@@ -55,7 +55,7 @@ export default function SectionAchivments() {
           {data === null ? (
             <Typography variant="h4">
               First of all you have to create{' '}
-              <Link to={LinksPageSections.ACHIVMENTS}>section achivments</Link>
+              <Link to={PageSections.ACHIVMENTS}>section achivments</Link>
             </Typography>
           ) : (
             <AchivmentsForm

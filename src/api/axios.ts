@@ -1,7 +1,7 @@
 import axios, { AxiosError } from 'axios';
 import { getTokenFromLC } from '../utils/localStorage';
 import AuthService from '../services/auth';
-import { Links } from '../constants/routes';
+import { Dashboard } from '../constants/routes/dashboard';
 
 const api = axios.create({
   baseURL: `${import.meta.env.VITE_REACT_API_URL}/api/dashboard/`,
@@ -45,7 +45,7 @@ api.interceptors.response.use(
         if (e instanceof AxiosError) {
           if (e.response?.data.message === 'Refresh token expired') {
             localStorage.removeItem('token');
-            window.location.href = Links.LOGIN;
+            window.location.href = Dashboard.LOGIN;
           }
         }
         return Promise.reject(error);

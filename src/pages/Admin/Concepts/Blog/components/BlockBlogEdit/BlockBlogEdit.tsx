@@ -10,7 +10,7 @@ import { AlertMessageModal, useAlertMessageModal } from '@/src/components';
 import BlogForm from '../BlogForm/BlogForm';
 import { BlockCardEditableProps, BlogCardProps } from '../BlogCard';
 import PostService from '../../Blog.service';
-import { LinksConcepts } from '@/src/constants/routes';
+import { Concepts } from '@/src/constants/routes/concepts';
 import dayjs from 'dayjs';
 
 const service = new PostService();
@@ -37,11 +37,11 @@ export default function BlockBlogEdit() {
       setLoading('loading');
       const response = await service.getPost(id || '');
       if (response.data === null) {
-        navigate(LinksConcepts.BLOG);
+        navigate(Concepts.BLOG);
       }
       setData(response.data);
     } catch (e) {
-      navigate(LinksConcepts.BLOG);
+      navigate(Concepts.BLOG);
     } finally {
       setLoading(null);
     }
@@ -56,7 +56,7 @@ export default function BlockBlogEdit() {
     try {
       setLoading('loadingRemove');
       await service.delete(selectedId);
-      navigate(LinksConcepts.BLOG);
+      navigate(Concepts.BLOG);
     } catch (e) {
       console.log(e);
     } finally {
@@ -72,7 +72,7 @@ export default function BlockBlogEdit() {
         ...params,
         _id: id || '',
       });
-      navigate(LinksConcepts.BLOG);
+      navigate(Concepts.BLOG);
     } catch (e) {
       console.log(e);
     } finally {

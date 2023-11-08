@@ -1,5 +1,3 @@
-import { LinksPageAboutCourseSections } from 'src/constants/routes';
-
 import Seo from './Seo/Seo';
 import SectionHero from './SectionHero/SectionHero';
 import SectionCourseForPeople from './SectionCourseForPeople/SectionCourseForPeople';
@@ -7,34 +5,35 @@ import SectionStructEducation from './SectionStructEducation/SectionStructEducat
 import SectionOurBenefits from './SectionOurBenefits/SectionOurBenefits';
 import SectionWhoTeach from './SectionWhoTeach/SectionWhoTeach';
 import SectionCta from './SectionCta/SectionCta';
+import { PageAboutCourseSections } from '@/src/constants/routes/pages';
 
 export const pages = [
   {
-    path: LinksPageAboutCourseSections.SEO,
+    path: PageAboutCourseSections.SEO,
     element: <Seo />,
   },
   {
-    path: LinksPageAboutCourseSections.HERO,
+    path: PageAboutCourseSections.HERO,
     element: <SectionHero />,
   },
   {
-    path: LinksPageAboutCourseSections.COURSE_FOR_PEOPLE,
+    path: PageAboutCourseSections.COURSE_FOR_PEOPLE,
     element: <SectionCourseForPeople />,
   },
   {
-    path: LinksPageAboutCourseSections.STRUCT_EDUCATION,
+    path: PageAboutCourseSections.STRUCT_EDUCATION,
     element: <SectionStructEducation />,
   },
   {
-    path: LinksPageAboutCourseSections.OUR_BENEFITS,
+    path: PageAboutCourseSections.OUR_BENEFITS,
     element: <SectionOurBenefits />,
   },
   {
-    path: LinksPageAboutCourseSections.WHO_TEACH,
+    path: PageAboutCourseSections.WHO_TEACH,
     element: <SectionWhoTeach />,
   },
   {
-    path: LinksPageAboutCourseSections.CTA,
+    path: PageAboutCourseSections.CTA,
     element: <SectionCta />,
   },
 ];

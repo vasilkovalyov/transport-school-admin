@@ -8,7 +8,8 @@ import Divider from '@mui/material/Divider';
 
 import { FormContacts, SocialForm } from './components';
 
-import { Links, LinksPages } from '@/src/constants/routes';
+import { Dashboard } from '@/src/constants/routes/dashboard';
+import { Pages } from '@/src/constants/routes/pages';
 
 export default function PageCommonContacts() {
   return (
@@ -19,8 +20,8 @@ export default function PageCommonContacts() {
         </Typography>
         <Box marginBottom={4}>
           <Breadcrumbs aria-label="breadcrumb">
-            <Link to={Links.ADMIN}>Home</Link>
-            <Link to={LinksPages.HOME}>Pages</Link>
+            <Link to={Dashboard.ADMIN}>Home</Link>
+            <Link to={Pages.HOME}>Pages</Link>
             <Typography>Schedule</Typography>
           </Breadcrumbs>
         </Box>

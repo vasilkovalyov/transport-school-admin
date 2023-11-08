@@ -2,12 +2,12 @@ import { Navigate, Outlet } from 'react-router-dom';
 import { Header } from '@/src/components';
 
 import './PrivateLayout.scss';
-import { Links } from '@/src/constants/routes';
 import { getTokenFromLC } from '@/src/utils/localStorage';
+import { Dashboard } from '@/src/constants/routes/dashboard';
 
 export default function PrivateLayout() {
   if (!getTokenFromLC()) {
-    return <Navigate to={Links.LOGIN} replace={true} />;
+    return <Navigate to={Dashboard.LOGIN} replace={true} />;
   }
 
   return (

@@ -7,8 +7,9 @@ import Container from '@mui/material/Container';
 import Typography from '@mui/material/Typography';
 import Breadcrumbs from '@mui/material/Breadcrumbs';
 
-import { Links, LinksPageSections } from '@/src/constants/routes';
 import { ReviewList, ReviewContentForm } from './components';
+import { Dashboard } from '@/src/constants/routes/dashboard';
+import { PageSections } from '@/src/constants/routes/sections';
 
 export default function PageSectionReview() {
   const navigate = useNavigate();
@@ -25,7 +26,7 @@ export default function PageSectionReview() {
               variant="contained"
               size="small"
               onClick={() => {
-                navigate(LinksPageSections.REVIEW_CREATE);
+                navigate(PageSections.REVIEW_CREATE);
               }}
             >
               Create Review
@@ -34,7 +35,7 @@ export default function PageSectionReview() {
         </Grid>
         <Box mb={4}>
           <Breadcrumbs aria-label="breadcrumb">
-            <Link to={Links.ADMIN}>Home</Link>
+            <Link to={Dashboard.ADMIN}>Home</Link>
             <Typography>Section Review</Typography>
           </Breadcrumbs>
         </Box>

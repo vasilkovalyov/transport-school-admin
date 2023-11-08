@@ -5,7 +5,6 @@ import { Box } from '@mui/material';
 import Typography from '@mui/material/Typography';
 import CircularProgress from '@mui/material/CircularProgress';
 
-import api from '@/src/api/axios';
 import {
   AlertMessageModal,
   StudentsTable,
@@ -27,9 +26,10 @@ export default function StudentsList() {
   const [loading, setLoading] = useState<boolean>(true);
 
   async function loadData() {
+    if (!id) return;
     try {
       setLoading(true);
-      const response = await api.get(`lesson-schedule-students/${id}`);
+      const response = await service.getStudentsFromLesson(id);
       setStudents(response.data);
     } catch (e) {
       console.log(e);

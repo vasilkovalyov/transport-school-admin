@@ -5,7 +5,8 @@ import Container from '@mui/material/Container';
 import Typography from '@mui/material/Typography';
 import Breadcrumbs from '@mui/material/Breadcrumbs';
 
-import { Links, LinksConcepts } from '@/src/constants/routes';
+import { Concepts } from '@/src/constants/routes/concepts';
+import { Dashboard } from '@/src/constants/routes/dashboard';
 import { BlockCreateLesson } from './components';
 
 export default function LessonScheduleCreate() {
@@ -15,8 +16,8 @@ export default function LessonScheduleCreate() {
         <Typography variant="h1">Create schedule</Typography>
         <Box mb={4}>
           <Breadcrumbs aria-label="breadcrumb">
-            <Link to={Links.ADMIN}>Home</Link>
-            <Link to={LinksConcepts.LESSON_SCHEDULE}>Lesson shedule</Link>
+            <Link to={Dashboard.ADMIN}>Home</Link>
+            <Link to={Concepts.LESSON_SCHEDULE}>Lesson shedule</Link>
             <Typography>Create lesson schedule</Typography>
           </Breadcrumbs>
         </Box>

@@ -1,5 +1,3 @@
-import { LinksPageSections } from 'src/constants/routes';
-
 import PageSectionAchivments from './Achivments/Achivments';
 import PageSectionContacts from './Contacts/Contacts';
 import PageSectionFaq from './Faq/Faq';
@@ -9,34 +7,35 @@ import {
   PageSectionReviewCreate,
   PageSectionReviewEdit,
 } from './Review';
+import { PageSections } from '@/src/constants/routes/sections';
 
 export const pages = [
   {
-    path: LinksPageSections.ACHIVMENTS,
+    path: PageSections.ACHIVMENTS,
     element: <PageSectionAchivments />,
   },
   {
-    path: LinksPageSections.CONTACTS,
+    path: PageSections.CONTACTS,
     element: <PageSectionContacts />,
   },
   {
-    path: LinksPageSections.FAQ,
+    path: PageSections.FAQ,
     element: <PageSectionFaq />,
   },
   {
-    path: LinksPageSections.CTA,
+    path: PageSections.CTA,
     element: <PageSectionCta />,
   },
   {
-    path: LinksPageSections.REVIEW,
+    path: PageSections.REVIEW,
     element: <PageSectionReview />,
   },
   {
-    path: `${LinksPageSections.REVIEW_EDIT}/:id`,
+    path: `${PageSections.REVIEW_EDIT}/:id`,
     element: <PageSectionReviewEdit />,
   },
   {
-    path: LinksPageSections.REVIEW_CREATE,
+    path: PageSections.REVIEW_CREATE,
     element: <PageSectionReviewCreate />,
   },
 ];

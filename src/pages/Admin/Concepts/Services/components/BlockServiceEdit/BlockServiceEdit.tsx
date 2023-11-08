@@ -9,7 +9,7 @@ import { AlertMessageModal, useAlertMessageModal } from '@/src/components';
 
 import ServiceForm from '../ServiceForm/ServiceForm';
 import { ServiceEditableFormData } from '../ServiceForm/ServiceForm.type';
-import { LinksConcepts } from '@/src/constants/routes';
+import { Concepts } from '@/src/constants/routes/concepts';
 import ServicesService from '../../Services.service';
 
 const service = new ServicesService();
@@ -35,12 +35,12 @@ export default function BlockServiceEdit() {
       setLoading('loading');
       const response = await service.getPost(id || '');
       if (response.data === null) {
-        navigate(LinksConcepts.SERVICES);
+        navigate(Concepts.SERVICES);
       }
       setData(response.data);
     } catch (e) {
       console.log(e);
-      navigate(LinksConcepts.SERVICES);
+      navigate(Concepts.SERVICES);
     } finally {
       setLoading(null);
     }
@@ -57,7 +57,7 @@ export default function BlockServiceEdit() {
         ...params,
         _id: id || '',
       });
-      navigate(LinksConcepts.SERVICES);
+      navigate(Concepts.SERVICES);
     } catch (e) {
       console.log(e);
     } finally {
@@ -69,7 +69,7 @@ export default function BlockServiceEdit() {
     try {
       setLoading('loadingRemove');
       await service.delete(id || '');
-      navigate(LinksConcepts.SERVICES);
+      navigate(Concepts.SERVICES);
     } catch (e) {
       console.log(e);
     } finally {

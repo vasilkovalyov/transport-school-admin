@@ -6,9 +6,10 @@ import Container from '@mui/material/Container';
 import Typography from '@mui/material/Typography';
 import Breadcrumbs from '@mui/material/Breadcrumbs';
 
-import { Links, LinksPageSections } from '@/src/constants/routes';
 import { ReviewFormDataType, ReviewForm } from './components';
 import ServiceReview from './Review.service';
+import { Dashboard } from '@/src/constants/routes/dashboard';
+import { PageSections } from '@/src/constants/routes/sections';
 
 const service = new ServiceReview();
 
@@ -20,7 +21,7 @@ export default function PageSectionReviewCreate() {
     try {
       setLoadingSubmit(true);
       await service.create(data);
-      navigate(LinksPageSections.REVIEW);
+      navigate(PageSections.REVIEW);
     } catch (e) {
       console.log(e);
     } finally {
@@ -34,8 +35,8 @@ export default function PageSectionReviewCreate() {
         <Typography variant="h1">Create review</Typography>
         <Box mb={4}>
           <Breadcrumbs aria-label="breadcrumb">
-            <Link to={Links.ADMIN}>Home</Link>
-            <Link to={LinksPageSections.REVIEW}>Section review</Link>
+            <Link to={Dashboard.ADMIN}>Home</Link>
+            <Link to={PageSections.REVIEW}>Section review</Link>
             <Typography>Create review</Typography>
           </Breadcrumbs>
         </Box>

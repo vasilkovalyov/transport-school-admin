@@ -1,39 +1,39 @@
-import { LinksPageAboutCourseSections } from '@/src/constants/routes';
+import { PageAboutCourseSections } from '@/src/constants/routes/pages';
 
 export const navigation = [
   {
     id: '0',
-    path: LinksPageAboutCourseSections.SEO,
+    path: PageAboutCourseSections.SEO,
     name: 'Seo',
   },
   {
     id: '1',
-    path: LinksPageAboutCourseSections.HERO,
+    path: PageAboutCourseSections.HERO,
     name: 'Section Hero',
   },
   {
     id: '2',
-    path: LinksPageAboutCourseSections.COURSE_FOR_PEOPLE,
+    path: PageAboutCourseSections.COURSE_FOR_PEOPLE,
     name: 'Section Course for people',
   },
   {
     id: '3',
-    path: LinksPageAboutCourseSections.STRUCT_EDUCATION,
+    path: PageAboutCourseSections.STRUCT_EDUCATION,
     name: 'Section struct education',
   },
   {
     id: '4',
-    path: LinksPageAboutCourseSections.OUR_BENEFITS,
+    path: PageAboutCourseSections.OUR_BENEFITS,
     name: 'Section our benefits',
   },
   {
     id: '5',
-    path: LinksPageAboutCourseSections.WHO_TEACH,
+    path: PageAboutCourseSections.WHO_TEACH,
     name: 'Section who teach',
   },
   {
     id: '6',
-    path: LinksPageAboutCourseSections.CTA,
+    path: PageAboutCourseSections.CTA,
     name: 'Section cta',
   },
 ];

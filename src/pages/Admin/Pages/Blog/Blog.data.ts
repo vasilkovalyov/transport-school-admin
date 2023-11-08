@@ -1,24 +1,24 @@
-import { LinksPageBlogSections } from '@/src/constants/routes';
+import { PageBlogSections } from '@/src/constants/routes/pages';
 
 export const navigation = [
   {
     id: '0',
-    path: LinksPageBlogSections.SEO,
+    path: PageBlogSections.SEO,
     name: 'Seo',
   },
   {
     id: '1',
-    path: LinksPageBlogSections.HERO,
+    path: PageBlogSections.HERO,
     name: 'Section Hero',
   },
   {
     id: '2',
-    path: LinksPageBlogSections.BLOG,
+    path: PageBlogSections.BLOG,
     name: 'Section blog',
   },
   {
     id: '3',
-    path: LinksPageBlogSections.CTA,
+    path: PageBlogSections.CTA,
     name: 'Section cta',
   },
 ];

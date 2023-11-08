@@ -4,7 +4,7 @@ import { Box } from '@mui/material';
 import LessonForm from '../LessonForm/LessonForm';
 import LessonScheduleService from '../../LessonSchedule.service';
 import { LessonScheduleEditableProps } from '../LessonRow';
-import { LinksConcepts } from '@/src/constants/routes';
+import { Concepts } from '@/src/constants/routes/concepts';
 
 const service = new LessonScheduleService();
 
@@ -14,7 +14,7 @@ export default function BlockCreateLesson() {
   async function onCreate(params: LessonScheduleEditableProps) {
     try {
       await service.create(params);
-      navigate(LinksConcepts.LESSON_SCHEDULE);
+      navigate(Concepts.LESSON_SCHEDULE);
     } catch (e) {
       console.log(e);
     }

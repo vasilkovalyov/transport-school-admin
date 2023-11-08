@@ -5,7 +5,8 @@ import Container from '@mui/material/Container';
 import Typography from '@mui/material/Typography';
 import Breadcrumbs from '@mui/material/Breadcrumbs';
 
-import { Links, LinksConcepts } from '@/src/constants/routes';
+import { Concepts } from '@/src/constants/routes/concepts';
+import { Dashboard } from '@/src/constants/routes/dashboard';
 
 export default function Student() {
   return (
@@ -14,8 +15,8 @@ export default function Student() {
         <Typography variant="h1">Student</Typography>
         <Box mb={4}>
           <Breadcrumbs aria-label="breadcrumb">
-            <Link to={Links.ADMIN}>Home</Link>
-            <Link to={LinksConcepts.STUDENTS}>Students</Link>
+            <Link to={Dashboard.ADMIN}>Home</Link>
+            <Link to={Concepts.STUDENTS}>Students</Link>
             <Typography>Student</Typography>
           </Breadcrumbs>
         </Box>

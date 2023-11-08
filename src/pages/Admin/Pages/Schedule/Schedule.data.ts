@@ -1,24 +1,24 @@
-import { LinksPageScheduleSections } from '@/src/constants/routes';
+import { PageScheduleSections } from '@/src/constants/routes/pages';
 
 export const navigation = [
   {
     id: '0',
-    path: LinksPageScheduleSections.SEO,
+    path: PageScheduleSections.SEO,
     name: 'Seo',
   },
   {
     id: '1',
-    path: LinksPageScheduleSections.HERO,
+    path: PageScheduleSections.HERO,
     name: 'Section hero',
   },
   {
     id: '2',
-    path: LinksPageScheduleSections.SCHEDULE,
+    path: PageScheduleSections.SCHEDULE,
     name: 'Section schedule',
   },
   {
     id: '3',
-    path: LinksPageScheduleSections.CONTACTS,
+    path: PageScheduleSections.CONTACTS,
     name: 'Section contacts',
   },
 ];

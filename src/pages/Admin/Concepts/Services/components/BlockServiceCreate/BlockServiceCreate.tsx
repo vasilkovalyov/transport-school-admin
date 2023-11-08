@@ -4,7 +4,7 @@ import { Box } from '@mui/material';
 
 import ServiceForm from '../ServiceForm/ServiceForm';
 import { ServiceEditableFormData } from '../ServiceForm/ServiceForm.type';
-import { LinksConcepts } from '@/src/constants/routes';
+import { Concepts } from '@/src/constants/routes/concepts';
 import ServicesService from '../../Services.service';
 
 const service = new ServicesService();
@@ -17,7 +17,7 @@ export default function BlockServiceCreate() {
     try {
       setLoading(true);
       await service.create(params);
-      navigate(LinksConcepts.SERVICES);
+      navigate(Concepts.SERVICES);
     } catch (e) {
       console.log(e);
     } finally {

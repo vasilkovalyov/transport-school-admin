@@ -1,5 +1,3 @@
-import { LinksConcepts } from 'src/constants/routes';
-
 import { Blog, BlogCreate, BlogEdit } from './Blog';
 import {
   LessonSchedule,
@@ -9,54 +7,55 @@ import {
 } from './LessonSchedule';
 import { Services, ServiceCreate, ServiceEdit } from './Services';
 import { Students, Student } from './Students';
+import { Concepts } from '@/src/constants/routes/concepts';
 
 export const pages = [
   {
-    path: LinksConcepts.BLOG,
+    path: Concepts.BLOG,
     element: <Blog />,
   },
   {
-    path: LinksConcepts.BLOG_CREATE,
+    path: Concepts.BLOG_CREATE,
     element: <BlogCreate />,
   },
   {
-    path: `${LinksConcepts.BLOG_EDIT}/:id`,
+    path: `${Concepts.BLOG_EDIT}/:id`,
     element: <BlogEdit />,
   },
   {
-    path: LinksConcepts.LESSON_SCHEDULE,
+    path: Concepts.LESSON_SCHEDULE,
     element: <LessonSchedule />,
   },
   {
-    path: LinksConcepts.LESSON_SCHEDULE_CREATE,
+    path: Concepts.LESSON_SCHEDULE_CREATE,
     element: <LessonScheduleCreate />,
   },
   {
-    path: `${LinksConcepts.LESSON_SCHEDULE_EDIT}/:id`,
+    path: `${Concepts.LESSON_SCHEDULE_EDIT}/:id`,
     element: <LessonScheduleEdit />,
   },
   {
-    path: `${LinksConcepts.LESSON_SCHEDULE_STUDENTS}/:id`,
+    path: `${Concepts.LESSON_SCHEDULE_STUDENTS}/:id`,
     element: <LessonScheduleStudents />,
   },
   {
-    path: LinksConcepts.SERVICES,
+    path: Concepts.SERVICES,
     element: <Services />,
   },
   {
-    path: LinksConcepts.SERVICES_CREATE,
+    path: Concepts.SERVICES_CREATE,
     element: <ServiceCreate />,
   },
   {
-    path: `${LinksConcepts.SERVICES_EDIT}/:id`,
+    path: `${Concepts.SERVICES_EDIT}/:id`,
     element: <ServiceEdit />,
   },
   {
-    path: LinksConcepts.STUDENTS,
+    path: Concepts.STUDENTS,
     element: <Students />,
   },
   {
-    path: `${LinksConcepts.STUDENTS}/:id`,
+    path: `${Concepts.STUDENTS}/:id`,
     element: <Student />,
   },
 ];

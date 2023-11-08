@@ -12,7 +12,7 @@ import { PageEnum } from '@/src/pages/Admin/Pages/pages-enum';
 import { BlockInfoPageType } from '@/src/pages/Admin/Pages/Components/types';
 import { BlocsEnum } from '@/src/pages/Admin/Pages/blocks-enum';
 import { Link } from 'react-router-dom';
-import { LinksPageSections } from '@/src/constants/routes';
+import { PageSections } from '@/src/constants/routes/sections';
 import { useApisReuseBlock } from '@/src/pages/Admin/Pages/hooks/useApisReuseBlock';
 
 const service = new ReviewFormService();
@@ -56,7 +56,7 @@ export default function SectionReview() {
           {data === null ? (
             <Typography variant="h4">
               First of all you have to create{' '}
-              <Link to={LinksPageSections.REVIEW}>section faq</Link>
+              <Link to={PageSections.REVIEW}>section faq</Link>
             </Typography>
           ) : (
             <ReviewForm

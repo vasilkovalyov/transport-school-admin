@@ -9,7 +9,8 @@ import Breadcrumbs from '@mui/material/Breadcrumbs';
 
 import { ServiceList } from './components';
 
-import { Links, LinksConcepts } from '@/src/constants/routes';
+import { Concepts } from '@/src/constants/routes/concepts';
+import { Dashboard } from '@/src/constants/routes/dashboard';
 
 export default function Services() {
   const navigate = useNavigate();
@@ -26,7 +27,7 @@ export default function Services() {
               variant="contained"
               size="small"
               onClick={() => {
-                navigate(LinksConcepts.SERVICES_CREATE);
+                navigate(Concepts.SERVICES_CREATE);
               }}
             >
               Create Service
@@ -35,7 +36,7 @@ export default function Services() {
         </Grid>
         <Box mb={4}>
           <Breadcrumbs aria-label="breadcrumb">
-            <Link to={Links.ADMIN}>Home</Link>
+            <Link to={Dashboard.ADMIN}>Home</Link>
             <Typography>Service</Typography>
           </Breadcrumbs>
         </Box>

@@ -12,7 +12,9 @@ import Paper from '@mui/material/Paper';
 import CircularProgress from '@mui/material/CircularProgress';
 
 import { ServiceRow, ServiceRowProps } from '../ServiceRow';
-import api from '@/src/api/axios';
+import ServicesService from '../../Services.service';
+
+const service = new ServicesService();
 
 const headCells: string[] = ['Image', 'Heading', 'Price'];
 
@@ -23,8 +25,18 @@ export default function ServiceList() {
   async function loadData() {
     try {
       setLoading(true);
-      const response = await api.get('services');
-      setPosts(response.data);
+      const response = await service.getPosts();
+      if (!response.data.length) return;
+
+      const item = response.data.map((item) => {
+        return {
+          _id: item._id,
+          heading: item.heading,
+          price: item.price,
+          image: item.image,
+        };
+      });
+      setPosts(item as ServiceRowProps[]);
     } catch (e) {
       console.log(e);
     } finally {

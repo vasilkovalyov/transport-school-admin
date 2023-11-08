@@ -1,35 +1,34 @@
-import { LinksPagePriceSections } from 'src/constants/routes';
-
 import Seo from './Seo/Seo';
 import SectionHero from './SectionHero/SectionHero';
 import SectionFormatLessons from './SectionFormatLessons/SectionFormatLessons';
 import SectionTeamEducation from './SectionTeamEducation/SectionTeamEducation';
 import SectionRequirement from './SectionRequirement/SectionRequirement';
 import SectionsContacts from './SectionsContacts/SectionsContacts';
+import { PagePriceSections } from '@/src/constants/routes/pages';
 
 export const pages = [
   {
-    path: LinksPagePriceSections.SEO,
+    path: PagePriceSections.SEO,
     element: <Seo />,
   },
   {
-    path: LinksPagePriceSections.HERO,
+    path: PagePriceSections.HERO,
     element: <SectionHero />,
   },
   {
-    path: LinksPagePriceSections.FORMAT_LESSONS,
+    path: PagePriceSections.FORMAT_LESSONS,
     element: <SectionFormatLessons />,
   },
   {
-    path: LinksPagePriceSections.EDUCATION,
+    path: PagePriceSections.EDUCATION,
     element: <SectionTeamEducation />,
   },
   {
-    path: LinksPagePriceSections.REQUIREMENT,
+    path: PagePriceSections.REQUIREMENT,
     element: <SectionRequirement />,
   },
   {
-    path: LinksPagePriceSections.CONTACTS,
+    path: PagePriceSections.CONTACTS,
     element: <SectionsContacts />,
   },
 ];

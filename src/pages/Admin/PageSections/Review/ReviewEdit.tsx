@@ -7,9 +7,10 @@ import Typography from '@mui/material/Typography';
 import Breadcrumbs from '@mui/material/Breadcrumbs';
 import LinearProgress from '@mui/material/LinearProgress';
 
-import { Links, LinksPageSections } from '@/src/constants/routes';
 import { ReviewType, ReviewFormDataType, ReviewForm } from './components';
 import ServiceReview from './Review.service';
+import { PageSections } from '@/src/constants/routes/sections';
+import { Dashboard } from '@/src/constants/routes/dashboard';
 
 const service = new ServiceReview();
 
@@ -43,7 +44,7 @@ export default function PageSectionReviewEdit() {
         ...data,
         _id: id as string,
       });
-      navigate(LinksPageSections.REVIEW);
+      navigate(PageSections.REVIEW);
     } catch (e) {
       console.log(e);
     } finally {
@@ -57,8 +58,8 @@ export default function PageSectionReviewEdit() {
         <Typography variant="h1">Edit review</Typography>
         <Box mb={4}>
           <Breadcrumbs aria-label="breadcrumb">
-            <Link to={Links.ADMIN}>Home</Link>
-            <Link to={LinksPageSections.REVIEW}>Section review</Link>
+            <Link to={Dashboard.ADMIN}>Home</Link>
+            <Link to={PageSections.REVIEW}>Section review</Link>
             <Typography>Edit review</Typography>
           </Breadcrumbs>
         </Box>

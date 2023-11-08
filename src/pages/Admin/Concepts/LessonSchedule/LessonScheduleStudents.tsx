@@ -7,7 +7,8 @@ import Breadcrumbs from '@mui/material/Breadcrumbs';
 
 import { StudentsList } from './components';
 
-import { Links, LinksConcepts } from '@/src/constants/routes';
+import { Concepts } from '@/src/constants/routes/concepts';
+import { Dashboard } from '@/src/constants/routes/dashboard';
 
 export default function LessonScheduleStudents() {
   return (
@@ -18,8 +19,8 @@ export default function LessonScheduleStudents() {
         </Box>
         <Box mb={4}>
           <Breadcrumbs aria-label="breadcrumb">
-            <Link to={Links.ADMIN}>Home</Link>
-            <Link to={LinksConcepts.LESSON_SCHEDULE}>Lesson shedule</Link>
+            <Link to={Dashboard.ADMIN}>Home</Link>
+            <Link to={Concepts.LESSON_SCHEDULE}>Lesson shedule</Link>
             <Typography>Lesson students</Typography>
           </Breadcrumbs>
         </Box>
