@@ -9,6 +9,9 @@ import Breadcrumbs from '@mui/material/Breadcrumbs';
 
 import { Concepts } from '@/src/constants/routes/concepts';
 import { Dashboard } from '@/src/constants/routes/dashboard';
+
+import { LessonTableForStudents } from '@/src/components';
+
 import { StudentInfo, StudentInfoType } from '../components/StudentInfo';
 
 import StudentService from '../Students.service';
@@ -47,7 +50,7 @@ export default function Student() {
   return (
     <Box py={4} component="section">
       <Container className="fullwidth-container">
-        <Typography variant="h1">{studentInfo?.name}</Typography>
+        <Typography variant="h1">Student {studentInfo?.name}</Typography>
         <Box mb={4}>
           <Breadcrumbs aria-label="breadcrumb">
             <Link to={Dashboard.ADMIN}>Home</Link>
@@ -55,7 +58,11 @@ export default function Student() {
             <Typography>Student {studentInfo?.name}</Typography>
           </Breadcrumbs>
         </Box>
-        {studentInfo ? <StudentInfo {...studentInfo} /> : null}
+        <Box mb={4}>
+          {studentInfo ? <StudentInfo {...studentInfo} /> : null}
+        </Box>
+        <Typography variant="h5">Lessons</Typography>
+        <LessonTableForStudents id={id as string} />
       </Container>
     </Box>
   );

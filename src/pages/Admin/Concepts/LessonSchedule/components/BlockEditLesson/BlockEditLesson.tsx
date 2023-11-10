@@ -7,13 +7,14 @@ import LinearProgress from '@mui/material/LinearProgress';
 
 import LessonForm from '../LessonForm/LessonForm';
 import LessonScheduleService from '../../LessonSchedule.service';
-import { LessonScheduleEditableProps } from '../LessonRow';
+
 import { Concepts } from '@/src/constants/routes/concepts';
 import { AlertMessageModal, useAlertMessageModal } from '@/src/components';
+import { LessonEditProps } from '@/src/types/lesson';
 
 const service = new LessonScheduleService();
 
-const initialData: LessonScheduleEditableProps = {
+const initialData: LessonEditProps = {
   heading: '',
   type_group: '',
   type_lesson: '',
@@ -27,7 +28,7 @@ export default function BlockEditLesson() {
   let { id } = useParams();
   const navigate = useNavigate();
   const [loading, setLoading] = useState<boolean>(true);
-  const [data, setData] = useState<LessonScheduleEditableProps>(initialData);
+  const [data, setData] = useState<LessonEditProps>(initialData);
   const [loadingRemove, setLoadingRemove] = useState<boolean>(false);
   const { openModal, onCloseModal, onOpenModal } = useAlertMessageModal();
 
@@ -50,7 +51,7 @@ export default function BlockEditLesson() {
     loadData();
   }, []);
 
-  async function onUpdate(params: LessonScheduleEditableProps) {
+  async function onUpdate(params: LessonEditProps) {
     try {
       await service.update({
         ...params,

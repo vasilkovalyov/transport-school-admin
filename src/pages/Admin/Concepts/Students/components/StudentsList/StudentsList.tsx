@@ -39,6 +39,7 @@ export default function StudentsList() {
     if (!selectedId) return null;
     try {
       setLoadingRemove(true);
+      await service.delete(selectedId);
       const updatedReviews = students.filter((item) => item._id !== selectedId);
       setStudents(updatedReviews);
     } catch (e) {
@@ -70,7 +71,7 @@ export default function StudentsList() {
           <AlertMessageModal
             open={openModal}
             loading={loadingRemove}
-            title="Do you want to remove user?"
+            title="Do you want to remove student?"
             handleAgree={onDeleteStudent}
             handleClose={onCloseModal}
           />

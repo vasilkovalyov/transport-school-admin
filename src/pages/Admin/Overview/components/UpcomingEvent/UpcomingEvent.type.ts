@@ -1,7 +1,7 @@
-import { LessonScheduleProps } from '@/src/pages/Admin/Concepts/LessonSchedule/components';
+import { LessonType } from '@/src/types/lesson';
 
 export type UpcomingEventProps = Pick<
-  LessonScheduleProps,
+  LessonType,
   | '_id'
   | 'date_start_event'
   | 'time_start'

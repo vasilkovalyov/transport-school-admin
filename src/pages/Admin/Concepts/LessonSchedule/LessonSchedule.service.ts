@@ -1,7 +1,7 @@
 import { AxiosPromise } from 'axios';
-import { LessonScheduleProps, LessonScheduleEditableProps } from './components';
 import api from '@/src/api/axios';
 import { StudentType } from '@/src/types/student';
+import { LessonEditProps, LessonType } from '@/src/types/lesson';
 
 enum EndpointLessonScheduleEnum {
   CREATE = 'lesson-schedule-create',
@@ -13,16 +13,16 @@ enum EndpointLessonScheduleEnum {
 }
 
 class LessonScheduleService {
-  async create(
-    params: LessonScheduleEditableProps
-  ): AxiosPromise<{ message: string }> {
+  async create(params: LessonEditProps): AxiosPromise<{ message: string }> {
     const response = await api.post(EndpointLessonScheduleEnum.CREATE, {
       ...params,
     });
     return response;
   }
 
-  async update(params: LessonScheduleProps): AxiosPromise<{ message: string }> {
+  async update(
+    params: LessonEditProps & { _id: string }
+  ): AxiosPromise<{ message: string }> {
     const response = await api.patch(EndpointLessonScheduleEnum.UPDATE, {
       ...params,
     });
@@ -49,12 +49,12 @@ class LessonScheduleService {
     return response;
   }
 
-  async getPosts(): AxiosPromise<LessonScheduleProps[]> {
+  async getPosts(): AxiosPromise<LessonType[]> {
     const response = await api.get(EndpointLessonScheduleEnum.GET_POSTS);
     return response;
   }
 
-  async getPost(id: string): AxiosPromise<LessonScheduleProps> {
+  async getPost(id: string): AxiosPromise<LessonType> {
     const response = await api.get(
       `${EndpointLessonScheduleEnum.GET_POSTS}/${id}`
     );

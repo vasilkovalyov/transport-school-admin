@@ -12,7 +12,7 @@ export default function BlogList() {
   const { loading, page, posts, totalPageCount, handleChangePage } =
     usePostPaginate<BlogCardProps>({
       apiUrl: 'posts',
-      postSizePage: 4,
+      postSizePage: 8,
     });
 
   if (loading) {

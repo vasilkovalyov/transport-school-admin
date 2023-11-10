@@ -1,6 +1,11 @@
-import { LessonScheduleEditableProps } from '../LessonRow';
+import { LessonEditProps, LessonType } from '@/src/types/lesson';
 
 export type LessonFormProps = {
-  data?: LessonScheduleEditableProps;
-  onSubmit?: (data: LessonScheduleEditableProps) => void;
+  data?: LessonEditProps;
+  onSubmit?: (data: LessonEditProps) => void;
 };
+
+export type FormValuesKey = keyof Omit<
+  LessonType,
+  '_id' | 'createdAt' | 'students'
+>;

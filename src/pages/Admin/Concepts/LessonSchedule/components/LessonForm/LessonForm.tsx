@@ -16,15 +16,15 @@ import FormControl from '@mui/material/FormControl';
 
 import { shortNames } from '@/src/utils/dayNames';
 
-import { LessonFormProps } from './LessonForm.type';
-import { FormValuesKey, LessonScheduleEditableProps } from '../LessonRow';
+import { FormValuesKey, LessonFormProps } from './LessonForm.type';
 import schemaValidation from './LessonForm.validation';
 import {
   adaptArrayDaysToObject,
   adaptObjectDaysToArray,
 } from '../../LessonSchedule.utils';
+import { LessonEditProps } from '@/src/types/lesson';
 
-const defaultValuesForm: LessonScheduleEditableProps = {
+const defaultValuesForm: LessonEditProps = {
   heading: '',
   type_group: '',
   type_lesson: '',
@@ -55,7 +55,7 @@ const valuesKeys: FormValuesKey[] = [
 ];
 
 type SelectTypeKeys = Pick<
-  LessonScheduleEditableProps,
+  LessonEditProps,
   'time_start' | 'time_end' | 'days' | 'type_group' | 'type_lesson'
 >;
 
@@ -71,7 +71,7 @@ export default function LessonForm({ data, onSubmit }: LessonFormProps) {
     register,
     setValue,
     formState: { errors },
-  } = useForm<LessonScheduleEditableProps>({
+  } = useForm<LessonEditProps>({
     mode: 'onSubmit',
     defaultValues: data ?? defaultValuesForm,
     resolver: yupResolver(schemaValidation),
@@ -86,7 +86,7 @@ export default function LessonForm({ data, onSubmit }: LessonFormProps) {
     }
   }, [data]);
 
-  function handleSave(data: LessonScheduleEditableProps) {
+  function handleSave(data: LessonEditProps) {
     onSubmit &&
       onSubmit({
         ...data,
@@ -101,10 +101,7 @@ export default function LessonForm({ data, onSubmit }: LessonFormProps) {
     }));
   }
 
-  function fillValues(
-    keys: FormValuesKey[],
-    values: LessonScheduleEditableProps
-  ) {
+  function fillValues(keys: FormValuesKey[], values: LessonEditProps) {
     if (!data) return;
     keys.forEach((key) => {
       setValue(key, values[key]);

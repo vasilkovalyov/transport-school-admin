@@ -9,7 +9,8 @@ import Breadcrumbs from '@mui/material/Breadcrumbs';
 
 import { Concepts } from '@/src/constants/routes/concepts';
 import { Dashboard } from '@/src/constants/routes/dashboard';
-import { LessonsList } from './components';
+
+import { LessonTable } from '@/src/components/Lessons';
 
 export default function LessonSchedule() {
   const navigate = useNavigate();
@@ -39,7 +40,7 @@ export default function LessonSchedule() {
             <Typography>Lesson shedule</Typography>
           </Breadcrumbs>
         </Box>
-        <LessonsList />
+        <LessonTable />
       </Container>
     </Box>
   );

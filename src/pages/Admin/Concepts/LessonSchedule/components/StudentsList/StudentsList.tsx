@@ -70,7 +70,7 @@ export default function StudentsList() {
           <AlertMessageModal
             open={openModal}
             loading={loadingRemove}
-            title="Do you want to remove user?"
+            title="Do you want to remove student?"
             handleAgree={onDeleteStudent}
             handleClose={onCloseModal}
           />
