@@ -45,7 +45,7 @@ export default function UpcomingEvent({
               {time_start} - {time_end}
             </Typography>
             <Typography>
-              Students - {students || 0} / {max_people}
+              Students - {students as number} / {max_people}
             </Typography>
           </Box>
         </Stack>
