@@ -36,6 +36,8 @@ export default function BlogForm({ data, loading, onSubmit }: BlogFormProps) {
     setValue('image', data.image);
     setValue('slug', data.slug);
     setValue('short_description', data.short_description);
+    setValue('seo_description', data.seo_description);
+    setValue('seo_keywords', data.seo_keywords);
     setMarkdownText(data.rich_text || '');
   }, [data]);
 
@@ -61,7 +63,6 @@ export default function BlogForm({ data, loading, onSubmit }: BlogFormProps) {
 
   function onChangeHeading(value: string) {
     const convertedStr = transliterateToLatin(value).trim();
-    // setSlugText(convertedStr);
     setValue('slug', convertedStr);
   }
 
@@ -72,6 +73,45 @@ export default function BlogForm({ data, loading, onSubmit }: BlogFormProps) {
   return (
     <Box component="form" maxWidth={800} marginBottom={4}>
       <Grid container spacing={4} mb={4}>
+        <Grid item xs={12}>
+          <Typography variant="h4" mb={0}>
+            Seo
+          </Typography>
+        </Grid>
+        <Grid item xs={12}>
+          <Box mb={4}>
+            <TextField
+              {...register('seo_description')}
+              id="seo_description"
+              label="Seo description"
+              variant="outlined"
+              fullWidth
+              multiline
+              rows={4}
+              error={!!errors['seo_description']?.message}
+              helperText={errors['seo_description']?.message}
+              InputLabelProps={{
+                shrink: true,
+              }}
+            />
+          </Box>
+          <Box mb={4}>
+            <TextField
+              {...register('seo_keywords')}
+              id="seo_keywords"
+              label="Seo keywords"
+              variant="outlined"
+              fullWidth
+              multiline
+              rows={4}
+              error={!!errors['seo_keywords']?.message}
+              helperText={errors['seo_keywords']?.message}
+              InputLabelProps={{
+                shrink: true,
+              }}
+            />
+          </Box>
+        </Grid>
         <Grid item xs={12}>
           <ImageUpload
             viewType="wide"

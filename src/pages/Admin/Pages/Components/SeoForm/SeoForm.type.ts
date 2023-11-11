@@ -1,14 +1,10 @@
+import { SeoType } from '@/src/types/seo';
+
 export type SeoFormProps = {
-  data?: SeoFormDataType | null;
-  onUpdate?: (data: SeoFormDataType) => void;
+  data?: SeoType | null;
+  onUpdate?: (data: SeoType) => void;
 };
 
-export type SeoFormDataType = {
-  title: string;
-  description?: string | null;
-  keywords?: string | null;
-};
-
-export type SeoFullDataType = SeoFormDataType & {
+export type SeoFullDataType = SeoType & {
   page: string;
 };

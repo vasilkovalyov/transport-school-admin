@@ -33,15 +33,15 @@ export default function BlockBlogEdit() {
     useAlertMessageModal();
 
   async function loadData() {
+    if (!id) return;
     try {
       setLoading('loading');
-      const response = await service.getPost(id || '');
+      const response = await service.getPost(id);
       if (response.data === null) {
         navigate(Concepts.BLOG);
       }
       setData(response.data);
     } catch (e) {
-      navigate(Concepts.BLOG);
     } finally {
       setLoading(null);
     }
@@ -65,7 +65,7 @@ export default function BlockBlogEdit() {
     }
   }
 
-  async function onUpdate(params: BlockCardEditableProps) {
+  async function onPostUpdate(params: BlockCardEditableProps) {
     try {
       setLoading('loadingUpdate');
       await service.update({
@@ -93,7 +93,7 @@ export default function BlockBlogEdit() {
       <BlogForm
         data={data}
         loading={loading === 'loadingUpdate'}
-        onSubmit={onUpdate}
+        onSubmit={onPostUpdate}
       />
       <Box>
         <Button

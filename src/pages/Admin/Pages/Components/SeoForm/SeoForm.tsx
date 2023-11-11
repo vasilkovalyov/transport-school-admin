@@ -6,17 +6,18 @@ import { Box } from '@mui/material';
 import Button from '@mui/material/Button';
 import TextField from '@mui/material/TextField';
 
-import { SeoFormProps, SeoFormDataType } from './SeoForm.type';
+import { SeoFormProps } from './SeoForm.type';
 import schemaValidation from './SeoForm.validation';
+import { SeoType } from '@/src/types/seo';
 
-const defaultValuesForm: SeoFormDataType = {
+const defaultValuesForm: SeoType = {
   title: '',
   description: '',
   keywords: '',
 };
 
-export default function BlogForm({ data, onUpdate }: SeoFormProps) {
-  const { handleSubmit, register, setValue } = useForm<SeoFormDataType>({
+export default function SeoForm({ data, onUpdate }: SeoFormProps) {
+  const { handleSubmit, register, setValue } = useForm<SeoType>({
     mode: 'onSubmit',
     defaultValues: data ?? defaultValuesForm,
     resolver: yupResolver(schemaValidation),
@@ -29,7 +30,7 @@ export default function BlogForm({ data, onUpdate }: SeoFormProps) {
     setValue('description', data?.description);
   }, [data]);
 
-  function handleSave(params: SeoFormDataType) {
+  function handleSave(params: SeoType) {
     onUpdate &&
       onUpdate({
         ...params,

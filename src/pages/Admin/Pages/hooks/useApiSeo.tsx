@@ -1,9 +1,6 @@
 import { useEffect, useState } from 'react';
-import {
-  SeoFormDataType,
-  SeoFullDataType,
-  SeoFormService,
-} from '../Components';
+import { SeoFullDataType, SeoFormService } from '../Components';
+import { SeoType } from '@/src/types/seo';
 
 const service = new SeoFormService();
 
@@ -27,7 +24,7 @@ export default function useApiSeo(page: string) {
     }
   }
 
-  async function onHandleUpdate(params: SeoFormDataType) {
+  async function onHandleUpdate(params: SeoType) {
     await service.update({
       ...params,
       page: page,
@@ -36,7 +33,7 @@ export default function useApiSeo(page: string) {
 
   const getAdapterSectionParams = (
     params: SeoFullDataType | null
-  ): SeoFormDataType | null => {
+  ): SeoType | null => {
     if (!params) return null;
     const { page, ...props } = params;
     return {
